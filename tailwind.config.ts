@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				pixel: ['Press Start 2P', 'cursive'],
+				mono: ['Source Code Pro', 'monospace'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,7 +65,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// NexHack specific colors
+				nether: {
+					dark: 'hsl(var(--nether-dark))',
+					purple: 'hsl(var(--nether-purple))',
+				},
+				ender: 'hsl(var(--ender-green))',
+				emerald: 'hsl(var(--emerald-green))',
+				diamond: 'hsl(var(--diamond-blue))',
+				netherite: 'hsl(var(--netherite-gray))',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -2,41 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* NexHack Minecraft-inspired Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Overworld Theme (Light Mode) */
+    --background: 240 100% 97%;
+    --foreground: 210 40% 18%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 100% 97%;
+    --card-foreground: 210 40% 18%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 100% 97%;
+    --popover-foreground: 210 40% 18%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 145 100% 28%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 100% 35%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 85%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 145 100% 28%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 20% 82%;
+    --input: 210 20% 82%;
+    --ring: 145 100% 28%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
+
+    /* NexHack specific tokens */
+    --nether-dark: 270 60% 6%;
+    --nether-purple: 270 100% 63%;
+    --ender-green: 120 100% 55%;
+    --emerald-green: 145 100% 28%;
+    --diamond-blue: 210 100% 35%;
+    --netherite-gray: 0 0% 12%;
+    
+    /* Gradients */
+    --gradient-nether: linear-gradient(135deg, hsl(270 60% 6%), hsl(270 100% 63%));
+    --gradient-overworld: linear-gradient(135deg, hsl(240 100% 97%), hsl(145 100% 28%));
+    --gradient-ender: linear-gradient(45deg, hsl(120 100% 55%), hsl(270 100% 63%));
+    
+    /* Background animation */
+    --bg-animation: 20s linear infinite;
+    
+    /* Fonts */
+    --font-pixel: 'Press Start 2P', cursive;
+    --font-mono: 'Source Code Pro', monospace;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +75,34 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Nether Theme (Dark Mode) */
+    --background: 270 60% 6%;
+    --foreground: 0 0% 100%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 270 60% 8%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 270 60% 8%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 120 100% 55%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 270 100% 63%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 270 40% 15%;
+    --muted-foreground: 0 0% 63%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 120 100% 55%;
+    --accent-foreground: 0 0% 0%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 270 40% 15%;
+    --input: 270 40% 15%;
+    --ring: 120 100% 55%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +120,81 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
   }
+}
+
+@layer components {
+  .font-pixel {
+    font-family: var(--font-pixel);
+  }
+  
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  
+  .bg-nether {
+    background: var(--gradient-nether);
+  }
+  
+  .bg-overworld {
+    background: var(--gradient-overworld);
+  }
+  
+  .bg-ender {
+    background: var(--gradient-ender);
+  }
+  
+  .text-ender {
+    color: hsl(var(--ender-green));
+  }
+  
+  .text-nether {
+    color: hsl(var(--nether-purple));
+  }
+  
+  .minecraft-btn {
+    @apply px-6 py-3 font-pixel text-xs uppercase tracking-wider transform transition-all duration-200 hover:scale-105 active:scale-95 border-2;
+  }
+  
+  .minecraft-card {
+    @apply bg-card border-2 border-border rounded-none p-6 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg;
+  }
+  
+  .section-spacing {
+    @apply py-16 px-4 md:px-8 lg:px-16;
+  }
+  
+  .container-max {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .floating-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: subtle-float 20s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+  
+  .backdrop-blur-minecraft {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes subtle-float {
+  0%, 100% { transform: scale(1) translateY(0px); }
+  50% { transform: scale(1.02) translateY(-5px); }
 }
