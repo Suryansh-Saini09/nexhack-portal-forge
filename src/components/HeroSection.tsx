@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
+import { RegistrationForm } from '@/components/RegistrationForm';
 
 export const HeroSection = () => {
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const { isNether } = useTheme();
 
   return (
@@ -30,6 +33,7 @@ export const HeroSection = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
+              onClick={() => setIsRegistrationOpen(true)}
               size="lg" 
               className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-4"
             >
@@ -50,6 +54,11 @@ export const HeroSection = () => {
           <div className="absolute bottom-1/3 left-20 w-4 h-4 bg-accent/20 rotate-45 animate-pulse hidden lg:block animation-delay-1000" />
         </div>
       </div>
+      
+      <RegistrationForm 
+        open={isRegistrationOpen} 
+        onOpenChange={setIsRegistrationOpen} 
+      />
     </section>
   );
 };

@@ -3,9 +3,11 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useTheme } from '@/contexts/ThemeContext';
+import { RegistrationForm } from '@/components/RegistrationForm';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const { isNether } = useTheme();
 
   const navItems = [
@@ -54,7 +56,10 @@ export const Header = () => {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
             <ThemeToggle />
-            <Button className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button 
+              onClick={() => setIsRegistrationOpen(true)}
+              className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90"
+            >
               REGISTER NOW →
             </Button>
           </div>
@@ -90,13 +95,21 @@ export const Header = () => {
                   {item}
                 </button>
               ))}
-              <Button className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 mt-4">
+               <Button 
+                onClick={() => setIsRegistrationOpen(true)}
+                className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 mt-4"
+              >
                 REGISTER NOW →
               </Button>
             </nav>
           </div>
         )}
       </div>
+      
+      <RegistrationForm 
+        open={isRegistrationOpen} 
+        onOpenChange={setIsRegistrationOpen} 
+      />
     </header>
   );
 };
