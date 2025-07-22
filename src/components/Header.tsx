@@ -30,7 +30,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-minecraft border-b border-border">
+    <header className={`sticky top-0 z-50 ${isNether ? 'backdrop-blur-minecraft' : 'bg-white'}  border-b border-border`}>
       <div className="container-max">
         <div className="flex items-center justify-between h-16 px-4">
           {/* Logo */}

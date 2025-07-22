@@ -15,7 +15,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Animated Background */}
-      <Background />
+      {/* <Background /> */}
       
       {/* Header/Navigation */}
       <Header />

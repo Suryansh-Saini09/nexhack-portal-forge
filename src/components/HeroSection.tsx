@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
+import netherBg from '@/assets/nether-world.mp4';
+import overworldBg from '@/assets/overworld.mp4';
 import { RegistrationForm } from '@/components/RegistrationForm';
 
 export const HeroSection = () => {
@@ -8,8 +10,19 @@ export const HeroSection = () => {
   const { isNether } = useTheme();
 
   return (
-    <section className="section-spacing min-h-screen flex items-center justify-center relative">
-      <div className="container-max text-center">
+    <section className="relative h-[92vh] flex items-center justify-center overflow-hidden">
+      {/* Video Background */}
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover -z-10"
+        src={isNether ? netherBg : overworldBg}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+
+      {/* Content Overlay */}
+      <div className="container-max text-center relative z-10 px-4">
         <div className="space-y-8">
           {/* Main Headline */}
           <h1 className="font-pixel text-4xl md:text-6xl lg:text-7xl text-primary text-shadow-glow leading-tight">
@@ -24,7 +37,7 @@ export const HeroSection = () => {
           </p>
 
           {/* Social Proof */}
-          <div className="minecraft-card inline-block bg-card/50 backdrop-blur-sm">
+          <div className="minecraft-card inline-block bg-card/50 backdrop-blur-sm p-2 rounded">
             <p className="font-mono text-sm text-foreground">
               🏆 Join over <span className="text-primary font-bold">500+</span> participants in the arena!
             </p>
@@ -32,15 +45,15 @@ export const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
+            <Button
               onClick={() => setIsRegistrationOpen(true)}
-              size="lg" 
+              size="lg"
               className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-4"
             >
               REGISTER NOW →
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="lg"
               className="minecraft-btn border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-4"
             >
@@ -54,11 +67,9 @@ export const HeroSection = () => {
           <div className="absolute bottom-1/3 left-20 w-4 h-4 bg-accent/20 rotate-45 animate-pulse hidden lg:block animation-delay-1000" />
         </div>
       </div>
-      
-      <RegistrationForm 
-        open={isRegistrationOpen} 
-        onOpenChange={setIsRegistrationOpen} 
-      />
+
+      <RegistrationForm open={isRegistrationOpen} onOpenChange={setIsRegistrationOpen} />
     </section>
+
   );
 };
