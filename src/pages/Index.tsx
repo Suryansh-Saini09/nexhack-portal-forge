@@ -1,4 +1,4 @@
-import { Background } from '@/components/Background';
+import MinecraftBackground from '@/components/MinecraftBackground';
 import { Header } from '@/components/Header';
 import { HeroSection } from '@/components/HeroSection';
 import { AboutSection } from '@/components/AboutSection';
@@ -15,7 +15,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* Animated Background */}
-      <Background />
+      <MinecraftBackground />
       
       {/* Header/Navigation */}
       <Header />
