@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
-import netherBg from '@/assets/nether-world.mp4';
-import overworldBg from '@/assets/overworld.mp4';
+import netherBg from '/bg-video.mp4';
+// import overworldBg from '@/assets/overworld.mp4';
 import { RegistrationForm } from '@/components/RegistrationForm';
 
 export const HeroSection = () => {
@@ -14,12 +14,16 @@ export const HeroSection = () => {
       {/* Video Background */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-        src={isNether ? netherBg : overworldBg}
+        src={netherBg}
         autoPlay
         loop
         muted
         playsInline
       />
+
+      {/* Black Overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
+
 
       {/* Content Overlay */}
       <div className="container-max text-center relative z-10 px-4">

@@ -55,7 +55,7 @@ export const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             <Button 
               onClick={() => setIsRegistrationOpen(true)}
               className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90"
