@@ -74,9 +74,6 @@ export const ThemesSection = () => {
         </div>
 
         <div className="text-center mt-12">
-          <p className="font-mono text-sm text-muted-foreground">
-            💡 Can't decide? Teams can combine multiple themes for hybrid solutions!
-          </p>
         </div>
       </div>
     </section>

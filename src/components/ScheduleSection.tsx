@@ -54,7 +54,7 @@ export const ScheduleSection = () => {
             THE EVENT TIMELINE
           </h2>
           <p className="font-mono text-lg text-muted-foreground max-w-3xl mx-auto">
-            Your quest schedule for the ultimate 36-hour coding adventure. Plan your strategy and make every moment count!
+            Your quest schedule for the ultimate 24-hour coding adventure. Plan your strategy and make every moment count!
           </p>
         </div>
 

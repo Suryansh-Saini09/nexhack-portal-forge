@@ -4,13 +4,13 @@ export const AboutSection = () => {
   const features = [
     {
       icon: Code,
-      title: "36 Hours of Innovation",
+      title: "24 Hours of Innovation",
       description: "Push your limits and create something extraordinary in our intense coding marathon."
     },
     {
       icon: Trophy,
       title: "Legendary Loot & Prizes",
-      description: "Compete for epic prizes including cash rewards, internships, and exclusive tech gear."
+      description: "Compete for epic prizes including cash rewards and exclusive tech gear."
     },
     {
       icon: Users,

@@ -6,8 +6,8 @@ export const PrizesSection = () => {
       place: "1st Place",
       icon: Crown,
       title: "NETHERITE TIER",
-      amount: "$5,000",
-      description: "Cash prize + Premium internship opportunities + Exclusive tech bundle",
+      amount: "25,000",
+      description: "Cash prize + Exclusive tech bundle",
       color: "bg-netherite border-gray-600 text-gray-100",
       highlight: "border-yellow-400 shadow-yellow-400/50"
     },
@@ -15,8 +15,8 @@ export const PrizesSection = () => {
       place: "2nd Place", 
       icon: Award,
       title: "DIAMOND TIER",
-      amount: "$3,000",
-      description: "Cash prize + Mentorship program + Professional development package",
+      amount: "15,000",
+      description: "Cash prize + Mentorship program ",
       color: "bg-diamond/20 border-diamond text-diamond",
       highlight: "border-blue-400 shadow-blue-400/50"
     },
@@ -24,18 +24,16 @@ export const PrizesSection = () => {
       place: "3rd Place",
       icon: Medal,
       title: "EMERALD TIER", 
-      amount: "$1,500",
-      description: "Cash prize + Online course credits + Tech accessories bundle",
+      amount: "10,000",
+      description: "Cash prize + Tech accessories bundle",
       color: "bg-emerald/20 border-emerald text-emerald",
       highlight: "border-green-400 shadow-green-400/50"
     }
   ];
 
   const specialPrizes = [
-    "Best AI Innovation - $1,000",
-    "Most Creative Solution - $750", 
-    "Best Beginner Project - $500",
-    "People's Choice Award - $500"
+    "All Girls Team - 5,000",
+    "Best AI Innovation - 3,000"
   ];
 
   return (
@@ -46,7 +44,7 @@ export const PrizesSection = () => {
             THE TREASURE AWAITS
           </h2>
           <p className="font-mono text-lg text-muted-foreground max-w-3xl mx-auto">
-            Epic rewards for legendary builders. Over $15,000 in total prizes plus exclusive opportunities to launch your career.
+            Epic rewards for legendary builders. Over 1,20,000 in total prizes plus exclusive opportunities to launch your career.
           </p>
         </div>
 
