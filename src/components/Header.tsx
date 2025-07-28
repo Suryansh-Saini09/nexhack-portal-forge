@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useTheme } from '@/contexts/ThemeContext';
 import { RegistrationForm } from '@/components/RegistrationForm';
+import logo from '/text-logo.png';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,10 +35,8 @@ export const Header = () => {
       <div className="container-max">
         <div className="flex items-center justify-between h-16 px-4">
           {/* Logo */}
-          <div className="flex items-center">
-            <h1 className="font-pixel text-lg text-primary text-shadow-glow">
-              NEXHACK
-            </h1>
+          <div className="flex items-end justify-end">
+            <img src={logo} className='h-16'/>
           </div>
 
           {/* Desktop Navigation */}

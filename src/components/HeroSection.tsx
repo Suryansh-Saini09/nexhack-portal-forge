@@ -36,7 +36,7 @@ export const HeroSection = () => {
           </h1>
 
           {/* Sub-headline */}
-          <p className="font-mono text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <p className="font-mono text-lg md:text-xl lg:text-2xl text-white max-w-4xl mx-auto leading-relaxed text-shadow-glow">
             Welcome to NexHack 2024. The nexus of innovation where the next generation of builders, coders, and dreamers unite.
           </p>
 
