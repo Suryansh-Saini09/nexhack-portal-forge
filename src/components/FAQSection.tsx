@@ -83,7 +83,7 @@ export const FAQSection = () => {
           <p className="font-mono text-sm text-muted-foreground">
             Still have questions? Reach out to us at{' '}
             <a href="mailto:hello@nexhack.dev" className="text-primary hover:underline">
-              hello@nexhack.dev
+              nexhack@geetauniversity.edu.in
             </a>
           </p>
         </div>

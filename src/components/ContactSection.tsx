@@ -29,25 +29,25 @@ export const ContactSection = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "hello@nexhack.dev",
+      content: "nexhack@geetauniversity.edu.in",
       description: "Send us a message anytime"
     },
     {
       icon: MessageCircle,
       title: "Discord",
-      content: "NexHack Community",
+      content: "thenexhack",
       description: "Join our active community"
     },
     {
       icon: MapPin,
       title: "Location",
-      content: "Your University Campus",
+      content: "Geeta University,Naultha,Panipat",
       description: "Main Engineering Building"
     },
     {
       icon: Phone,
       title: "Emergency",
-      content: "+1 (555) 123-4567",
+      content: "9012822721",
       description: "Event day support only"
     }
   ];
