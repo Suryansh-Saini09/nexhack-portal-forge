@@ -7,35 +7,31 @@ export const FAQSection = () => {
   const faqs = [
     {
       question: "What is the registration process?",
-      answer: "Registration is completely free! Simply click the 'Register Now' button and fill out the form. We'll send you a confirmation email with all the details you need."
+      answer: "To register for NexHack, simply head over to our official website and click the “Register Now” button. Fill in your details, select your team members and submit the form. Once registered, you’ll receive a confirmation email along with event details."
     },
     {
-      question: "Do I need a team to participate?",
-      answer: "Not at all! You can participate solo, bring your own team (up to 4 members), or join our team formation session on Day 1. We'll help you find the perfect squad."
+      question: "How many members are required in a team for NexHack?",
+      answer: " Each team must have 2 to 4 members."
     },
     {
       question: "What should I bring to the event?",
-      answer: "Bring your laptop, charger, any peripherals you prefer, and your creativity! We'll provide food, drinks, swag, and all the energy you need. Don't forget a change of clothes for the full 36-hour experience."
+      answer: "Bring your laptop, charger,Student ID card, any peripherals you prefer, and your creativity! We'll provide food, drinks, swag, and all the energy you need."
     },
     {
       question: "Are there any participation requirements?",
-      answer: "You must be a current college student with a valid student ID. All skill levels are welcome - from complete beginners to coding veterans. The only requirement is enthusiasm to learn and build!"
+      answer: "YNexHack is open to everyone! Whether you’re a school student, college student, or a tech enthusiast, you’re welcome to join. All you need is a team of 2–4 members and the passion to hack the next dimension."
     },
     {
-      question: "What technologies can we use?",
-      answer: "Any programming language, framework, or platform is fair game! Whether you're into web development, mobile apps, AI/ML, blockchain, or something completely different - build what excites you."
-    },
-    {
-      question: "How does judging work?",
-      answer: "Projects are judged on innovation, technical implementation, presentation, and potential impact. Our panel includes industry experts, professors, and previous hackathon winners."
-    },
-    {
-      question: "Is there food provided?",
-      answer: "Absolutely! We'll have meals, snacks, and drinks available throughout the entire event. We cater to various dietary restrictions - just let us know your needs during registration."
+      question: "Will food be provided during the hackathon?",
+      answer: "Yes, participants will be provided with breakfast, lunch, dinner, and midnight snacks to keep you energized throughout the hackathon. All meals and refreshments are included and will be served at scheduled times during the event."
     },
     {
       question: "Can I start working on my project before the event?",
-      answer: "No pre-existing code is allowed. All work must be done during the 36-hour timeframe. However, you can brainstorm ideas and plan your approach beforehand!"
+      answer: "No, all development must begin only after the official start of NexHack. Any team found working on a pre-built project will face disqualification. However, you are allowed to brainstorm ideas and research concepts in advance."
+    },
+    {
+      question: "Can we form teams at the venue?",
+      answer: "No, teams must be formed before registration. Only complete teams (2–4 members) will be allowed to participate."
     }
   ];
 
