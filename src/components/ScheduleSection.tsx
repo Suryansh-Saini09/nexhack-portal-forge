@@ -108,7 +108,7 @@ export const ScheduleSection = () => {
                       </span>
                     </div>
                   </div>
-                  <span className={`px-2 py-1 text-xs font-mono border ${getEventColor(item.type)} rounded`}>
+                  <span className={`px-2 py-1 text-xs font-mono border md:block hidden ${getEventColor(item.type)} rounded`}>
                     {item.type}
                   </span>
                 </div>
