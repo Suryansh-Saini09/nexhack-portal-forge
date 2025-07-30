@@ -36,7 +36,7 @@ export const Header = () => {
         <div className="flex items-center justify-between h-16 px-4">
           {/* Logo */}
           <div className="flex items-end justify-end">
-            <img src={logo} className='h-16'/>
+            <a href='#'><img src={logo} className='h-16'/></a>
           </div>
 
           {/* Desktop Navigation */}

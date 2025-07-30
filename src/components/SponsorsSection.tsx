@@ -1,3 +1,4 @@
+import { BackgroundBeams } from "@/components/background-beams";
 export const SponsorsSection = () => {
   const sponsors = {
     netherite: [
@@ -18,7 +19,7 @@ export const SponsorsSection = () => {
   };
 
   return (
-    <section id="sponsors" className="section-spacing bg-muted/5">
+    <section id="sponsors" className="section-spacing bg-black/60 relative">
       <div className="container-max">
         <div className="text-center mb-16">
           <h2 className="font-pixel text-3xl md:text-4xl text-primary mb-8">
@@ -103,6 +104,7 @@ export const SponsorsSection = () => {
           </div>
         </div>
       </div>
+      <BackgroundBeams />
     </section>
   );
 };

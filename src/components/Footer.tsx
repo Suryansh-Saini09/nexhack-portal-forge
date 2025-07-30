@@ -1,5 +1,5 @@
 import { Github, Twitter, Instagram, Mail, MessageCircle } from 'lucide-react';
-
+import {BackgroundBeamsWithCollision} from '@/components/background-beams-with-collision'
 export const Footer = () => {
   const quickLinks = [
     { name: 'About', href: '#about' },
@@ -19,7 +19,8 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-card border-t border-border">
+    <BackgroundBeamsWithCollision>
+    <footer className=" border-t border-border">
       <div className="container-max section-spacing">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Logo & Description */}
@@ -40,9 +41,9 @@ export const Footer = () => {
             <div className="grid grid-cols-2 gap-2">
               {quickLinks.map((link) => (
                 <a
-                  key={link.name}
-                  href={link.href}
-                  className="font-mono text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                key={link.name}
+                href={link.href}
+                className="font-mono text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
                 >
                   {link.name}
                 </a>
@@ -58,10 +59,10 @@ export const Footer = () => {
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
                 <a
-                  key={social.name}
-                  href={social.href}
-                  className="w-10 h-10 bg-muted/20 border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-200 hover:scale-110"
-                  aria-label={social.name}
+                key={social.name}
+                href={social.href}
+                className="w-10 h-10 bg-muted/20 border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-200 hover:scale-110"
+                aria-label={social.name}
                 >
                   <social.icon className="w-4 h-4" />
                 </a>
@@ -83,19 +84,7 @@ export const Footer = () => {
               <a
                 href="#"
                 className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="#"
-                className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
+                >
                 Code of Conduct
               </a>
             </div>
@@ -103,5 +92,6 @@ export const Footer = () => {
         </div>
       </div>
     </footer>
+</BackgroundBeamsWithCollision>
   );
 };

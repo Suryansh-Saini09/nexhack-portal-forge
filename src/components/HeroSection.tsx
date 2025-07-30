@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
 import netherBg from '/bg-video.mp4';
+import { Cover } from "@/components/cover";
 // import overworldBg from '@/assets/overworld.mp4';
 import { RegistrationForm } from '@/components/RegistrationForm';
 
@@ -32,7 +33,9 @@ export const HeroSection = () => {
           <h1 className="font-pixel text-4xl md:text-6xl lg:text-7xl text-primary text-shadow-glow leading-tight">
             HACK THE NEXT
             <br />
+            <Cover>
             DIMENSION
+            </Cover>
           </h1>
 
           {/* Sub-headline */}
