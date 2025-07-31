@@ -3,19 +3,31 @@ import { Code, Trophy, Users } from 'lucide-react';
 export const AboutSection = () => {
   const features = [
     {
-      icon: Code,
+      iconLink: "https://cdn.lordicon.com/gvtjlyjf.json",
       title: "24 Hours of Innovation",
-      description: "Push your limits and create something extraordinary in our intense coding marathon."
+      description: "Push your limits and create something extraordinary in our intense coding marathon.",
+      color:{
+        primary:"#1AFF1A",
+        secondary:"#152121"
+      }
     },
     {
-      icon: Trophy,
+      iconLink: "https://cdn.lordicon.com/kezeezyg.json",
       title: "Legendary Loot & Prizes",
-      description: "Compete for epic prizes including cash rewards and exclusive tech gear."
+      description: "Compete for epic prizes including cash rewards and exclusive tech gear.",
+      color:{
+        primary:"#1AFF1A",
+        secondary:"#1AFF1A"
+      }
     },
     {
-      icon: Users,
+      iconLink: "https://cdn.lordicon.com/shcfcebj.json",
       title: "Expert Mentors & Workshops",
-      description: "Learn from industry veterans and attend workshops to level up your skills."
+      description: "Learn from industry veterans and attend workshops to level up your skills.",
+      color:{
+        primary:"#1AFF1A",
+        secondary:"#1AFF1A"
+      }
     }
   ];
 
@@ -52,7 +64,8 @@ export const AboutSection = () => {
               >
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 bg-primary/10 border-2 border-primary flex items-center justify-center">
-                    <feature.icon className="w-6 h-6 text-primary" />
+                    {/* <feature.icon className="w-6 h-6 text-primary" /> */}
+                    <lord-icon part="box" class='regs' src={`${feature.iconLink}`} trigger="loop" colors={`primary:${feature.color.primary},secondary:${feature.color.secondary}`}/>
                   </div>
                 </div>
                 <div>
