@@ -6,6 +6,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import lottie from "lottie-web";
+import { defineElement } from "lord-icon-element";
+
+// Define the custom <lord-icon> element
+defineElement(lottie.loadAnimation);
 
 const queryClient = new QueryClient();
 

@@ -27,30 +27,31 @@ export const ContactSection = () => {
 
   const contactInfo = [
     {
-      icon: Mail,
+      icon: "https://cdn.lordicon.com/ozlkyfxg.json",
       title: "Email",
       content: "nexhack@geetauniversity.edu.in",
       description: "Send us a message anytime"
     },
     {
-      icon: MessageCircle,
+      icon: "https://cdn.lordicon.com/zvnxzuwv.json",
       title: "Discord",
       content: "thenexhack",
       description: "Join our active community"
     },
     {
-      icon: MapPin,
+      icon: "https://cdn.lordicon.com/onmwuuox.json",
       title: "Location",
       content: "Geeta University,Naultha,Panipat",
       description: "Main Engineering Building"
     },
     {
-      icon: Phone,
+      icon: "https://cdn.lordicon.com/vcdutftw.json",
       title: "Emergency",
       content: "9012822721",
       description: "Event day support only"
     }
   ];
+  
 
   return (
     <section id="contact" className="section-spacing bg-muted/5">
@@ -76,7 +77,12 @@ export const ContactSection = () => {
                   <div key={index} className="minecraft-card flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       <div className="w-12 h-12 bg-primary/10 border-2 border-primary flex items-center justify-center">
-                        <info.icon className="w-5 h-5 text-primary" />
+                        <lord-icon
+                            part="box"
+                            src={info.icon}
+                            trigger="loop"
+                            colors="primary:#19E71A,secondary:#19E71A"
+                          />
                       </div>
                     </div>
                     <div>
