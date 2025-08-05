@@ -56,7 +56,7 @@ export const ThemesSection = () => {
           {themes.map((theme, index) => (
             <div 
               key={index}
-              className="minecraft-card group cursor-pointer hover:shadow-xl"
+              className="minecraft-card group hover:shadow-xl"
             >
               <div className="text-center space-y-4">
                 <div className={`w-16 h-16 mx-auto ${theme.color} flex items-center justify-center border-2 transition-all duration-300 group-hover:scale-110`}>
