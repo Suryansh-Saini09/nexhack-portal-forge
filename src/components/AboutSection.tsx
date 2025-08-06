@@ -1,5 +1,5 @@
 import { Code, Trophy, Users } from 'lucide-react';
-
+import logo from '/logo.png'
 export const AboutSection = () => {
   const features = [
     {
@@ -32,7 +32,7 @@ export const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="section-spacing">
+    <section id="about" className="section-spacing bg-black">
       <div className="container-max">
         <div className="text-center mb-16">
           <h2 className="font-pixel text-3xl md:text-4xl text-primary mb-8">
@@ -40,8 +40,11 @@ export const AboutSection = () => {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-3 gap-12 items-center">
           {/* Mission Statement */}
+          <div className='hidden md:inline'>
+            <img src={logo} alt="" />
+          </div>
           <div className="space-y-6">
             <p className="font-mono text-lg leading-relaxed text-foreground">
               NexHack is not just another hackathon – it's a portal to the future of technology. 
@@ -54,16 +57,15 @@ export const AboutSection = () => {
               and connect with like-minded builders from across the dimension.
             </p>
           </div>
-
           {/* Feature Grid */}
           <div className="grid gap-6">
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="minecraft-card flex items-start space-x-4"
+                className="minecraft-card bg-transparent backdrop-blur-lg flex items-start space-x-4 shadow-primary/10 shadow-xl"
               >
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-primary/10 border-2 border-primary flex items-center justify-center">
+                  <div className="w-12 h-12 bg-black/10 border-2 border-primary flex items-center justify-center">
                     {/* <feature.icon className="w-6 h-6 text-primary" /> */}
                     <lord-icon part="box" class='regs' src={`${feature.iconLink}`} trigger="loop" colors={`primary:${feature.color.primary},secondary:${feature.color.secondary}`}/>
                   </div>

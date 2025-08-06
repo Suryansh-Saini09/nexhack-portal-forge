@@ -4,7 +4,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { BackgroundBeamsWithCollision } from '@/components/background-beams-with-collision'
+import { BackgroundBeamsWithCollision } from '@/components/background-beams-with-collision';
+import logo from '/text-logo.png';
+
 export const Footer = () => {
   const quickLinks = [
     { name: 'About', href: '#about' },
@@ -30,9 +32,7 @@ export const Footer = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Logo & Description */}
             <div className="space-y-4">
-              <h3 className="font-pixel text-lg text-primary">
-                NEXHACK
-              </h3>
+                          <a href='#'><img src={logo} className='h-16'/></a>
               <p className="font-mono text-sm text-muted-foreground leading-relaxed">
                 The nexus of innovation where the next generation of builders, coders, and dreamers unite to hack the next dimension.
               </p>
