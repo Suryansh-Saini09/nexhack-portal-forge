@@ -31,7 +31,7 @@ export const SponsorsSection = () => {
         </div>
 
         {/* Netherite Tier */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <div className="text-center mb-8">
             <h3 className="font-pixel text-xl text-gray-400 mb-2">NETHERITE TIER</h3>
             <div className="w-24 h-1 bg-gray-600 mx-auto"></div>
@@ -44,10 +44,10 @@ export const SponsorsSection = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Diamond Tier */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <div className="text-center mb-8">
             <h3 className="font-pixel text-xl text-diamond mb-2">DIAMOND TIER</h3>
             <div className="w-24 h-1 bg-diamond mx-auto"></div>
@@ -60,10 +60,10 @@ export const SponsorsSection = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Emerald Tier */}
-        <div className="mb-12">
+        {/* <div className="mb-12">
           <div className="text-center mb-8">
             <h3 className="font-pixel text-xl text-emerald mb-2">EMERALD TIER</h3>
             <div className="w-24 h-1 bg-emerald mx-auto"></div>
@@ -76,7 +76,7 @@ export const SponsorsSection = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Sponsor CTA */}
         <div className="text-center">
@@ -93,12 +93,6 @@ export const SponsorsSection = () => {
                 className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 font-pixel text-xs uppercase tracking-wider transform transition-all duration-200 hover:scale-105 active:scale-95 border-2 inline-block"
               >
                 SPONSOR US →
-              </a>
-              <a
-                href="#"
-                className="minecraft-btn border-primary text-primary hover:bg-primary hover:text-primary-foreground px-6 py-3 font-pixel text-xs uppercase tracking-wider transform transition-all duration-200 hover:scale-105 active:scale-95 border-2 inline-block"
-              >
-                VIEW PACKAGE
               </a>
             </div>
           </div>

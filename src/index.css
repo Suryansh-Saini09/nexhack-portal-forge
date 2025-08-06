@@ -239,3 +239,7 @@
 .animate-blink {
   animation: blink 1.5s steps(1) infinite;
 }
+
+html,body,.App ,p,a,button{
+  cursor: url('/cursor-mine.cur'),auto !important;
+} 

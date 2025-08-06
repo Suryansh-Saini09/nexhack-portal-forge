@@ -46,19 +46,21 @@ export const HeroSection = () => {
           {/* Social Proof */}
           <div className="minecraft-card inline-block bg-card/50 backdrop-blur-sm p-2 rounded">
             <p className="font-mono text-sm text-foreground">
-              🏆 Join over <span className="text-primary font-bold">500+</span> participants in the arena!
+              Join over <span className="text-primary font-bold">500+</span> participants in the arena!
             </p>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
+            {/* <Button
               onClick={() => setIsRegistrationOpen(true)}
               size="lg"
               className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-4"
             >
               REGISTER NOW →
-            </Button>
+            </Button> */}
+            <a href='#faq'>
+
             <Button
               variant="outline"
               size="lg"
@@ -66,6 +68,7 @@ export const HeroSection = () => {
             >
               LEARN MORE
             </Button>
+            </a>
           </div>
 
           {/* Animated Elements */}

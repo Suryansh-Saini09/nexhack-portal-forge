@@ -6,7 +6,7 @@ export const PrizesSection = () => {
       place: "1st Place",
       icon: Crown,
       title: "NETHERITE TIER",
-      amount: "25,000",
+      amount: "₹25,000",
       description: "Cash prize + Exclusive tech bundle",
       color: "bg-netherite border-gray-600 text-gray-100",
       highlight: "border-yellow-400 shadow-yellow-400/50"
@@ -32,8 +32,8 @@ export const PrizesSection = () => {
   ];
 
   const specialPrizes = [
-    "All Girls Team - 5,000",
-    "Best AI Innovation - 3,000"
+    "All Girls Team: ₹5,000",
+    "Best AI Innovation: ₹3,000"
   ];
 
   return (
@@ -44,7 +44,7 @@ export const PrizesSection = () => {
             THE TREASURE AWAITS
           </h2>
           <p className="font-mono text-lg text-muted-foreground max-w-3xl mx-auto">
-            Epic rewards for legendary builders. Over 1,20,000 in total prizes plus exclusive opportunities to launch your career.
+            Epic rewards for legendary builders. Over ₹1,20,000 in total prizes plus exclusive opportunities to launch your career.
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export const PrizesSection = () => {
                   key={index}
                   className="font-['Press_Start_2P'] text-xs text-[#F5F5DC] bg-[#3E2723]/80 border-2 border-[#8D6E63] p-4 rounded shadow-[4px_4px_0_#000] transition-all duration-300 ease-in-out animate-softPulse hover:-translate-y-1 hover:border-[#FFD700] hover:shadow-[6px_6px_0_#000] hover:brightness-110"
                 >
-                  🏆 {prize}
+                   {prize}
                 </div>
               ))}
             </div>
