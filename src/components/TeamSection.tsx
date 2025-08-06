@@ -49,7 +49,7 @@ export const TeamSection = () => {
     },
     {
       name: "Riya Rana",
-      role: "Pagal Marketing Lead",
+      role: "Marketing Lead",
       avatar: "/riya.jpg",
       bio: "Digital marketing specialist who spreads the word about our epic coding adventures.",
       github:"https://github.com/riyarana9813",
