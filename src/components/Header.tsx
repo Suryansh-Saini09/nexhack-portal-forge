@@ -55,12 +55,12 @@ export const Header = () => {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
             {/* <ThemeToggle /> */}
-            <Button 
+            {/* <Button 
               onClick={() => setIsRegistrationOpen(true)}
               className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90"
             >
               REGISTER NOW →
-            </Button>
+            </Button> */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -94,21 +94,21 @@ export const Header = () => {
                   {item}
                 </button>
               ))}
-               <Button 
+               {/* <Button 
                 onClick={() => setIsRegistrationOpen(true)}
                 className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 mt-4"
               >
                 REGISTER NOW →
-              </Button>
+              </Button> */}
             </nav>
           </div>
         )}
       </div>
       
-      <RegistrationForm 
+      {/* <RegistrationForm 
         open={isRegistrationOpen} 
         onOpenChange={setIsRegistrationOpen} 
-      />
+      /> */}
     </header>
   );
 };
