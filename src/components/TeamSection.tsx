@@ -1,5 +1,7 @@
+import { CometCard } from "@/components/comet-card";
 export const TeamSection = () => {
   const team = [
+
     {
       name: "Alex Chen",
       role: "Event Director",
