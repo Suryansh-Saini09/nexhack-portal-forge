@@ -40,11 +40,7 @@ export const AboutSection = () => {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-12 items-center">
-          {/* Mission Statement */}
-          <div className='hidden md:inline'>
-            <img src={logo} alt="" />
-          </div>
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <p className="font-mono text-lg leading-relaxed text-foreground">
               NexHack is not just another hackathon – it's a portal to the future of technology. 

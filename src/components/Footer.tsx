@@ -20,9 +20,9 @@ export const Footer = () => {
   const socialLinks = [
     { name: 'Discord', icon: "https://cdn.lordicon.com/zvnxzuwv.json", href: '#' },
     { name: 'Twitter', icon: "https://cdn.lordicon.com/wlbymhoo.json", href: '#' },
-    { name: 'Instagram', icon: "https://cdn.lordicon.com/tgyvxauj.json", href: '#' },
+    { name: 'Instagram', icon: "https://cdn.lordicon.com/tgyvxauj.json", href: 'https://instagram.com/thenexhack' },
     { name: 'GitHub', icon: "https://cdn.lordicon.com/jjxzcivr.json", href: '#' },
-    { name: 'Email', icon: "https://cdn.lordicon.com/vpbspaec.json", href: 'mailto:hello@nexhack.dev' },
+    { name: 'Email', icon: "https://cdn.lordicon.com/vpbspaec.json", href: 'mailto:nexhack@geetauniversity.edu.in' },
   ];
 
   return (
@@ -70,6 +70,7 @@ export const Footer = () => {
                           href={social.href}
                           className="w-10 h-10 bg-muted/20 border border-border flex items-center justify-center hover:bg-primary/50 hover:text-primary-foreground transition-all duration-200 hover:scale-110"
                           aria-label={social.name}
+                          target="_blank"
                         >
                           <lord-icon
                             part="box"

@@ -1,11 +1,16 @@
+import { useState } from "react";
+import { Button } from "./ui/button";
+import { MentorDialog } from "./MentorDialog";
+
 export const TeamSection = () => {
+  const [mentorDialogOpen, setMentorDialogOpen] = useState(false);
   const team = [
     {
       name: "Nitish Chaudhary",
       role: "Lead Organizer",
       avatar: "/nitish.jpeg",
       bio: "Full-stack developer with a strong track record in building real-world web applications, leading tech communities, and winning national-level hackathon.",
-      github:"https://github.com/MrZorawaR",
+      github: "https://github.com/MrZorawaR",
       linkedin: "https://www.linkedin.com/in/nitish315",
       instagram: "https://www.instagram.com/zorawar_singh_315"
     },
@@ -14,7 +19,7 @@ export const TeamSection = () => {
       role: "Lead Organizer",
       avatar: "/shravyaaa.jpg",
       bio: "President of Innovation Forge at Geeta University, leading tech initiatives and community events with a strong foundation in Data Structures and Algorithms.",
-      github:"https://github.com/shravya315",
+      github: "https://github.com/shravya315",
       linkedin: "https://www.linkedin.com/in/shravyatrey315",
       instagram: "https://www.instagram.com/__shravyaaaaaaa"
     },
@@ -23,7 +28,7 @@ export const TeamSection = () => {
       role: "Tech Lead",
       avatar: "/suryansh.jpeg",
       bio: "A passionate web developer and problem solver, leading tech strategy at CodeForge. Skilled in React.js and DSA, with a strong focus on building the student tech community.",
-      github:"https://github.com/Suryansh-Saini09",
+      github: "https://github.com/Suryansh-Saini09",
       linkedin: "https://www.linkedin.com/in/suryansh-saini-216712292/",
       instagram: "https://www.instagram.com/suryxnsh_09"
     },
@@ -32,7 +37,7 @@ export const TeamSection = () => {
       role: "Operations Lead",
       avatar: "/harsh.jpeg",
       bio: "UX designer and community builder who ensures everyone feels welcome in our coding arena.",
-      github:"https://github.com/harsh7509",
+      github: "https://github.com/harsh7509",
       linkedin: "https://www.linkedin.com/in/harshkumar7509",
       instagram: "https://www.instagram.com/harshxantil"
     },
@@ -41,16 +46,16 @@ export const TeamSection = () => {
       role: "Partnerships Lead",
       avatar: "/sahil.jpeg",
       bio: "Project manager extraordinaire who keeps everything running smoothly during the chaos.",
-      github:"https://github.com/sahil-codesfor-fun",
+      github: "https://github.com/sahil-codesfor-fun",
       linkedin: "https://www.linkedin.com/in/sahil-bhardwaj-1b1672320/",
       instagram: "https://www.instagram.com/bhardwaj_sahil10"
     },
     {
       name: "Riya Rana",
-      role: "Pagal Marketing Lead",
+      role: "Marketing Lead",
       avatar: "/riya.jpg",
       bio: "Digital marketing specialist who spreads the word about our epic coding adventures.",
-      github:"https://github.com/riyarana9813",
+      github: "https://github.com/riyarana9813",
       linkedin: "https://www.linkedin.com/in/riya-rana-b752a6327/",
       instagram: "https://www.instagram.com/rana_riyaaa/"
     }
@@ -88,9 +93,9 @@ export const TeamSection = () => {
                 </div>
 
                 {/* Bio */}
-                <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                {/* <p className="font-mono text-sm text-muted-foreground leading-relaxed">
                   {member.bio}
-                </p>
+                </p> */}
 
                 {/* Social Links */}
                 <div className="flex justify-center space-x-3 pt-2">
@@ -148,15 +153,16 @@ export const TeamSection = () => {
             <p className="font-mono text-sm text-muted-foreground mb-6">
               Are you an industry professional, a seasoned developer, or a design wizard? Share your expertise, guide our participants, and help shape the future of tech by mentoring at our next event.
             </p>
-            <a
-              href="mailto:mentors@nexhack.dev?subject=Mentor Application for NexaHack"
+            <Button
+              onClick={() => setMentorDialogOpen(true)}
               className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 font-pixel text-xs uppercase tracking-wider transform transition-all duration-200 hover:scale-105 active:scale-95 border-2 inline-block"
             >
               BECOME A MENTOR →
-            </a>
+            </Button>
           </div>
         </div>
       </div>
+      <MentorDialog open={mentorDialogOpen} onOpenChange={setMentorDialogOpen} />
     </section>
   );
 };
