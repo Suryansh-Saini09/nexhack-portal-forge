@@ -20,6 +20,8 @@ interface SponsorDialogProps {
 export const SponsorDialog = ({ open, onOpenChange }: SponsorDialogProps) => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [name, setName] = useState('');
+    const [company, setCompany] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { toast } = useToast();
 
@@ -42,10 +44,10 @@ export const SponsorDialog = ({ open, onOpenChange }: SponsorDialogProps) => {
         try {
             setIsSubmitting(true);
 
-            const res = await fetch('/api/sponsor-message', {
+            const res = await fetch('https://websitebackend-w5m9.onrender.com/api/sponsor', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, message }),
+                body: JSON.stringify({ name, email, company, message }),
             });
 
             if (!res.ok) throw new Error('Something went wrong');
@@ -88,12 +90,25 @@ export const SponsorDialog = ({ open, onOpenChange }: SponsorDialogProps) => {
                     >
                         <Newspaper />Download Brochure
                     </Button>
-
+                    <Input
+                        type="text"
+                        placeholder="Your Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="bg-muted font-mono"
+                    />
                     <Input
                         type="email"
                         placeholder="youremail@company.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        className="bg-muted font-mono"
+                    />
+                    <Input
+                        type="text"
+                        placeholder="Company"
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
                         className="bg-muted font-mono"
                     />
 

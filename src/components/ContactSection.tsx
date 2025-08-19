@@ -1,28 +1,62 @@
 import { useState } from 'react';
-import { Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast'; // ✅ Add this
 
 export const ContactSection = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+
+    const { name, email, message } = formData;
+
+    if (!email || !message) {
+      toast({
+        title: 'Both email and message are required.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      const res = await fetch('https://websitebackend-w5m9.onrender.com/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (!res.ok) throw new Error('Something went wrong');
+
+      toast({
+        title: 'Message Sent ✅',
+        description: "We'll reach out to you shortly!",
+      });
+
+      setFormData({ name: '', email: '', message: '' });
+    } catch (err) {
+      toast({
+        title: 'Failed to send message',
+        description: 'Please try again later or email us directly.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const contactInfo = [
@@ -41,7 +75,7 @@ export const ContactSection = () => {
     {
       icon: "https://cdn.lordicon.com/onmwuuox.json",
       title: "Location",
-      content: "Geeta University,Naultha,Panipat",
+      content: "Geeta University, Naultha, Panipat",
       description: "Main Engineering Building"
     },
     {
@@ -51,7 +85,6 @@ export const ContactSection = () => {
       description: "Event day support only"
     }
   ];
-  
 
   return (
     <section id="contact" className="section-spacing bg-muted/5">
@@ -66,7 +99,7 @@ export const ContactSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
+          {/* Contact Info */}
           <div className="space-y-8">
             <div>
               <h3 className="font-pixel text-xl text-foreground mb-6">
@@ -78,30 +111,24 @@ export const ContactSection = () => {
                     <div className="flex-shrink-0">
                       <div className="w-12 h-12 bg-primary/10 border-2 border-primary flex items-center justify-center">
                         <lord-icon
-                            part="box"
-                            src={info.icon}
-                            trigger="loop"
-                            colors="primary:#19E71A,secondary:#19E71A"
-                          />
+                          part="box"
+                          src={info.icon}
+                          trigger="loop"
+                          colors="primary:#19E71A,secondary:#19E71A"
+                        />
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-pixel text-sm text-foreground mb-1">
-                        {info.title}
-                      </h4>
-                      <p className="font-mono text-sm text-primary font-medium mb-1">
-                        {info.content}
-                      </p>
-                      <p className="font-mono text-xs text-muted-foreground">
-                        {info.description}
-                      </p>
+                      <h4 className="font-pixel text-sm text-foreground mb-1">{info.title}</h4>
+                      <p className="font-mono text-sm text-primary font-medium mb-1">{info.content}</p>
+                      <p className="font-mono text-xs text-muted-foreground">{info.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Quick Stats */}
+            {/* Stats */}
             <div className="minecraft-card bg-primary/5 border-primary">
               <h4 className="font-pixel text-sm text-primary mb-4">
                 RESPONSE STATS
@@ -127,9 +154,7 @@ export const ContactSection = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="font-pixel text-xs text-foreground mb-2 block">
-                    NAME *
-                  </label>
+                  <label className="font-pixel text-xs text-foreground mb-2 block">NAME *</label>
                   <Input
                     type="text"
                     name="name"
@@ -141,9 +166,7 @@ export const ContactSection = () => {
                   />
                 </div>
                 <div>
-                  <label className="font-pixel text-xs text-foreground mb-2 block">
-                    EMAIL *
-                  </label>
+                  <label className="font-pixel text-xs text-foreground mb-2 block">EMAIL *</label>
                   <Input
                     type="email"
                     name="email"
@@ -157,24 +180,7 @@ export const ContactSection = () => {
               </div>
 
               <div>
-                <label className="font-pixel text-xs text-foreground mb-2 block">
-                  SUBJECT *
-                </label>
-                <Input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="font-mono border-2 border-border focus:border-primary"
-                  placeholder="What's this about?"
-                />
-              </div>
-
-              <div>
-                <label className="font-pixel text-xs text-foreground mb-2 block">
-                  MESSAGE *
-                </label>
+                <label className="font-pixel text-xs text-foreground mb-2 block">MESSAGE *</label>
                 <Textarea
                   name="message"
                   value={formData.message}
@@ -188,10 +194,12 @@ export const ContactSection = () => {
 
               <Button
                 type="submit"
+                disabled={isSubmitting}
                 className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 w-full"
               >
-                TRANSMIT MESSAGE →
+                {isSubmitting ? 'Sending...' : 'TRANSMIT MESSAGE →'}
               </Button>
+
             </form>
 
             <p className="font-mono text-xs text-muted-foreground mt-4">

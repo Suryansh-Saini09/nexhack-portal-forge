@@ -38,10 +38,10 @@ export const MentorDialog = ({ open, onOpenChange }: MentorDialogProps) => {
     try {
       setIsSubmitting(true);
 
-      const res = await fetch('/api/mentor-application', {
+      const res = await fetch('https://websitebackend-w5m9.onrender.com/api/mentor', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, linkedin, github, experience }),
+        body: JSON.stringify({name, email, github, linkedin, experience}),
       });
 
       if (!res.ok) throw new Error('Something went wrong');
