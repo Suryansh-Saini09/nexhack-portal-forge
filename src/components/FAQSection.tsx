@@ -82,7 +82,7 @@ export const FAQSection = () => {
         <div className="text-center mt-12">
           <p className="font-mono text-sm text-muted-foreground">
             Still have questions? Reach out to us at{' '}
-            <a href="mailto:hello@nexhack.dev" className="text-primary hover:underline">
+            <a href="mailto:nexhack@geetauniversity.edu.in" className="text-primary hover:underline">
               nexhack@geetauniversity.edu.in
             </a>
           </p>

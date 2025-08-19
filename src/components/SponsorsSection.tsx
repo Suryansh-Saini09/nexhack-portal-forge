@@ -1,4 +1,7 @@
 import { BackgroundBeams } from "@/components/background-beams";
+import { useState } from "react";
+import { SponsorDialog } from "./SponsorDialog";
+import { Button } from "./ui/button";
 export const SponsorsSection = () => {
   const sponsors = {
     netherite: [
@@ -17,6 +20,9 @@ export const SponsorsSection = () => {
       { name: "WebCraft", logo: "🌐" },
     ]
   };
+
+  const [sponsorOpen, setSponsorOpen] = useState(false);
+
 
   return (
     <section id="sponsors" className="section-spacing bg-black/60 relative">
@@ -88,17 +94,21 @@ export const SponsorsSection = () => {
               Partner with us to reach 500+ talented developers and showcase your brand to the next generation of innovators.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:sponsors@nexhack.dev"
+              <Button
+                onClick={() => setSponsorOpen(true)}
                 className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 font-pixel text-xs uppercase tracking-wider transform transition-all duration-200 hover:scale-105 active:scale-95 border-2 inline-block"
               >
                 SPONSOR US →
-              </a>
+              </Button >
+
+              {/* <button onClick={() => alert("Clicked!")}>SPONSOR US →</button> */}
+
             </div>
           </div>
         </div>
       </div>
       <BackgroundBeams />
+      <SponsorDialog open={sponsorOpen} onOpenChange={setSponsorOpen} />
     </section>
   );
 };
