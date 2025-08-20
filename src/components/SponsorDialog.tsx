@@ -59,6 +59,8 @@ export const SponsorDialog = ({ open, onOpenChange }: SponsorDialogProps) => {
 
             setEmail('');
             setMessage('');
+            setName('');
+            setCompany('');
             onOpenChange(false);
         } catch (err) {
             toast({
