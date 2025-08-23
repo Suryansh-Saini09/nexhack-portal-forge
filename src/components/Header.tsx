@@ -19,7 +19,7 @@ export const Header = () => {
     'SPONSORS',
     'TEAM',
     'FAQ',
-    'CONTACT US'
+    'CONTACT'
   ];
 
   const scrollToSection = (sectionId: string) => {
