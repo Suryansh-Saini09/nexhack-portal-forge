@@ -40,13 +40,13 @@ export const HeroSection = () => {
 
           {/* Sub-headline */}
           <p className="font-mono text-lg md:text-xl lg:text-2xl text-white max-w-4xl mx-auto leading-relaxed text-shadow-glow">
-            Welcome to NexHack 2025. The nexus of innovation where the next generation of builders, coders, and dreamers unite.
+            Welcome to NexHack 2025. The nexus of innovation where the next generation of builders, coders, and dreamers unite. 
           </p>
 
           {/* Social Proof */}
           <div className="minecraft-card inline-block bg-card/50 backdrop-blur-sm p-2 rounded">
             <p className="font-mono text-sm text-foreground">
-              Join over <span className="text-primary font-bold">500+</span> participants in the arena!
+              Organised by School of Computer Science and Engineering and Code Forge Society Powered by <span className="text-orange-500 text-shadow-glow leading-tight font-bold">Geeta Technical Hub</span> 
             </p>
           </div>
 

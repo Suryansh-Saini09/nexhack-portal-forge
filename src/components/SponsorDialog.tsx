@@ -27,7 +27,7 @@ export const SponsorDialog = ({ open, onOpenChange }: SponsorDialogProps) => {
 
     const handleDownload = () => {
         const link = document.createElement('a');
-        link.href = '/assets/NexHack-Sponsorship-Brochure.pdf';
+        link.href = '/src/assets/NexHack_Sponsorship _Brochure.pdf';
         link.download = 'NexHack-Sponsorship-Brochure.pdf';
         link.click();
     };

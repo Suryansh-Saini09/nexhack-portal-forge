@@ -1,43 +1,67 @@
-import { Cpu, Gamepad2, Heart, Shield, Zap, Globe } from 'lucide-react';
+import { Cpu, Gamepad2, Heart, Shield, Zap, Globe, Wifi, ShieldCheckIcon, Lightbulb, Power, RocketIcon } from 'lucide-react';
 
 export const ThemesSection = () => {
   const themes = [
     {
       icon: Cpu,
-      title: "AI & Machine Learning",
-      description: "Build intelligent systems that can learn, adapt, and solve complex problems.",
+      title: "WordPress",
+      description: "Crafting powerful websites and digital experiences with open-source tools",
       color: "bg-primary/10 border-primary text-primary"
     },
     {
       icon: Gamepad2,
-      title: "Gaming & Entertainment",
-      description: "Create immersive experiences that captivate and engage users.",
+      title: "EdTech",
+      description: "Transforming education through technology-driven solutions.",
       color: "bg-secondary/10 border-secondary text-secondary"
     },
     {
       icon: Heart,
-      title: "Healthcare & Wellness",
-      description: "Develop solutions that improve lives and promote well-being.",
+      title: "Open Innovation",
+      description: "Breaking barriers with creative, cross-domain problem-solving.",
       color: "bg-emerald/10 border-emerald text-emerald"
     },
     {
       icon: Shield,
-      title: "Cybersecurity",
-      description: "Protect the digital realm with innovative security solutions.",
+      title: "Web3",
+      description: " Building decentralized and trustless systems of the future.",
       color: "bg-diamond/10 border-diamond text-diamond"
     },
     {
       icon: Zap,
-      title: "Sustainability & Environment",
-      description: "Build for a greener future with eco-friendly technologies.",
+      title: "AI in Agriculture",
+      description: "Leveraging AI for smarter, sustainable farming practices.",
       color: "bg-accent/10 border-accent text-accent"
     },
     {
+      icon: Lightbulb,
+      title: "Generative AI",
+      description: "Unlocking creativity with next-gen AI capabilities.",
+      color: "bg-diamond/10 border-diamond text-diamond"
+    },
+     {
+      icon: RocketIcon,
+      title: "Robotics",
+      description: " Designing intelligent, autonomous, and human-assistive machines.",
+      color: "bg-secondary/10 border-secondary text-secondary"
+    },
+    {
+      icon: ShieldCheckIcon,
+      title: "Cybersecurity",
+      description: " Protecting the digital world with secure and resilient systems.",
+      color: "bg-diamond/10 border-diamond text-diamond"
+    },
+     {
       icon: Globe,
-      title: "Open Innovation",
-      description: "Think outside the box and create something completely new.",
-      color: "bg-muted/10 border-muted-foreground text-muted-foreground"
-    }
+      title: "FinTech",
+      description: "  Redefining financial services with digital innovation.",
+      color: "bg-secondary/10 border-secondary text-secondary"
+    },
+    {
+      icon: Wifi,
+      title: "Campus Solutions ",
+      description: " Innovating for smarter, connected, and future-ready campuses.",
+      color: "bg-accent/10 border-accent text-accent"
+    },
   ];
 
   return (

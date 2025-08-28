@@ -5,6 +5,8 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { useTheme } from '@/contexts/ThemeContext';
 import { RegistrationForm } from '@/components/RegistrationForm';
 import logo from '/text-logo.png';
+import GTH from '/GTH.png';
+
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,6 +24,12 @@ export const Header = () => {
     'CONTACT'
   ];
 
+  <img 
+  src="/gth.png" 
+  alt="GTH Logo" 
+  className="h-10 w-10 rounded-full"
+  />
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId.toLowerCase());
     if (element) {
@@ -38,6 +46,7 @@ export const Header = () => {
           <div className="flex items-end justify-end">
             <a href='#'><img src={logo} className='h-16'/></a>
           </div>
+          
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
@@ -61,6 +70,11 @@ export const Header = () => {
             >
               REGISTER NOW →
             </Button> */}
+            <img 
+          src="/GTH.png" 
+          alt="GTH Logo" 
+          className="h-10 w-30 "
+            />
           </div>
 
           {/* Mobile Menu Button */}
@@ -103,12 +117,14 @@ export const Header = () => {
             </nav>
           </div>
         )}
+        
       </div>
       
       {/* <RegistrationForm 
         open={isRegistrationOpen} 
         onOpenChange={setIsRegistrationOpen} 
       /> */}
+      
     </header>
   );
 };
