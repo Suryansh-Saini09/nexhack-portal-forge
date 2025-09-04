@@ -33,7 +33,7 @@ export const TeamSection = () => {
       instagram: "https://www.instagram.com/suryxnsh_09"
     },
     {
-      name: "Harsh Kumar",
+      name: "Harsh Choudhary",
       role: "Operations Lead",
       avatar: "/harsh.jpeg",
       bio: "UX designer and community builder who ensures everyone feels welcome in our coding arena.",
@@ -66,7 +66,7 @@ export const TeamSection = () => {
       <div className="container-max">
         <div className="text-center mb-16">
           <h2 className="font-pixel text-3xl md:text-4xl text-primary mb-8">
-            MEET THE ARCHITECTS
+            MEET THE CORE TEAM
           </h2>
           <p className="font-mono text-lg text-muted-foreground max-w-3xl mx-auto">
             The masterminds behind NexHack. Our team of passionate builders, organizers, and mentors who make the magic happen.

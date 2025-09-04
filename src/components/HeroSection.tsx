@@ -1,15 +1,26 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { useTheme } from '@/contexts/ThemeContext';
-import netherBg from '/bg-video.mp4';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useTheme } from "@/contexts/ThemeContext";
+import netherBg from "/bg-video.mp4";
 import { Cover } from "@/components/cover";
 // import overworldBg from '@/assets/overworld.mp4';
-import { RegistrationForm } from '@/components/RegistrationForm';
+import { RegistrationForm } from "@/components/RegistrationForm";
+import { color } from "motion/react";
 
 export const HeroSection = () => {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const { isNether } = useTheme();
 
+  React.useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://apply.devfolio.co/v2/sdk.js";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   return (
     <section className="relative h-[92vh] flex items-center justify-center overflow-hidden">
       {/* Video Background */}
@@ -25,7 +36,6 @@ export const HeroSection = () => {
       {/* Black Overlay */}
       <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
 
-
       {/* Content Overlay */}
       <div className="container-max text-center relative z-10 px-4">
         <div className="space-y-8">
@@ -33,20 +43,23 @@ export const HeroSection = () => {
           <h1 className="font-pixel text-4xl md:text-6xl lg:text-7xl text-primary text-shadow-glow leading-tight">
             HACK THE NEXT
             <br />
-            <Cover>
-            DIMENSION
-            </Cover>
+            <Cover>DIMENSION</Cover>
           </h1>
 
           {/* Sub-headline */}
           <p className="font-mono text-lg md:text-xl lg:text-2xl text-white max-w-4xl mx-auto leading-relaxed text-shadow-glow">
-            Welcome to NexHack 2025. The nexus of innovation where the next generation of builders, coders, and dreamers unite. 
+            Welcome to NexHack 2025. The nexus of innovation where the next
+            generation of builders, coders, and dreamers unite.
           </p>
 
           {/* Social Proof */}
           <div className="minecraft-card inline-block bg-card/50 backdrop-blur-sm p-2 rounded">
             <p className="font-mono text-sm text-foreground">
-              Organised by School of Computer Science and Engineering and Code Forge Society Powered by <span className="text-orange-500 text-shadow-glow leading-tight font-bold">Geeta Technical Hub</span> 
+              Organised by School of Computer Science and Engineering and Code
+              Forge Society Powered by{" "}
+              <span className="text-orange-500 text-shadow-glow leading-tight font-bold">
+                Geeta Technical Hub
+              </span>
             </p>
           </div>
 
@@ -59,15 +72,26 @@ export const HeroSection = () => {
             >
               REGISTER NOW →
             </Button> */}
-            <a href='#faq'>
-
-            <Button
+            <a
+              className="text-white "
+              href="https://apply.devfolio.co/v2/sdk.js"
+            >
+              {/* <Button
               variant="outline"
               size="lg"
               className="minecraft-btn border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-4"
             >
               LEARN MORE
-            </Button>
+            </Button> */}
+
+              <button
+                className="apply-button"
+                data-hackathon-slug="nexhackgu"
+                data-button-theme="dark"
+                style={{ height: "44px", width: "312px" }}
+              >
+                hello
+              </button>
             </a>
           </div>
 
@@ -78,8 +102,10 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      <RegistrationForm open={isRegistrationOpen} onOpenChange={setIsRegistrationOpen} />
+      <RegistrationForm
+        open={isRegistrationOpen}
+        onOpenChange={setIsRegistrationOpen}
+      />
     </section>
-
   );
 };

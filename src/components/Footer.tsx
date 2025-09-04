@@ -18,7 +18,7 @@ export const Footer = () => {
   ];
 
   const socialLinks = [
-    { name: 'Discord', icon: "https://cdn.lordicon.com/zvnxzuwv.json", href: '#' },
+    { name: 'Discord', icon: "https://cdn.lordicon.com/zvnxzuwv.json", href: 'https://discord.gg/EhJa8PaM' },
     { name: 'Twitter', icon: "https://cdn.lordicon.com/wlbymhoo.json", href: '#' },
     { name: 'Instagram', icon: "https://cdn.lordicon.com/tgyvxauj.json", href: 'https://instagram.com/thenexhack' },
     { name: 'GitHub', icon: "https://cdn.lordicon.com/jjxzcivr.json", href: '#' },
