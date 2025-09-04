@@ -2,6 +2,9 @@ import { BackgroundBeams } from "@/components/background-beams";
 import { useState } from "react";
 import { SponsorDialog } from "./SponsorDialog";
 import { Button } from "./ui/button";
+import xyz from "/xyz.png";
+import Give from "/Give.png";
+
 export const SponsorsSection = () => {
   const sponsors = {
     netherite: [
@@ -18,11 +21,14 @@ export const SponsorsSection = () => {
       { name: "TechVenture", logo: "📱" },
       { name: "DataFlow", logo: "📊" },
       { name: "WebCraft", logo: "🌐" },
-    ]
+    ],
+    general: [
+      { name: "Domain Partner", logo: xyz },
+      { name: "Certificate Partner", logo: Give },
+    ],
   };
 
   const [sponsorOpen, setSponsorOpen] = useState(false);
-
 
   return (
     <section id="sponsors" className="section-spacing bg-black/60 relative">
@@ -32,7 +38,8 @@ export const SponsorsSection = () => {
             OUR STRATEGIC ALLIES
           </h2>
           <p className="font-mono text-lg text-muted-foreground max-w-3xl mx-auto">
-            Powered by industry leaders who believe in the next generation of innovators. Join our sponsor alliance!
+            Powered by industry leaders who believe in the next generation of
+            innovators. Join our sponsor alliance!
           </p>
         </div>
 
@@ -83,7 +90,29 @@ export const SponsorsSection = () => {
             ))}
           </div>
         </div> */}
-
+        {/* General Sponsors */}
+        {
+          <div className="mb-12">
+            <div className="text-center mb-8">
+              <h3 className="font-pixel text-primary mb-2">Special Sponsors</h3>
+              <div className="w-24 h-1 bg-blue-200 mx-auto"></div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto ">
+              {sponsors.general.map((sponsor, index) => (
+                <div className="flex flex-col gap-5 justify-center items-center text-shadow-glow ">
+                  <div
+                    key={index}
+                    className="minecraft-card  border-black-500 text-center  p-4 hover:shadow-lg flex flex-col gap-5 justify-center items-center h-full"
+                  >
+                    {/* <div className="text-3xl mb-2">{sponsor.logo}</div> */}
+                    <img src={sponsor.logo}  />
+                  </div>
+                  <h4 className="font-pixel text-sm text-">{sponsor.name}</h4>
+                </div>
+              ))}
+            </div>
+          </div>
+        }
         {/* Sponsor CTA */}
         <div className="text-center">
           <div className="minecraft-card bg-card/50 backdrop-blur-sm max-w-2xl mx-auto">
@@ -91,7 +120,8 @@ export const SponsorsSection = () => {
               BECOME A SPONSOR
             </h3>
             <p className="font-mono text-sm text-muted-foreground mb-6">
-              Partner with us to reach 500+ talented developers and showcase your brand to the next generation of innovators.
+              Partner with us to reach 500+ talented developers and showcase
+              your brand to the next generation of innovators.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -99,10 +129,9 @@ export const SponsorsSection = () => {
                 className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 font-pixel text-xs uppercase tracking-wider transform transition-all duration-200 hover:scale-105 active:scale-95 border-2 inline-block"
               >
                 SPONSOR US →
-              </Button >
+              </Button>
 
               {/* <button onClick={() => alert("Clicked!")}>SPONSOR US →</button> */}
-
             </div>
           </div>
         </div>

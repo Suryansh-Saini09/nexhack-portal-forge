@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast'; // ✅ Add this
+import { Mail } from 'lucide-react';
 
 export const ContactSection = () => {
   const { toast } = useToast();
@@ -63,24 +64,28 @@ export const ContactSection = () => {
     {
       icon: "https://cdn.lordicon.com/ozlkyfxg.json",
       title: "Email",
+      link: "mailto:nexhack@geetauniversity.edu.in",
       content: "nexhack@geetauniversity.edu.in",
       description: "Send us a message anytime"
     },
     {
       icon: "https://cdn.lordicon.com/zvnxzuwv.json",
       title: "Discord",
+      link: "https://discord.gg/EhJa8PaM",
       content: "thenexhack",
       description: "Join our active community"
     },
     {
       icon: "https://cdn.lordicon.com/onmwuuox.json",
       title: "Location",
+      link: "https://maps.app.goo.gl/MM2dUNCVjGZCPcPo6?g_st=ipc",
       content: "Geeta University, Naultha, Panipat",
       description: "Main Engineering Building"
     },
     {
       icon: "https://cdn.lordicon.com/vcdutftw.json",
       title: "Emergency",
+      link: "#",
       content: "9012822721",
       description: "Event day support only"
     }
@@ -107,7 +112,8 @@ export const ContactSection = () => {
               </h3>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
-                  <div key={index} className="minecraft-card flex items-start space-x-4">
+                      <a href={info.link} key={index} className="minecraft-card flex items-start space-x-4" target='_blank'>
+
                     <div className="flex-shrink-0">
                       <div className="w-12 h-12 bg-primary/10 border-2 border-primary flex items-center justify-center">
                         <lord-icon
@@ -123,7 +129,7 @@ export const ContactSection = () => {
                       <p className="font-mono text-sm text-primary font-medium mb-1">{info.content}</p>
                       <p className="font-mono text-xs text-muted-foreground">{info.description}</p>
                     </div>
-                  </div>
+                      </a>
                 ))}
               </div>
             </div>
