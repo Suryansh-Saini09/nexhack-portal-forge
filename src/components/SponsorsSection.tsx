@@ -2,8 +2,10 @@ import { BackgroundBeams } from "@/components/background-beams";
 import { useState } from "react";
 import { SponsorDialog } from "./SponsorDialog";
 import { Button } from "./ui/button";
-import xyz from "/xyz.png";
+import xyz from "/xyz.svg";
 import Give from "/Give.png";
+import devfolio from "/devfolio.png";
+import ethindia from "/ethindia.png";
 
 export const SponsorsSection = () => {
   const sponsors = {
@@ -16,15 +18,11 @@ export const SponsorsSection = () => {
       { name: "DevTools Inc", logo: "🔧" },
       { name: "CloudNet", logo: "☁️" },
     ],
-    emerald: [
-      { name: "StartupHub", logo: "💼" },
-      { name: "TechVenture", logo: "📱" },
-      { name: "DataFlow", logo: "📊" },
-      { name: "WebCraft", logo: "🌐" },
-    ],
+    emerald: [{ name: "", logo: devfolio }],
     general: [
       { name: "Domain Partner", logo: xyz },
-      { name: "Certificate Partner", logo: Give },
+      { name: "Certificate\u00A0Partner", logo: Give },
+      { name: "Blockchain\u00A0Partner", logo: ethindia },
     ],
   };
 
@@ -90,6 +88,27 @@ export const SponsorsSection = () => {
             ))}
           </div>
         </div> */}
+        {/* Platform Partner */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h3 className="font-pixel text-xl text-primary mb-2">
+              Platform Partner
+            </h3>
+            <div className="w-24 h-1 bg-emerald mx-auto"></div>
+          </div>
+          <div className="flex h-[13vh] justify-center">
+            {sponsors.emerald.map((sponsor, index) => (
+              <div key={index} className="flex justify-center item-center ">
+                <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 h-32">
+                  <img src={devfolio} className="h-30" />
+                </div>
+                <h4 className="font-pixel text-xs text-emerald">
+                  {sponsor.name}
+                </h4>
+              </div>
+            ))}
+          </div>
+        </div>
         {/* General Sponsors */}
         {
           <div className="mb-12">
@@ -97,15 +116,15 @@ export const SponsorsSection = () => {
               <h3 className="font-pixel text-primary mb-2">Special Sponsors</h3>
               <div className="w-24 h-1 bg-blue-200 mx-auto"></div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto ">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-[100px] max-w- mx-auto ">
               {sponsors.general.map((sponsor, index) => (
-                <div className="flex flex-col gap-5 justify-center items-center text-shadow-glow ">
+                <div className="flex flex-col gap-5 justify-center rounded-md items-center text-shadow-glow ">
                   <div
                     key={index}
-                    className="minecraft-card  border-black-500 text-center  p-4 hover:shadow-lg flex flex-col gap-5 justify-center items-center h-full"
+                    className=" flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 h-32 gap-20"
                   >
                     {/* <div className="text-3xl mb-2">{sponsor.logo}</div> */}
-                    <img src={sponsor.logo}  />
+                    <img src={sponsor.logo}  className="max-h-20 "/>
                   </div>
                   <h4 className="font-pixel text-sm text-">{sponsor.name}</h4>
                 </div>
