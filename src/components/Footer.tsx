@@ -101,10 +101,11 @@ export const Footer = () => {
               </p>
               <div className="flex space-x-6">
                 <a
-                  href="#"
+                  href="/RuleBook.pdf"
+                  download={true}
                   className="font-mono text-xs text-muted-foreground hover:text-primary transition-colors duration-200"
                 >
-                  Code of Conduct
+                  Rule Book
                 </a>
               </div>
             </div>

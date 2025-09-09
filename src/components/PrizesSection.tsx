@@ -33,7 +33,7 @@ export const PrizesSection = () => {
 
   const specialPrizes = [
     "All Girls Team: ₹5,000",
-    "Best AI Innovation: ₹3,000"
+    "Ethereum Track: $100"
   ];
 
   return (

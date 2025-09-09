@@ -55,10 +55,10 @@ export const HeroSection = () => {
           {/* Social Proof */}
           <div className="minecraft-card inline-block bg-card/50 backdrop-blur-sm p-2 rounded">
             <p className="font-mono text-sm text-foreground">
-              Organised by School of Computer Science and Engineering and Code
-              Forge Society Powered by{" "}
-              <span className="text-orange-500 text-shadow-glow leading-tight font-bold">
-                Geeta Technical Hub
+              Organised by <strong>Geeta technical Hub</strong> and <strong>School of Computer Science and Engineering</strong>
+              <br /> Powered by{" "}
+              <span className="text-primary text-shadow-glow leading-tight font-bold">
+              Codeforge Society
               </span>
             </p>
           </div>
