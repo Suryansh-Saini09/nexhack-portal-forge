@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { MentorDialog } from "./MentorDialog";
+import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 
 export const TeamSection = () => {
   const [mentorDialogOpen, setMentorDialogOpen] = useState(false);
