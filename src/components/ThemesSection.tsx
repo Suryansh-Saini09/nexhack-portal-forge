@@ -4,8 +4,8 @@ export const ThemesSection = () => {
   const themes = [
     {
       icon: Cpu,
-      title: "WordPress",
-      description: "Crafting powerful websites and digital experiences with open-source tools",
+      title: "Forensic Tech",
+      description: "Solving Crime with the help of Technology",
       color: "bg-primary/10 border-primary text-primary"
     },
     {
