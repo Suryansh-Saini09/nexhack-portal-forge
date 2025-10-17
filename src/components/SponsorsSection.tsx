@@ -17,6 +17,7 @@ import dna from "/dna.jpeg";
 import mon from "/mon.jpg";
 import bx from "/bx.png";
 import tri from "/tri.png";
+import gfg from "/gfg.svg";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 export const SponsorsSection = () => {
@@ -39,6 +40,7 @@ export const SponsorsSection = () => {
       { name: "AI Partner", logo: devdock },
       { name: "Monetary Partner", logo: bx },
       { name: "Monetary Partner", logo: tri },
+      { name: "Contest Partner", logo: gfg },
     ],
     cp: [
       { logo: "hackcbs" },
@@ -256,28 +258,6 @@ export const SponsorsSection = () => {
           </div>
           
         }
-        {/* Sponsor CTA */}
-        <div className="text-center">
-          <div className="minecraft-card bg-card/50 backdrop-blur-sm max-w-2xl mx-auto">
-            <h3 className="font-pixel text-lg text-primary mb-4">
-              BECOME A SPONSOR
-            </h3>
-            <p className="font-mono text-sm text-muted-foreground mb-6">
-              Partner with us to reach 500+ talented developers and showcase
-              your brand to the next generation of innovators.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                onClick={() => setSponsorOpen(true)}
-                className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 font-pixel text-xs uppercase tracking-wider transform transition-all duration-200 hover:scale-105 active:scale-95 border-2 inline-block"
-              >
-                SPONSOR US →
-              </Button>
-
-              {/* <button onClick={() => alert("Clicked!")}>SPONSOR US →</button> */}
-            </div>
-          </div>
-        </div>
       </div>
       <BackgroundBeams />
       <SponsorDialog open={sponsorOpen} onOpenChange={setSponsorOpen} />

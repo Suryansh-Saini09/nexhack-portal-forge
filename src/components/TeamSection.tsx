@@ -171,25 +171,7 @@ export const TeamSection = () => {
           ))}
         </div>
 
-        {/* Join Team CTA */}
-        <div className="text-center mt-16">
-          <div className="minecraft-card bg-card/50 backdrop-blur-sm max-w-2xl mx-auto">
-            <h3 className="font-pixel text-lg text-primary mb-4">
-              WANT TO BECOME A MENTOR?
-            </h3>
-            <p className="font-mono text-sm text-muted-foreground mb-6">
-              Are you an industry professional, a seasoned developer, or a design wizard? Share your expertise, guide our participants, and help shape the future of tech by mentoring at our next event.
-            </p>
-            <Button
-              onClick={() => setMentorDialogOpen(true)}
-              className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 font-pixel text-xs uppercase tracking-wider transform transition-all duration-200 hover:scale-105 active:scale-95 border-2 inline-block"
-            >
-              BECOME A MENTOR →
-            </Button>
-          </div>
-        </div>
       </div>
-      <MentorDialog open={mentorDialogOpen} onOpenChange={setMentorDialogOpen} />
     </section>
   );
 };
