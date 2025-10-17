@@ -36,7 +36,7 @@ export const TeamSection = () => {
     {
       name: "Harsh Choudhary",
       role: "Operations Lead",
-      avatar: "/harsh.jpeg",
+      avatar: "/harsh.PNG",
       bio: "UX designer and community builder who ensures everyone feels welcome in our coding arena.",
       github: "https://github.com/harsh7509",
       linkedin: "https://www.linkedin.com/in/harshkumar7509",
@@ -54,11 +54,37 @@ export const TeamSection = () => {
     {
       name: "Riya Rana",
       role: "Marketing Lead",
-      avatar: "/riya.jpg",
+      avatar: "/riya.jpeg",
       bio: "Digital marketing specialist who spreads the word about our epic coding adventures.",
       github: "https://github.com/riyarana9813",
       linkedin: "https://www.linkedin.com/in/riya-rana-b752a6327/",
       instagram: "https://www.instagram.com/rana_riyaaa/"
+    },
+    {
+      name: "Tanay Bansal",
+      role: "Stage and anchoring head",
+      avatar: "/tanay.jpg",
+      github: "https://github.com/tanayybbansal",
+      linkedin: "https://www.linkedin.com/in/tanay-bansal-146522290",
+      instagram: "https://www.instagram.com/tanayb_?igsh=MXFudXNtNGJkdzl5aw=="
+    },
+    {
+      name: "Rishabh",
+      role: "Participation Lead",
+      avatar: "/rishabh.jpeg",
+      // bio: "Project manager extraordinaire who keeps everything running smoothly during the chaos.",
+      github: "github.com/RishabhVoid",
+      linkedin: "linkedin.com/in/rishabhvoid",
+      instagram: "instagram.com/rishabhvoid"
+    },
+    {
+      name: "Gagan Thakur",
+      role: "Social Outreach Lead",
+      avatar: "/gagan.jpeg",
+      // bio: "Project manager extraordinaire who keeps everything running smoothly during the chaos.",
+      github: "github.com/Gaganthakur0101",
+      linkedin: "www.linkedin.com/in/gaagan-singh",
+      instagram: "https://www.instagram.com/__gagan__thakur001/"
     }
   ];
 
