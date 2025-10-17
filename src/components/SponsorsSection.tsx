@@ -6,6 +6,18 @@ import xyz from "/xyz.svg";
 import Give from "/Give.png";
 import devfolio from "/devfolio.png";
 import ethindia from "/ethindia.png";
+import cblogo from "/cblogo.png";
+import samatrix from "/samatrix.png";
+import devdock from "/devdock.jpeg";
+import hackcbs from "/hackcbs.png";
+import bc from "/bc.png";
+import ac from "/ac.png";
+import kt from "/kt.png";
+import dna from "/dna.jpeg";
+import mon from "/mon.jpg";
+import bx from "/bx.png";
+import tri from "/tri.png";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 export const SponsorsSection = () => {
   const sponsors = {
@@ -19,16 +31,63 @@ export const SponsorsSection = () => {
       { name: "CloudNet", logo: "☁️" },
     ],
     emerald: [{ name: "", logo: devfolio }],
+    gold: [{ name: "", logo: cblogo}],
     general: [
       { name: "Domain Partner", logo: xyz },
       { name: "Certificate\u00A0Partner", logo: Give },
       { name: "Blockchain\u00A0Partner", logo: ethindia },
+      { name: "AI Partner", logo: devdock },
+      { name: "Monetary Partner", logo: bx },
+      { name: "Monetary Partner", logo: tri },
+    ],
+    cp: [
+      { logo: "hackcbs" },
+
     ],
   };
 
   const [sponsorOpen, setSponsorOpen] = useState(false);
 
+  // Example data matching InfiniteMovingCards expected type
+  const movingCardsItems = [
+    {
+      quote: "TechCorp is a leader in innovation.",
+      name: "TechCorp",
+      title: "Netherite Sponsor",
+    },
+    {
+      quote: "InnovateLab empowers developers.",
+      name: "InnovateLab",
+      title: "Netherite Sponsor",
+    },
+    {
+      quote: "CodeBase supports open source.",
+      name: "CodeBase",
+      title: "Diamond Sponsor",
+    },
+    {
+      quote: "DevTools Inc builds great tools.",
+      name: "DevTools Inc",
+      title: "Diamond Sponsor",
+    },
+    {
+      quote: "CloudNet connects the world.",
+      name: "CloudNet",
+      title: "Diamond Sponsor",
+    },
+  ];
+
+  // Render InfiniteMovingCards with correct items type
+  <div className="h-[40rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+    <InfiniteMovingCards
+      items={movingCardsItems}
+      direction="right"
+      speed="slow"
+    />
+  </div>
+
   return (
+    
     <section id="sponsors" className="section-spacing bg-black/60 relative">
       <div className="container-max">
         <div className="text-center mb-16">
@@ -88,6 +147,30 @@ export const SponsorsSection = () => {
             ))}
           </div>
         </div> */}
+        {/* {Gold Sponsers/} */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h3 className="font-pixel text-xl text-primary mb-2">
+              Gold Sponsors
+            </h3>
+            <div className="w-24 h-1 bg-emerald mx-auto"></div>
+          </div>
+          <div className="flex h-[13vh] justify-center">
+            {sponsors.emerald.map((sponsor, index) => (
+              <div key={index} className="flex justify-center item-center gap-10  d">
+                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 h-32 gap-5">
+                  <img src={cblogo} className="h-20" />
+                </div>
+                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
+                  <img src={samatrix} className="h-30" />
+                </div>
+                <h4 className="font-pixel text-xs text-emerald">
+                  {sponsor.name}
+                </h4>
+              </div>
+            ))}
+          </div>
+        </div>
         {/* Platform Partner */}
         <div className="mb-12">
           <div className="text-center mb-8">
@@ -109,7 +192,7 @@ export const SponsorsSection = () => {
             ))}
           </div>
         </div>
-        {/* General Sponsors */}
+        {/* special Sponsors */}
         {
           <div className="mb-12">
             <div className="text-center mb-8">
@@ -130,7 +213,48 @@ export const SponsorsSection = () => {
                 </div>
               ))}
             </div>
+            <br />
+            {/* {community partner} */}
+            {
+              
+          <div className="mb-12">
+          <div className="text-center mb-8">
+            <h3 className="font-pixel text-xl text-primary mb-2">
+              Community Partners
+            </h3>
+            <div className="w-24 h-1 bg-emerald mx-auto"></div>
           </div>
+          <div className="flex h-[13vh] justify-center">
+            {sponsors.cp.map((sponsor, index) => (
+              <div key={index} className="flex justify-center item-center gap-10  d">
+                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 h-32 gap-5">
+                  <img src={hackcbs} className="h-20" />
+                </div>
+                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
+                  <img src={bc} className="h-20" />
+                </div>
+                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
+                  <img src={ac} className="h-20" />
+                </div>
+                <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
+                  <img src={kt} className="h-20" />
+                </div>
+                <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
+                  <img src={dna} className="h-20" />
+                </div>
+                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
+                  <img src={mon} className="h-20" />
+                </div>
+                <h4 className="font-pixel text-xs text-emerald">
+                  {/* {sponsor.name} */}
+                </h4>
+              </div>
+            ))}
+          </div>
+        </div>
+        }
+          </div>
+          
         }
         {/* Sponsor CTA */}
         <div className="text-center">
