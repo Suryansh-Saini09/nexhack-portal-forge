@@ -17,6 +17,7 @@ import dna from "/dna.jpeg";
 import mon from "/mon.jpg";
 import bx from "/bx.png";
 import tri from "/tri.png";
+import arena from "/arenapulse.png";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 export const SponsorsSection = () => {
@@ -31,7 +32,7 @@ export const SponsorsSection = () => {
       { name: "CloudNet", logo: "☁️" },
     ],
     emerald: [{ name: "", logo: devfolio }],
-    gold: [{ name: "", logo: cblogo}],
+    gold: [{ name: "", logo: cblogo }],
     general: [
       { name: "Domain Partner", logo: xyz },
       { name: "Certificate\u00A0Partner", logo: Give },
@@ -39,55 +40,15 @@ export const SponsorsSection = () => {
       { name: "AI Partner", logo: devdock },
       { name: "Monetary Partner", logo: bx },
       { name: "Monetary Partner", logo: tri },
-    ],
-    cp: [
-      { logo: "hackcbs" },
-
+      { name: "Gaming Partner", logo: arena },
     ],
   };
 
   const [sponsorOpen, setSponsorOpen] = useState(false);
 
-  // Example data matching InfiniteMovingCards expected type
-  const movingCardsItems = [
-    {
-      quote: "TechCorp is a leader in innovation.",
-      name: "TechCorp",
-      title: "Netherite Sponsor",
-    },
-    {
-      quote: "InnovateLab empowers developers.",
-      name: "InnovateLab",
-      title: "Netherite Sponsor",
-    },
-    {
-      quote: "CodeBase supports open source.",
-      name: "CodeBase",
-      title: "Diamond Sponsor",
-    },
-    {
-      quote: "DevTools Inc builds great tools.",
-      name: "DevTools Inc",
-      title: "Diamond Sponsor",
-    },
-    {
-      quote: "CloudNet connects the world.",
-      name: "CloudNet",
-      title: "Diamond Sponsor",
-    },
-  ];
-
-  // Render InfiniteMovingCards with correct items type
-  <div className="h-[40rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
-    <InfiniteMovingCards
-      items={movingCardsItems}
-      direction="right"
-      speed="slow"
-    />
-  </div>
 
   return (
-    
+
     <section id="sponsors" className="section-spacing bg-black/60 relative">
       <div className="container-max">
         <div className="text-center mb-16">
@@ -148,7 +109,7 @@ export const SponsorsSection = () => {
           </div>
         </div> */}
         {/* {Gold Sponsers/} */}
-        <div className="mb-12">
+        <div className="my-12">
           <div className="text-center mb-8">
             <h3 className="font-pixel text-xl text-primary mb-2">
               Gold Sponsors
@@ -158,10 +119,10 @@ export const SponsorsSection = () => {
           <div className="flex h-[13vh] justify-center">
             {sponsors.emerald.map((sponsor, index) => (
               <div key={index} className="flex justify-center item-center gap-10  d">
-                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 h-32 gap-5">
+                <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 h-32 gap-5">
                   <img src={cblogo} className="h-20" />
                 </div>
-                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
+                <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
                   <img src={samatrix} className="h-30" />
                 </div>
                 <h4 className="font-pixel text-xs text-emerald">
@@ -172,7 +133,7 @@ export const SponsorsSection = () => {
           </div>
         </div>
         {/* Platform Partner */}
-        <div className="mb-12">
+        <div className="my-12">
           <div className="text-center mb-8">
             <h3 className="font-pixel text-xl text-primary mb-2">
               Platform Partner
@@ -194,9 +155,9 @@ export const SponsorsSection = () => {
         </div>
         {/* special Sponsors */}
         {
-          <div className="mb-12">
+          <div className="my-12">
             <div className="text-center mb-8">
-              <h3 className="font-pixel text-primary mb-2">Special Sponsors</h3>
+              <h3 className="font-pixel text-primary mb-2 text-xl">Special Sponsors</h3>
               <div className="w-24 h-1 bg-blue-200 mx-auto"></div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-[100px] max-w- mx-auto ">
@@ -207,7 +168,7 @@ export const SponsorsSection = () => {
                     className=" flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 h-32 gap-20"
                   >
                     {/* <div className="text-3xl mb-2">{sponsor.logo}</div> */}
-                    <img src={sponsor.logo}  className="max-h-20 "/>
+                    <img src={sponsor.logo} className="max-h-20 " />
                   </div>
                   <h4 className="font-pixel text-sm text-">{sponsor.name}</h4>
                 </div>
@@ -216,45 +177,30 @@ export const SponsorsSection = () => {
             <br />
             {/* {community partner} */}
             {
-              
-          <div className="mb-12">
-          <div className="text-center mb-8">
-            <h3 className="font-pixel text-xl text-primary mb-2">
-              Community Partners
-            </h3>
-            <div className="w-24 h-1 bg-emerald mx-auto"></div>
-          </div>
-          <div className="flex h-[13vh] justify-center">
-            {sponsors.cp.map((sponsor, index) => (
-              <div key={index} className="flex justify-center item-center gap-10  d">
-                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 h-32 gap-5">
-                  <img src={hackcbs} className="h-20" />
+
+              <div className="my-12">
+                <div className="text-center mb-8">
+                  <h3 className="font-pixel text-xl text-primary mb-2">
+                    Community Partners
+                  </h3>
+                  <div className="w-24 h-1 bg-emerald mx-auto"></div>
                 </div>
-                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
-                  <img src={bc} className="h-20" />
-                </div>
-                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
-                  <img src={ac} className="h-20" />
-                </div>
-                <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
-                  <img src={kt} className="h-20" />
-                </div>
-                <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
-                  <img src={dna} className="h-20" />
-                </div>
-                 <div className="flex justify-center items-center bg-white rounded-lg shadow-md p-6 w-72 gap-10 h-32">
-                  <img src={mon} className="h-20" />
-                </div>
-                <h4 className="font-pixel text-xs text-emerald">
-                  {/* {sponsor.name} */}
-                </h4>
+                <InfiniteMovingCards
+                  items={[
+                    { image: hackcbs },
+                    { image: bc },
+                    { image: ac },
+                    { image: kt },
+                    { image: dna },
+                    { image: mon },
+                    { image: "/hackshastra.png" },
+                  ]}
+                  speed="slow"
+                />
               </div>
-            ))}
+            }
           </div>
-        </div>
-        }
-          </div>
-          
+
         }
         {/* Sponsor CTA */}
         <div className="text-center">

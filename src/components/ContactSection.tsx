@@ -71,7 +71,7 @@ export const ContactSection = () => {
     {
       icon: "https://cdn.lordicon.com/zvnxzuwv.json",
       title: "Discord",
-      link: "https://discord.gg/EhJa8PaM",
+      link: "https://discord.gg/mKy2G9ye6F",
       content: "thenexhack",
       description: "Join our active community"
     },

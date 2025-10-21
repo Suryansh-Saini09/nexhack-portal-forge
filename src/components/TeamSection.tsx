@@ -171,7 +171,7 @@ export const TeamSection = () => {
           ))}
         </div>
 
-        {/* Join Team CTA */}
+        {/* Join Team CTA
         <div className="text-center mt-16">
           <div className="minecraft-card bg-card/50 backdrop-blur-sm max-w-2xl mx-auto">
             <h3 className="font-pixel text-lg text-primary mb-4">
@@ -187,9 +187,9 @@ export const TeamSection = () => {
               BECOME A MENTOR →
             </Button>
           </div>
-        </div>
+        </div> */}
       </div>
-      <MentorDialog open={mentorDialogOpen} onOpenChange={setMentorDialogOpen} />
+      {/* <MentorDialog open={mentorDialogOpen} onOpenChange={setMentorDialogOpen} /> */}
     </section>
   );
 };
