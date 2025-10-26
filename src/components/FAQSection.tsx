@@ -19,7 +19,7 @@ export const FAQSection = () => {
     },
     {
       question: "Are there any participation requirements?",
-      answer: "YNexHack is open to everyone! Whether you’re a school student, college student, or a tech enthusiast, you’re welcome to join. All you need is a team of 2–4 members and the passion to hack the next dimension."
+      answer: "NexHack is open to everyone! Whether you’re a college student, or a tech enthusiast, you’re welcome to join. All you need is a team of 2–4 members and the passion to hack the next dimension."
     },
     {
       question: "Will food be provided during the hackathon?",
