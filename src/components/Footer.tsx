@@ -19,9 +19,9 @@ export const Footer = () => {
 
   const socialLinks = [
     { name: 'Discord', icon: "https://cdn.lordicon.com/zvnxzuwv.json", href: 'https://discord.gg/mKy2G9ye6F' },
-    { name: 'Twitter', icon: "https://cdn.lordicon.com/wlbymhoo.json", href: '#' },
+    { name: 'Twitter', icon: "https://cdn.lordicon.com/wlbymhoo.json", href: 'https://x.com/thenexhack' },
     { name: 'Instagram', icon: "https://cdn.lordicon.com/tgyvxauj.json", href: 'https://instagram.com/thenexhack' },
-    { name: 'GitHub', icon: "https://cdn.lordicon.com/jjxzcivr.json", href: '#' },
+    // { name: 'GitHub', icon: "https://cdn.lordicon.com/jjxzcivr.json", href: '#' },
     { name: 'Email', icon: "https://cdn.lordicon.com/vpbspaec.json", href: 'mailto:nexhack@geetauniversity.edu.in' },
   ];
 
