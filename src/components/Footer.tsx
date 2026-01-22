@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/tooltip";
 import { BackgroundBeamsWithCollision } from '@/components/background-beams-with-collision';
 import logo from '/text-logo.png';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   const quickLinks = [
@@ -15,6 +16,10 @@ export const Footer = () => {
     { name: 'Schedule', href: '#schedule' },
     { name: 'Sponsors', href: '#sponsors' },
     { name: 'FAQ', href: '#faq' },
+  ];
+
+  const archiveLinks = [
+    { name: 'NexHack 1.0', href: '/archives/nexhack-1' },
   ];
 
   const socialLinks = [
@@ -29,10 +34,10 @@ export const Footer = () => {
     <BackgroundBeamsWithCollision>
       <footer className=" border-t border-border">
         <div className="container-max section-spacing">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-4 gap-20">
             {/* Logo & Description */}
             <div className="space-y-4">
-                          <a href='#'><img src={logo} className='h-16'/></a>
+              <a href='#'><img src={logo} className='h-16' /></a>
               <p className="font-mono text-sm text-muted-foreground leading-relaxed">
                 The nexus of innovation where the next generation of builders, coders, and dreamers unite to hack the next dimension.
               </p>
@@ -43,7 +48,7 @@ export const Footer = () => {
               <h4 className="font-pixel text-sm text-foreground">
                 QUICK LINKS
               </h4>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 gap-2">
                 {quickLinks.map((link) => (
                   <a
                     key={link.name}
@@ -52,6 +57,24 @@ export const Footer = () => {
                   >
                     {link.name}
                   </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Arhives Links */}
+            <div className="space-y-4">
+              <h4 className="font-pixel text-sm text-foreground">
+                ARCHIVES
+              </h4>
+              <div className="grid grid-cols-1 gap-2">
+                {archiveLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="font-mono text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
                 ))}
               </div>
             </div>
