@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
+import NexHack1 from './archives/nexHack1.0/nexHack1';
 
 // Define the custom <lord-icon> element
 defineElement(lottie.loadAnimation);
@@ -24,6 +25,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/archives/nexhack-1" element={<NexHack1 />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

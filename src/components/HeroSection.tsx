@@ -84,14 +84,14 @@ export const HeroSection = () => {
               LEARN MORE
             </Button> */}
 
-              <button
+              {/*<button
                 className="apply-button"
                 data-hackathon-slug="nexhackgu"
                 data-button-theme="dark"
                 style={{ height: "44px", width: "312px" }}
               >
                 hello
-              </button>
+              </button>*/}
             </a>
           </div>
 
