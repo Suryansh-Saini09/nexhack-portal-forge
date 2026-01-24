@@ -10,6 +10,7 @@ import { TeamSection } from '@/components/TeamSection';
 import { FAQSection } from '@/components/FAQSection';
 import { ContactSection } from '@/components/ContactSection';
 import { Footer } from '@/components/Footer';
+import { Archives } from '@/components/Archives';
 import Character from '@/components/Character';
 
 const Index = () => {
@@ -27,11 +28,12 @@ const Index = () => {
         <AboutSection />
         <ThemesSection />
         <PrizesSection />
-        <ScheduleSection />
+        {/* <ScheduleSection /> */}
         <SponsorsSection />
         <TeamSection />
         <Character />
         <FAQSection />
+        <Archives />
         <ContactSection />
       </main>
       

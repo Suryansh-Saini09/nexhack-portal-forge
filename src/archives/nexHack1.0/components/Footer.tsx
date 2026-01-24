@@ -20,7 +20,7 @@ export const Footer = () => {
   ];
 
   const archiveLinks = [
-    { name: 'NexHack 1.0', href: '/archives/nexHack1.0/nexHack1' },
+    { name: 'NexHack 1.0', href: '/archives/nexHack-1' },
   ];
 
   const socialLinks = [

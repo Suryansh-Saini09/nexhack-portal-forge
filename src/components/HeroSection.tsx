@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { useTheme } from "@/contexts/ThemeContext";
 import netherBg from "/bg-video.mp4";
 import { Cover } from "@/components/cover";
-// import overworldBg from '@/assets/overworld.mp4';
 import { RegistrationForm } from "@/components/RegistrationForm";
-import { color } from "motion/react";
 
 export const HeroSection = () => {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
@@ -21,6 +18,7 @@ export const HeroSection = () => {
       document.body.removeChild(script);
     };
   }, []);
+
   return (
     <section className="relative h-[92vh] flex items-center justify-center overflow-hidden">
       {/* Video Background */}
@@ -34,68 +32,53 @@ export const HeroSection = () => {
       />
 
       {/* Black Overlay */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10" />
 
-      {/* Content Overlay */}
+      {/* Content */}
       <div className="container-max text-center relative z-10 px-4">
         <div className="space-y-8">
-          {/* Main Headline */}
+
+          {/* MAIN HEADLINE */}
           <h1 className="font-pixel text-4xl md:text-6xl lg:text-7xl text-primary text-shadow-glow leading-tight">
             HACK THE NEXT
             <br />
             <Cover>DIMENSION</Cover>
           </h1>
 
-          {/* Sub-headline */}
+          {/* SUB HEADLINE */}
           <p className="font-mono text-lg md:text-xl lg:text-2xl text-white max-w-4xl mx-auto leading-relaxed text-shadow-glow">
             Welcome to NexHack 2025. The nexus of innovation where the next
             generation of builders, coders, and dreamers unite.
           </p>
 
-          {/* Social Proof */}
-          <div className="minecraft-card inline-block bg-card/50 backdrop-blur-sm p-2 rounded">
+          {/* ORGANISED BY */}
+          <div className="minecraft-card inline-block bg-card/50 backdrop-blur-sm p-3">
             <p className="font-mono text-sm text-foreground">
-              Organised by <strong>Geeta technical Hub</strong> and <strong>School of Computer Science and Engineering</strong>
-              <br /> Powered by{" "}
-              <span className="text-primary text-shadow-glow leading-tight font-bold">
-              Codeforge Society
+              Organised by{" "}
+              <strong>Geeta Technical Hub</strong> and{" "}
+              <strong>School of Computer Science and Engineering</strong>
+              <br />
+              Powered by{" "}
+              <span className="text-primary text-shadow-glow font-bold">
+                Codeforge Society
               </span>
             </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            {/* <Button
-              onClick={() => setIsRegistrationOpen(true)}
-              size="lg"
-              className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-4"
-            >
-              REGISTER NOW →
-            </Button> */}
-            <a
-              className="text-white "
-              href="https://apply.devfolio.co/v2/sdk.js"
-            >
-              {/* <Button
-              variant="outline"
-              size="lg"
-              className="minecraft-btn border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-4"
-            >
-              LEARN MORE
-            </Button> */}
+          {/* COMING SOON — 2026 */}
+          <div className="flex flex-col items-center gap-2">
+            <div className="h-[2px] w-36 bg-primary/40" />
 
-              {/*<button
-                className="apply-button"
-                data-hackathon-slug="nexhackgu"
-                data-button-theme="dark"
-                style={{ height: "44px", width: "312px" }}
-              >
-                hello
-              </button>*/}
-            </a>
+            <p className="font-pixel text-xs tracking-[0.45em] uppercase text-primary/80">
+              Coming Soon • 2026
+            </p>
+
+            <p className="font-mono text-[11px] text-muted-foreground">
+              A new dimension is under construction
+            </p>
           </div>
 
-          {/* Animated Elements */}
+          {/* DECORATIVE PIXELS */}
           <div className="absolute top-1/2 left-10 w-8 h-8 bg-primary/20 rotate-45 animate-pulse hidden lg:block" />
           <div className="absolute top-1/3 right-16 w-6 h-6 bg-secondary/20 rotate-45 animate-pulse hidden lg:block animation-delay-500" />
           <div className="absolute bottom-1/3 left-20 w-4 h-4 bg-accent/20 rotate-45 animate-pulse hidden lg:block animation-delay-1000" />

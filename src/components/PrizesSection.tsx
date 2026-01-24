@@ -1,108 +1,105 @@
-import { Crown, Award, Medal } from 'lucide-react';
+import { Lock, ShieldAlert } from "lucide-react";
 
 export const PrizesSection = () => {
-  const prizes = [
+  const lockedTiers = [
     {
-      place: "1st Place",
-      icon: Crown,
-      title: "NETHERITE TIER",
-      amount: "₹25,000",
-      description: "Cash prize + Exclusive tech bundle",
-      color: "bg-netherite border-gray-600 text-gray-100",
-      highlight: "border-yellow-400 shadow-yellow-400/50"
+      tier: "NETHERITE VAULT",
+      description: "The highest reward tier. Power, prestige, and legacy.",
+      glow: "shadow-[0_0_40px_rgba(250,204,21,0.45)] border-yellow-400/40",
     },
     {
-      place: "2nd Place",
-      icon: Award,
-      title: "DIAMOND TIER",
-      amount: "₹15,000",
-      description: "Cash prize + Mentorship program ",
-      color: "bg-sky-900/80 border-sky-500 ",
-      highlight: "border-blue-400 shadow-blue-400/50"
+      tier: "DIAMOND VAULT",
+      description: "Elite rewards forged for top-tier builders.",
+      glow: "shadow-[0_0_40px_rgba(59,130,246,0.45)] border-blue-400/40",
     },
     {
-      place: "3rd Place",
-      icon: Medal,
-      title: "EMERALD TIER",
-      amount: "₹10,000",
-      description: "Cash prize + Tech accessories bundle",
-      color: "bg-emerald-900/80 border-emerald-500 text-emerald-200",
-      highlight: "border-green-400 shadow-green-400/50"
-    }
-  ];
-
-  const specialPrizes = [
-    "All Girls Team: ₹5,000",
-    "Ethereum Track: $100"
+      tier: "EMERALD VAULT",
+      description: "Strategic rewards with long-term impact.",
+      glow: "shadow-[0_0_40px_rgba(16,185,129,0.45)] border-emerald-400/40",
+    },
   ];
 
   return (
     <section id="prizes" className="section-spacing">
       <div className="container-max">
-        <div className="text-center mb-16">
-          <h2 className="font-pixel text-3xl md:text-4xl text-primary mb-8">
-            THE TREASURE AWAITS
+
+        {/* HEADER */}
+        <div className="text-center mb-20">
+          <p className="font-mono text-xs tracking-[0.45em] uppercase text-muted-foreground">
+            Reward System
+          </p>
+          <h2 className="font-pixel text-3xl md:text-4xl text-primary mt-4">
+            THE PRIZE VAULT
           </h2>
-          <p className="font-mono text-lg text-muted-foreground max-w-3xl mx-auto">
-            Epic rewards for legendary builders. Over ₹1,20,000 in total prizes plus exclusive opportunities to launch your career.
+          <p className="font-mono text-muted-foreground mt-6 max-w-3xl mx-auto">
+            NexHack rewards are evolving.  
+            Bigger stakes. Higher impact. Greater legacy.
           </p>
         </div>
 
-        {/* Main Prizes */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {prizes.map((prize, index) => (
+        {/* VAULT GRID */}
+        <div className="grid md:grid-cols-3 gap-10 mb-20">
+          {lockedTiers.map((tier, i) => (
             <div
-              key={index}
-              className={`minecraft-card ${prize.color} ${prize.highlight} relative overflow-hidden border-4 shadow-2xl`}
+              key={i}
+              className={`
+                minecraft-card
+                relative overflow-hidden
+                border-2 bg-black/60 backdrop-blur-sm
+                p-8 text-center
+                ${tier.glow}
+              `}
             >
-              {index === 0 && (
-                <div className="absolute top-0 left-0 right-0 bg-yellow-400 text-black text-center py-1">
-                  <span className="font-pixel text-xs">GRAND CHAMPION</span>
+              {/* LOCK ICON */}
+              <div className="mb-6 flex justify-center">
+                <div className="w-14 h-14 flex items-center justify-center border-2 border-primary bg-black/70">
+                  <Lock className="w-6 h-6 text-primary" />
                 </div>
-              )}
+              </div>
 
-              <div className="text-center space-y-4 pt-2">
-                <div className="flex items-center justify-center space-x-2">
-                  <prize.icon className="w-8 h-8" />
-                  <span className="font-pixel text-xs">{prize.place}</span>
-                </div>
+              {/* TITLE */}
+              <h3 className="font-pixel text-lg text-primary mb-4">
+                {tier.tier}
+              </h3>
 
-                <h3 className="font-pixel text-lg">
-                  {prize.title}
-                </h3>
+              {/* ENCRYPTED VALUE */}
+              <div className="font-pixel text-xl text-muted-foreground tracking-widest mb-4">
+                ███ ███ ███
+              </div>
 
-                <div className="text-4xl font-pixel text-shadow-glow">
-                  {prize.amount}
-                </div>
+              {/* DESCRIPTION */}
+              <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                {tier.description}
+              </p>
 
-                <p className="font-mono text-sm opacity-90">
-                  {prize.description}
-                </p>
+              {/* SEALED TAG */}
+              <div className="absolute top-4 right-4 font-pixel text-[9px] tracking-widest text-red-400">
+                SEALED
               </div>
             </div>
           ))}
         </div>
 
-        {/* Special Category Prizes */}
-        <div className="bg-[#2E2E2E]/60 border-4 border-[#5D4037] rounded-md backdrop-blur-sm shadow-[8px_8px_0_#1B1B1B] p-6 mx-auto max-w-3xl space-t-10 hover:scale-105 animate-in ease-in-out transition-all">
-          <div className="text-center space-y-6">
-            <h3 className="text-2xl text-[#FFD700] font-['Press_Start_2P'] animate-glow drop-shadow-[2px_2px_0_rgba(0,0,0,0.8)]">
-               SPECIAL CATEGORY PRIZES 
-            </h3>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              {specialPrizes.map((prize, index) => (
-                <div
-                  key={index}
-                  className="font-['Press_Start_2P'] text-xs text-[#F5F5DC] bg-[#3E2723]/80 border-2 border-[#8D6E63] p-4 rounded shadow-[4px_4px_0_#000] transition-all duration-300 ease-in-out animate-softPulse hover:-translate-y-1 hover:border-[#FFD700] hover:shadow-[6px_6px_0_#000] hover:brightness-110"
-                >
-                   {prize}
-                </div>
-              ))}
+        {/* SYSTEM MESSAGE */}
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="minecraft-card bg-black/70 border-2 border-neutral-700 p-6">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <ShieldAlert className="w-5 h-5 text-primary" />
+              <p className="font-pixel text-xs text-primary tracking-widest">
+                SYSTEM NOTICE
+              </p>
             </div>
 
-            <p className="font-['Press_Start_2P'] text-[10px] text-[#BBBBBB] italic animate-blink">
-              * Swag, certificates & epic networking for all players!
+            <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+              Prize data is currently encrypted.
+              <br />
+              Vault access will unlock when NexHack 2026 goes live.
+              <br />
+              Prepare accordingly.
+            </p>
+
+            <p className="mt-4 font-mono text-xs text-muted-foreground italic">
+              Archive rewards are preserved separately.
             </p>
           </div>
         </div>

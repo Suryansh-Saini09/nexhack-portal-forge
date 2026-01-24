@@ -16,8 +16,9 @@ export const Header = () => {
   const navItems = [
     'ABOUT',
     'THEMES', 
-    'PRIZE',
-    'SCHEDULE',
+    'PRIZES',
+    'ARCHIVES',
+    // 'SCHEDULE',
     'SPONSORS',
     'TEAM',
     'FAQ',
