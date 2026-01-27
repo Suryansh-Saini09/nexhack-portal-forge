@@ -13,9 +13,10 @@ export const Footer = () => {
     { name: 'About', href: '#about' },
     { name: 'Themes', href: '#themes' },
     { name: 'Prizes', href: '#prizes' },
-    { name: 'Schedule', href: '#schedule' },
+    // { name: 'Schedule', href: '#schedule' },
     { name: 'Sponsors', href: '#sponsors' },
     { name: 'FAQ', href: '#faq' },
+    { name: 'Archives', href: '#archives' },
   ];
 
   const archiveLinks = [

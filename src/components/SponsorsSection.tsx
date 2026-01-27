@@ -225,7 +225,7 @@ export const SponsorsSection = () => {
           </div>
         </div>
       </div>
-      <BackgroundBeams />
+      {/* <BackgroundBeams /> */}
       <SponsorDialog open={sponsorOpen} onOpenChange={setSponsorOpen} />
     </section>
   );
