@@ -38,8 +38,8 @@ export const SponsorsSection = () => {
       { name: "Certificate\u00A0Partner", logo: Give },
       { name: "Blockchain\u00A0Partner", logo: ethindia },
       { name: "AI Partner", logo: devdock },
-      { name: "Monetary Partner", logo: bx },
-      { name: "Monetary Partner", logo: tri },
+      { name: "Active Partner", logo: bx },
+      { name: "Active Partner", logo: tri },
       { name: "Gaming Partner", logo: arena },
     ],
   };
@@ -53,7 +53,7 @@ export const SponsorsSection = () => {
       <div className="container-max">
         <div className="text-center mb-16">
           <h2 className="font-pixel text-3xl md:text-4xl text-primary mb-8">
-            OUR STRATEGIC ALLIES
+            OUR PAST STRATEGIC ALLIES
           </h2>
           <p className="font-mono text-lg text-muted-foreground max-w-3xl mx-auto">
             Powered by industry leaders who believe in the next generation of
