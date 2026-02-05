@@ -121,8 +121,8 @@ export const Footer = () => {
           <div className="border-t border-border pt-8 mt-8">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <p className="font-mono text-xs text-muted-foreground">
-                © 2025 Geeta University. A Nexus for the Next Generation of Builders.
-              </p>
+  © {new Date().getFullYear()} Geeta University. A Nexus for the Next Generation of Builders.
+</p>
               <div className="flex space-x-6">
                 <a
                   href="/RuleBook.pdf"
