@@ -138,15 +138,7 @@ export function GlimpseSection() {
   const [activeImage, setActiveImage] = useState<GalleryImage | null>(null);
   const { setIsLightboxOpen } = useLightbox();
 
-  // Minecraft camera / chunk sound
-  const playSound = () => {
-    const audio = new Audio("/sounds/camera-click.mp3"); // put in public/sounds
-    audio.volume = 0.5;
-    audio.play().catch(() => { });
-  };
-
   const openLightbox = (img: GalleryImage) => {
-    playSound();
     setActiveImage(img);
     setIsLightboxOpen(true);
   };

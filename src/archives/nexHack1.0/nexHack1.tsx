@@ -28,7 +28,7 @@ export default function NexHack1() {
       <MinecraftChunkBackground />
 
       {/* CONTENT LAYER */}
-      <div className="relative z-10 min-h-screen text-white">
+      <div className="relative z-10 min-h-screen text-white overflow-x-hidden w-full">
         <ArchiveHeroSection />
         <AboutSection />
         <StatsSection />
