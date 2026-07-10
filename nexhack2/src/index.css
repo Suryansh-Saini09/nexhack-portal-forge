@@ -520,7 +520,7 @@ header * {
   grid-template-columns: repeat(3, 1fr);
   gap: 50px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1450px;
   z-index: 5;
 }
 
@@ -764,7 +764,7 @@ header * {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 28px;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1500px;
 }
 
 /* Track number badge (top-right corner) */
@@ -1247,7 +1247,7 @@ header * {
 }
 
 .objects-container {
-  max-width: 1200px;
+  max-width: 1450px;
   margin: 0 auto;
   padding: 0 5%;
   display: flex;
@@ -1535,7 +1535,7 @@ header * {
   grid-template-columns: repeat(4, 1fr);
   gap: 50px;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1600px;
   z-index: 5;
 }
 
@@ -1726,9 +1726,9 @@ header * {
    ========================================================================== */
 .glimpses-section {
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 60px auto 20px auto;
-  padding: 0 5%;
+  padding: 0;
   text-align: center;
   overflow: hidden;
   z-index: 5;
@@ -1990,7 +1990,7 @@ header * {
   align-items: stretch;
   gap: 30px;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1450px;
   margin: 10px auto 20px auto;
   padding: 0 2%;
   position: relative;
@@ -2348,7 +2348,7 @@ header * {
    ========================================== */
 .special-awards-grid-container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1450px;
   margin: 10px auto 20px auto;
   padding: 0 2%;
   z-index: 5;
@@ -2679,7 +2679,7 @@ header * {
   grid-template-columns: 1fr 1fr;
   gap: 50px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1450px;
 }
 
 /* Day block */
@@ -2967,7 +2967,7 @@ header * {
   flex-direction: column;
   gap: 60px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1450px;
 }
 
 /* Tier section */
@@ -3395,7 +3395,7 @@ header * {
   justify-content: space-between;
   align-items: flex-start;
   gap: 30px;
-  max-width: 1300px;
+  max-width: 1500px;
   margin: 0 auto;
   z-index: 2;
   position: relative;
@@ -3547,7 +3547,7 @@ header * {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1500px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
