@@ -12,7 +12,7 @@ import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import Footer from './components/Footer';
 
-const LAUNCH_DATE = new Date("2025-08-15T09:00:00+05:30");
+const LAUNCH_DATE = new Date("2026-08-15T09:00:00+05:30");
 
 export default function App() {
   const [timeLeft, setTimeLeft] = useState(() => {
