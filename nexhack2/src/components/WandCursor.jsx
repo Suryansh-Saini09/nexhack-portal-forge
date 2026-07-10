@@ -15,9 +15,20 @@ export default function WandCursor() {
     const onMouseMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      cursor.style.opacity = '1';
+    };
+
+    const onMouseLeaveWindow = () => {
+      cursor.style.opacity = '0';
+    };
+
+    const onMouseEnterWindow = () => {
+      cursor.style.opacity = '1';
     };
 
     document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseleave', onMouseLeaveWindow);
+    document.addEventListener('mouseenter', onMouseEnterWindow);
 
     // Dynamic Sparkle generation helper
     const createSparkle = (x, y) => {
@@ -89,6 +100,8 @@ export default function WandCursor() {
 
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeaveWindow);
+      document.removeEventListener('mouseenter', onMouseEnterWindow);
       cancelAnimationFrame(animationFrameId);
       observer.disconnect();
       const hoverables = document.querySelectorAll('a, button, select, input, .card, .floating-img, .logo, .character-name, .team-social-icon, .faq-item, .faq-search-input, .footer-logo, .footer-nav-grid button, .footer-social-icon');
