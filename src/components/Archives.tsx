@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { PageTransitionOverlay } from "./PageTransitionOverlay";
 
 // ─── SET YOUR LAUNCH DATE HERE ───────────────────────────────────────────────
-const LAUNCH_DATE = new Date("2026-08-15T09:00:00+05:30");
+const LAUNCH_DATE = new Date("2026-01-01T00:00:00+05:30");
 // ─────────────────────────────────────────────────────────────────────────────
 
 interface TimeLeft {

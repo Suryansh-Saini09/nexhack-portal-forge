@@ -9,7 +9,7 @@ export function NextHackathonSection() {
   const [chunk, setChunk] = useState(0);
   const navigate = useNavigate();
 
-  const isLocked = edition === "2.0";
+  const isLocked = false;
 
   /* =========================
      CHUNK LOADING (2.0 ONLY)
