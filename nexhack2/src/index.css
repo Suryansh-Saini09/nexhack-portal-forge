@@ -351,7 +351,7 @@ header * {
   align-items: center;
   text-align: center;
   z-index: 2;
-  margin-top: 15px;
+  margin-top: 20px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.3s, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.3s;
@@ -3895,20 +3895,35 @@ header * {
 
 .magic-modal-close {
   position: absolute;
-  top: 15px;
+  top: 18px;
   right: 20px;
   background: none;
   border: none;
-  color: var(--color-text-muted);
-  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: color 0.25s ease, transform 0.25s ease;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
 }
 
 .magic-modal-close:hover {
-  color: var(--gryffindor-accent);
+  color: #eeb939;
   transform: scale(1.1);
+}
+
+.magic-modal-close.key-rotate {
+  animation: keyTurn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes keyTurn {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
 }
 
 .magic-modal-icon {

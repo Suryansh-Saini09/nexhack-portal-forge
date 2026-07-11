@@ -34,7 +34,7 @@ export function Archives() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(calcTimeLeft);
 
   const isLocked = edition === "2.0";
-  const isUnlocked = isLocked && timeLeft === null;
+  const isUnlocked = true;
 
   /* COUNTDOWN TICKER */
   useEffect(() => {

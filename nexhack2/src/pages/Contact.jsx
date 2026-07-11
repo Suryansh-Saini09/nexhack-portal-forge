@@ -4,11 +4,42 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus('Owl dispatched successfully!');
-    setForm({ name: '', email: '', message: '' });
+    setStatus('sending');
+    try {
+      const response = await fetch('https://websitebackend-w5m9.onrender.com/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+      const data = await response.json();
+      if (response.ok && data.success) {
+        setStatus('success');
+        setForm({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      console.error('Error dispatching owl:', err);
+      setStatus('error');
+    }
     setTimeout(() => setStatus(''), 4000);
+  };
+
+  const getButtonBackground = () => {
+    if (status === 'sending') return 'linear-gradient(135deg, #555 0%, #335 100%)';
+    if (status === 'success') return 'linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%)';
+    if (status === 'error') return 'linear-gradient(135deg, #c62828 0%, #b71c1c 100%)';
+    return 'linear-gradient(135deg, #ae0001 0%, #740001 100%)';
+  };
+
+  const getButtonBorderColor = () => {
+    if (status === 'success') return '#5cd68a';
+    if (status === 'error') return '#ff8a80';
+    return '#eeb939';
   };
 
   return (
@@ -242,50 +273,57 @@ export default function Contact() {
                 
                 <button 
                   type="submit" 
+                  disabled={status === 'sending'}
                   style={{
                     padding: '14px 30px',
                     borderRadius: '30px',
-                    background: 'linear-gradient(135deg, #ae0001 0%, #740001 100%)',
-                    border: '1px solid #eeb939',
+                    background: getButtonBackground(),
+                    border: `1px solid ${getButtonBorderColor()}`,
                     color: '#fff',
                     fontFamily: 'Cinzel, serif',
                     fontSize: '1rem',
                     fontWeight: 'bold',
                     letterSpacing: '2px',
-                    cursor: 'none',
+                    cursor: status === 'sending' ? 'not-allowed' : 'none',
                     transition: 'all 0.3s ease-out',
                     alignSelf: 'flex-start',
                     marginTop: '10px',
-                    boxShadow: '0 4px 15px rgba(174, 0, 1, 0.3)'
+                    boxShadow: status === 'success' 
+                      ? '0 4px 15px rgba(46, 125, 50, 0.4)' 
+                      : status === 'error' 
+                        ? '0 4px 15px rgba(198, 40, 40, 0.4)' 
+                        : '0 4px 15px rgba(174, 0, 1, 0.3)',
+                    opacity: status === 'sending' ? 0.7 : 1
                   }}
                   onMouseEnter={(e) => {
+                    if (status === 'sending') return;
                     e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 6px 20px rgba(238, 185, 57, 0.4), 0 0 15px rgba(174, 0, 1, 0.5)';
+                    e.target.style.boxShadow = status === 'success'
+                      ? '0 6px 20px rgba(92, 214, 138, 0.4)'
+                      : status === 'error'
+                        ? '0 6px 20px rgba(255, 138, 128, 0.4)'
+                        : '0 6px 20px rgba(238, 185, 57, 0.4), 0 0 15px rgba(174, 0, 1, 0.5)';
                     e.target.style.borderColor = '#fff';
                   }}
                   onMouseLeave={(e) => {
+                    if (status === 'sending') return;
                     e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = '0 4px 15px rgba(174, 0, 1, 0.3)';
-                    e.target.style.borderColor = '#eeb939';
+                    e.target.style.boxShadow = status === 'success'
+                      ? '0 4px 15px rgba(46, 125, 50, 0.4)'
+                      : status === 'error'
+                        ? '0 4px 15px rgba(198, 40, 40, 0.4)'
+                        : '0 4px 15px rgba(174, 0, 1, 0.3)';
+                    e.target.style.borderColor = getButtonBorderColor();
                   }}
                 >
-                  Dispatch Owl
+                  {status === 'sending' 
+                    ? 'Sending Owl...' 
+                    : status === 'success' 
+                      ? 'Owl Dispatched!' 
+                      : status === 'error' 
+                        ? 'Failed to Send' 
+                        : 'Dispatch Owl'}
                 </button>
-                
-                {status && (
-                  <div style={{ 
-                    color: '#5cd68a', 
-                    fontFamily: 'Inter, sans-serif', 
-                    fontSize: '1rem', 
-                    marginTop: '15px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    textShadow: '0 0 8px rgba(92, 214, 138, 0.3)'
-                  }}>
-                    <span>✉</span> {status}
-                  </div>
-                )}
               </form>
             </div>
           </div>

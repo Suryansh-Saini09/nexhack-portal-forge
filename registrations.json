@@ -1,0 +1,13 @@
+[
+  {
+    "id": "1783750414834",
+    "name": "Test Wizard",
+    "email": "test@hogwarts.edu",
+    "phone": "1234567890",
+    "academy": "Hogwarts School",
+    "year": "1st Year",
+    "teamSize": "2",
+    "github": "https://github.com/testwizard",
+    "timestamp": "2026-07-11T06:13:34.834Z"
+  }
+]

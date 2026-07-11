@@ -74,7 +74,7 @@ export default function Footer({ onNavClick }) {
               <div className="footer-link-group">
                 <h4>Resources</h4>
                 <a href="#" className="footer-text-link">Sponsorship Brochure</a>
-                <a href="#" className="footer-text-link">Code of Conduct</a>
+                <a href="./images/NexHack%202.0%20Code%20of%20Conduct.pdf" className="footer-text-link" target="_blank" rel="noopener noreferrer">Code of Conduct</a>
               </div>
               <div className="footer-link-group">
                 <h4>Archives</h4>

@@ -20,7 +20,7 @@ export default function About() {
     <main className="objects-section" style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <h1 className="section-title" style={{ marginBottom: '40px' }}>About NexHack</h1>
       <div className="objects-container" style={{ gap: '0' }}>
-        <div className="object-card" style={{ maxWidth: '800px', margin: '0 auto', float: 'none' }}>
+        <div className="object-card" style={{ maxWidth: '1100px', margin: '0 auto', float: 'none' }}>
           <div className="wand-decor" />
           <div className="object-card-content" style={{ textAlign: 'center', paddingLeft: '0' }}>
             <h2 className="object-title" style={{ fontSize: '2.8rem' }}>The Wizarding Hackathon</h2>

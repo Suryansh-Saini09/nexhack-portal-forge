@@ -34,7 +34,7 @@ export default function App() {
     return () => clearInterval(interval);
   }, [timeLeft]);
 
-  const isLocked = timeLeft > 0;
+  const isLocked = false;
 
   const [activeSection, setActiveSection] = useState('home');
   const videoRef = React.useRef(null);
@@ -109,7 +109,7 @@ export default function App() {
       <>
         {/* Global Custom Cursor */}
         <WandCursor />
-        
+
         <div className="wizard-lock-screen">
           {/* Decorative golden frame corners */}
           <div className="wizard-lock-frame-corner top-left" />
@@ -117,57 +117,57 @@ export default function App() {
           <div className="wizard-lock-frame-corner bottom-left" />
           <div className="wizard-lock-frame-corner bottom-right" />
 
-        {/* Animated background stars */}
-        <div className="wizard-lock-stars" />
-        
-        {/* Hogwarts House Ambient Glows */}
-        <div className="house-glow glow-gryffindor" />
-        <div className="house-glow glow-slytherin" />
-        
-        {/* Animated Golden Snitch */}
-        <div className="golden-snitch">
-          <div className="snitch-body" />
-          <div className="snitch-wing wing-left" />
-          <div className="snitch-wing wing-right" />
-        </div>
+          {/* Animated background stars */}
+          <div className="wizard-lock-stars" />
 
-        {/* Content Overlay */}
-        <div className="wizard-lock-content">
-         
-          
-          <h1 className="wizard-lock-title">PORTAL &nbsp; SEALED</h1>
-          
-          <p className="wizard-lock-subtitle">
-            The wizarding world chunks are generating. The portal stabilizes in:
-          </p>
+          {/* Hogwarts House Ambient Glows */}
+          <div className="house-glow glow-gryffindor" />
+          <div className="house-glow glow-slytherin" />
 
-          <div className="wizard-lock-countdown">
-            <div className="countdown-item">
-              <span className="countdown-num">{String(days).padStart(2, '0')}</span>
-              <span className="countdown-label">Days</span>
-            </div>
-            <div className="countdown-item">
-              <span className="countdown-num">{String(hours).padStart(2, '0')}</span>
-              <span className="countdown-label">Hours</span>
-            </div>
-            <div className="countdown-item">
-              <span className="countdown-num">{String(minutes).padStart(2, '0')}</span>
-              <span className="countdown-label">Mins</span>
-            </div>
-            <div className="countdown-item">
-              <span className="countdown-num">{String(seconds).padStart(2, '0')}</span>
-              <span className="countdown-label">Secs</span>
-            </div>
+          {/* Animated Golden Snitch */}
+          <div className="golden-snitch">
+            <div className="snitch-body" />
+            <div className="snitch-wing wing-left" />
+            <div className="snitch-wing wing-right" />
           </div>
 
-          <button 
-            className="wizard-lock-button"
-            onClick={() => window.location.replace('/')}
-          >
-            Return to Dimension 1.0
-          </button>
+          {/* Content Overlay */}
+          <div className="wizard-lock-content">
+
+
+            <h1 className="wizard-lock-title">PORTAL &nbsp; SEALED</h1>
+
+            <p className="wizard-lock-subtitle">
+              The wizarding world chunks are generating. The portal stabilizes in:
+            </p>
+
+            <div className="wizard-lock-countdown">
+              <div className="countdown-item">
+                <span className="countdown-num">{String(days).padStart(2, '0')}</span>
+                <span className="countdown-label">Days</span>
+              </div>
+              <div className="countdown-item">
+                <span className="countdown-num">{String(hours).padStart(2, '0')}</span>
+                <span className="countdown-label">Hours</span>
+              </div>
+              <div className="countdown-item">
+                <span className="countdown-num">{String(minutes).padStart(2, '0')}</span>
+                <span className="countdown-label">Mins</span>
+              </div>
+              <div className="countdown-item">
+                <span className="countdown-num">{String(seconds).padStart(2, '0')}</span>
+                <span className="countdown-label">Secs</span>
+              </div>
+            </div>
+
+            <button
+              className="wizard-lock-button"
+              onClick={() => window.location.replace('/')}
+            >
+              Return to Dimension 1.0
+            </button>
+          </div>
         </div>
-      </div>
       </>
     );
   }
