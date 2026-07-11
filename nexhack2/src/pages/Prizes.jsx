@@ -1,121 +1,149 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 
-const objectsData = [
-  {
-    id: 'galleons',
-    rank: '2nd',
-    title: '2nd Prize: Galleon Pool',
-    subtitle: 'Grand Runners-Up',
-    image: './images/prizes/galleon.png',
-    alt: 'Embossed Golden Galleon Coin',
-    class: 'left-card'
-  },
+const grandPrizes = [
   {
     id: 'snitch',
     rank: '1st',
-    title: '1st Prize: Golden Snitch',
-    subtitle: 'Ultimate Champions',
-    image: './images/prizes/snitch.png',
-    alt: 'Flying Golden Snitch with wings',
-    class: 'center-card'
+    title: 'Golden Snitch',
+    subtitle: '1st Prize',
+    description: 'Ultimate champions.',
+    image: '/nexhack2/images/prizes/new_snitch.png',
+    alt: 'Flying Golden Snitch',
+    glowColor: 'rgba(238, 185, 57, 0.45)',
+    borderColor: 'rgba(238, 185, 57, 0.35)',
+    hoverBorderColor: 'rgba(238, 185, 57, 0.85)',
+    badgeBg: 'linear-gradient(135deg, #f5c75d 0%, #eeb939 100%)',
+    badgeColor: '#030305',
+    loot: '₹35,000 + Gear'
+  },
+  {
+    id: 'galleons',
+    rank: '2nd',
+    title: 'Galleon Pool',
+    subtitle: '2nd Prize',
+    description: 'Runner-up team.',
+    image: '/nexhack2/images/prizes/new_galleons.png',
+    alt: 'Golden Galleon Coin',
+    glowColor: 'rgba(192, 192, 192, 0.35)',
+    borderColor: 'rgba(192, 192, 192, 0.3)',
+    hoverBorderColor: 'rgba(192, 192, 192, 0.8)',
+    badgeBg: 'rgba(192, 192, 192, 0.15)',
+    badgeColor: '#c0c0c0',
+    loot: '₹25,000 + Swag'
   },
   {
     id: 'wand',
     rank: '3rd',
-    title: '3rd Prize: Elder Wand',
-    subtitle: 'Technical Mastery',
-    image: './images/prizes/elder_wand.png',
-    alt: 'The Elder Wand resting',
-    class: 'right-card'
+    title: 'Elder Wand',
+    subtitle: '3rd Prize',
+    description: 'Technical mastery.',
+    image: '/nexhack2/images/prizes/new_elder_wand.png',
+    alt: 'The Elder Wand',
+    glowColor: 'rgba(184, 115, 51, 0.35)',
+    borderColor: 'rgba(184, 115, 51, 0.3)',
+    hoverBorderColor: 'rgba(184, 115, 51, 0.8)',
+    badgeBg: 'rgba(184, 115, 51, 0.15)',
+    badgeColor: '#b87333',
+    loot: '₹15,000 + Perks'
   }
 ];
 
-function PrizeCard({ obj, unfolded }) {
-  const wrapperRef = useRef(null);
-  const cardRef = useRef(null);
+const specialPrizes = [
+  {
+    id: 'girls-team',
+    rank: 'Track',
+    title: 'Best Girls Team',
+    subtitle: "Hermione's Choice",
+    description: 'Top female project.',
+    image: '/nexhack2/images/prizes/time_turner.png',
+    alt: 'Time Turner Medal',
+    glowColor: 'rgba(138, 43, 226, 0.4)',
+    borderColor: 'rgba(138, 43, 226, 0.3)',
+    hoverBorderColor: 'rgba(138, 43, 226, 0.85)',
+    badgeBg: 'rgba(138, 43, 226, 0.15)',
+    badgeColor: '#dca4ff',
+    loot: '₹10,000 + Swag'
+  },
+  {
+    id: 'ai-innovation',
+    rank: 'Track',
+    title: 'Best AI Innovation',
+    subtitle: "Sorting Hat's Pick",
+    description: 'Top AI implementation.',
+    image: '/nexhack2/images/prizes/sorting_hat_ai.png',
+    alt: 'AI Sorting Hat',
+    glowColor: 'rgba(0, 206, 209, 0.4)',
+    borderColor: 'rgba(0, 206, 209, 0.3)',
+    hoverBorderColor: 'rgba(0, 206, 209, 0.85)',
+    badgeBg: 'rgba(0, 206, 209, 0.15)',
+    badgeColor: '#4ee2ec',
+    loot: '₹10,000 + Credits'
+  }
+];
 
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    const card = cardRef.current;
-    if (!wrapper || !card || !unfolded) return;
-
-    const isTouch = window.matchMedia('(max-width: 768px)').matches;
-    if (isTouch) return;
-
-    const onMouseMove = (e) => {
-      const rect = wrapper.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const xc = rect.width / 2;
-      const yc = rect.height / 2;
-
-      const maxTilt = 15;
-      const angleX = -((y - yc) / yc) * maxTilt;
-      const angleY = ((x - xc) / xc) * maxTilt;
-
-      card.style.zIndex = '15';
-      card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.05, 1.05, 1.05) translateY(-12px)`;
-    };
-
-    const onMouseEnter = () => {
-      card.style.transition = 'transform 0.1s ease, border-color 0.4s ease, box-shadow 0.4s ease';
-    };
-
-    const onMouseLeave = () => {
-      card.style.zIndex = '';
-      card.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.25, 1), border-color 0.4s ease, box-shadow 0.4s ease';
-
-      let baseRotation = 'rotate(0deg)';
-      if (obj.class === 'left-card') baseRotation = 'rotate(-4deg)';
-      if (obj.class === 'right-card') baseRotation = 'rotate(4deg)';
-      if (obj.class === 'center-card') baseRotation = 'translateY(-15px) scale(1.02)';
-
-      card.style.transform = baseRotation;
-    };
-
-    wrapper.addEventListener('mousemove', onMouseMove);
-    wrapper.addEventListener('mouseenter', onMouseEnter);
-    wrapper.addEventListener('mouseleave', onMouseLeave);
-
-    return () => {
-      wrapper.removeEventListener('mousemove', onMouseMove);
-      wrapper.removeEventListener('mouseenter', onMouseEnter);
-      wrapper.removeEventListener('mouseleave', onMouseLeave);
-    };
-  }, [unfolded, obj.class]);
-
+function PrizeCard({ obj }) {
   return (
     <div
-      ref={wrapperRef}
-      className={`prize-cinematic-wrapper ${obj.class}-wrapper`}
+      className="simple-prize-card"
+      style={{
+        '--border-color': obj.borderColor,
+        '--hover-border-color': obj.hoverBorderColor,
+        '--glow-color': obj.glowColor,
+        '--badge-color': obj.badgeColor
+      }}
     >
+      {/* Background Glow */}
       <div
-        ref={cardRef}
-        className={`prize-cinematic-card ${obj.class}`}
-      >
-        {/* Breathing backdrop glow */}
-        <div className="prize-card-glow-backdrop" />
+        className="simple-prize-card-glow"
+        style={{
+          background: `radial-gradient(circle, ${obj.glowColor} 0%, rgba(0, 0, 0, 0) 70%)`
+        }}
+      />
 
-        {/* Animated magic portal vortex */}
-        <div className="prize-card-portal-vortex" />
+      {/* Floating Sparkles Embers */}
+      <div className="simple-prize-sparkles">
+        <span className="sparkle s1"></span>
+        <span className="sparkle s2"></span>
+        <span className="sparkle s3"></span>
+      </div>
 
-        {/* Ambient floating ember particles */}
-        <div className="prize-card-particles">
-          <span className="particle p1"></span>
-          <span className="particle p2"></span>
-          <span className="particle p3"></span>
-          <span className="particle p4"></span>
-          <span className="particle p5"></span>
+      {/* Left Column: Image & Badge */}
+      <div className="simple-prize-left-col">
+        {/* Concentric Rotating Magic Circles */}
+        <div className="simple-prize-image-ring" />
+        <div className="simple-prize-image-ring-inner" />
+
+        <div className="simple-prize-image-wrapper">
+          <img
+            src={obj.image}
+            alt={obj.alt}
+            className="simple-prize-image"
+          />
         </div>
+        
+        <div
+          className="simple-prize-badge"
+          style={{
+            background: obj.badgeBg,
+            color: obj.badgeColor,
+            borderColor: obj.borderColor
+          }}
+        >
+          {obj.rank}
+        </div>
+      </div>
 
-        <div className="prize-card-inner">
-          <div className="prize-card-badge">{obj.rank}</div>
-          <div className="prize-card-img-wrapper">
-            <img src={obj.image} alt={obj.alt} className="prize-card-img" />
-          </div>
-          <h2 className="prize-card-title">{obj.title}</h2>
-          <p className="prize-card-subtitle">{obj.subtitle}</p>
+      {/* Right Column: Title, Subtitle, Description & Loot Badge */}
+      <div className="simple-prize-right-col">
+        <div>
+          <h3 className="simple-prize-title">{obj.title}</h3>
+          <p className="simple-prize-subtitle">{obj.subtitle}</p>
+        </div>
+        
+        <p className="simple-prize-description">{obj.description}</p>
+
+        <div className="simple-prize-loot-badge">
+          {obj.loot}
         </div>
       </div>
     </div>
@@ -123,44 +151,29 @@ function PrizeCard({ obj, unfolded }) {
 }
 
 export default function Prizes() {
-  const [unfolded, setUnfolded] = useState(false);
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setUnfolded(true);
-        }
-      },
-      {
-        threshold: 0.15
-      }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
-    };
-  }, []);
-
   return (
-    <main className="objects-section" ref={containerRef}>
-      <h1 className="section-title">NexHack Rewards</h1>
+    <main className="objects-section">
+      <div className="prizes-container">
+        <h1 className="section-title">NexHack Rewards</h1>
+        <p className="prizes-section-subtitle">
+          Brew your algorithms and sculpt your code. Legendary loot and epic accolades await the finest tech sorcerers.
+        </p>
 
-      <div className={`prizes-cinematic-row ${unfolded ? 'unfolded' : ''}`}>
-        {objectsData.map((obj) => (
-          <PrizeCard
-            key={obj.id}
-            obj={obj}
-            unfolded={unfolded}
-          />
-        ))}
+        {/* Grand Prizes Section */}
+        <h2 className="prizes-grid-title">Grand Prizes</h2>
+        <div className="prizes-simple-grid grand-prizes-grid">
+          {grandPrizes.map((prize) => (
+            <PrizeCard key={prize.id} obj={prize} />
+          ))}
+        </div>
+
+        {/* Special Recognition Tracks Section */}
+        <h2 className="prizes-grid-title" style={{ marginTop: '50px' }}>Special Recognition Tracks</h2>
+        <div className="prizes-simple-grid special-tracks-grid">
+          {specialPrizes.map((prize) => (
+            <PrizeCard key={prize.id} obj={prize} />
+          ))}
+        </div>
       </div>
     </main>
   );
