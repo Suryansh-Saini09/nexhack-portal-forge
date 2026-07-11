@@ -224,7 +224,7 @@ export default function Sponsors() {
             style={{ 
               maxWidth: '650px', 
               width: '95%',
-              padding: '30px 40px',
+              padding: '20px 30px',
               textAlign: 'left', 
               alignItems: 'stretch' 
             }}
@@ -251,32 +251,32 @@ export default function Sponsors() {
             </button>
 
             {submitted ? (
-              <div style={{ padding: '20px 0', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div className="magic-modal-icon" aria-hidden="true" style={{ animation: 'floatIcon 3s ease-in-out infinite alternate', fontSize: '3.2rem', marginBottom: '15px' }}>✉️</div>
-                <h2 className="magic-modal-title" style={{ fontSize: '2.4rem', fontFamily: 'HarryP, serif' }}>Inquiry Sent!</h2>
-                <div className="magic-modal-divider" style={{ margin: '15px auto' }} />
-                <p className="magic-modal-text" style={{ fontSize: '1.1rem', textAlign: 'center' }}>
+              <div style={{ padding: '15px 0', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div className="magic-modal-icon" aria-hidden="true" style={{ animation: 'floatIcon 3s ease-in-out infinite alternate', fontSize: '2.8rem', marginBottom: '10px' }}>✉️</div>
+                <h2 className="magic-modal-title" style={{ fontSize: '2.1rem', fontFamily: 'HarryP, serif' }}>Inquiry Sent!</h2>
+                <div className="magic-modal-divider" style={{ margin: '10px auto' }} />
+                <p className="magic-modal-text" style={{ fontSize: '1rem', textAlign: 'center' }}>
                   Your partnership proposal has been dispatched! Our owl messenger is winging its way to the committee, and we will reply post-haste.
                 </p>
-                <button className="magic-modal-btn" onClick={handleCloseModal}>
+                <button className="magic-modal-btn" onClick={handleCloseModal} style={{ marginTop: '10px' }}>
                   Mischief Managed
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSponsorSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <form onSubmit={handleSponsorSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <div className="magic-modal-icon" aria-hidden="true" style={{ fontSize: '2.5rem', marginBottom: '10px' }}>🤝</div>
-                  <h2 className="magic-modal-title" style={{ fontSize: '2.4rem', fontFamily: 'HarryP, serif' }}>Forge an Alliance</h2>
-                  <div className="magic-modal-divider" style={{ margin: '10px auto' }} />
-                  <p className="magic-modal-text" style={{ fontSize: '0.95rem', marginBottom: '15px', textAlign: 'center' }}>
+                  <div className="magic-modal-icon" aria-hidden="true" style={{ fontSize: '2.2rem', marginBottom: '6px' }}>🤝</div>
+                  <h2 className="magic-modal-title" style={{ fontSize: '2rem', fontFamily: 'HarryP, serif' }}>Forge an Alliance</h2>
+                  <div className="magic-modal-divider" style={{ margin: '8px auto' }} />
+                  <p className="magic-modal-text" style={{ fontSize: '0.85rem', marginBottom: '10px', textAlign: 'center' }}>
                     Share your details to enlist as an ally for NexHack 2.0.
                   </p>
                 </div>
 
                 {/* Grid Row 1: Company Name & Contact Name */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '0.8rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Organization / Company Name</label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <label style={{ fontSize: '0.75rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Organization / Company Name</label>
                     <input
                       type="text"
                       required
@@ -285,7 +285,7 @@ export default function Sponsors() {
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       style={{
                         width: '100%',
-                        padding: '10px 14px',
+                        padding: '8px 12px',
                         borderRadius: '8px',
                         background: 'rgba(255, 255, 255, 0.02)',
                         border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -298,8 +298,8 @@ export default function Sponsors() {
                     />
                   </div>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '0.8rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Contact Person Name</label>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <label style={{ fontSize: '0.75rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Contact Person Name</label>
                     <input
                       type="text"
                       required
@@ -308,7 +308,7 @@ export default function Sponsors() {
                       onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
                       style={{
                         width: '100%',
-                        padding: '10px 14px',
+                        padding: '8px 12px',
                         borderRadius: '8px',
                         background: 'rgba(255, 255, 255, 0.02)',
                         border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -323,9 +323,9 @@ export default function Sponsors() {
                 </div>
 
                 {/* Grid Row 2: Owl Email & Interest Tier */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '0.8rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Owl Address (Email)</label>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <label style={{ fontSize: '0.75rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Owl Address (Email)</label>
                     <input
                       type="email"
                       required
@@ -334,7 +334,7 @@ export default function Sponsors() {
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       style={{
                         width: '100%',
-                        padding: '10px 14px',
+                        padding: '8px 12px',
                         borderRadius: '8px',
                         background: 'rgba(255, 255, 255, 0.02)',
                         border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -347,14 +347,14 @@ export default function Sponsors() {
                     />
                   </div>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '0.8rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Interest Tier</label>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <label style={{ fontSize: '0.75rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Interest Tier</label>
                     <select
                       value={formData.tier}
                       onChange={(e) => setFormData({ ...formData, tier: e.target.value })}
                       style={{
                         width: '100%',
-                        padding: '10px 14px',
+                        padding: '8px 12px',
                         borderRadius: '8px',
                         background: '#0e1222',
                         border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -374,16 +374,16 @@ export default function Sponsors() {
                 </div>
 
                 {/* Row 3: Owl Post Message / Details */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <label style={{ fontSize: '0.8rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Owl Post Message / Details</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <label style={{ fontSize: '0.75rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Owl Post Message / Details</label>
                   <textarea
-                    rows="4"
+                    rows="3"
                     placeholder="Tell us how you would like to support our tech magic..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     style={{
                       width: '100%',
-                      padding: '10px 14px',
+                      padding: '8px 12px',
                       borderRadius: '8px',
                       background: 'rgba(255, 255, 255, 0.02)',
                       border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -397,7 +397,7 @@ export default function Sponsors() {
                   />
                 </div>
 
-                <button type="submit" className="magic-modal-btn" style={{ marginTop: '10px', width: '100%', cursor: 'none' }}>
+                <button type="submit" className="magic-modal-btn" style={{ marginTop: '5px', width: '100%', cursor: 'none' }}>
                   Send Owl Message
                 </button>
               </form>

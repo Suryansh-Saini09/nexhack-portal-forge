@@ -4612,3 +4612,19 @@ header * {
 .sound-icon.play {
   color: #eeb939;
 }
+
+/* Responsive Navbar capsule scaling for tablets/zooms */
+@media (max-width: 1250px) and (min-width: 769px) {
+  .navbar-capsule {
+    gap: 12px !important;
+    padding: 6px 16px !important;
+  }
+  .nav-link {
+    font-size: 0.78rem !important;
+    padding: 4px 10px !important;
+    letter-spacing: 0.2px !important;
+  }
+  .navbar-logo-left, .navbar-logo-right {
+    height: 26px !important;
+  }
+}

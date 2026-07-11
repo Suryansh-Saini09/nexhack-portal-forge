@@ -46,29 +46,21 @@ export default function App() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const sections = ['home', 'about', 'themes', 'prizes', 'schedule', 'sponsors', 'team', 'faq', 'contact'];
-          const viewportCenter = window.innerHeight / 2;
-
+          
           let currentSection = 'home';
-          let minDistance = Infinity;
-          const debugInfo = [];
           for (const id of sections) {
             const el = document.getElementById(id);
             if (el) {
               const rect = el.getBoundingClientRect();
-              const sectionCenter = rect.top + rect.height / 2;
-              const distance = Math.abs(sectionCenter - viewportCenter);
-              debugInfo.push(`${id}: top=${Math.round(rect.top)}, bottom=${Math.round(rect.bottom)}, dist=${Math.round(distance)}`);
-              if (distance < minDistance) {
-                minDistance = distance;
+              if (rect.top <= 200) {
                 currentSection = id;
               }
             }
           }
-          const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 150;
+          const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
           if (isAtBottom) {
             currentSection = 'contact';
           }
-          console.log(`Scroll Spy active=${currentSection} scrollY=${window.scrollY} vpCenter=${viewportCenter}`, debugInfo);
           setActiveSection(currentSection);
           ticking = false;
         });
