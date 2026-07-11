@@ -18,11 +18,10 @@ export default function Navbar({ activeSection, onNavClick }) {
             <img src="./images/home/gu_logo.png" alt="Geeta University" className="nav-logo-img" />
           </div>
 
-          <div className="navbar-mobile-brand" onClick={() => handleLinkClick('home')}>
-            NEXHACK
-          </div>
 
-          <button 
+
+
+          <button
             className="navbar-toggle-btn"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
