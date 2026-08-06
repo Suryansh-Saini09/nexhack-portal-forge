@@ -274,7 +274,7 @@ export default function Sponsors() {
                 </div>
 
                 {/* Grid Row 1: Company Name & Contact Name */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     <label style={{ fontSize: '0.75rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Organization / Company Name</label>
                     <input
@@ -323,7 +323,7 @@ export default function Sponsors() {
                 </div>
 
                 {/* Grid Row 2: Owl Email & Interest Tier */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     <label style={{ fontSize: '0.75rem', color: '#eeb939', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', fontFamily: 'Cinzel, serif' }}>Owl Address (Email)</label>
                     <input

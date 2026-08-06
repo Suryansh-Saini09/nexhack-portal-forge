@@ -141,6 +141,7 @@ textarea,
 
 /* Hide wand cursor on mobile & tablet devices */
 @media (max-width: 1024px) {
+
   #wand-cursor,
   .cursor-particle {
     display: none !important;
@@ -149,6 +150,7 @@ textarea,
 
 /* Also hide on any touch-only device regardless of width */
 @media (hover: none) {
+
   #wand-cursor,
   .cursor-particle {
     display: none !important;
@@ -337,7 +339,7 @@ header * {
 /* Metallic HP Logo */
 .hp-main-title {
   font-family: 'HarryP', 'Cinzel Decorative', serif;
-  font-size: 7.5rem;
+  font-size: clamp(2.5rem, 10vw, 7.5rem);
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
@@ -522,7 +524,7 @@ header * {
 
 .section-title {
   font-family: 'HarryP', 'Cinzel Decorative', serif;
-  font-size: 4.5rem;
+  font-size: clamp(2rem, 6vw, 4.5rem);
   text-align: center;
   margin-bottom: 60px;
   color: var(--color-text-light);
@@ -1663,7 +1665,8 @@ header * {
   }
 
   .hp-main-title {
-    font-size: 4.5rem;
+    font-size: clamp(2.2rem, 9vw, 4.5rem);
+    letter-spacing: 2px;
   }
 
   .cards-grid {
@@ -1672,7 +1675,7 @@ header * {
   }
 
   .section-title {
-    font-size: 2.2rem;
+    font-size: clamp(1.8rem, 5vw, 3rem);
     margin-top: 40px;
   }
 
@@ -5117,5 +5120,63 @@ header * {
 
   .prizes-grid-title {
     font-size: 1.4rem;
+  }
+}
+
+/* FAQ Card Responsive Padding */
+.faq-card {
+  padding: 25px 35px;
+}
+
+@media (max-width: 768px) {
+  .faq-card {
+    padding: 20px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-card {
+    padding: 15px 15px;
+  }
+}
+
+/* Small mobile responsiveness additions */
+@media (max-width: 480px) {
+  .hp-main-title {
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+    letter-spacing: 1px !important;
+  }
+  .section-title {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    margin-bottom: 30px !important;
+  }
+  .hero-subtitle {
+    font-size: 0.8rem !important;
+  }
+  .hero-subtitles {
+    gap: 8px !important;
+  }
+  .register-btn {
+    font-size: 0.88rem !important;
+    padding: 12px 28px !important;
+  }
+  
+  .simple-prize-card {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 24px 16px !important;
+    gap: 16px !important;
+  }
+  
+  .simple-prize-right-col {
+    align-items: center !important;
+    text-align: center !important;
+    min-height: auto !important;
+    gap: 8px !important;
+  }
+  
+  .simple-prize-left-col {
+    margin-bottom: 8px !important;
   }
 }

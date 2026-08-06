@@ -36,7 +36,7 @@ export default function About() {
       </div>
       <div className="glimpses-section">
         <h2 className="glimpses-title">Glimpses of NexHack 1.0</h2>
-        
+
         {/* Row 1: Rightward Scrolling (Left to Right) */}
         <div className="glimpses-marquee row-right">
           <div className="glimpses-marquee-track scroll-right">

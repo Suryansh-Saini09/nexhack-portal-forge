@@ -35,7 +35,6 @@ function FAQItem({ item, isOpen, onClick }) {
   const [hovered, setHovered] = useState(false);
 
   const cardStyle = {
-    padding: '25px 35px',
     margin: '0 auto 20px auto',
     width: '100%',
     maxWidth: '1100px',
@@ -59,7 +58,7 @@ function FAQItem({ item, isOpen, onClick }) {
 
   return (
     <div
-      className="object-card"
+      className="object-card faq-card"
       style={cardStyle}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}

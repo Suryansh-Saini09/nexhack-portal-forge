@@ -34,7 +34,7 @@ export default function App() {
     return () => clearInterval(interval);
   }, [timeLeft]);
 
-  const isLocked = true;
+  const isLocked = false;
 
   const [activeSection, setActiveSection] = useState('home');
   const videoRef = React.useRef(null);
