@@ -43,7 +43,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="objects-section" style={{ minHeight: '90vh', padding: '140px 0 100px 0' }}>
+    <main className="objects-section" style={{ minHeight: 'auto', padding: '60px 0 20px 0' }}>
       <h1 className="section-title">Owl Post</h1>
       
       <div className="objects-container" style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 20px' }}>

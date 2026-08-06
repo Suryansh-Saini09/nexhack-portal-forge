@@ -4,122 +4,87 @@ const teamData = [
   {
     id: 'shravya-atrey',
     name: 'Shravya Atrey',
-    house: 'Gryffindor House / AI Track Lead',
-    class: 'gryffindor',
-    role: 'AI & Intellect Lead',
+    role: 'Core Lead',
     image: './images/team/shravya.png',
-    desc: 'The lead builder for the AI track at NexHack. Drawing inspiration from Gryffindor courage, this track focuses on developing state-of-the-art neural networks, generative AI agents, and custom machine learning pipelines to solve complex automation challenges.',
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
+    socials: { github: 'https://github.com/shravya315', linkedin: 'https://www.linkedin.com/in/shravyatrey315/'}
   },
   {
     id: 'sahil-bhardwaj',
     name: 'Sahil Bhardwaj',
-    house: 'Gryffindor House / UI Lead',
-    class: 'gryffindor',
-    role: 'Frontend & Design Lead',
+    role: 'Core Lead',
     image: './images/team/sahil.png',
-    desc: 'The frontend lead for the Gryffindor track. Focused on highly responsive interface designs, custom web structures, and wizarding animation systems. This category challenges builders to create stunning user journeys with zero loading latency.',
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
+    socials: { github: 'https://github.com/sahil-codesfor-fun', linkedin: 'https://www.linkedin.com/in/sahil-bhardwajs10/'}
   },
-  {
-    id: 'suryansh-saini',
-    name: 'Suryansh Saini',
-    house: 'Gryffindor House / Logic Expert',
-    class: 'gryffindor',
-    role: 'Core Algorithms Lead',
-    image: './images/team/suryansh.png',
-    desc: 'The supreme authority on data logic and parsing algorithms at NexHack. This track focuses on backend optimizations, search queries, database design, and algorithmic efficiency to scale wizarding applications to millions of active queries.',
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
-  },
+  
   {
     id: 'muskan-kaushik',
     name: 'Muskan Kaushik',
-    house: 'Hogwarts / Grand Judge',
-    class: 'hogwarts',
-    role: 'Open Track Director',
+    role: 'Technical Lead',
     image: './images/team/muskan.png',
-    desc: "The chief panel organizer and final arbiter of NexHack 2026. Under Dumbledore's guidance, the Open Track welcomes any innovative software solution that breaks the mold of conventional engineering and crafts true magic.",
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
+    socials: { github: 'https://github.com/kaushikmuskan29', linkedin: 'https://www.linkedin.com/in/kaushikmuskan29'}
   },
   {
     id: 'kunal-khandelwal',
     name: 'Kunal Khandelwal',
-    house: 'Slytherin House / Cryptographer',
-    class: 'slytherin',
-    role: 'Blockchain & Security Lead',
+    role: 'Outreach Head',
     image: './images/team/kunal.jpeg',
-    desc: 'The lead instructor for the Slytherin Cryptography track. Focused on high-security vaults, smart contract execution, distributed databases, and zero-knowledge proofs. Builders must design secure code that blocks all intrusion attempts.',
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
+    socials: { github: 'https://github.com/KunalKhandelwal-dev', linkedin: 'https://in.linkedin.com/in/kunal-khandelwal-62a5b1311'}
   },
   {
     id: 'mimansha-yadav',
     name: 'Mimansha Yadav',
-    house: 'Slytherin House / Red Team Lead',
-    class: 'slytherin',
-    role: 'Cyber Defense Advisor',
+    role: 'Logistics and Hospitality Head',
     image: './images/team/mimansha.png',
-    desc: 'The ultimate adversarial simulator for our cybersecurity track. Teams will audit, reverse-engineer, and fortify critical wizarding endpoints to withstand high-volume distributed server attacks and protect the integrity of the magic system.',
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
+    socials: { github: 'https://github.com', linkedin: 'https://www.linkedin.com/in/mimansha-yadav-764434322/'}
   },
   {
     id: 'vinit-vashishta',
     name: 'Vinit Vashishta',
-    house: 'Slytherin House / Logistics Lead',
-    class: 'slytherin',
-    role: 'Logistics & Venue Director',
+    role: 'Social Media & Public Relations Head ',
     image: './images/team/vinit.png',
-    desc: 'Ensures the seamless coordination of transport charms, room allocations, food services, and magical hardware check-ins to make the hackathon venue safe and structured.',
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
+    socials: { github: 'https://github.com', linkedin: 'https://www.linkedin.com/in/vinit-vashishta-4280b8323/'}
+  },
+  {
+    id: 'nera',
+    name: 'Nera',
+    role: 'Design and Creative Head',
+    image: './images/team/nera.png',
+    socials: { github: 'https://github.com/nera8563', linkedin: 'https://www.linkedin.com/in/nera123'}
   },
   {
     id: 'krishna-garg',
     name: 'Krishna Garg',
-    house: 'Gryffindor House / Marketing Lead',
-    class: 'gryffindor',
-    role: 'Marketing & Community Lead',
+    role: 'Registration & Participant Relations Head',
     image: './images/team/krishna.png',
-    desc: 'Drives community engagement, tracks sponsor features, schedules public announcements, and ensures the magic of NexHack is shared globally through wizarding media channels.',
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
-  },
-  {
-    id: 'janvi',
-    name: 'Janvi',
-    house: 'Gryffindor House / Marketing Lead',
-    class: 'gryffindor',
-    role: 'Marketing & Community Lead',
-    image: './images/team/janvi.png',
-    desc: 'Drives community engagement, tracks sponsor features, schedules public announcements, and ensures the magic of NexHack is shared globally through wizarding media channels.',
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
+    socials: { github: 'https://github.com/Krishna-Gupta-Git', linkedin: 'https://www.linkedin.com/in/krishna-gupta-890147374'}
   },
   {
     id: 'lakshay',
     name: 'Lakshay',
-    house: 'Gryffindor House / Marketing Lead',
-    class: 'gryffindor',
-    role: 'Marketing & Community Lead',
+    role: 'Volunteer Management Head ',
     image: './images/team/lakshay.png',
-    desc: 'Drives community engagement, tracks sponsor features, schedules public announcements, and ensures the magic of NexHack is shared globally through wizarding media channels.',
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
+    socials: { github: 'https://github.com/Lakshayy-y', linkedin: 'https://www.linkedin.com/in/lakshaymittal012'}
+  },
+  {
+    id: 'janvi',
+    name: 'Janvi',
+    role: 'Content & Documentation Head ',
+    image: './images/team/janvi.png',
+    socials: { github: 'https://github.com/JANVI2223', linkedin: 'https://www.linkedin.com/in/janvidevi49'}
   },
   {
     id: 'drishti',
     name: 'Drishti',
-    house: 'Gryffindor House / Marketing Lead',
-    class: 'gryffindor',
-    role: 'Marketing & Community Lead',
+    role: 'Marketing Head',
     image: './images/team/drishti.png',
-    desc: 'Drives community engagement, tracks sponsor features, schedules public announcements, and ensures the magic of NexHack is shared globally through wizarding media channels.',
-    socials: { github: 'https://github.com', linkedin: 'https://linkedin.com', instagram: 'https://instagram.com' }
+    socials: { github: 'https://github.com/jaspaldrishti-droid', linkedin: 'https://www.linkedin.com/in/drishti-jaspal12'}
   }
-
-
-
-
 ];
 
 function TeamCard({ member }) {
   const wrapperRef = useRef(null);
   const cardRef = useRef(null);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -161,6 +126,14 @@ function TeamCard({ member }) {
     };
   }, []);
 
+  const getInitials = (name) => {
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase();
+  };
+
   return (
     <div
       ref={wrapperRef}
@@ -170,9 +143,43 @@ function TeamCard({ member }) {
     >
       <div ref={cardRef} className="card">
         <div className="card-image-container">
-          <img src={member.image} alt={member.name} className="character-portrait" />
+          {imageError ? (
+            <div style={{
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(135deg, #1a2035 0%, #0b0f19 100%)',
+              border: '1px dashed rgba(240, 199, 94, 0.4)',
+              borderRadius: '17px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '2.8rem',
+              fontWeight: 'bold',
+              fontFamily: "'HarryP', 'Cinzel', serif",
+              color: '#f0c75e',
+              textShadow: '0 0 12px rgba(240, 199, 94, 0.5)',
+              letterSpacing: '1px',
+              userSelect: 'none'
+            }}>
+              {getInitials(member.name)}
+            </div>
+          ) : (
+            <img 
+              src={member.image} 
+              alt={member.name} 
+              className="character-portrait" 
+              onError={() => setImageError(true)}
+            />
+          )}
         </div>
-        <img src={member.image} alt={member.name} className="character-popout" />
+        {!imageError && (
+          <img 
+            src={member.image} 
+            alt={member.name} 
+            className="character-popout" 
+            onError={() => setImageError(true)}
+          />
+        )}
       </div>
       <div className="card-details-below">
         <h2 className="character-name">{member.name}</h2>

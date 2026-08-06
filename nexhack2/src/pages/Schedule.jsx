@@ -229,7 +229,7 @@ export default function Schedule() {
   return (
     <main className="objects-section schedule-page">
       {/* Header */}
-      <div className="themes-header" style={{ marginBottom: '60px' }}>
+      <div className="themes-header" style={{ marginBottom: '30px' }}>
         <p className="themes-eyebrow">The Event Chronicle</p>
         <h1 className="section-title" style={{ marginBottom: '16px' }}>Schedule</h1>
         <p className="themes-subheading">

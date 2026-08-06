@@ -177,7 +177,7 @@ export default function Sponsors() {
   return (
     <main className="objects-section sponsors-page">
       {/* Header */}
-      <div className="themes-header" style={{ marginBottom: '70px' }}>
+      <div className="themes-header" style={{ marginBottom: '30px' }}>
         <h1 className="section-title" style={{ marginBottom: '16px' }}>Sponsors</h1>
         <p className="themes-subheading">
           The wizarding world behind NexHack 2026 — organisations that believe in the next generation of builders.
@@ -212,7 +212,7 @@ export default function Sponsors() {
           <button onClick={() => setShowSponsorModal(true)} className="register-btn" style={{ cursor: 'none' }}>
             Contact Us
           </button>
-          <a href="/NexHack_Sponsorship%20_Brochure.pdf" download className="sponsor-cta-link">Download Sponsorship Kit →</a>
+          <a href="./images/sponsors/NexHack_2.0_Sponsorship_Prospectus.pdf" download className="sponsor-cta-link">Download Sponsorship Kit →</a>
         </div>
       </div>
 

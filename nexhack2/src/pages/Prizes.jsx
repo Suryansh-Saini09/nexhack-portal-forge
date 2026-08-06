@@ -4,9 +4,8 @@ const grandPrizes = [
   {
     id: 'snitch',
     rank: '1st',
-    title: 'Golden Snitch',
-    subtitle: '1st Prize',
-    description: 'Ultimate champions.',
+    title: 'The Golden Snitch',
+    subtitle: 'Grand Champions (1st)',
     image: '/nexhack2/images/prizes/new_snitch.png',
     alt: 'Flying Golden Snitch',
     glowColor: 'rgba(238, 185, 57, 0.45)',
@@ -14,29 +13,28 @@ const grandPrizes = [
     hoverBorderColor: 'rgba(238, 185, 57, 0.85)',
     badgeBg: 'linear-gradient(135deg, #f5c75d 0%, #eeb939 100%)',
     badgeColor: '#030305',
-    loot: '₹35,000 + Gear'
+    lootColor: '#f5c75d',
+    loot: '₹25,000 + Swags'
   },
   {
     id: 'galleons',
     rank: '2nd',
-    title: 'Galleon Pool',
-    subtitle: '2nd Prize',
-    description: 'Runner-up team.',
+    title: 'The Gringotts Vault',
+    subtitle: 'Reserve Champions (2nd)',
     image: '/nexhack2/images/prizes/new_galleons.png',
-    alt: 'Golden Galleon Coin',
+    alt: 'Golden Galleon Coins',
     glowColor: 'rgba(192, 192, 192, 0.35)',
     borderColor: 'rgba(192, 192, 192, 0.3)',
     hoverBorderColor: 'rgba(192, 192, 192, 0.8)',
     badgeBg: 'rgba(192, 192, 192, 0.15)',
     badgeColor: '#c0c0c0',
-    loot: '₹25,000 + Swag'
+    loot: '₹15,000 + Swags'
   },
   {
     id: 'wand',
     rank: '3rd',
-    title: 'Elder Wand',
-    subtitle: '3rd Prize',
-    description: 'Technical mastery.',
+    title: 'The Elder Wand',
+    subtitle: 'Technical Vanguard (3rd)',
     image: '/nexhack2/images/prizes/new_elder_wand.png',
     alt: 'The Elder Wand',
     glowColor: 'rgba(184, 115, 51, 0.35)',
@@ -44,40 +42,7 @@ const grandPrizes = [
     hoverBorderColor: 'rgba(184, 115, 51, 0.8)',
     badgeBg: 'rgba(184, 115, 51, 0.15)',
     badgeColor: '#b87333',
-    loot: '₹15,000 + Perks'
-  }
-];
-
-const specialPrizes = [
-  {
-    id: 'girls-team',
-    rank: 'Track',
-    title: 'Best Girls Team',
-    subtitle: "Hermione's Choice",
-    description: 'Top female project.',
-    image: '/nexhack2/images/prizes/time_turner.png',
-    alt: 'Time Turner Medal',
-    glowColor: 'rgba(138, 43, 226, 0.4)',
-    borderColor: 'rgba(138, 43, 226, 0.3)',
-    hoverBorderColor: 'rgba(138, 43, 226, 0.85)',
-    badgeBg: 'rgba(138, 43, 226, 0.15)',
-    badgeColor: '#dca4ff',
-    loot: '₹10,000 + Swag'
-  },
-  {
-    id: 'ai-innovation',
-    rank: 'Track',
-    title: 'Best AI Innovation',
-    subtitle: "Sorting Hat's Pick",
-    description: 'Top AI implementation.',
-    image: '/nexhack2/images/prizes/sorting_hat_ai.png',
-    alt: 'AI Sorting Hat',
-    glowColor: 'rgba(0, 206, 209, 0.4)',
-    borderColor: 'rgba(0, 206, 209, 0.3)',
-    hoverBorderColor: 'rgba(0, 206, 209, 0.85)',
-    badgeBg: 'rgba(0, 206, 209, 0.15)',
-    badgeColor: '#4ee2ec',
-    loot: '₹10,000 + Credits'
+    loot: '₹10,000 + Swags'
   }
 ];
 
@@ -89,7 +54,8 @@ function PrizeCard({ obj }) {
         '--border-color': obj.borderColor,
         '--hover-border-color': obj.hoverBorderColor,
         '--glow-color': obj.glowColor,
-        '--badge-color': obj.badgeColor
+        '--badge-color': obj.badgeColor,
+        '--loot-color': obj.lootColor || obj.badgeColor
       }}
     >
       {/* Background Glow */}
@@ -133,15 +99,13 @@ function PrizeCard({ obj }) {
         </div>
       </div>
 
-      {/* Right Column: Title, Subtitle, Description & Loot Badge */}
+      {/* Right Column: Title, Subtitle, & Loot Badge */}
       <div className="simple-prize-right-col">
         <div>
           <h3 className="simple-prize-title">{obj.title}</h3>
           <p className="simple-prize-subtitle">{obj.subtitle}</p>
         </div>
         
-        <p className="simple-prize-description">{obj.description}</p>
-
         <div className="simple-prize-loot-badge">
           {obj.loot}
         </div>
@@ -163,14 +127,6 @@ export default function Prizes() {
         <h2 className="prizes-grid-title">Grand Prizes</h2>
         <div className="prizes-simple-grid grand-prizes-grid">
           {grandPrizes.map((prize) => (
-            <PrizeCard key={prize.id} obj={prize} />
-          ))}
-        </div>
-
-        {/* Special Recognition Tracks Section */}
-        <h2 className="prizes-grid-title" style={{ marginTop: '50px' }}>Special Recognition Tracks</h2>
-        <div className="prizes-simple-grid special-tracks-grid">
-          {specialPrizes.map((prize) => (
             <PrizeCard key={prize.id} obj={prize} />
           ))}
         </div>
