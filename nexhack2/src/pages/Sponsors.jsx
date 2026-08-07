@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { postApi } from '../utils/api';
 
 /* Replace src values with actual logo image paths when available */
 const sponsorTiers = [
@@ -148,22 +149,8 @@ export default function Sponsors() {
   const handleSponsorSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response;
-      try {
-        response = await fetch('/api/sponsor', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-      } catch (e) {
-        response = await fetch('https://websitebackend-w5m9.onrender.com/api/sponsor', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-      }
-      const data = await response.json();
-      if (response.ok && data.success) {
+      const data = await postApi('/api/sponsor', formData);
+      if (data && data.success) {
         setSubmitted(true);
         setFormData({
           company: '',
@@ -173,11 +160,11 @@ export default function Sponsors() {
           message: ''
         });
       } else {
-        alert(data.error || 'Failed to submit inquiry. Please try again.');
+        alert(data?.error || 'Failed to submit inquiry. Please try again.');
       }
     } catch (err) {
       console.error('Error submitting inquiry:', err);
-      alert('A network error occurred. Please try again.');
+      alert(err.message || 'A network error occurred. Please try again.');
     }
   };
 

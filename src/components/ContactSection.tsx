@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast'; // ✅ Add this
+import { useToast } from '@/hooks/use-toast';
 import { Mail } from 'lucide-react';
+import { postApi } from '@/lib/api';
 
 export const ContactSection = () => {
   const { toast } = useToast();
@@ -30,23 +31,7 @@ export const ContactSection = () => {
 
     try {
       setIsSubmitting(true);
-
-      let res;
-      try {
-        res = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, message }),
-        });
-      } catch (e) {
-        res = await fetch('https://websitebackend-w5m9.onrender.com/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, message }),
-        });
-      }
-
-      if (!res.ok) throw new Error('Something went wrong');
+      await postApi('/api/contact', { name, email, message });
 
       toast({
         title: 'Message Sent ✅',
@@ -54,10 +39,10 @@ export const ContactSection = () => {
       });
 
       setFormData({ name: '', email: '', message: '' });
-    } catch (err) {
+    } catch (err: any) {
       toast({
         title: 'Failed to send message',
-        description: 'Please try again later or email us directly.',
+        description: err.message || 'Please try again later or email us directly.',
         variant: 'destructive',
       });
     } finally {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { postApi } from '../utils/api';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -8,22 +9,8 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
     try {
-      let response;
-      try {
-        response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form),
-        });
-      } catch (e) {
-        response = await fetch('https://websitebackend-w5m9.onrender.com/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form),
-        });
-      }
-      const data = await response.json();
-      if (response.ok && data.success) {
+      const data = await postApi('/api/contact', form);
+      if (data && data.success) {
         setStatus('success');
         setForm({ name: '', email: '', message: '' });
       } else {

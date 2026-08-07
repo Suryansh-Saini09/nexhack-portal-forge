@@ -11,6 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Newspaper } from 'lucide-react';
+import { postApi } from '@/lib/api';
 
 interface SponsorDialogProps {
     open: boolean;
@@ -43,23 +44,7 @@ export const SponsorDialog = ({ open, onOpenChange }: SponsorDialogProps) => {
 
         try {
             setIsSubmitting(true);
-
-            let res;
-            try {
-                res = await fetch('/api/sponsor', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, company, message, tier: 'General', contactName: name }),
-                });
-            } catch (e) {
-                res = await fetch('https://websitebackend-w5m9.onrender.com/api/sponsor', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, company, message, tier: 'General', contactName: name }),
-                });
-            }
-
-            if (!res.ok) throw new Error('Something went wrong');
+            await postApi('/api/sponsor', { name, email, company, message, tier: 'General', contactName: name });
 
             toast({
                 title: 'Message Sent ✅',
@@ -71,10 +56,10 @@ export const SponsorDialog = ({ open, onOpenChange }: SponsorDialogProps) => {
             setName('');
             setCompany('');
             onOpenChange(false);
-        } catch (err) {
+        } catch (err: any) {
             toast({
                 title: 'Failed to send message',
-                description: 'Please try again later or email us directly.',
+                description: err.message || 'Please try again later or email us directly.',
                 variant: 'destructive',
             });
         } finally {

@@ -28,6 +28,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { postApi } from '@/lib/api';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -66,21 +67,34 @@ export const RegistrationForm = ({ open, onOpenChange }: RegistrationFormProps) 
   });
 
   const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log('Registration data:', data);
-    
-    toast({
-      title: "Registration Successful! 🎉",
-      description: "Welcome to NexHack! We'll send you more details soon.",
-    });
-    
-    form.reset();
-    onOpenChange(false);
-    setIsSubmitting(false);
+    try {
+      setIsSubmitting(true);
+      await postApi('/api/register', {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        academy: data.university,
+        year: data.yearOfStudy,
+        teamSize: data.teamSize,
+        github: data.github || '',
+      });
+
+      toast({
+        title: "Registration Successful! 🎉",
+        description: "Welcome to NexHack! We'll send you more details soon.",
+      });
+
+      form.reset();
+      onOpenChange(false);
+    } catch (err: any) {
+      toast({
+        title: "Registration Failed",
+        description: err.message || "Could not save your registration. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
