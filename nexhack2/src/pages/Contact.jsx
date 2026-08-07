@@ -8,13 +8,20 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
     try {
-      const response = await fetch('https://websitebackend-w5m9.onrender.com/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form),
-      });
+      let response;
+      try {
+        response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form),
+        });
+      } catch (e) {
+        response = await fetch('https://websitebackend-w5m9.onrender.com/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form),
+        });
+      }
       const data = await response.json();
       if (response.ok && data.success) {
         setStatus('success');

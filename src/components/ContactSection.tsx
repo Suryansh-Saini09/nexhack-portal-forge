@@ -31,11 +31,20 @@ export const ContactSection = () => {
     try {
       setIsSubmitting(true);
 
-      const res = await fetch('https://websitebackend-w5m9.onrender.com/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message }),
-      });
+      let res;
+      try {
+        res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message }),
+        });
+      } catch (e) {
+        res = await fetch('https://websitebackend-w5m9.onrender.com/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message }),
+        });
+      }
 
       if (!res.ok) throw new Error('Something went wrong');
 

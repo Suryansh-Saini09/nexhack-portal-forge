@@ -148,13 +148,20 @@ export default function Sponsors() {
   const handleSponsorSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://websitebackend-w5m9.onrender.com/api/sponsor', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
+      let response;
+      try {
+        response = await fetch('/api/sponsor', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+      } catch (e) {
+        response = await fetch('https://websitebackend-w5m9.onrender.com/api/sponsor', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+      }
       const data = await response.json();
       if (response.ok && data.success) {
         setSubmitted(true);

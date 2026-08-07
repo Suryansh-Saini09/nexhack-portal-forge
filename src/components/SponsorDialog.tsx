@@ -44,11 +44,20 @@ export const SponsorDialog = ({ open, onOpenChange }: SponsorDialogProps) => {
         try {
             setIsSubmitting(true);
 
-            const res = await fetch('https://websitebackend-w5m9.onrender.com/api/sponsor', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, company, message }),
-            });
+            let res;
+            try {
+                res = await fetch('/api/sponsor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, company, message, tier: 'General', contactName: name }),
+                });
+            } catch (e) {
+                res = await fetch('https://websitebackend-w5m9.onrender.com/api/sponsor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, company, message, tier: 'General', contactName: name }),
+                });
+            }
 
             if (!res.ok) throw new Error('Something went wrong');
 
