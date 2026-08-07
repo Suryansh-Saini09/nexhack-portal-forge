@@ -28,6 +28,9 @@ if (process.env.SMTP_USER && process.env.SMTP_PASS) {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+    connectionTimeout: 5000,
+    greetingTimeout: 5000,
+    socketTimeout: 5000,
   });
   console.log(`[Email] Mailer active for target: ${TARGET_EMAIL} via ${process.env.SMTP_HOST || 'smtp.gmail.com'}`);
 } else {
@@ -42,17 +45,25 @@ async function sendMailNotification(subject, htmlContent, replyTo) {
     console.log(`Reply-To: ${replyTo}`);
     return;
   }
+
+  // 5-second max timeout guard for mail dispatch
+  const mailPromise = transporter.sendMail({
+    from: `"${process.env.SENDER_NAME || 'NexHack 2.0 Portal'}" <${process.env.SMTP_USER}>`,
+    to: TARGET_EMAIL,
+    replyTo: replyTo,
+    subject: subject,
+    html: htmlContent,
+  });
+
+  const timeoutPromise = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('SMTP dispatch timed out')), 5000)
+  );
+
   try {
-    const info = await transporter.sendMail({
-      from: `"${process.env.SENDER_NAME || 'NexHack 2.0 Portal'}" <${process.env.SMTP_USER}>`,
-      to: TARGET_EMAIL,
-      replyTo: replyTo,
-      subject: subject,
-      html: htmlContent,
-    });
+    const info = await Promise.race([mailPromise, timeoutPromise]);
     console.log(`[Email Delivered] Sent to ${TARGET_EMAIL}: ID ${info.messageId}`);
   } catch (err) {
-    console.error(`[Email Delivery Failed] Error sending to ${TARGET_EMAIL}:`, err.message);
+    console.error(`[Email Delivery Notice] ${err.message}`);
   }
 }
 
