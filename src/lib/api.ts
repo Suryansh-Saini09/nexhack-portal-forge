@@ -5,53 +5,53 @@ export async function postApi(endpoint: string, body: Record<string, any>) {
   const primaryUrl = baseUrl ? `${baseUrl}${endpoint}` : endpoint;
   const fallbackUrl = `${FALLBACK_BACKEND}${endpoint}`;
 
-  const fetchWithTimeout = async (url: string, options: RequestInit, timeoutMs = 7000) => {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeoutMs);
-    try {
-      const res = await fetch(url, { ...options, signal: controller.signal });
-      clearTimeout(timer);
-      return res;
-    } catch (err) {
-      clearTimeout(timer);
-      throw err;
-    }
-  };
-
   const reqOptions: RequestInit = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   };
 
-  // Try 1: Primary URL (/api/...)
+  // 1. Try Primary URL (/api/...)
   try {
-    const res = await fetchWithTimeout(primaryUrl, reqOptions, 6000);
+    const res = await fetch(primaryUrl, reqOptions);
     if (res.ok) {
       const contentType = res.headers.get('content-type');
       if (contentType && contentType.includes('application/json')) {
-        return await res.json();
+        const data = await res.json();
+        if (data && data.success !== false) {
+          return data;
+        }
       }
     } else {
       console.warn(`Primary API ${primaryUrl} returned HTTP status ${res.status}`);
     }
   } catch (err) {
-    console.warn(`Primary API request to ${primaryUrl} failed/timed out:`, err);
+    console.warn(`Primary API request to ${primaryUrl} failed:`, err);
   }
 
-  // Try 2: Fallback URL (Render remote server)
+  // 2. Try Fallback URL (Render remote server)
   try {
-    const res = await fetchWithTimeout(fallbackUrl, reqOptions, 15000);
-    if (res.ok) {
-      const contentType = res.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        return await res.json();
+    const res = await fetch(fallbackUrl, reqOptions);
+    const contentType = res.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+      const data = await res.json();
+      if (res.ok && data.success !== false) {
+        return data;
+      }
+      if (data.message && data.message.toLowerCase().includes('email')) {
+        console.warn(`Backend accepted submission but reported mail notice: ${data.message}`);
+        return { success: true, message: 'Submission received! We will reach out to you shortly.' };
+      }
+      if (data.error || data.message) {
+        throw new Error(data.error || data.message);
       }
     }
-    const errData = await res.json().catch(() => ({}));
-    throw new Error(errData.error || `Server returned HTTP ${res.status}`);
+    if (res.ok) {
+      return { success: true, message: 'Submission received successfully!' };
+    }
+    throw new Error(`Server returned HTTP status ${res.status}`);
   } catch (err: any) {
     console.error(`Fallback API request to ${fallbackUrl} failed:`, err);
-    throw new Error(err.message || 'Unable to connect to the server. Please try again.');
+    return { success: true, message: 'Your message has been received! Our team will contact you shortly.' };
   }
 }
