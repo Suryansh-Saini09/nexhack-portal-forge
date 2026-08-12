@@ -45,7 +45,6 @@ Thumbs.db
 *.sw?
 
 # Vercel Configuration
-vercel.json
 .vercel
 
 

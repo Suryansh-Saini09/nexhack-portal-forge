@@ -24,9 +24,9 @@ export async function postApi(endpoint, body) {
     body: JSON.stringify(body),
   };
 
-  // 1. Try Primary URL (/api/...) - 3.5s timeout guard
+  // 1. Try Primary URL (/api/...) - 15s timeout guard for serverless & email dispatch
   try {
-    const res = await fetchWithTimeout(primaryUrl, reqOptions, 3500);
+    const res = await fetchWithTimeout(primaryUrl, reqOptions, 15000);
     if (res.ok) {
       const contentType = res.headers.get('content-type');
       if (contentType && contentType.includes('application/json')) {

@@ -99,7 +99,7 @@ textarea,
   position: fixed;
   width: 80px;
   height: 80px;
-  background-image: url('/nexhack2/images/home/cursor_wand.png');
+  background-image: url('/images/home/cursor_wand.png');
   background-size: contain;
   background-repeat: no-repeat;
   pointer-events: none;
@@ -4068,7 +4068,7 @@ header * {
   background-color: #020204;
   background-image:
     linear-gradient(to bottom, rgba(3, 3, 5, 0.25) 0%, rgba(3, 3, 5, 0.75) 60%, rgba(3, 3, 5, 0.95) 100%),
-    url('/nexhack2/images/home/harry_potter_lock_bg.png');
+    url('/images/home/harry_potter_lock_bg.png');
   background-size: cover;
   background-position: center 22%;
   background-repeat: no-repeat;

@@ -199,7 +199,7 @@ export default function Sponsors() {
 
         {/* Actions */}
         <div className="sponsor-cta-actions">
-          <button onClick={() => setShowSponsorModal(true)} className="register-btn" style={{ cursor: 'none' }}>
+          <button onClick={() => setShowSponsorModal(true)} className="register-btn" style={{ cursor: 'pointer' }}>
             Contact Us
           </button>
           <a href="./images/sponsors/NexHack_2.0_Sponsorship_Prospectus.pdf" download className="sponsor-cta-link">Download Sponsorship Kit →</a>
@@ -283,7 +283,7 @@ export default function Sponsors() {
                         fontFamily: 'Spectral, serif',
                         fontSize: '0.95rem',
                         outline: 'none',
-                        cursor: 'none'
+                        cursor: 'text'
                       }}
                     />
                   </div>
@@ -306,7 +306,7 @@ export default function Sponsors() {
                         fontFamily: 'Spectral, serif',
                         fontSize: '0.95rem',
                         outline: 'none',
-                        cursor: 'none'
+                        cursor: 'text'
                       }}
                     />
                   </div>
@@ -332,7 +332,7 @@ export default function Sponsors() {
                         fontFamily: 'Spectral, serif',
                         fontSize: '0.95rem',
                         outline: 'none',
-                        cursor: 'none'
+                        cursor: 'text'
                       }}
                     />
                   </div>
@@ -352,7 +352,7 @@ export default function Sponsors() {
                         fontFamily: 'Spectral, serif',
                         fontSize: '0.95rem',
                         outline: 'none',
-                        cursor: 'none'
+                        cursor: 'pointer'
                       }}
                     >
                       <option value="Gold">Gold Ally</option>
@@ -381,13 +381,13 @@ export default function Sponsors() {
                       fontFamily: 'Spectral, serif',
                       fontSize: '0.95rem',
                       outline: 'none',
-                      cursor: 'none',
+                      cursor: 'text',
                       resize: 'none'
                     }}
                   />
                 </div>
 
-                <button type="submit" className="magic-modal-btn" style={{ marginTop: '5px', width: '100%', cursor: 'none' }}>
+                <button type="submit" className="magic-modal-btn" style={{ marginTop: '5px', width: '100%', cursor: 'pointer' }}>
                   Send Owl Message
                 </button>
               </form>

@@ -167,7 +167,7 @@ export default function Contact() {
                       fontSize: '1.05rem',
                       outline: 'none',
                       transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
-                      cursor: 'none'
+                      cursor: 'text'
                     }}
                     onFocus={(e) => {
                       e.target.style.borderColor = '#eeb939';
@@ -208,7 +208,7 @@ export default function Contact() {
                       fontSize: '1.05rem',
                       outline: 'none',
                       transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
-                      cursor: 'none'
+                      cursor: 'text'
                     }}
                     onFocus={(e) => {
                       e.target.style.borderColor = '#eeb939';
@@ -250,7 +250,7 @@ export default function Contact() {
                       outline: 'none',
                       resize: 'none',
                       transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
-                      cursor: 'none'
+                      cursor: 'text'
                     }}
                     onFocus={(e) => {
                       e.target.style.borderColor = '#eeb939';
@@ -278,7 +278,7 @@ export default function Contact() {
                     fontSize: '1rem',
                     fontWeight: 'bold',
                     letterSpacing: '2px',
-                    cursor: status === 'sending' ? 'not-allowed' : 'none',
+                    cursor: status === 'sending' ? 'not-allowed' : 'pointer',
                     transition: 'all 0.3s ease-out',
                     alignSelf: 'flex-start',
                     marginTop: '10px',

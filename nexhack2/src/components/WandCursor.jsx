@@ -51,6 +51,7 @@ export default function WandCursor() {
 
       particle.style.left = `${x}px`;
       particle.style.top = `${y}px`;
+      particle.style.pointerEvents = 'none';
 
       document.body.appendChild(particle);
 

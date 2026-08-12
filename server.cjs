@@ -55,7 +55,7 @@ async function sendMailNotification(subject, htmlContent, replyTo) {
   });
 
   const timeoutPromise = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error('SMTP dispatch timed out')), 5000)
+    setTimeout(() => reject(new Error('SMTP dispatch timed out')), 20000)
   );
 
   try {

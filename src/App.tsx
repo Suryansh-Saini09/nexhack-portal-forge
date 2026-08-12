@@ -24,6 +24,10 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/nexhack" element={<Index />} />
+            <Route path="/nexhack/*" element={<Index />} />
+            <Route path="/nexhack1" element={<Index />} />
+            <Route path="/nexhack1/*" element={<Index />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="/archives/nexhack-1" element={<NexHack1 />} />
             <Route path="*" element={<NotFound />} />

@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    },
+    {
+      "source": "/nexhack1",
+      "destination": "/nexhack1/index.html"
+    },
+    {
+      "source": "/nexhack1/(.*)",
+      "destination": "/nexhack1/index.html"
+    },
+    {
+      "source": "/nexhack",
+      "destination": "/nexhack/index.html"
+    },
+    {
+      "source": "/nexhack/(.*)",
+      "destination": "/nexhack/index.html"
+    },
+    {
+      "source": "/nexhack2",
+      "destination": "/nexhack2/index.html"
+    },
+    {
+      "source": "/nexhack2/(.*)",
+      "destination": "/nexhack2/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
