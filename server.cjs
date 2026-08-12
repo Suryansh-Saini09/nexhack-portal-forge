@@ -15,7 +15,6 @@ app.use(express.json());
 const REGISTRATIONS_FILE = path.join(__dirname, 'registrations.json');
 const MESSAGES_FILE = path.join(__dirname, 'messages.json');
 const SPONSORS_FILE = path.join(__dirname, 'sponsors.json');
-const MENTORS_FILE = path.join(__dirname, 'mentors.json');
 
 // Configure Nodemailer Transporter
 let transporter = null;
@@ -89,6 +88,22 @@ function writeJsonFile(filePath, data) {
     console.error(`Error writing to ${filePath}:`, error);
   }
 }
+
+// Root Status Endpoint
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    service: 'NexHack 2.0 API Server',
+    targetEmail: TARGET_EMAIL,
+    smtpConfigured: !!transporter,
+    endpoints: [
+      'GET  /api/health',
+      'POST /api/register',
+      'POST /api/contact',
+      'POST /api/sponsor'
+    ]
+  });
+});
 
 // Health Check Endpoint
 app.get('/api/health', (req, res) => {
@@ -241,55 +256,11 @@ app.post('/api/sponsor', (req, res) => {
   res.status(200).json({ success: true, message: 'Inquiry submitted successfully' });
 });
 
-// Mentor Application Endpoint
-app.post('/api/mentor', (req, res) => {
-  const { name, email, github, linkedin, experience } = req.body;
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Backend server is running on http://localhost:${PORT}`);
+    console.log(`Target Email for notifications: ${TARGET_EMAIL}`);
+  });
+}
 
-  if (!name || !email) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
-  const mentors = readJsonFile(MENTORS_FILE);
-  const newMentor = {
-    id: Date.now().toString(),
-    name,
-    email,
-    github,
-    linkedin,
-    experience,
-    timestamp: new Date().toISOString()
-  };
-
-  mentors.push(newMentor);
-  writeJsonFile(MENTORS_FILE, mentors);
-
-  console.log(`[Mentor] New application from: ${name} (${email})`);
-
-  // Send Email Notification
-  sendMailNotification(
-    `🎓 Mentor Application: ${name}`,
-    `
-      <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #0f172a; color: #f8fafc; border-radius: 8px;">
-        <h2 style="color: #c084fc;">NexHack 2.0 - Mentor Application</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>GitHub:</strong> ${github || 'N/A'}</p>
-        <p><strong>LinkedIn:</strong> ${linkedin || 'N/A'}</p>
-        <p><strong>Experience & Background:</strong></p>
-        <blockquote style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-left: 4px solid #c084fc;">
-          ${experience || 'N/A'}
-        </blockquote>
-        <hr style="border-color: #334155;" />
-        <p style="font-size: 12px; color: #94a3b8;">Dispatched to ${TARGET_EMAIL}.</p>
-      </div>
-    `,
-    email
-  );
-
-  res.status(200).json({ success: true, message: 'Application submitted successfully' });
-});
-
-app.listen(PORT, () => {
-  console.log(`Backend server is running on http://localhost:${PORT}`);
-  console.log(`Target Email for notifications: ${TARGET_EMAIL}`);
-});
+module.exports = app;
