@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { postApi } from '../utils/api';
 
-/* Replace src values with actual logo image paths when available */
+/* Empty Sponsor Tiers configuration for NexHack 2.0 (placeholders only) */
 const sponsorTiers = [
   {
     tier: 'Gold Sponsors',
@@ -9,8 +9,8 @@ const sponsorTiers = [
     accentColor: '#eeb939',
     size: 'large',
     sponsors: [
-      { id: 'gringotts',  src: './images/sponsors/sponsor1.png', role: 'Title Sponsor' },
-      { id: 'ollivanders', src: './images/sponsors/sponsor1.png', role: 'Hardware Sponsor' },
+      { id: 'gold-1', role: 'Title Sponsor' },
+      { id: 'gold-2', role: 'Hardware Sponsor' },
     ]
   },
   {
@@ -19,8 +19,8 @@ const sponsorTiers = [
     accentColor: '#c084fc',
     size: 'medium',
     sponsors: [
-      { id: 'ministry', src: './images/sponsors/sponsor1.png', role: 'Cloud Partner' },
-      { id: 'flourish',  src: './images/sponsors/sponsor1.png', role: 'Platform Partner' },
+      { id: 'plat-1', role: 'Cloud Partner' },
+      { id: 'plat-2', role: 'Platform Partner' },
     ]
   },
   {
@@ -29,40 +29,36 @@ const sponsorTiers = [
     accentColor: '#38bdf8',
     size: 'medium',
     sponsors: [
-      { id: 'weasleys',  src: './images/sponsors/sponsor1.png', role: 'Creativity Sponsor' },
-      { id: 'honeyduke', src: './images/sponsors/sponsor1.png', role: 'Food Sponsor' },
-      { id: 'quidditch', src: './images/sponsors/sponsor1.png', role: 'Sports-Tech Sponsor' },
+      { id: 'spec-1', role: 'Creativity Sponsor' },
+      { id: 'spec-2', role: 'Food Sponsor' },
+      { id: 'spec-3', role: 'Sports-Tech Sponsor' },
     ]
   },
 ];
 
 const communityPartners = [
-  { id: 'prophet',    src: './images/sponsors/sponsor1.png' },
-  { id: 'hogsmead',   src: './images/sponsors/sponsor1.png' },
-  { id: 'sorting',    src: './images/sponsors/sponsor1.png' },
-  { id: 'three-b',    src: './images/sponsors/sponsor1.png' },
-  { id: 'divination', src: './images/sponsors/sponsor1.png' },
-  { id: 'patronus',   src: './images/sponsors/sponsor1.png' },
-  { id: 'leaky',      src: './images/sponsors/sponsor1.png' },
-  { id: 'floo',       src: './images/sponsors/sponsor1.png' },
+  { id: 'cp-1' },
+  { id: 'cp-2' },
+  { id: 'cp-3' },
+  { id: 'cp-4' },
+  { id: 'cp-5' },
+  { id: 'cp-6' },
+  { id: 'cp-7' },
+  { id: 'cp-8' },
 ];
 
 function LogoCard({ sponsor, size, accentColor }) {
   return (
     <div className="sponsor-card-wrap">
-      <a
-        href="#"
+      <div
         className={`sponsor-logo-card sponsor-logo-card--${size}`}
         style={{ '--accent': accentColor }}
       >
         {sponsor.src
-          ? <img src={sponsor.src} alt="sponsor logo" className="sponsor-logo-img" />
+          ? <img src={sponsor.src} alt="" className="sponsor-logo-img" />
           : <div className="sponsor-logo-placeholder" />
         }
-      </a>
-      {sponsor.role && (
-        <p className="sponsor-role-label">{sponsor.role}</p>
-      )}
+      </div>
     </div>
   );
 }
@@ -101,23 +97,23 @@ function CommunityMarquee() {
       <div className="marquee-wrapper">
         <div className="marquee-track marquee-track--left">
           {row1.map((p, i) => (
-            <a key={i} href="#" className="marquee-logo-card" style={{ '--accent': accentColor }}>
+            <div key={i} className="marquee-logo-card" style={{ '--accent': accentColor }}>
               {p.src
-                ? <img src={p.src} alt="partner logo" className="sponsor-logo-img" />
+                ? <img src={p.src} alt="" className="sponsor-logo-img" />
                 : <div className="sponsor-logo-placeholder" />
               }
-            </a>
+            </div>
           ))}
         </div>
 
         <div className="marquee-track marquee-track--right">
           {row2.map((p, i) => (
-            <a key={i} href="#" className="marquee-logo-card" style={{ '--accent': accentColor }}>
+            <div key={i} className="marquee-logo-card" style={{ '--accent': accentColor }}>
               {p.src
-                ? <img src={p.src} alt="partner logo" className="sponsor-logo-img" />
+                ? <img src={p.src} alt="" className="sponsor-logo-img" />
                 : <div className="sponsor-logo-placeholder" />
               }
-            </a>
+            </div>
           ))}
         </div>
       </div>
