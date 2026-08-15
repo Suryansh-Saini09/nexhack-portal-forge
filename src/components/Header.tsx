@@ -17,7 +17,7 @@ export const Header = () => {
     'ABOUT',
     'THEMES', 
     'PRIZES',
-    'ARCHIVES',
+    // 'ARCHIVES',
     // 'SCHEDULE',
     'SPONSORS',
     'TEAM',

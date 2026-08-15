@@ -1,6 +1,6 @@
 const FALLBACK_BACKEND = 'https://websitebackend-w5m9.onrender.com';
 
-async function fetchWithTimeout(url, options, timeoutMs) {
+async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs: number): Promise<Response> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
@@ -13,12 +13,19 @@ async function fetchWithTimeout(url, options, timeoutMs) {
   }
 }
 
-export async function postApi(endpoint, body) {
-  const baseUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace(/\/$/, '') : '';
+export interface ApiResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
+  [key: string]: any;
+}
+
+export async function postApi(endpoint: string, body: Record<string, any>): Promise<ApiResponse> {
+  const baseUrl = (import.meta as any).env?.VITE_API_URL ? (import.meta as any).env.VITE_API_URL.replace(/\/$/, '') : '';
   const primaryUrl = baseUrl ? `${baseUrl}${endpoint}` : endpoint;
   const fallbackUrl = `${FALLBACK_BACKEND}${endpoint}`;
 
-  const reqOptions = {
+  const reqOptions: RequestInit = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),

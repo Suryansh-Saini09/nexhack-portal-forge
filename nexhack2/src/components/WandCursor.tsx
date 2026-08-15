@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 export default function WandCursor() {
-  const cursorRef = useRef(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cursor = cursorRef.current;
@@ -12,26 +12,20 @@ export default function WandCursor() {
     let cursorX = 0;
     let cursorY = 0;
 
-    const onMouseMove = (e) => {
+    const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       cursor.style.opacity = '1';
     };
 
-    const onMouseLeaveWindow = () => {
-      cursor.style.opacity = '0';
-    };
-
-    const onMouseEnterWindow = () => {
-      cursor.style.opacity = '1';
-    };
+    const onMouseLeaveWindow = () => { cursor.style.opacity = '0'; };
+    const onMouseEnterWindow = () => { cursor.style.opacity = '1'; };
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseleave', onMouseLeaveWindow);
     document.addEventListener('mouseenter', onMouseEnterWindow);
 
-    // Dynamic Sparkle generation helper
-    const createSparkle = (x, y) => {
+    const createSparkle = (x: number, y: number) => {
       const particle = document.createElement('div');
       particle.className = 'cursor-particle';
 
@@ -45,23 +39,18 @@ export default function WandCursor() {
       particle.style.boxShadow = `0 0 8px ${color}`;
 
       const xDir = (Math.random() - 0.5) * 80;
-      const yDir = (Math.random() - 0.5) * 80 + 30; // Tendency to fall down slightly
+      const yDir = (Math.random() - 0.5) * 80 + 30;
       particle.style.setProperty('--x-dir', `${xDir}px`);
       particle.style.setProperty('--y-dir', `${yDir}px`);
-
       particle.style.left = `${x}px`;
       particle.style.top = `${y}px`;
       particle.style.pointerEvents = 'none';
 
       document.body.appendChild(particle);
-
-      setTimeout(() => {
-        particle.remove();
-      }, 600);
+      setTimeout(() => { particle.remove(); }, 600);
     };
 
-    // Tracking loop
-    let animationFrameId;
+    let animationFrameId: number;
     const updateCursor = () => {
       const dx = mouseX - cursorX;
       const dy = mouseY - cursorY;
@@ -81,12 +70,13 @@ export default function WandCursor() {
 
     updateCursor();
 
-    // Hover state managers
     const onMouseEnter = () => cursor.classList.add('hovering');
     const onMouseLeave = () => cursor.classList.remove('hovering');
 
     const addHoverListeners = () => {
-      const hoverables = document.querySelectorAll('a, button, select, input, .card, .floating-img, .logo, .character-name, .team-social-icon, .faq-item, .faq-search-input, .footer-logo, .footer-nav-grid button, .footer-social-icon');
+      const hoverables = document.querySelectorAll<Element>(
+        'a, button, select, input, .card, .floating-img, .logo, .character-name, .team-social-icon, .faq-item, .faq-search-input, .footer-logo, .footer-nav-grid button, .footer-social-icon'
+      );
       hoverables.forEach(elem => {
         elem.removeEventListener('mouseenter', onMouseEnter);
         elem.removeEventListener('mouseleave', onMouseLeave);
@@ -105,7 +95,9 @@ export default function WandCursor() {
       document.removeEventListener('mouseenter', onMouseEnterWindow);
       cancelAnimationFrame(animationFrameId);
       observer.disconnect();
-      const hoverables = document.querySelectorAll('a, button, select, input, .card, .floating-img, .logo, .character-name, .team-social-icon, .faq-item, .faq-search-input, .footer-logo, .footer-nav-grid button, .footer-social-icon');
+      const hoverables = document.querySelectorAll<Element>(
+        'a, button, select, input, .card, .floating-img, .logo, .character-name, .team-social-icon, .faq-item, .faq-search-input, .footer-logo, .footer-nav-grid button, .footer-social-icon'
+      );
       hoverables.forEach(elem => {
         elem.removeEventListener('mouseenter', onMouseEnter);
         elem.removeEventListener('mouseleave', onMouseLeave);

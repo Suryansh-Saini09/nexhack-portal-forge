@@ -62,8 +62,8 @@ export const Footer = () => {
               </div>
             </div>
 
-            {/* Arhives Links */}
-            <div className="space-y-4">
+            {/* Archives Links (hidden) */}
+            {/* <div className="space-y-4">
               <h4 className="font-pixel text-sm text-foreground">
                 ARCHIVES
               </h4>
@@ -78,7 +78,7 @@ export const Footer = () => {
                   </Link>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Social Media */}
             <div className="space-y-4">
