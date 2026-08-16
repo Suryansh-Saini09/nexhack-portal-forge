@@ -145,9 +145,6 @@ export default function Themes() {
         <div className="themes-centered-header">
           <span className="themes-hall-tag">THE GRAND HALL OF TRACKS</span>
           <h1 className="themes-hall-title">Hacking Themes</h1>
-          <p className="themes-hall-subtitle">
-            Ten magical disciplines. Choose your track and cast your spell upon the world.
-          </p>
           <div className="themes-hall-divider" />
         </div>
 

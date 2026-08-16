@@ -138,22 +138,39 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
     // Vault Roman Numeral in the seal center
     ctx.save();
     ctx.fillStyle = vault.themeColor;
-    ctx.font = `bold ${Math.round(radius * 0.48)}px 'Cinzel', serif`;
+    ctx.font = `bold ${Math.round(radius * 0.52)}px 'Cinzel', serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(vault.numeral, centerX, centerY);
     ctx.restore();
 
-    // Header & Footer instructions
-    ctx.fillStyle = vault.themeColor;
+    // Top Header
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
     ctx.font = `600 9.5px 'Cinzel', serif`;
     ctx.textAlign = 'center';
-    ctx.fillText(`✦ ENCHANTED SEAL ✦`, centerX, centerY - radius - 8);
+    ctx.fillText(`✦ ENCHANTED VAULT ✦`, centerX, centerY - radius - 10);
 
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-    ctx.font = `bold 9px 'Cinzel', sans-serif`;
-    ctx.letterSpacing = '1px';
-    ctx.fillText(`SCRATCH TO UNLOCK`, centerX, height - 12);
+    // Single Elegant Bottom Prompt: "✦ SCRATCH TO REVEAL ✦"
+    const bannerW = Math.min(width * 0.82, 190);
+    const bannerH = 24;
+    const bannerY = height - 32;
+    const bannerX = (width - bannerW) / 2;
+
+    ctx.save();
+    ctx.fillStyle = 'rgba(10, 18, 30, 0.85)';
+    ctx.strokeStyle = vault.themeColor;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(bannerX, bannerY, bannerW, bannerH, 12);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#f0c030';
+    ctx.font = `bold 9.5px 'Cinzel', serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(`✦ SCRATCH TO REVEAL ✦`, centerX, bannerY + bannerH / 2);
+    ctx.restore();
   }, [vault.numeral, vault.themeColor]);
 
   useEffect(() => {
@@ -251,6 +268,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
 
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     isDrawing.current = true;
+    document.body.classList.add('is-scratching');
     lastPoint.current = null;
     scratch(e.clientX, e.clientY);
   };
@@ -262,6 +280,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
 
   const handleMouseUp = () => {
     isDrawing.current = false;
+    document.body.classList.remove('is-scratching');
     lastPoint.current = null;
     checkClearedPercentage();
   };
@@ -269,6 +288,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
   const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
     if (e.touches.length > 0) {
       isDrawing.current = true;
+      document.body.classList.add('is-scratching');
       lastPoint.current = null;
       scratch(e.touches[0].clientX, e.touches[0].clientY);
     }
@@ -282,6 +302,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
 
   const handleTouchEnd = () => {
     isDrawing.current = false;
+    document.body.classList.remove('is-scratching');
     lastPoint.current = null;
     checkClearedPercentage();
   };
@@ -289,6 +310,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
   const triggerInstantUnlock = () => {
     if (hasTriggeredReveal.current || isRevealed) return;
     hasTriggeredReveal.current = true;
+    document.body.classList.remove('is-scratching');
     setIsBreaking(true);
     setTimeout(() => {
       onReveal(vault.id);
@@ -296,9 +318,27 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
     }, 400);
   };
 
+  const handleCardMouseEnter = () => {
+    document.body.classList.add('hovering-prize-card');
+  };
+
+  const handleCardMouseLeave = () => {
+    document.body.classList.remove('hovering-prize-card');
+    document.body.classList.remove('is-scratching');
+  };
+
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove('hovering-prize-card');
+      document.body.classList.remove('is-scratching');
+    };
+  }, []);
+
   return (
     <div
       className={`enchanted-vault-box ${isRevealed ? 'vault-unsealed' : 'vault-sealed'}`}
+      onMouseEnter={handleCardMouseEnter}
+      onMouseLeave={handleCardMouseLeave}
       style={{
         '--vault-color': vault.themeColor,
         '--vault-glow': vault.accentGlow,
@@ -348,6 +388,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            onMouseEnter={handleCardMouseEnter}
           />
         )}
       </div>
@@ -360,7 +401,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
             className="vault-unlock-action-btn"
             title="Click to automatically break the magical seal"
           >
-            <span>✦ UNSEAL VAULT ✦</span>
+            <span>✦ UNSEAL ✦</span>
           </button>
         ) : (
           <div className="vault-unlocked-status-badge">
@@ -379,7 +420,12 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
   );
 }
 
-export default function Prizes() {
+interface PrizesProps {
+  onUnlockStatusChange?: (allUnlocked: boolean) => void;
+  showBarrierAlert?: boolean;
+}
+
+export default function Prizes({ onUnlockStatusChange, showBarrierAlert }: PrizesProps) {
   const [revealedVaults, setRevealedVaults] = useState<{ [id: string]: boolean }>({
     'vault-1': false,
     'vault-2': false,
@@ -387,11 +433,36 @@ export default function Prizes() {
   });
 
   const handleReveal = (vaultId: string) => {
-    setRevealedVaults((prev) => ({ ...prev, [vaultId]: true }));
+    setRevealedVaults((prev) => {
+      const next = { ...prev, [vaultId]: true };
+      const allDone = Object.values(next).filter(Boolean).length === 3;
+      if (allDone && onUnlockStatusChange) {
+        onUnlockStatusChange(true);
+      }
+      return next;
+    });
+  };
+
+  const unsealAllVaults = () => {
+    const all = {
+      'vault-1': true,
+      'vault-2': true,
+      'vault-3': true
+    };
+    setRevealedVaults(all);
+    if (onUnlockStatusChange) {
+      onUnlockStatusChange(true);
+    }
   };
 
   const openedCount = Object.values(revealedVaults).filter(Boolean).length;
   const allOpened = openedCount === 3;
+
+  useEffect(() => {
+    if (allOpened && onUnlockStatusChange) {
+      onUnlockStatusChange(true);
+    }
+  }, [allOpened, onUnlockStatusChange]);
 
   return (
     <main className="objects-section enchanted-rewards-section" id="prizes">
@@ -404,10 +475,9 @@ export default function Prizes() {
         <div className="rewards-section-header">
           <span className="rewards-pre-eyebrow">ENCHANTED VAULTS</span>
           <h1 className="rewards-main-title">NEXHACK REWARDS</h1>
-          <p className="rewards-sub-headline">THREE TREASURES AWAIT THEIR CHAMPIONS</p>
           <div className="rewards-header-divider" />
 
-          {/* Subtle Progression Counter */}
+          {/* Progression Counter */}
           <div className="vaults-progress-tracker">
             <span className="progress-counter-text">
               {openedCount} / 3 VAULTS OPENED
@@ -432,13 +502,28 @@ export default function Prizes() {
           ))}
         </div>
 
-        {/* All Opened Celebration Footer Note */}
-        <div className={`all-vaults-unlocked-banner ${allOpened ? 'visible' : ''}`}>
-          <div className="unlocked-banner-glow" />
-          <span className="unlocked-banner-sparkle">✦</span>
-          <h2 className="unlocked-banner-title">THE VAULTS HAVE BEEN OPENED</h2>
-          <span className="unlocked-banner-sparkle">✦</span>
-        </div>
+        {/* Magical Scroll Barrier & Progression Gate */}
+        {!allOpened ? (
+          <div className={`prizes-barrier-notice ${showBarrierAlert ? 'barrier-shake-alert' : ''}`}>
+            <div className="barrier-shield-icon">🔒</div>
+            <div className="barrier-text-wrap">
+              <h4 className="barrier-title">ANCIENT SEAL ACTIVE</h4>
+              <p className="barrier-desc">
+                Unseal all 3 prize vaults ({openedCount}/3 unlocked) to proceed down the tracks to the Schedule & beyond.
+              </p>
+            </div>
+            <button onClick={unsealAllVaults} className="barrier-quick-unlock-btn" title="Click to instantly unseal all 3 vaults">
+              <span>✦ UNSEAL ALL ✦</span>
+            </button>
+          </div>
+        ) : (
+          <div className="all-vaults-unlocked-banner visible">
+            <div className="unlocked-banner-glow" />
+            <span className="unlocked-banner-sparkle">✦</span>
+            <h2 className="unlocked-banner-title">ALL VAULTS UNSEALED • PATHWAY UNLOCKED</h2>
+            <span className="unlocked-banner-sparkle">✦</span>
+          </div>
+        )}
       </div>
     </main>
   );

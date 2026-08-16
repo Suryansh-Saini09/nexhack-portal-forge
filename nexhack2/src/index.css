@@ -115,6 +115,18 @@ textarea,
   transform: translate(-8px, -8px) scale(1.15) rotate(-15deg);
 }
 
+/* Hide wand cursor and particle sparkles over prize vault cards & during scratching */
+body.hovering-prize-card #wand-cursor,
+body.hovering-prize-card .cursor-particle,
+body.is-scratching #wand-cursor,
+body.is-scratching .cursor-particle,
+.enchanted-vault-box:hover~#wand-cursor {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.05s ease !important;
+}
+
 /* Particle effect */
 .cursor-particle {
   position: fixed;
@@ -443,11 +455,25 @@ textarea,
 
 .bg-layer.video-bg {
   overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity;
 }
 
+.bg-layer.video-bg.active {
+  opacity: 1;
+}
 
-
-
+.bg-layer.video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.5;
+  filter: brightness(0.9) contrast(1.15) saturate(1.1);
+  transition: opacity 1.6s ease-in-out;
+}
 
 .bg-layer.active {
   opacity: 1;
@@ -646,7 +672,7 @@ textarea,
 .characters-section {
   width: 100%;
   min-height: auto;
-  padding: 60px 10% 20px 10%;
+  padding: 35px 8% 15px 8%;
   background: transparent;
   display: flex;
   flex-direction: column;
@@ -701,7 +727,7 @@ textarea,
   font-family: 'HarryP', 'Cinzel Decorative', serif;
   font-size: clamp(2rem, 6vw, 4.5rem);
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: var(--color-text-light);
   text-shadow: 0 0 15px rgba(0, 191, 255, 0.25);
   letter-spacing: 3px;
@@ -720,41 +746,33 @@ textarea,
 /* 3D Card Wrap */
 .card-wrapper {
   perspective: 1000px;
-  /* Crucial for 3D card tilt */
   width: 100%;
-  max-width: 230px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: none !important;
 }
 
-/* Card Body */
+/* Actual Visual Card */
 .card {
   position: relative;
-  height: 220px;
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  background: var(--color-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
-  background: #0d1321;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-  transform-style: preserve-3d;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
-  overflow: visible;
-  /* Let the character breakout overlay display */
-}
-
-/* Inner shadow overlay */
-.card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 17px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 100%);
-  z-index: 2;
-  pointer-events: none;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  cursor: none !important;
 }
 
 /* Golden Borders on Hover */
 .card-wrapper:hover .card {
   border-color: #f0c75e;
-  box-shadow: 0 15px 40px rgba(240, 199, 94, 0.35);
+  box-shadow: 0 12px 35px rgba(240, 199, 94, 0.25);
 }
 
 /* Card image (Character Cutout) */
@@ -769,7 +787,7 @@ textarea,
   z-index: 1;
 }
 
-/* Character Portrait image */
+/* Character Portrait image - Stays static on hover */
 .character-portrait {
   width: 100%;
   height: 100%;
@@ -778,32 +796,17 @@ textarea,
   top: 0;
   left: 0;
   border-radius: 17px;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* 3D Pop-out Layer (duplicate image layered above border) */
-.character-popout {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 3;
-  pointer-events: none;
-  opacity: 0;
-  border-radius: 17px;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
-  transform: scale(1);
+  transition: filter 0.3s ease;
 }
 
 .card-wrapper:hover .character-portrait {
-  transform: scale(1.1) translateY(-25px);
+  transform: none !important;
+  filter: brightness(1.05);
 }
 
+.character-popout,
 .card-wrapper:hover .character-popout {
-  opacity: 1;
-  transform: scale(1.1) translateY(-25px);
+  display: none !important;
 }
 
 /* Card details below the card */
@@ -905,7 +908,7 @@ textarea,
 
 /* Page-level layout */
 .themes-page {
-  padding: 60px 8% 20px 8%;
+  padding: 35px 8% 15px 8%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -914,7 +917,7 @@ textarea,
 .themes-header {
   text-align: center;
   max-width: 700px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .themes-eyebrow {
@@ -3458,176 +3461,309 @@ textarea,
    SPONSORS PAGE — TIERED LAYOUT
    ========================================================================== */
 
+/* ==========================================================================
+   GRAND WIZARDING PATRONAGE — SPONSORS SECTION
+   ========================================================================== */
+
 .sponsors-page {
-  padding: 140px 7% 100px 7%;
+  padding: 40px 6% 25px 6%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+/* Grand Header */
+.sponsors-grand-header {
+  text-align: center;
+  max-width: 780px;
+  margin-bottom: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.sponsors-tiers-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-  width: 100%;
-  max-width: 1450px;
+.sponsors-eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 23, 38, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: 30px;
+  padding: 5px 18px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Tier section */
-.sponsor-tier {
+.eyebrow-sparkle {
+  color: #f0c030;
+  font-size: 0.72rem;
+}
+
+.eyebrow-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #f3e5ab;
+  text-transform: uppercase;
+}
+
+.sponsors-subheading {
+  font-family: 'Spectral', serif;
+  font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+  color: rgba(245, 230, 200, 0.88);
+  line-height: 1.6;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.sponsors-subheading strong {
+  color: #f0c030;
+}
+
+/* Showcase Container */
+.sponsors-showcase-container {
+  width: 100%;
+  max-width: 1140px;
   display: flex;
   flex-direction: column;
   gap: 24px;
-}
-
-.sponsor-tier-header {
-  display: flex;
   align-items: center;
-  gap: 12px;
 }
 
-.sponsor-tier-icon {
-  font-size: 1.2rem;
-  flex-shrink: 0;
-}
-
-.sponsor-tier-title {
-  font-family: 'Cinzel', serif;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.sponsor-tier-line {
-  flex: 1;
-  height: 1px;
-  border-radius: 1px;
-}
-
-/* Grid layouts by size (Converted to flex for centering fewer items) */
-.sponsor-tier-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 32px;
+/* 4 Impact Pillars Grid */
+.sponsor-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
   width: 100%;
 }
 
-/* Wrap: logo card + role label stacked */
-.sponsor-card-wrap {
+.sponsor-pillar-card {
+  position: relative;
+  background: linear-gradient(145deg, rgba(16, 24, 40, 0.85) 0%, rgba(9, 14, 24, 0.92) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 16px;
+  padding: 20px 18px 18px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.sponsor-role-label {
-  font-family: 'Cinzel', serif;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  text-align: center;
-}
-
-/* Logo-only sponsor card */
-.sponsor-logo-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 18px;
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  text-align: left;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.04);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
 }
 
-.sponsor-logo-card:hover {
-  border-color: var(--accent, rgba(238, 185, 57, 0.4));
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
-  transform: translateY(-4px);
+.sponsor-pillar-card:hover {
+  border-color: rgba(240, 192, 48, 0.7);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 20px rgba(240, 192, 48, 0.15);
 }
 
-/* Size-specific heights and widths */
-.sponsor-logo-card--large {
-  height: 140px;
-  width: 320px;
-  max-width: 100%;
+.pillar-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
-.sponsor-logo-card--medium {
-  height: 110px;
-  width: 260px;
-  max-width: 100%;
+.pillar-icon-badge {
+  font-size: 1.4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(240, 192, 48, 0.4));
 }
 
-.sponsor-logo-card--small {
-  height: 90px;
-  width: 200px;
-  max-width: 100%;
+.pillar-tag-pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #f0c030;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
 }
 
-/* Actual logo image */
-.sponsor-logo-img {
-  max-width: 85%;
-  max-height: 75%;
-  object-fit: contain;
-  opacity: 0.85;
-  transition: opacity 0.3s ease;
+.pillar-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  line-height: 1.25;
 }
 
-.sponsor-logo-card:hover .sponsor-logo-img,
-.marquee-logo-card:hover .sponsor-logo-img {
-  opacity: 1;
+.pillar-desc {
+  font-family: 'Spectral', serif;
+  font-size: 0.84rem;
+  color: rgba(220, 230, 240, 0.8);
+  line-height: 1.48;
+  margin: 0;
 }
 
-/* Placeholder when no logo provided */
-.sponsor-logo-placeholder {
-  width: 55%;
-  height: 38%;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px dashed rgba(255, 255, 255, 0.12);
+/* Central Grand Alliance Decree Card */
+.sponsor-decree-card {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(155deg, rgba(18, 28, 48, 0.94) 0%, rgba(10, 16, 30, 0.98) 60%, rgba(6, 10, 20, 0.99) 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  border-radius: 22px;
+  padding: 32px 42px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0 25px 75px rgba(0, 0, 0, 0.9),
+    0 0 35px rgba(212, 175, 55, 0.12),
+    inset 0 1px 2px rgba(255, 235, 160, 0.18);
+  overflow: hidden;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
-/* Marquee logo card */
-.marquee-logo-card {
-  width: 140px;
-  height: 80px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.sponsor-decree-card:hover {
+  border-color: rgba(240, 192, 48, 0.8);
+  box-shadow:
+    0 30px 85px rgba(0, 0, 0, 0.95),
+    0 0 45px rgba(240, 192, 48, 0.22),
+    inset 0 1px 3px rgba(255, 235, 160, 0.25);
+}
+
+.decree-ambient-aura {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 250px;
+  background: radial-gradient(ellipse, rgba(240, 192, 48, 0.14) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.decree-top-hairline {
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #f0c030 50%, transparent 100%);
+  box-shadow: 0 0 10px rgba(240, 192, 48, 0.8);
+}
+
+.decree-seal-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.decree-wax-seal {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 8px rgba(240, 192, 48, 0.4));
+}
+
+.decree-heading {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  margin: 0 0 2px 0;
+  text-transform: uppercase;
+}
+
+.decree-sub {
+  font-family: 'Spectral', serif;
+  font-size: 0.92rem;
+  color: rgba(245, 230, 200, 0.82);
+  margin: 0;
+}
+
+/* Tiers Strip */
+.decree-tiers-strip {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  flex-shrink: 0;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0 24px;
+  padding: 8px 18px;
+  background: rgba(10, 16, 28, 0.7);
+  border: 1px dashed rgba(212, 175, 55, 0.3);
+  border-radius: 30px;
 }
 
-.marquee-logo-card:hover {
-  border-color: var(--accent, rgba(52, 211, 153, 0.4));
-  transform: translateY(-2px);
+.tier-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #f3e5ab;
+  text-transform: uppercase;
 }
 
-.marquee-logo-card .sponsor-logo-placeholder {
-  width: 60%;
-  height: 40%;
+.tier-bullet {
+  color: rgba(212, 175, 55, 0.5);
+  font-size: 0.7rem;
+}
+
+/* Action Buttons Container */
+.decree-action-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 1050px) {
+  .sponsor-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .sponsors-page {
+    padding: 30px 4% 20px 4%;
+  }
+
+  .sponsor-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sponsor-decree-card {
+    padding: 24px 18px 22px;
+  }
+
+  .decree-action-controls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .alliance-primary-btn,
+  .alliance-secondary-btn {
+    width: 100%;
+  }
 }
 
 /* ── Become a Sponsor CTA — Compact Centered ── */
 /* ── Become a Sponsor CTA — Sleek Compact Wizarding Alliance Card ── */
 .sponsor-cta-block.magical-alliance-compact {
   position: relative;
-  margin-top: 65px;
+  margin-top: 0;
+  margin-bottom: 10px;
   width: 100%;
   max-width: 820px;
   margin-left: auto;
@@ -3682,6 +3818,7 @@ textarea,
   from {
     transform: translate(0, 0) scale(1);
   }
+
   to {
     transform: translate(15px, 12px) scale(1.08);
   }
@@ -5301,7 +5438,7 @@ textarea,
 .enchanted-rewards-section {
   position: relative;
   width: 100%;
-  padding: 110px 4% 80px;
+  padding: 45px 4% 20px;
   background: transparent;
   overflow: hidden;
   display: flex;
@@ -5584,6 +5721,7 @@ textarea,
   0% {
     transform: translateY(0px) rotate(0deg);
   }
+
   100% {
     transform: translateY(-4px) rotate(1.5deg);
   }
@@ -5747,6 +5885,111 @@ textarea,
   right: 4px;
   border-bottom: 1.5px solid rgba(240, 192, 48, 0.6);
   border-right: 1.5px solid rgba(240, 192, 48, 0.6);
+}
+
+/* Magical Scroll Barrier & Progression Gate */
+.prizes-barrier-notice {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, rgba(28, 14, 20, 0.95) 0%, rgba(14, 22, 38, 0.95) 100%);
+  border: 1.5px solid rgba(225, 40, 40, 0.6);
+  border-radius: 12px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(225, 40, 40, 0.25);
+  transition: all 0.35s ease;
+  width: 100%;
+  max-width: 820px;
+}
+
+.prizes-barrier-notice.barrier-shake-alert {
+  border-color: #ff3333;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 50, 50, 0.6);
+  animation: barrierShake 0.45s ease-in-out;
+}
+
+@keyframes barrierShake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+.barrier-shield-icon {
+  font-size: 1.4rem;
+  animation: shieldPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes shieldPulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px #ff4444);
+  }
+
+  100% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px #ff2222);
+  }
+}
+
+.barrier-text-wrap {
+  flex: 1;
+  text-align: left;
+}
+
+.barrier-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #ff4d4d;
+  margin: 0 0 3px 0;
+  text-transform: uppercase;
+}
+
+.barrier-desc {
+  font-family: 'Spectral', serif;
+  font-size: 0.82rem;
+  color: rgba(255, 230, 230, 0.85);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.barrier-quick-unlock-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #ffd700;
+  background: rgba(240, 192, 48, 0.12);
+  border: 1px solid #ffd700;
+  border-radius: 20px;
+  padding: 6px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(240, 192, 48, 0.25);
+}
+
+.barrier-quick-unlock-btn:hover {
+  background: rgba(240, 192, 48, 0.3);
+  color: #ffffff;
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 0 16px rgba(240, 192, 48, 0.5);
 }
 
 /* All Vaults Unlocked Banner */
@@ -6188,50 +6431,59 @@ textarea,
 }
 
 /* ==========================================================================
-   DIRECTLY CONNECTED EVENT TIMELINE STYLES
+   HOGWARTS EXPRESS RAILWAY TIMELINE & TRAIN STYLES
    ========================================================================== */
 
-.schedule-connected-section {
+.schedule-hogwarts-section {
   position: relative;
   width: 100%;
-  padding: 90px 5% 120px;
+  padding: 45px 5% 50px;
   background: transparent;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Ambient Backdrops */
+/* Atmospheric Night Backdrops */
 .schedule-ambient-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
+  filter: blur(140px);
   pointer-events: none;
   opacity: 0.28;
 }
 
 .schedule-ambient-glow.top {
-  top: 6%;
-  left: 20%;
-  width: 550px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(212, 160, 23, 0.14) 0%, rgba(11, 27, 42, 0.04) 70%, transparent 100%);
+  top: 4%;
+  left: 18%;
+  width: 600px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212, 160, 23, 0.16) 0%, rgba(11, 27, 42, 0.05) 70%, transparent 100%);
 }
 
 .schedule-ambient-glow.bottom {
-  bottom: 8%;
-  right: 18%;
-  width: 650px;
-  height: 550px;
-  background: radial-gradient(circle, rgba(69, 199, 232, 0.10) 0%, rgba(7, 21, 34, 0.04) 70%, transparent 100%);
+  bottom: 6%;
+  right: 15%;
+  width: 700px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(69, 199, 232, 0.12) 0%, rgba(7, 21, 34, 0.05) 70%, transparent 100%);
+}
+
+.schedule-ambient-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.45;
 }
 
 /* Section Header */
 .schedule-section-header {
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto 35px;
+  max-width: 820px;
+  margin: 0 auto 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6239,26 +6491,58 @@ textarea,
   z-index: 5;
 }
 
-.schedule-pre-tag {
+.schedule-express-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 23, 36, 0.85);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  border-radius: 24px;
+  padding: 5px 18px;
+  margin-bottom: 12px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), 0 0 12px rgba(212, 175, 55, 0.15);
+}
+
+.express-badge-spark {
+  color: #f0c030;
+  font-size: 0.75rem;
+  animation: badgeSparkle 3s ease-in-out infinite;
+}
+
+.express-badge-text {
   font-family: 'Cinzel', serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 4px;
-  color: #d4a017;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  color: #f3e5ab;
   text-transform: uppercase;
-  margin-bottom: 6px;
-  text-shadow: 0 0 10px rgba(212, 160, 23, 0.35);
+}
+
+@keyframes badgeSparkle {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+    text-shadow: 0 0 8px #f0c030;
+  }
 }
 
 .schedule-main-title {
   font-family: 'HarryP', 'Cinzel Decorative', serif;
-  font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+  font-size: clamp(2.8rem, 5.5vw, 4.6rem);
   font-weight: 700;
   letter-spacing: 3px;
   color: #ffffff;
-  margin: 0 0 10px 0;
+  margin: 0 0 12px 0;
   line-height: 1.05;
-  text-shadow: 0 0 15px rgba(0, 191, 255, 0.25);
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.25), 0 0 35px rgba(0, 0, 0, 0.9);
 }
 
 .schedule-main-subtitle {
@@ -6266,29 +6550,63 @@ textarea,
   font-size: 1.15rem;
   line-height: 1.7;
   color: rgba(245, 230, 200, 0.85);
-  max-width: 700px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
-.schedule-header-divider {
-  width: 140px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #d4a017 50%, transparent 100%);
-  margin: 16px auto 0;
-  box-shadow: 0 0 8px rgba(212, 160, 23, 0.5);
+/* Track Railway Divider with Brass 5972 Locomotive Seal */
+.schedule-track-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+  margin: 20px auto 0;
 }
 
-/* Connected Stage Container */
-.schedule-connected-stage {
+.track-rail-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, #8a6c38);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.schedule-track-divider .track-rail-line:last-child {
+  background: linear-gradient(90deg, #8a6c38, #d4af37, transparent);
+}
+
+.track-crest-seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #58111a 0%, #1a080c 100%);
+  border: 1.5px solid #d4af37;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.35), inset 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.crest-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #f3e5ab;
+}
+
+/* Railway Stage Container */
+.schedule-railway-stage {
   position: relative;
   width: 100%;
   max-width: 1050px;
-  margin: 20px auto 0;
+  margin: 25px auto 0;
   overflow: visible;
 }
 
-/* SVG Trail Layer */
-.schedule-connected-svg {
+/* SVG Railway Track Layer */
+.schedule-railway-svg {
   position: absolute;
   top: 0;
   left: 0;
@@ -6299,49 +6617,375 @@ textarea,
   overflow: visible;
 }
 
-.connected-ghost-path {
-  opacity: 0.55;
-}
-
-.connected-active-path {
+.revealed-rail-outer {
   transition: stroke-dashoffset 0.12s ease-out;
 }
 
-/* Small Wand Spark Orb Marker */
-.connected-wand-spark {
+.revealed-rail-inner-cut {
+  transition: stroke-dashoffset 0.12s ease-out;
+}
+
+/* ==========================================================================
+   HOGWARTS EXPRESS STEAM TRAIN
+   ========================================================================== */
+
+.hogwarts-express-train {
   position: absolute;
   top: 0;
   left: 0;
-  width: 14px;
-  height: 14px;
-  margin-left: -7px;
-  margin-top: -7px;
+  width: 38px;
+  height: 105px;
+  margin-left: -19px;
+  margin-top: -52px;
   pointer-events: none;
-  z-index: 10;
+  z-index: 100;
   will-change: transform;
   transition: opacity 0.3s ease;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
 }
 
-.spark-core-dot {
+/* Forward Headlamp Glowing Light Beam */
+.train-headlamp-beam {
   position: absolute;
-  inset: 2px;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 0 8px #f0c030, 0 0 14px #45c7e8;
+  top: -54px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 58px;
+  background: radial-gradient(ellipse at bottom, rgba(255, 245, 180, 0.9) 0%, rgba(240, 192, 48, 0.4) 40%, rgba(212, 175, 55, 0.12) 70%, transparent 85%);
+  clip-path: polygon(35% 100%, 65% 100%, 100% 0%, 0% 0%);
+  pointer-events: none;
+  filter: blur(1.5px);
+  animation: headlampFlicker 3.5s ease-in-out infinite;
 }
 
-.spark-halo-ring {
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(240, 192, 48, 0.55) 0%, rgba(69, 199, 232, 0.2) 60%, transparent 80%);
+@keyframes headlampFlicker {
+
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.75;
+  }
+
+  70% {
+    opacity: 0.95;
+  }
+
+  85% {
+    opacity: 0.8;
+  }
 }
 
-/* Connected Node Endpoint on Card Border */
-.connected-node-point {
+.train-locomotive-svg {
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.train-window-glow {
+  animation: fireboxWindowFlicker 2s ease-in-out infinite alternate;
+}
+
+@keyframes fireboxWindowFlicker {
+  0% {
+    fill: #ffb300;
+    filter: drop-shadow(0 0 3px #ff6f00);
+  }
+
+  50% {
+    fill: #ffe082;
+    filter: drop-shadow(0 0 6px #ffa000);
+  }
+
+  100% {
+    fill: #ffd54f;
+    filter: drop-shadow(0 0 4px #ff8f00);
+  }
+}
+
+.train-headlamp-bulb {
+  animation: bulbPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes bulbPulse {
+  0% {
+    fill: #fff7cc;
+    filter: drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 8px #ffd700);
+  }
+
+  100% {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 14px #ffe082);
+  }
+}
+
+.train-tail-lamp {
+  animation: tailPulse 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes tailPulse {
+  0% {
+    fill: #c62828;
+    filter: drop-shadow(0 0 2px #d32f2f);
+  }
+
+  100% {
+    fill: #ff5252;
+    filter: drop-shadow(0 0 6px #ff1744);
+  }
+}
+
+/* Billowing Steam Clouds from Smokestack */
+.train-steam-container {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 14px;
-  height: 14px;
+  height: 38px;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.steam-puff {
+  position: absolute;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.75) 0%, rgba(245, 240, 230, 0.45) 45%, rgba(220, 210, 195, 0.15) 75%, transparent 100%);
+  filter: blur(1.5px);
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+.steam-puff.puff-1 {
+  animation: steamDrift 2.2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+
+.steam-puff.puff-2 {
+  animation: steamDrift 2.2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite 0.45s;
+}
+
+.steam-puff.puff-3 {
+  animation: steamDrift 2.2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite 0.9s;
+}
+
+.steam-puff.puff-4 {
+  animation: steamDrift 2.2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite 1.35s;
+}
+
+.steam-puff.puff-5 {
+  animation: steamDrift 2.2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite 1.8s;
+}
+
+@keyframes steamDrift {
+  0% {
+    opacity: 0.8;
+    transform: translate(-50%, 0) scale(0.6);
+  }
+
+  35% {
+    opacity: 0.6;
+    transform: translate(calc(-50% + 5px), 18px) scale(1.6);
+  }
+
+  70% {
+    opacity: 0.3;
+    transform: translate(calc(-50% - 7px), 36px) scale(2.6);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 9px), 54px) scale(3.5);
+  }
+}
+
+/* Micro Magical Stardust Embers */
+.train-magical-embers {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 24px;
+  height: 40px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 16;
+}
+
+.ember {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ffe082;
+  box-shadow: 0 0 6px #ffd54f, 0 0 10px #ff9800;
+  opacity: 0;
+}
+
+.ember-1 {
+  left: 3px;
+  animation: emberGlow 1.8s ease-out infinite;
+}
+
+.ember-2 {
+  right: 3px;
+  animation: emberGlow 1.8s ease-out infinite 0.6s;
+}
+
+.ember-3 {
+  left: 10px;
+  animation: emberGlow 1.8s ease-out infinite 1.2s;
+}
+
+@keyframes emberGlow {
+  0% {
+    opacity: 0.95;
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: translate(6px, 16px) scale(1.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-10px, 34px) scale(0.2);
+  }
+}
+
+/* ==========================================================================
+   GRAND RAILWAY PLATFORM MOMENT (DAY I & DAY II)
+   ========================================================================== */
+
+.grand-station-platform {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  opacity: 0.4;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+  width: clamp(300px, 44vw, 460px);
+}
+
+.grand-station-platform.active-platform,
+.grand-station-platform.initial-platform {
+  opacity: 1;
+}
+
+.platform-station-sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(145deg, rgba(20, 10, 14, 0.94) 0%, rgba(9, 16, 26, 0.97) 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.65);
+  border-radius: 16px;
+  padding: 10px 24px 8px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.9), 0 0 24px rgba(212, 175, 55, 0.2), inset 0 1px 1px rgba(255, 235, 170, 0.2);
+  text-align: center;
+}
+
+.platform-arch-filigree-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.arch-flourish-left,
+.arch-flourish-right {
+  color: #d4af37;
+  font-size: 0.9rem;
+}
+
+.arch-crest-clock {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #f3e5ab;
+  text-transform: uppercase;
+}
+
+.platform-main-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px 0;
+}
+
+.platform-day-title {
+  font-family: 'HarryP', 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #f0c030;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 0 14px rgba(240, 192, 48, 0.4), 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.platform-title-divider {
+  width: 80px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 4px 0;
+}
+
+.platform-chapter-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: rgba(245, 230, 200, 0.9);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.platform-track-clearance {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px dashed rgba(212, 175, 55, 0.25);
+}
+
+.platform-lamp {
+  font-size: 0.75rem;
+  filter: drop-shadow(0 0 4px #ff9800);
+}
+
+.platform-station-code {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: rgba(168, 217, 232, 0.85);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   RAILWAY STATION STOP MARKERS ON TRACK
+   ========================================================================== */
+
+.railway-station-stop {
+  position: absolute;
+  width: 18px;
+  height: 18px;
   transform: translate(-50%, -50%);
   z-index: 5;
   display: flex;
@@ -6350,188 +6994,217 @@ textarea,
   pointer-events: none;
 }
 
-.node-outer-halo {
+.station-track-ring {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.18);
-  background: #071522;
-  transition: all 0.3s ease;
+  border: 1.5px solid rgba(212, 175, 55, 0.3);
+  background: #09121c;
+  transition: all 0.35s ease;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
 }
 
-.node-center-gem {
-  width: 4px;
-  height: 4px;
+.station-center-lantern {
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
+  background: rgba(212, 175, 55, 0.4);
+  transition: all 0.35s ease;
 }
 
-.connected-node-point.active .node-outer-halo {
-  border-color: rgba(69, 199, 232, 0.6);
-  box-shadow: 0 0 8px rgba(69, 199, 232, 0.4);
+.railway-station-stop.visited .station-track-ring {
+  border-color: rgba(212, 175, 55, 0.7);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
 }
 
-.connected-node-point.active .node-center-gem {
-  background: #45c7e8;
-}
-
-.connected-node-point.focal .node-outer-halo {
-  border-color: #f0c030;
-  box-shadow: 0 0 14px rgba(240, 192, 48, 0.8);
-  transform: scale(1.25);
-}
-
-.connected-node-point.focal .node-center-gem {
+.railway-station-stop.visited .station-center-lantern {
   background: #f0c030;
   box-shadow: 0 0 6px #f0c030;
 }
 
-/* Day Transition Separator Badge */
-.connected-day-separator {
+.railway-station-stop.active-stop .station-track-ring {
+  border-color: #f3e5ab;
+  background: #58111a;
+  box-shadow: 0 0 16px rgba(240, 192, 48, 0.8), 0 0 28px rgba(240, 192, 48, 0.4);
+  transform: scale(1.3);
+}
+
+.railway-station-stop.active-stop .station-center-lantern {
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff, 0 0 14px #ffd700;
+}
+
+/* Miniature Platform Lamp Bracket extending toward event card */
+.station-lamp-bracket {
   position: absolute;
-  z-index: 5;
-  opacity: 0.35;
-  transition: opacity 0.5s ease;
+  top: 50%;
+  width: 58px;
+  height: 2px;
+  background: rgba(212, 175, 55, 0.4);
   pointer-events: none;
 }
 
-.connected-day-separator.revealed {
-  opacity: 1;
+.station-lamp-bracket.side-left {
+  right: 100%;
+  transform-origin: right center;
 }
 
-.day-separator-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: rgba(11, 27, 42, 0.92);
-  border: 1.5px solid rgba(212, 160, 23, 0.55);
-  border-radius: 30px;
-  padding: 6px 22px;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85), 0 0 16px rgba(212, 160, 23, 0.2);
+.station-lamp-bracket.side-right {
+  left: 100%;
+  transform-origin: left center;
 }
 
-.day-num-label {
-  font-family: 'Cinzel', serif;
-  font-size: 0.9rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: #f0c030;
+.station-lamp-bracket.side-center {
+  display: none;
 }
 
-.day-chapter-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  color: rgba(245, 230, 200, 0.7);
-  text-transform: uppercase;
-}
-
-/* Event Card Attached Directly to the Node */
-.connected-card-wrapper {
+.lamp-lantern-glow {
   position: absolute;
-  width: clamp(280px, 32vw, 380px);
-  z-index: 6;
+  top: -4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, rgba(255, 152, 0, 0.4) 60%, transparent 100%);
+  opacity: 0.4;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.station-lamp-bracket.side-left .lamp-lantern-glow {
+  left: 0;
+}
+
+.station-lamp-bracket.side-right .lamp-lantern-glow {
+  right: 0;
+}
+
+.railway-station-stop.active-stop .lamp-lantern-glow {
+  opacity: 1;
+  transform: scale(1.4);
+  box-shadow: 0 0 12px #ffb300;
+}
+
+/* ==========================================================================
+   STATION EVENT CARDS (ASYMMETRIC LEFT / RIGHT LAYOUT)
+   ========================================================================== */
+
+.railway-card-wrapper {
+  position: absolute;
+  width: clamp(285px, 29vw, 390px);
+  z-index: 8;
   transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Left Card: sits to the left of its node */
-.connected-card-wrapper.card-side-left {
-  transform: translate(calc(-100% - 16px), -50%);
+/* Left Card: wide horizontal clearance to the left */
+.railway-card-wrapper.side-left {
+  transform: translate(calc(-100% - 60px), -50%);
 }
 
-/* Right Card: sits to the right of its node */
-.connected-card-wrapper.card-side-right {
-  transform: translate(16px, -50%);
+/* Right Card: wide horizontal clearance to the right */
+.railway-card-wrapper.side-right {
+  transform: translate(60px, -50%);
 }
 
-/* Finale Center Card */
-.connected-card-wrapper.card-side-center {
-  transform: translate(-50%, 18px);
+/* Finale Center Card: positioned below terminus buffer stop */
+.railway-card-wrapper.side-center {
+  transform: translate(-50%, 45px);
 }
 
-.connected-card-wrapper.hidden {
-  opacity: 0.2;
-  filter: grayscale(0.4);
-}
-
-.connected-card-wrapper.revealed {
-  opacity: 0.84;
+/* Station Progression States - Fully Visible Everywhere */
+.railway-card-wrapper.upcoming {
+  opacity: 0.9;
   filter: none;
 }
 
-.connected-card-wrapper.focal-event {
-  opacity: 1;
-  z-index: 7;
+.railway-card-wrapper.visited {
+  opacity: 0.95;
+  filter: none;
 }
 
-/* Event Card Body */
-.connected-event-card {
+.railway-card-wrapper.focal-station {
+  opacity: 1;
+  z-index: 10;
+}
+
+/* Station Event Card Body */
+.railway-event-card {
   position: relative;
   width: 100%;
-  background: linear-gradient(140deg, rgba(14, 23, 36, 0.9) 0%, rgba(7, 15, 26, 0.97) 100%);
+  background: linear-gradient(140deg, rgba(16, 24, 37, 0.92) 0%, rgba(9, 16, 26, 0.97) 100%);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
   border-radius: 12px;
   padding: 16px 20px 14px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.06);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease, background 0.35s ease;
   overflow: hidden;
 }
 
-.connected-card-wrapper.focal-event .connected-event-card {
-  border-color: rgba(240, 192, 48, 0.85);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9), 0 0 25px rgba(240, 192, 48, 0.22), inset 0 1px 1px rgba(255, 230, 120, 0.15);
-  transform: scale(1.02);
+.railway-card-wrapper.focal-station .railway-event-card {
+  background: linear-gradient(140deg, rgba(28, 14, 20, 0.94) 0%, rgba(10, 18, 30, 0.98) 100%);
+  border-color: rgba(240, 192, 48, 0.88);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(240, 192, 48, 0.25), inset 0 1px 1px rgba(255, 235, 150, 0.2);
+  transform: scale(1.025);
 }
 
-.connected-event-card:hover {
+.railway-event-card:hover {
   border-color: rgba(240, 192, 48, 0.95);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(240, 192, 48, 0.28);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.95), 0 0 32px rgba(240, 192, 48, 0.3);
 }
 
 /* Card Top Shimmer */
-.card-top-shimmer {
+.station-card-top-shimmer {
   position: absolute;
   top: 0;
-  left: 15%;
-  right: 15%;
+  left: 10%;
+  right: 10%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(240, 192, 48, 0.75), transparent);
+  background: linear-gradient(90deg, transparent, rgba(240, 192, 48, 0.85), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-.connected-card-wrapper.focal-event .card-top-shimmer {
+.railway-card-wrapper.focal-station .station-card-top-shimmer {
   opacity: 1;
 }
 
-/* Card Header Badge (Day • Time) */
-.event-meta-badge {
+/* Card Header Meta Badge (STN 01 • Day 01 • Time) */
+.station-meta-badge {
   display: flex;
   align-items: center;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 7px;
   margin-bottom: 6px;
 }
 
-.event-day-tag {
-  font-family: 'Inter', monospace, sans-serif;
+.station-tag {
+  font-family: 'Cinzel', serif;
   font-size: 0.65rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 1.5px;
   color: #f0c030;
+  background: rgba(88, 17, 26, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 4px;
+  padding: 1px 6px;
   text-transform: uppercase;
 }
 
-.event-bullet {
+.station-bullet {
   font-size: 0.58rem;
-  color: rgba(212, 160, 23, 0.6);
+  color: rgba(212, 175, 55, 0.5);
 }
 
-.event-time-tag {
+.station-day-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(245, 230, 200, 0.75);
+  text-transform: uppercase;
+}
+
+.station-time-tag {
   font-family: 'Cinzel', serif;
   font-size: 0.74rem;
   font-weight: 700;
@@ -6540,10 +7213,10 @@ textarea,
   text-transform: uppercase;
 }
 
-/* Card Title */
-.event-title-text {
+/* Event Title */
+.station-event-title {
   font-family: 'Cinzel', serif;
-  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  font-size: clamp(1rem, 1.35vw, 1.22rem);
   font-weight: 800;
   letter-spacing: 1.5px;
   color: #ffffff;
@@ -6552,99 +7225,422 @@ textarea,
   text-transform: uppercase;
 }
 
-.connected-card-wrapper.focal-event .event-title-text {
+.railway-card-wrapper.focal-station .station-event-title {
   color: #ffffff;
-  text-shadow: 0 0 10px rgba(240, 192, 48, 0.4);
+  text-shadow: 0 0 12px rgba(240, 192, 48, 0.45);
 }
 
-/* Card Description */
-.event-desc-text {
+/* Event Description */
+.station-event-desc {
   font-family: 'Spectral', serif;
-  font-size: 0.84rem;
+  font-size: 0.85rem;
   line-height: 1.5;
-  color: rgba(213, 222, 228, 0.85);
-  margin: 0;
+  color: rgba(213, 222, 228, 0.88);
+  margin: 0 0 8px 0;
 }
 
-/* Card Corner Filigree */
-.card-corner {
+/* Station Platform Name Tag */
+.station-platform-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(212, 175, 55, 0.2);
+  width: 100%;
+}
+
+.platform-loc-icon {
+  font-size: 0.65rem;
+  color: #d4af37;
+}
+
+.platform-loc-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgba(212, 175, 55, 0.85);
+  text-transform: uppercase;
+}
+
+/* Card Corner Filigrees in Antique Gold */
+.station-corner {
   position: absolute;
-  width: 5px;
-  height: 5px;
-  border-color: rgba(240, 192, 48, 0.5);
+  width: 6px;
+  height: 6px;
+  border-color: rgba(212, 175, 55, 0.5);
   pointer-events: none;
 }
 
-.card-corner.tl {
+.station-corner.tl {
   top: 4px;
   left: 4px;
-  border-top: 1px solid rgba(240, 192, 48, 0.5);
-  border-left: 1px solid rgba(240, 192, 48, 0.5);
+  border-top: 1px solid rgba(212, 175, 55, 0.5);
+  border-left: 1px solid rgba(212, 175, 55, 0.5);
 }
 
-.card-corner.tr {
+.station-corner.tr {
   top: 4px;
   right: 4px;
-  border-top: 1px solid rgba(240, 192, 48, 0.5);
-  border-right: 1px solid rgba(240, 192, 48, 0.5);
+  border-top: 1px solid rgba(212, 175, 55, 0.5);
+  border-right: 1px solid rgba(212, 175, 55, 0.5);
 }
 
-.card-corner.bl {
+.station-corner.bl {
   bottom: 4px;
   left: 4px;
-  border-bottom: 1px solid rgba(240, 192, 48, 0.5);
-  border-left: 1px solid rgba(240, 192, 48, 0.5);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+  border-left: 1px solid rgba(212, 175, 55, 0.5);
 }
 
-.card-corner.br {
+.station-corner.br {
   bottom: 4px;
   right: 4px;
-  border-bottom: 1px solid rgba(240, 192, 48, 0.5);
-  border-right: 1px solid rgba(240, 192, 48, 0.5);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+  border-right: 1px solid rgba(212, 175, 55, 0.5);
 }
 
-/* Responsive Schedule Breakpoints */
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
 @media (max-width: 900px) {
-  .schedule-connected-section {
+  .schedule-hogwarts-section {
     padding: 70px 4% 90px;
   }
 
-  .connected-card-wrapper {
+  .railway-card-wrapper {
     width: clamp(230px, 38vw, 300px);
   }
 
-  .connected-card-wrapper.card-side-left {
-    transform: translate(calc(-100% - 12px), -50%);
+  .railway-card-wrapper.side-left {
+    transform: translate(calc(-100% - 14px), -50%);
   }
 
-  .connected-card-wrapper.card-side-right {
-    transform: translate(12px, -50%);
+  .railway-card-wrapper.side-right {
+    transform: translate(14px, -50%);
   }
 }
 
 @media (max-width: 600px) {
-  .schedule-connected-section {
+  .schedule-hogwarts-section {
     padding: 60px 3% 80px;
   }
 
-  .connected-card-wrapper {
+  .railway-card-wrapper {
     width: clamp(145px, 42vw, 175px);
   }
 
-  .connected-card-wrapper.card-side-left {
-    transform: translate(calc(-100% - 8px), -50%);
+  .railway-card-wrapper.side-left {
+    transform: translate(calc(-100% - 10px), -50%);
   }
 
-  .connected-card-wrapper.card-side-right {
-    transform: translate(8px, -50%);
+  .railway-card-wrapper.side-right {
+    transform: translate(10px, -50%);
   }
 
-  .event-title-text {
+  .station-event-title {
     font-size: 0.88rem;
   }
 
-  .event-desc-text {
+  .station-event-desc {
     font-size: 0.76rem;
     line-height: 1.35;
+  }
+
+  .platform-day-title {
+    font-size: 1.8rem;
+  }
+
+  .platform-chapter-subtitle {
+    font-size: 0.62rem;
+  }
+
+  .grand-station-platform {
+    width: 92vw;
+  }
+}
+
+.railway-station-stop.active-stop .lamp-lantern-glow {
+  opacity: 1;
+  transform: scale(1.4);
+  box-shadow: 0 0 12px #ffb300;
+}
+
+/* ==========================================================================
+   STATION EVENT CARDS (ASYMMETRIC LEFT / RIGHT LAYOUT)
+   ========================================================================== */
+
+.railway-card-wrapper {
+  position: absolute;
+  width: clamp(285px, 29vw, 390px);
+  z-index: 8;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Left Card: wide horizontal clearance to the left */
+.railway-card-wrapper.side-left {
+  transform: translate(calc(-100% - 60px), -50%);
+}
+
+/* Right Card: wide horizontal clearance to the right */
+.railway-card-wrapper.side-right {
+  transform: translate(60px, -50%);
+}
+
+/* Finale Center Card: positioned below terminus buffer stop */
+.railway-card-wrapper.side-center {
+  transform: translate(-50%, 45px);
+}
+
+/* Station Progression States - Fully Visible Everywhere */
+.railway-card-wrapper.upcoming {
+  opacity: 0.9;
+  filter: none;
+}
+
+.railway-card-wrapper.visited {
+  opacity: 0.95;
+  filter: none;
+}
+
+.railway-card-wrapper.focal-station {
+  opacity: 1;
+  z-index: 10;
+}
+
+/* Station Event Card Body */
+.railway-event-card {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(140deg, rgba(16, 24, 37, 0.92) 0%, rgba(9, 16, 26, 0.97) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
+  padding: 16px 20px 14px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease, background 0.35s ease;
+  overflow: hidden;
+}
+
+.railway-card-wrapper.focal-station .railway-event-card {
+  background: linear-gradient(140deg, rgba(28, 14, 20, 0.94) 0%, rgba(10, 18, 30, 0.98) 100%);
+  border-color: rgba(240, 192, 48, 0.88);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(240, 192, 48, 0.25), inset 0 1px 1px rgba(255, 235, 150, 0.2);
+  transform: scale(1.025);
+}
+
+.railway-event-card:hover {
+  border-color: rgba(240, 192, 48, 0.95);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.95), 0 0 32px rgba(240, 192, 48, 0.3);
+}
+
+/* Card Top Shimmer */
+.station-card-top-shimmer {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240, 192, 48, 0.85), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.railway-card-wrapper.focal-station .station-card-top-shimmer {
+  opacity: 1;
+}
+
+/* Card Header Meta Badge (STN 01 • Day 01 • Time) */
+.station-meta-badge {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 6px;
+}
+
+.station-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #f0c030;
+  background: rgba(88, 17, 26, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 4px;
+  padding: 1px 6px;
+  text-transform: uppercase;
+}
+
+.station-bullet {
+  font-size: 0.58rem;
+  color: rgba(212, 175, 55, 0.5);
+}
+
+.station-day-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(245, 230, 200, 0.75);
+  text-transform: uppercase;
+}
+
+.station-time-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #a8d9e8;
+  text-transform: uppercase;
+}
+
+/* Event Title */
+.station-event-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1rem, 1.35vw, 1.22rem);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.railway-card-wrapper.focal-station .station-event-title {
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(240, 192, 48, 0.45);
+}
+
+/* Event Description */
+.station-event-desc {
+  font-family: 'Spectral', serif;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(213, 222, 228, 0.88);
+  margin: 0 0 8px 0;
+}
+
+/* Station Platform Name Tag */
+.station-platform-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(212, 175, 55, 0.2);
+  width: 100%;
+}
+
+.platform-loc-icon {
+  font-size: 0.65rem;
+  color: #d4af37;
+}
+
+.platform-loc-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgba(212, 175, 55, 0.85);
+  text-transform: uppercase;
+}
+
+/* Card Corner Filigrees in Antique Gold */
+.station-corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: rgba(212, 175, 55, 0.5);
+  pointer-events: none;
+}
+
+.station-corner.tl {
+  top: 4px;
+  left: 4px;
+  border-top: 1px solid rgba(212, 175, 55, 0.5);
+  border-left: 1px solid rgba(212, 175, 55, 0.5);
+}
+
+.station-corner.tr {
+  top: 4px;
+  right: 4px;
+  border-top: 1px solid rgba(212, 175, 55, 0.5);
+  border-right: 1px solid rgba(212, 175, 55, 0.5);
+}
+
+.station-corner.bl {
+  bottom: 4px;
+  left: 4px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+  border-left: 1px solid rgba(212, 175, 55, 0.5);
+}
+
+.station-corner.br {
+  bottom: 4px;
+  right: 4px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+  border-right: 1px solid rgba(212, 175, 55, 0.5);
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .schedule-hogwarts-section {
+    padding: 70px 4% 90px;
+  }
+
+  .railway-card-wrapper {
+    width: clamp(230px, 38vw, 300px);
+  }
+
+  .railway-card-wrapper.side-left {
+    transform: translate(calc(-100% - 14px), -50%);
+  }
+
+  .railway-card-wrapper.side-right {
+    transform: translate(14px, -50%);
+  }
+}
+
+@media (max-width: 600px) {
+  .schedule-hogwarts-section {
+    padding: 60px 3% 80px;
+  }
+
+  .railway-card-wrapper {
+    width: clamp(145px, 42vw, 175px);
+  }
+
+  .railway-card-wrapper.side-left {
+    transform: translate(calc(-100% - 10px), -50%);
+  }
+
+  .railway-card-wrapper.side-right {
+    transform: translate(10px, -50%);
+  }
+
+  .station-event-title {
+    font-size: 0.88rem;
+  }
+
+  .station-event-desc {
+    font-size: 0.76rem;
+    line-height: 1.35;
+  }
+
+  .platform-day-title {
+    font-size: 1.8rem;
+  }
+
+  .platform-chapter-subtitle {
+    font-size: 0.62rem;
+  }
+
+  .grand-station-platform {
+    width: 92vw;
   }
 }

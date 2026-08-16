@@ -58,12 +58,9 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <main className="objects-section" style={{ padding: '60px 0 20px 0' }}>
-      <div className="themes-header" style={{ marginBottom: '30px' }}>
-        <h1 className="section-title" style={{ marginBottom: '16px' }}>Frequently Asked Questions</h1>
-        <p className="themes-subheading" style={{ maxWidth: '800px', margin: '0 auto' }}>
-          Unravel the mysteries of NexHack 2.0. Everything you need to know about registrations, guidelines, and the wizarding arena.
-        </p>
+    <main className="objects-section" style={{ padding: '35px 0 15px 0' }}>
+      <div className="themes-header" style={{ marginBottom: '20px' }}>
+        <h1 className="section-title" style={{ marginBottom: '14px' }}>Frequently Asked Questions</h1>
         <div className="themes-header-divider" />
       </div>
       <div className="objects-container" style={{ gap: '0', maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>

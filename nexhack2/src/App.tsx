@@ -38,6 +38,16 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<SectionId>('home');
   const videoRef = React.useRef<HTMLVideoElement>(null);
 
+  const [allPrizesUnlocked, setAllPrizesUnlocked] = useState(false);
+  const [showBarrierAlert, setShowBarrierAlert] = useState(false);
+  const alertTimeoutRef = React.useRef<number | null>(null);
+
+  const triggerBarrierAlert = () => {
+    setShowBarrierAlert(true);
+    if (alertTimeoutRef.current) clearTimeout(alertTimeoutRef.current);
+    alertTimeoutRef.current = window.setTimeout(() => setShowBarrierAlert(false), 2500);
+  };
+
   useEffect(() => {
     let ticking = false;
 
@@ -68,7 +78,91 @@ export default function App() {
     return () => { window.removeEventListener('scroll', handleScroll); window.removeEventListener('resize', handleScroll); clearTimeout(timer); };
   }, []);
 
+  // Enforce scroll barrier: user cannot scroll down past Prizes until all 3 vaults are unsealed
+  useEffect(() => {
+    if (allPrizesUnlocked) return;
+
+    let touchStartY = 0;
+
+    const onWheel = (e: WheelEvent) => {
+      const prizesEl = document.getElementById('prizes');
+      if (!prizesEl) return;
+      const rect = prizesEl.getBoundingClientRect();
+
+      // If user is at the bottom of prizes or trying to scroll past it into schedule
+      if (rect.bottom <= window.innerHeight + 25 && e.deltaY > 0) {
+        e.preventDefault();
+        triggerBarrierAlert();
+      }
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY;
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const deltaY = touchStartY - e.touches[0].clientY;
+        const prizesEl = document.getElementById('prizes');
+        if (!prizesEl) return;
+        const rect = prizesEl.getBoundingClientRect();
+
+        if (rect.bottom <= window.innerHeight + 25 && deltaY > 0) {
+          if (e.cancelable) e.preventDefault();
+          triggerBarrierAlert();
+        }
+      }
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
+        const prizesEl = document.getElementById('prizes');
+        if (!prizesEl) return;
+        const rect = prizesEl.getBoundingClientRect();
+        if (rect.bottom <= window.innerHeight + 25) {
+          e.preventDefault();
+          triggerBarrierAlert();
+        }
+      }
+    };
+
+    const onScroll = () => {
+      const prizesEl = document.getElementById('prizes');
+      if (!prizesEl) return;
+      const maxScroll = prizesEl.offsetTop + prizesEl.offsetHeight - window.innerHeight;
+      if (window.scrollY > maxScroll + 35) {
+        window.scrollTo({ top: maxScroll, behavior: 'auto' });
+        triggerBarrierAlert();
+      }
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [allPrizesUnlocked]);
+
   const handleNavClick = (sectionId: string) => {
+    const downstream = ['schedule', 'sponsors', 'team', 'faq', 'contact'];
+    if (!allPrizesUnlocked && downstream.includes(sectionId)) {
+      const prizesEl = document.getElementById('prizes');
+      if (prizesEl) {
+        prizesEl.scrollIntoView({ behavior: 'smooth' });
+        triggerBarrierAlert();
+      }
+      return;
+    }
     const element = document.getElementById(sectionId);
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
@@ -119,7 +213,6 @@ export default function App() {
       <div className="global-bg-container">
         <div
           className={`bg-layer video-bg ${activeSection === 'schedule' ? 'active' : ''}`}
-          style={{ display: activeSection === 'schedule' ? 'block' : 'none' }}
         >
           <video
             ref={videoRef}
@@ -139,7 +232,7 @@ export default function App() {
           home:     <Home />,
           about:    <About />,
           themes:   <Themes />,
-          prizes:   <Prizes />,
+          prizes:   <Prizes onUnlockStatusChange={setAllPrizesUnlocked} showBarrierAlert={showBarrierAlert} />,
           schedule: <Schedule />,
           sponsors: <Sponsors />,
           team:     <Team />,

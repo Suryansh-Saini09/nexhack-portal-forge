@@ -22,49 +22,14 @@ const teamData: TeamMember[] = [
 ];
 
 function TeamCard({ member }: { member: TeamMember }) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
   const [imageError, setImageError] = useState(false);
-
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    const card = cardRef.current;
-    if (!wrapper || !card) return;
-
-    const onMouseMove = (e: MouseEvent) => {
-      const rect = wrapper.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const xc = rect.width / 2;
-      const yc = rect.height / 2;
-      const maxTilt = 15;
-      const angleX = -((y - yc) / yc) * maxTilt;
-      const angleY = ((x - xc) / xc) * maxTilt;
-      card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.04, 1.04, 1.04)`;
-    };
-
-    const onMouseEnter = () => { card.style.transition = 'none'; };
-    const onMouseLeave = () => {
-      card.style.transition = 'transform 0.5s ease';
-      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    };
-
-    wrapper.addEventListener('mousemove', onMouseMove);
-    wrapper.addEventListener('mouseenter', onMouseEnter);
-    wrapper.addEventListener('mouseleave', onMouseLeave);
-    return () => {
-      wrapper.removeEventListener('mousemove', onMouseMove);
-      wrapper.removeEventListener('mouseenter', onMouseEnter);
-      wrapper.removeEventListener('mouseleave', onMouseLeave);
-    };
-  }, []);
 
   const getInitials = (name: string) =>
     name.split(' ').map(n => n[0]).join('').toUpperCase();
 
   return (
-    <div ref={wrapperRef} className="card-wrapper" data-id={member.id}>
-      <div ref={cardRef} className="card">
+    <div className="card-wrapper" data-id={member.id}>
+      <div className="card">
         <div className="card-image-container">
           {imageError ? (
             <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1a2035 0%, #0b0f19 100%)', border: '1px dashed rgba(240, 199, 94, 0.4)', borderRadius: '17px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.8rem', fontWeight: 'bold', fontFamily: "'HarryP', 'Cinzel', serif", color: '#f0c75e', textShadow: '0 0 12px rgba(240, 199, 94, 0.5)', letterSpacing: '1px', userSelect: 'none' }}>
@@ -74,7 +39,6 @@ function TeamCard({ member }: { member: TeamMember }) {
             <img src={member.image} alt={member.name} className="character-portrait" onError={() => setImageError(true)} />
           )}
         </div>
-        {!imageError && <img src={member.image} alt={member.name} className="character-popout" onError={() => setImageError(true)} />}
       </div>
       <div className="card-details-below">
         <h2 className="character-name">{member.name}</h2>
