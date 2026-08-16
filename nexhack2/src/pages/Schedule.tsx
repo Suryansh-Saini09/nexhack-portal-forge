@@ -239,8 +239,8 @@ export default function Schedule() {
     const positions: { id: number; x: number; y: number }[] = [];
 
     // Expanded lateral track corridor for wide horizontal distance between left & right cards
-    const leftRailX = isMobile ? width * 0.40 : width * 0.38;
-    const rightRailX = isMobile ? width * 0.60 : width * 0.62;
+    const leftRailX = isMobile ? width * 0.38 : width * 0.34;
+    const rightRailX = isMobile ? width * 0.62 : width * 0.66;
     const centerRailX = width * 0.5;
 
     scheduleEventsData.forEach((event) => {
@@ -262,10 +262,9 @@ export default function Schedule() {
       currentY += rowGap;
     });
 
-    // Station 21 (Closure Ceremony) is positioned at transform: translate(-50%, 45px) with ~150px height
-    // So container height must accommodate the card fully without overflow or huge empty gaps
+    // Leave enough room for the centered closing card before the next section.
     const lastStationY = positions.length > 0 ? positions[positions.length - 1].y : currentY;
-    const finalHeight = lastStationY + 215;
+    const finalHeight = lastStationY + 310;
     setContainerDimensions({ width, height: finalHeight });
     setStationPositions(positions);
   };
@@ -350,7 +349,7 @@ export default function Schedule() {
           const ptBehind = trackPathRef.current.getPointAtLength(sampleBehind);
           const dx = ptAhead.x - ptBehind.x;
           const dy = ptAhead.y - ptBehind.y;
-          
+
           // Locomotive is oriented facing downward along the track
           const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
 
@@ -628,7 +627,7 @@ export default function Schedule() {
         {stationPositions.map((pos, index) => {
           const item = scheduleEventsData[index];
           const nodeProgress = index / (scheduleEventsData.length - 1);
-          
+
           // Station states based on train's progression
           const isVisited = scrollProgress >= nodeProgress * 0.93;
           const isActiveStation = index === activeStationIndex;
@@ -643,7 +642,7 @@ export default function Schedule() {
                 {/* Station Track Milestone Ring */}
                 <div className="station-track-ring" />
                 <div className="station-center-lantern" />
-                
+
                 {/* Miniature Vintage Platform Lamp Post */}
                 <div className={`station-lamp-bracket side-${item.side}`}>
                   <div className="lamp-lantern-glow" />
@@ -698,7 +697,6 @@ export default function Schedule() {
           );
         })}
 
-        {/* Hogwarts Express Steam Locomotive (Master Layer - Always on top) */}
         <div
           className="hogwarts-express-train"
           style={{
@@ -709,12 +707,12 @@ export default function Schedule() {
           {/* Forward Headlamp Glowing Light Beam */}
           <div className="train-headlamp-beam" />
 
-          {/* Authentic Hogwarts Express SVG (Engine + Coal Tender) */}
+          {/* Compact Hogwarts Express SVG (Engine + Tender + 2 Carriages) */}
           <svg
             className="train-locomotive-svg"
-            width="38"
-            height="105"
-            viewBox="0 0 58 160"
+            width="30"
+            height="150"
+            viewBox="0 0 58 240"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -760,7 +758,12 @@ export default function Schedule() {
                 <stop offset="50%" stopColor="#24252c" />
                 <stop offset="100%" stopColor="#0a0a0c" />
               </linearGradient>
+              <clipPath id="oneCoachTrainCrop">
+                <rect x="0" y="0" width="58" height="234" />
+              </clipPath>
             </defs>
+
+            <g clipPath="url(#oneCoachTrainCrop)">
 
             {/* Ground Shadow Under Train */}
             <ellipse cx="29" cy="80" rx="26" ry="76" fill="rgba(0,0,0,0.75)" filter="blur(4px)" />
@@ -785,14 +788,14 @@ export default function Schedule() {
 
               {/* Scarlet Red Tender Body */}
               <rect x="10" y="103" width="38" height="49" rx="3.5" fill="url(#hogwartsScarlet58)" stroke="#1a0407" strokeWidth="1" />
-              
+
               {/* Gold Pinstriping on Tender */}
               <rect x="12" y="105" width="34" height="45" rx="2" fill="none" stroke="url(#brassGold58)" strokeWidth="0.8" opacity="0.9" />
               <rect x="14" y="107" width="30" height="41" rx="1.5" fill="none" stroke="#fff1b8" strokeWidth="0.4" opacity="0.65" />
 
               {/* Coal Bunker Well */}
               <rect x="15" y="108" width="28" height="25" rx="2.5" fill="url(#coalBed58)" stroke="#09090b" strokeWidth="1" />
-              
+
               {/* High-Definition Coal Mound */}
               <path d="M 16 110 Q 20 107 24 110 Q 29 106 34 109 Q 39 107 42 111 Q 40 117 42 123 Q 37 129 29 126 Q 20 130 16 122 Z" fill="#18181c" />
               <circle cx="19" cy="113" r="2.8" fill="#26262e" />
@@ -823,6 +826,182 @@ export default function Schedule() {
               <circle cx="15" cy="155" r="1.8" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.5" />
               <circle cx="43" cy="155" r="1.8" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.5" />
               <circle cx="29" cy="154" r="1.5" fill="#d32f2f" className="train-tail-lamp" />
+            </g>
+
+            {/* COUPLING: Tender → Carriage 1 [Y: 156-165] */}
+            <g>
+              <rect x="22" y="156" width="14" height="9" fill="#161619" />
+              <line x1="24" y1="156" x2="24" y2="165" stroke="#444" strokeWidth="1.2" />
+              <line x1="34" y1="156" x2="34" y2="165" stroke="#444" strokeWidth="1.2" />
+              <circle cx="29" cy="160.5" r="1.5" fill="url(#brassGold58)" />
+            </g>
+
+            {/* CARRIAGE 1: Passenger Coach [Y: 165-230] */}
+            <g>
+              <rect x="9" y="165" width="40" height="64" rx="4" fill="#111114" />
+              <rect x="7" y="170" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="170" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="7" y="186" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="186" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="7" y="202" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="202" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="10" y="166" width="38" height="61" rx="3.5" fill="url(#hogwartsScarlet58)" stroke="#1a0407" strokeWidth="1" />
+              <rect x="12" y="168" width="34" height="57" rx="2" fill="none" stroke="url(#brassGold58)" strokeWidth="0.8" opacity="0.9" />
+              <rect x="11" y="166" width="36" height="8" rx="3" fill="#580812" />
+              <rect x="13" y="178" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="13.7" y="178.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="23" y="178" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="23.7" y="178.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="33" y="178" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="33.7" y="178.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="13" y="193" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="13.7" y="193.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="23" y="193" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="23.7" y="193.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="33" y="193" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="33.7" y="193.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="24" y="208" width="10" height="14" rx="1.5" fill="#7a0e1c" stroke="url(#brassGold58)" strokeWidth="0.6" />
+              <circle cx="28" cy="215" r="0.9" fill="url(#brassGold58)" />
+              <rect x="10" y="224" width="38" height="3" rx="0.6" fill="#80101a" stroke="#111" strokeWidth="0.6" />
+              <circle cx="15" cy="227" r="1.6" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.5" />
+              <circle cx="43" cy="227" r="1.6" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.5" />
+            </g>
+
+            {/* COUPLING: Carriage 1 → Carriage 2 [Y: 227-236] */}
+            <g>
+              <rect x="22" y="227" width="14" height="9" fill="#161619" />
+              <line x1="24" y1="227" x2="24" y2="236" stroke="#444" strokeWidth="1.2" />
+              <line x1="34" y1="227" x2="34" y2="236" stroke="#444" strokeWidth="1.2" />
+              <circle cx="29" cy="231.5" r="1.5" fill="url(#brassGold58)" />
+            </g>
+
+            {/* CARRIAGE 2: Passenger Coach [Y: 236-301] */}
+            <g>
+              <rect x="9" y="236" width="40" height="64" rx="4" fill="#111114" />
+              <rect x="7" y="241" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="241" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="7" y="257" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="257" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="7" y="273" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="273" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="10" y="237" width="38" height="61" rx="3.5" fill="url(#hogwartsScarlet58)" stroke="#1a0407" strokeWidth="1" />
+              <rect x="12" y="239" width="34" height="57" rx="2" fill="none" stroke="url(#brassGold58)" strokeWidth="0.8" opacity="0.9" />
+              <rect x="11" y="237" width="36" height="8" rx="3" fill="#580812" />
+              <rect x="13" y="249" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="13.7" y="249.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="23" y="249" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="23.7" y="249.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="33" y="249" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="33.7" y="249.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="13" y="264" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="13.7" y="264.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="23" y="264" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="23.7" y="264.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="33" y="264" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="33.7" y="264.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="24" y="279" width="10" height="14" rx="1.5" fill="#7a0e1c" stroke="url(#brassGold58)" strokeWidth="0.6" />
+              <circle cx="28" cy="286" r="0.9" fill="url(#brassGold58)" />
+              <rect x="10" y="295" width="38" height="3" rx="0.6" fill="#80101a" stroke="#111" strokeWidth="0.6" />
+              <circle cx="15" cy="298" r="1.6" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.5" />
+              <circle cx="43" cy="298" r="1.6" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.5" />
+            </g>
+
+            {/* COUPLING: Carriage 2 → Carriage 3 [Y: 298-307] */}
+            <g>
+              <rect x="22" y="298" width="14" height="9" fill="#161619" />
+              <line x1="24" y1="298" x2="24" y2="307" stroke="#444" strokeWidth="1.2" />
+              <line x1="34" y1="298" x2="34" y2="307" stroke="#444" strokeWidth="1.2" />
+              <circle cx="29" cy="302.5" r="1.5" fill="url(#brassGold58)" />
+            </g>
+
+            {/* CARRIAGE 3: Passenger Coach [Y: 307-372] */}
+            <g>
+              <rect x="9" y="307" width="40" height="64" rx="4" fill="#111114" />
+              <rect x="7" y="312" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="312" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="7" y="328" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="328" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="7" y="344" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="344" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="10" y="308" width="38" height="61" rx="3.5" fill="url(#hogwartsScarlet58)" stroke="#1a0407" strokeWidth="1" />
+              <rect x="12" y="310" width="34" height="57" rx="2" fill="none" stroke="url(#brassGold58)" strokeWidth="0.8" opacity="0.9" />
+              <rect x="11" y="308" width="36" height="8" rx="3" fill="#580812" />
+              <rect x="13" y="320" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="13.7" y="320.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="23" y="320" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="23.7" y="320.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="33" y="320" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="33.7" y="320.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="13" y="335" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="13.7" y="335.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="23" y="335" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="23.7" y="335.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="33" y="335" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="33.7" y="335.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="24" y="350" width="10" height="14" rx="1.5" fill="#7a0e1c" stroke="url(#brassGold58)" strokeWidth="0.6" />
+              <circle cx="28" cy="357" r="0.9" fill="url(#brassGold58)" />
+              <rect x="10" y="366" width="38" height="3" rx="0.6" fill="#80101a" stroke="#111" strokeWidth="0.6" />
+              <circle cx="15" cy="369" r="1.6" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.5" />
+              <circle cx="43" cy="369" r="1.6" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.5" />
+            </g>
+
+            {/* COUPLING: Carriage 3 → Carriage 4 [Y: 369-378] */}
+            <g>
+              <rect x="22" y="369" width="14" height="9" fill="#161619" />
+              <line x1="24" y1="369" x2="24" y2="378" stroke="#444" strokeWidth="1.2" />
+              <line x1="34" y1="369" x2="34" y2="378" stroke="#444" strokeWidth="1.2" />
+              <circle cx="29" cy="373.5" r="1.5" fill="url(#brassGold58)" />
+            </g>
+
+            {/* CARRIAGE 4: Passenger Coach [Y: 378-443] */}
+            <g>
+              <rect x="9" y="378" width="40" height="64" rx="4" fill="#111114" />
+              <rect x="7" y="383" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="383" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="7" y="399" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="399" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="7" y="415" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="415" width="3" height="10" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="10" y="379" width="38" height="61" rx="3.5" fill="url(#hogwartsScarlet58)" stroke="#1a0407" strokeWidth="1" />
+              <rect x="12" y="381" width="34" height="57" rx="2" fill="none" stroke="url(#brassGold58)" strokeWidth="0.8" opacity="0.9" />
+              <rect x="11" y="379" width="36" height="8" rx="3" fill="#580812" />
+              <rect x="13" y="391" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="13.7" y="391.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="23" y="391" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="23.7" y="391.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="33" y="391" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="33.7" y="391.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="13" y="406" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="13.7" y="406.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="23" y="406" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="23.7" y="406.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="33" y="406" width="7" height="9" rx="2" fill="#ffb300" />
+              <rect x="33.7" y="406.7" width="5.6" height="7.6" rx="1.5" fill="#ffe082" />
+              <rect x="24" y="421" width="10" height="14" rx="1.5" fill="#7a0e1c" stroke="url(#brassGold58)" strokeWidth="0.6" />
+              <circle cx="28" cy="428" r="0.9" fill="url(#brassGold58)" />
+              <rect x="10" y="437" width="38" height="3" rx="0.6" fill="#80101a" stroke="#111" strokeWidth="0.6" />
+              <circle cx="15" cy="440" r="1.6" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.5" />
+              <circle cx="43" cy="440" r="1.6" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.5" />
+            </g>
+
+            {/* COUPLING: Carriage 4 → Guard Van [Y: 440-449] */}
+            <g>
+              <rect x="22" y="440" width="14" height="9" fill="#161619" />
+              <line x1="24" y1="440" x2="24" y2="449" stroke="#444" strokeWidth="1.2" />
+              <line x1="34" y1="440" x2="34" y2="449" stroke="#444" strokeWidth="1.2" />
+              <circle cx="29" cy="444.5" r="1.5" fill="url(#brassGold58)" />
+            </g>
+
+            {/* GUARD VAN: Rear [Y: 449-457] */}
+            <g>
+              <rect x="9" y="449" width="40" height="9" rx="3" fill="#111114" />
+              <rect x="7" y="451" width="3" height="6" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="48" y="451" width="3" height="6" rx="1.5" fill="#202026" stroke="#d4af37" strokeWidth="0.6" />
+              <rect x="10" y="449" width="38" height="8" rx="2.5" fill="url(#hogwartsScarlet58)" stroke="#1a0407" strokeWidth="1" />
+              <circle cx="29" cy="457" r="2" fill="#d32f2f" />
+              <rect x="10" y="457" width="38" height="2" rx="0.5" fill="#80101a" />
+              <circle cx="15" cy="459" r="1.5" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.4" />
+              <circle cx="43" cy="459" r="1.5" fill="#1c1c22" stroke="url(#brassGold58)" strokeWidth="0.4" />
             </g>
 
             {/* ========================================================
@@ -872,20 +1051,20 @@ export default function Schedule() {
                 <rect x="8" y="68" width="42" height="25" rx="3.5" fill="url(#hogwartsScarlet58)" stroke="#1a0407" strokeWidth="1" />
                 {/* Gold Cab Pinstriping */}
                 <rect x="10" y="70" width="38" height="21" rx="2" fill="none" stroke="url(#brassGold58)" strokeWidth="0.8" opacity="0.9" />
-                
+
                 {/* Cab Roof Curve */}
                 <rect x="12" y="72" width="34" height="18" rx="4" fill="#580812" />
 
                 {/* Arched Cab Windows with Warm Firebox Glow */}
                 <rect x="13.5" y="74" width="7" height="8.5" rx="2" fill="#ffb300" className="train-window-glow" />
                 <rect x="14.2" y="74.7" width="5.6" height="7.1" rx="1.5" fill="#ffe082" className="train-window-glow" />
-                
+
                 <rect x="37.5" y="74" width="7" height="8.5" rx="2" fill="#ffb300" className="train-window-glow" />
                 <rect x="38.2" y="74.7" width="5.6" height="7.1" rx="1.5" fill="#ffe082" className="train-window-glow" />
 
                 {/* Central Cab Roof Ventilator */}
                 <rect x="24" y="76" width="10" height="6" rx="1.5" fill="#38040b" stroke="url(#brassGold58)" strokeWidth="0.6" />
-                
+
                 {/* Cab Side Brass Number Plates ("5972") */}
                 <rect x="8" y="84" width="2.5" height="5" rx="0.6" fill="url(#brassGold58)" />
                 <rect x="47.5" y="84" width="2.5" height="5" rx="0.6" fill="url(#brassGold58)" />
@@ -939,10 +1118,10 @@ export default function Schedule() {
                   ======================================================== */}
               {/* Smokebox Door Disc */}
               <circle cx="29" cy="11.5" r="6" fill="#18181d" stroke="#d4af37" strokeWidth="0.6" />
-              
+
               {/* Red Circular Crest Headboard */}
               <circle cx="29" cy="11.5" r="4.8" fill="#9e1625" stroke="url(#brassGold58)" strokeWidth="0.75" />
-              
+
               {/* Center "5972" Gold Plate */}
               <circle cx="29" cy="11.5" r="2.8" fill="#7a0e1c" />
               <text x="29" y="12.9" textAnchor="middle" fontSize="3.5" fontWeight="bold" fill="#ffd700" fontFamily="serif">5972</text>
@@ -950,9 +1129,10 @@ export default function Schedule() {
               {/* Golden Front Steam Lantern / Headlamp */}
               <g className="train-golden-headlamp">
                 <rect x="26.5" y="2.2" width="5" height="4.8" rx="1.2" fill="url(#brassGold58)" stroke="#523908" strokeWidth="0.5" />
-                <circle cx="29" cy="4.5" r="2.2" fill="#ffffff" className="train-headlamp-bulb" />
+              <circle cx="29" cy="4.5" r="2.2" fill="#ffffff" className="train-headlamp-bulb" />
                 <circle cx="29" cy="4.5" r="3" fill="none" stroke="#ffd700" strokeWidth="0.6" />
               </g>
+            </g>
             </g>
           </svg>
 

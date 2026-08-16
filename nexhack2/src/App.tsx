@@ -8,6 +8,7 @@ import Prizes from './pages/Prizes';
 import Schedule from './pages/Schedule';
 import Sponsors from './pages/Sponsors';
 import Team from './pages/Team';
+import CharacterShowcase from './components/CharacterShowcase';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import Footer from './components/Footer';
@@ -36,8 +37,6 @@ export default function App() {
   const isLocked = false;
 
   const [activeSection, setActiveSection] = useState<SectionId>('home');
-  const videoRef = React.useRef<HTMLVideoElement>(null);
-
   const [allPrizesUnlocked, setAllPrizesUnlocked] = useState(false);
   const [showBarrierAlert, setShowBarrierAlert] = useState(false);
   const alertTimeoutRef = React.useRef<number | null>(null);
@@ -211,17 +210,6 @@ export default function App() {
     <>
       <WandCursor />
       <div className="global-bg-container">
-        <div
-          className={`bg-layer video-bg ${activeSection === 'schedule' ? 'active' : ''}`}
-        >
-          <video
-            ref={videoRef}
-            src="./images/home/nexhack.mp4"
-            autoPlay loop muted playsInline
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
-          />
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, rgba(10, 20, 40, 0.35) 0%, rgba(3, 3, 5, 0.95) 90%)', pointerEvents: 'none' }} />
-        </div>
         <div className={`bg-layer home-bg ${activeSection !== 'schedule' ? 'active' : ''}`} />
       </div>
 
@@ -240,9 +228,12 @@ export default function App() {
           contact:  <Contact />,
         };
         return (
-          <div key={id} id={id} className={activeSection === id ? 'active' : ''}>
-            {PageMap[id]}
-          </div>
+          <React.Fragment key={id}>
+            <div id={id} className={activeSection === id ? 'active' : ''}>
+              {PageMap[id]}
+            </div>
+            {id === 'prizes' && <CharacterShowcase />}
+          </React.Fragment>
         );
       })}
 

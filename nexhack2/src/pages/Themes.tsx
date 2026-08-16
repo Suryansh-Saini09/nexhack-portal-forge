@@ -1,207 +1,173 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 
 interface Track {
   id: string;
   num: string;
+  category: 'all' | 'ai' | 'security' | 'web3' | 'hardware' | 'open';
   spell: string;
+  icon: string;
   title: string;
   desc: string;
+  tags: string[];
 }
 
 const tracksData: Track[] = [
   {
     id: 'forensic-tech',
     num: '01',
+    category: 'security',
     spell: 'Aparecium',
+    icon: '🔍',
     title: 'Forensic Tech',
-    desc: 'Uncover hidden digital footprints, extract encrypted artifacts, and deploy automated forensics to solve cyber crimes.'
+    desc: 'Uncover hidden digital footprints, extract encrypted artifacts, and deploy automated forensics to investigate and mitigate cyber incidents.',
+    tags: ['Memory Forensics', 'Deepfake Detection', 'Malware Triage']
   },
   {
     id: 'edtech',
     num: '02',
+    category: 'open',
     spell: 'Lumos',
+    icon: '💡',
     title: 'EdTech',
-    desc: 'Transform educational paradigms with intelligent tutoring, interactive classroom tools, and adaptive knowledge networks.'
+    desc: 'Transform educational paradigms with intelligent tutoring, immersive classroom tools, gamified curricula, and adaptive knowledge networks.',
+    tags: ['Adaptive Learning', 'AI Tutoring', 'Virtual Labs']
   },
   {
     id: 'open-innovation',
     num: '03',
+    category: 'open',
     spell: 'Alohomora',
+    icon: '🔓',
     title: 'Open Innovation',
-    desc: 'Break conventional boundaries in a limitless track where cross-domain engineering meets raw creative innovation.'
+    desc: 'Break conventional boundaries in a limitless track where cross-domain engineering, moonshot experiments, and raw creative hacking collide.',
+    tags: ['Multidisciplinary', 'Moonshots', 'Creative Tech']
   },
   {
     id: 'web3',
     num: '04',
+    category: 'web3',
     spell: 'Decentralia',
+    icon: '⛓️',
     title: 'Web3 & Blockchain',
-    desc: 'Forge tamper-proof smart contracts, decentralized ledgers, zero-knowledge privacy layers, and sovereign identity.'
+    desc: 'Forge tamper-proof smart contracts, decentralized ledgers, zero-knowledge privacy layers, tokenized economies, and sovereign digital identity.',
+    tags: ['Smart Contracts', 'ZK-Rollups', 'DeFi Protocols']
   },
   {
     id: 'ai-agri',
     num: '05',
+    category: 'ai',
     spell: 'Herbivicus',
+    icon: '🌿',
     title: 'AI in Agriculture',
-    desc: 'Leverage computer vision for crop diagnostics, predictive meteorology, and automated precision soil enrichment.'
+    desc: 'Leverage computer vision for crop diagnostics, predictive meteorology, automated precision yield optimization, and soil health monitoring.',
+    tags: ['Crop Diagnostics', 'Soil Telemetry', 'Yield Prediction']
   },
   {
     id: 'generative-ai',
     num: '06',
+    category: 'ai',
     spell: 'Conjurus',
+    icon: '⚡',
     title: 'Generative AI',
-    desc: 'Empower human ingenuity with agentic workflows, neural synthesizers, multimodal intelligence, and real-time generation.'
+    desc: 'Empower human ingenuity with autonomous agentic workflows, neural synthesizers, multimodal reasoning, and real-time generation engines.',
+    tags: ['Agentic AI', 'Multimodal LLMs', 'Diffusion Models']
   },
   {
     id: 'robotics',
     num: '07',
+    category: 'hardware',
     spell: 'Locomotor',
+    icon: '🤖',
     title: 'Robotics & Automation',
-    desc: 'Design intelligent physical automata, real-time spatial pathfinding, sensory telemetry, and collaborative robot interfaces.'
+    desc: 'Design intelligent physical automata, real-time spatial pathfinding, embedded sensor telemetry, and collaborative human-robot interfaces.',
+    tags: ['Embedded Systems', 'Autonomous Drones', 'Spatial Robotics']
   },
   {
     id: 'cybersecurity',
     num: '08',
+    category: 'security',
     spell: 'Cave Inimicum',
+    icon: '🛡️',
     title: 'Cybersecurity',
-    desc: 'Fortify digital perimeters with impenetrable cryptographic barriers, active anomaly detection, and zero-trust defenses.'
+    desc: 'Fortify digital perimeters with impenetrable cryptographic barriers, real-time anomaly detection, threat hunting, and zero-trust defenses.',
+    tags: ['Zero-Trust', 'Threat Intelligence', 'Cryptography']
   },
   {
     id: 'fintech',
     num: '09',
+    category: 'web3',
     spell: 'Gringotts',
+    icon: '💰',
     title: 'FinTech',
-    desc: 'Re-engineer transactions with microsecond algorithmic settlements, fraud-resistant ledgers, and automated trading.'
+    desc: 'Re-engineer transactions with microsecond algorithmic settlements, fraud-resistant financial pipelines, decentralized escrow, and automated trading.',
+    tags: ['Algorithmic Trading', 'Fraud Prevention', 'Open Banking']
   },
   {
     id: 'campus-solutions',
     num: '10',
+    category: 'open',
     spell: 'Hogwarts',
+    icon: '🏰',
     title: 'Campus Solutions',
-    desc: 'Build frictionless utilities for university life: intelligent resource dispatch, safety telemetry, and community portals.'
+    desc: 'Build frictionless utilities for university life: intelligent resource dispatch, student safety telemetry, automated administration, and community hubs.',
+    tags: ['Smart Campus', 'Resource Dispatch', 'Student Portals']
   }
 ];
 
 export default function Themes() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (!containerRef.current) return;
-          const rect = containerRef.current.getBoundingClientRect();
-          const totalScrollable = rect.height - window.innerHeight;
-
-          if (totalScrollable > 0) {
-            const current = -rect.top;
-            const progress = Math.min(Math.max(current / totalScrollable, 0), 1);
-            setScrollProgress(progress);
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
-
-  const totalTracks = tracksData.length;
-  const currentFocus = scrollProgress * (totalTracks - 1);
-  const activeIndex = Math.min(Math.round(currentFocus), totalTracks - 1);
-
-  const scrollToTheme = (index: number) => {
-    if (!containerRef.current) return;
-    const containerTop = containerRef.current.getBoundingClientRect().top + window.scrollY;
-    const totalScrollable = containerRef.current.offsetHeight - window.innerHeight;
-    const targetScroll = containerTop + (index / (totalTracks - 1)) * totalScrollable;
-    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-  };
-
   return (
-    <section ref={containerRef} className="themes-cinematic-wrapper">
-      <div className="themes-sticky-stage">
+    <section className="objects-section themes-section" id="themes">
+      {/* Grand Arcane Section Header */}
+      <div className="themes-grand-header">
+        <div className="themes-eyebrow-badge">
+          <span className="eyebrow-sparkle">✦</span>
+          <span className="eyebrow-text">THE TEN CHAMBERS OF INNOVATION</span>
+          <span className="eyebrow-sparkle">✦</span>
+        </div>
+        <h1 className="section-title themes-title">Hacking Themes</h1>
+        <div className="themes-header-divider" style={{ margin: '14px auto 0' }} />
+      </div>
 
-        {/* Ambient Dark Atmospheric Glows */}
-        <div className="themes-ambient-backdrop">
-          <div className="themes-radial-glow top-glow" />
-          <div className="themes-radial-glow bottom-glow" />
-          <div className="themes-big-watermark-text" aria-hidden="true">
-            THEMES
+      {/* Main 10-Chambers Showcase Grid */}
+      <div className="themes-showcase-grid">
+        {tracksData.map(track => (
+          <div key={track.id} className="theme-chamber-card">
+            {/* Ambient Background Aura */}
+            <div className="chamber-ambient-aura" />
+
+            {/* Top Card Meta Row */}
+            <div className="chamber-meta-row">
+              <span className="chamber-num-badge">TRACK // {track.num}</span>
+              <span className="chamber-spell-pill">
+                <span className="spell-wand-icon">🪄</span> {track.spell}
+              </span>
+            </div>
+
+            {/* Icon + Title */}
+            <div className="chamber-title-wrap">
+              <span className="chamber-icon-glyph">{track.icon}</span>
+              <h3 className="chamber-card-title">{track.title}</h3>
+            </div>
+
+            {/* Description */}
+            <p className="chamber-card-desc">{track.desc}</p>
+
+            {/* Problem Space / Focus Tags */}
+            <div className="chamber-tags-strip">
+              {track.tags.map((tag, idx) => (
+                <span key={idx} className="chamber-tag-chip">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Ornate Corner Filigrees */}
+            <div className="alliance-corner tl" />
+            <div className="alliance-corner tr" />
+            <div className="alliance-corner bl" />
+            <div className="alliance-corner br" />
           </div>
-        </div>
-
-        {/* Centered Grand Hall Header */}
-        <div className="themes-centered-header">
-          <span className="themes-hall-tag">THE GRAND HALL OF TRACKS</span>
-          <h1 className="themes-hall-title">Hacking Themes</h1>
-          <div className="themes-hall-divider" />
-        </div>
-
-        {/* Cards Stream Canvas — First Card highlighted at start */}
-        <div className="themes-stagger-canvas">
-          {tracksData.map((track, i) => {
-            const diff = i - currentFocus;
-            const absDiff = Math.abs(diff);
-
-            // Render visible cards
-            if (absDiff > 2.8) return null;
-
-            // Track 01 is guaranteed spotlight at start, progression follows smoothly
-            const isFocal = i === activeIndex || absDiff < 0.45;
-
-            // Spacing across viewport
-            const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-            const spacing = isMobile ? 320 : 440;
-            const translateX = diff * spacing;
-
-            // Subtle vertical stagger for editorial rhythm
-            const translateY = (i % 2 === 0 ? -16 : 16) + diff * 8;
-
-            const scale = Math.max(0.85, 1 - absDiff * 0.08);
-            const opacity = Math.max(0.2, 1 - absDiff * 0.32);
-            const zIndex = Math.round(30 - absDiff * 6);
-
-            return (
-              <div
-                key={track.id}
-                className={`theme-rect-card ${isFocal ? 'is-focal' : 'is-peripheral'}`}
-                style={{
-                  transform: `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`,
-                  opacity,
-                  zIndex,
-                }}
-                onClick={() => scrollToTheme(i)}
-              >
-                {/* Header Row: Number + Spell */}
-                <div className="rect-card-header">
-                  <span className="rect-track-num">TRACK // {track.num}</span>
-                  <span className="rect-spell-name">{track.spell}</span>
-                </div>
-
-                {/* Main Theme Title */}
-                <h2 className="rect-theme-title">{track.title}</h2>
-
-                {/* Divider Line */}
-                <div className="rect-card-divider" />
-
-                {/* About / Description */}
-                <p className="rect-desc-text">{track.desc}</p>
-              </div>
-            );
-          })}
-        </div>
-
+        ))}
       </div>
     </section>
   );

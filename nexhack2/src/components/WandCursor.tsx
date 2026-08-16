@@ -25,31 +25,6 @@ export default function WandCursor() {
     document.addEventListener('mouseleave', onMouseLeaveWindow);
     document.addEventListener('mouseenter', onMouseEnterWindow);
 
-    const createSparkle = (x: number, y: number) => {
-      const particle = document.createElement('div');
-      particle.className = 'cursor-particle';
-
-      const colors = ['#ffe066', '#ffd700', '#00bfff', '#00f7ff', '#ffffff'];
-      const color = colors[Math.floor(Math.random() * colors.length)];
-
-      const size = Math.random() * 5 + 3;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particle.style.background = color;
-      particle.style.boxShadow = `0 0 8px ${color}`;
-
-      const xDir = (Math.random() - 0.5) * 80;
-      const yDir = (Math.random() - 0.5) * 80 + 30;
-      particle.style.setProperty('--x-dir', `${xDir}px`);
-      particle.style.setProperty('--y-dir', `${yDir}px`);
-      particle.style.left = `${x}px`;
-      particle.style.top = `${y}px`;
-      particle.style.pointerEvents = 'none';
-
-      document.body.appendChild(particle);
-      setTimeout(() => { particle.remove(); }, 600);
-    };
-
     let animationFrameId: number;
     const updateCursor = () => {
       const dx = mouseX - cursorX;
@@ -59,11 +34,6 @@ export default function WandCursor() {
 
       cursor.style.left = `${cursorX}px`;
       cursor.style.top = `${cursorY}px`;
-
-      const speed = Math.sqrt(dx * dx + dy * dy);
-      if (speed > 1.5 && Math.random() < 0.4) {
-        createSparkle(cursorX, cursorY);
-      }
 
       animationFrameId = requestAnimationFrame(updateCursor);
     };

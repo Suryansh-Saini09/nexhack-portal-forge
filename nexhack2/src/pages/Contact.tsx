@@ -31,123 +31,185 @@ export default function Contact() {
     setTimeout(() => setStatus(''), 4000);
   };
 
-  const getButtonBackground = () => {
-    if (status === 'sending') return 'linear-gradient(135deg, #555 0%, #335 100%)';
-    if (status === 'success') return 'linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%)';
-    if (status === 'error')   return 'linear-gradient(135deg, #c62828 0%, #b71c1c 100%)';
-    return 'linear-gradient(135deg, #ae0001 0%, #740001 100%)';
-  };
-
-  const getButtonBorderColor = () => {
-    if (status === 'success') return '#5cd68a';
-    if (status === 'error')   return '#ff8a80';
-    return '#eeb939';
-  };
-
-  const inputStyle: React.CSSProperties = {
-    width: '100%', padding: '14px 18px', borderRadius: '10px',
-    background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)',
-    color: '#fff', fontFamily: 'Spectral, serif', fontSize: '1.05rem',
-    outline: 'none', transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)', cursor: 'text',
-  };
-
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.target.style.borderColor = '#eeb939';
-    e.target.style.background = 'rgba(255, 255, 255, 0.04)';
-    e.target.style.boxShadow = '0 0 15px rgba(238, 185, 57, 0.15)';
-  };
-
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.target.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-    e.target.style.background = 'rgba(255, 255, 255, 0.02)';
-    e.target.style.boxShadow = 'none';
-  };
+  const contactChannels = [
+    {
+      icon: '✉️',
+      label: 'OWL POST (EMAIL)',
+      val: 'nexhack@geetauniversity.edu.in',
+      href: 'mailto:nexhack@geetauniversity.edu.in'
+    },
+    {
+      icon: '💬',
+      label: 'DISCORD SANCTUM',
+      val: 'thenexhack',
+      href: 'https://discord.com'
+    },
+    {
+      icon: '📸',
+      label: 'INSTAGRAM SCROLL',
+      val: '@thenexhack',
+      href: 'https://instagram.com/thenexhack'
+    },
+    {
+      icon: '📍',
+      label: 'PHYSICAL REALM',
+      val: 'Geeta University, Panipat',
+      href: null
+    },
+    {
+      icon: '📜',
+      label: 'HOWLER TRANSMISSION',
+      val: '+91 9053709750',
+      href: 'tel:+919053709750'
+    }
+  ];
 
   return (
-    <main className="objects-section" style={{ minHeight: 'auto', padding: '35px 0 20px 0' }}>
-      <h1 className="section-title">Owl Post</h1>
+    <main className="objects-section owl-post-section" id="contact">
+      {/* Grand Header */}
+      <div className="owl-post-grand-header">
+        <div className="themes-eyebrow-badge">
+          <span className="eyebrow-sparkle">✦</span>
+          <span className="eyebrow-text">THE MINISTRY OF COMMUNICATIONS</span>
+          <span className="eyebrow-sparkle">✦</span>
+        </div>
+        <h1 className="section-title">Owl Post</h1>
+        <div className="themes-header-divider" style={{ margin: '12px auto 26px' }} />
+      </div>
 
-      <div className="objects-container" style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 20px' }}>
-        <div className="contact-wrapper">
+      {/* Main 2-Column Enchanted Vault Card */}
+      <div className="owl-vault-container">
+        <div className="owl-vault-card">
+          {/* Top Arcane Hairline */}
+          <div className="owl-card-top-hairline" />
 
-          {/* Left Side: Owl Info Panel */}
-          <div className="contact-info-panel">
-            <div style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', width: '200px', height: '200px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(236, 185, 57, 0.12) 0%, rgba(0,0,0,0) 70%)', filter: 'blur(20px)', pointerEvents: 'none', zIndex: 0 }} />
-            <div style={{ zIndex: 1, position: 'relative' }}>
-              <h2 style={{ fontFamily: 'HarryP, Cinzel Decorative, serif', fontSize: '3rem', color: '#fff', marginBottom: '10px', letterSpacing: '1px', textShadow: '0 0 10px rgba(236, 185, 57, 0.3)' }}>Get in Touch</h2>
-              <div style={{ width: '60px', height: '2px', background: 'linear-gradient(90deg, #eeb939 0%, transparent 100%)', marginBottom: '25px' }} />
-              <p style={{ fontFamily: 'Spectral, serif', fontSize: '1.15rem', lineHeight: '1.6', color: 'var(--color-text-muted)', marginBottom: '30px' }}>
-                Need to reach the Ministry of Hackers or summon the organizing committee? Contact us directly through the channels below.
+          {/* Left Panel: Information & Channels */}
+          <div className="owl-info-column">
+            <div className="owl-ambient-aura" />
+
+            <div className="owl-column-header">
+              <span className="owl-panel-tag">✦ REACH THE COMMITTEE ✦</span>
+              <h2 className="owl-column-title">Get in Touch</h2>
+              <div className="owl-title-underline" />
+              <p className="owl-column-desc">
+                Need to reach the Ministry of Hackers or summon the organizing committee? Dispatch your query through our official channels.
               </p>
-              <div className="contact-details-grid">
-                <div>
-                  <h4 style={{ fontFamily: 'Cinzel, serif', fontSize: '0.9rem', color: '#ff9900', letterSpacing: '1px', marginBottom: '4px' }}>EMAIL</h4>
-                  <p style={{ fontFamily: 'Spectral, serif', color: '#fff', fontSize: '1.1rem' }}>nexhack@geetauniversity.edu.in</p>
-                </div>
-                <div>
-                  <h4 style={{ fontFamily: 'Cinzel, serif', fontSize: '0.9rem', color: '#ff9900', letterSpacing: '1px', marginBottom: '4px' }}>DISCORD</h4>
-                  <p style={{ fontFamily: 'Spectral, serif', color: '#fff', fontSize: '1.1rem' }}>thenexhack</p>
-                </div>
-                <div>
-                  <h4 style={{ fontFamily: 'Cinzel, serif', fontSize: '0.9rem', color: '#ff9900', letterSpacing: '1px', marginBottom: '4px' }}>INSTAGRAM</h4>
-                  <p style={{ fontFamily: 'Spectral, serif', color: '#fff', fontSize: '1.1rem' }}>@thenexhack</p>
-                </div>
-                <div style={{ gridColumn: 'span 2' }}>
-                  <h4 style={{ fontFamily: 'Cinzel, serif', fontSize: '0.9rem', color: '#ff9900', letterSpacing: '1px', marginBottom: '4px' }}>LOCATION</h4>
-                  <p style={{ fontFamily: 'Spectral, serif', color: '#fff', fontSize: '1.1rem' }}>Geeta University, Panipat</p>
-                </div>
-                <div style={{ gridColumn: 'span 2' }}>
-                  <h4 style={{ fontFamily: 'Cinzel, serif', fontSize: '0.9rem', color: '#ff9900', letterSpacing: '1px', marginBottom: '4px' }}>EMERGENCY NO. (HOWLER)</h4>
-                  <p style={{ fontFamily: 'Spectral, serif', color: '#fff', fontSize: '1.1rem' }}>+91 9053709750</p>
+            </div>
+
+            {/* Channels Grid */}
+            <div className="owl-channels-grid">
+              {contactChannels.map((c, i) => {
+                const isFull =
+                  c.label.includes('EMAIL') ||
+                  c.label.includes('PHYSICAL') ||
+                  c.label.includes('LOCATION') ||
+                  c.label.includes('HOWLER');
+                return (
+                  <div
+                    key={i}
+                    className={`owl-channel-tile ${isFull ? 'full-width' : ''}`}
+                  >
+                    <div className="channel-icon-bubble">{c.icon}</div>
+                    <div className="channel-text-wrap">
+                      <span className="channel-label-text">{c.label}</span>
+                      {c.href ? (
+                        <a href={c.href} target="_blank" rel="noopener noreferrer" className="channel-value-link">
+                          {c.val}
+                        </a>
+                      ) : (
+                        <span className="channel-value-text">{c.val}</span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Central Gilded Divider with Rune Seal */}
+          <div className="owl-vertical-divider">
+            <div className="owl-seal-badge">
+              <span className="owl-seal-icon">🪶</span>
+            </div>
+          </div>
+
+          {/* Right Panel: Parchment Inquiry Form */}
+          <div className="owl-form-column">
+            <div className="owl-column-header">
+              <span className="owl-panel-tag">✦ PARCHMENT INQUIRY ✦</span>
+              <h2 className="owl-column-title">Send an Owl</h2>
+              <div className="owl-title-underline" />
+              <p className="owl-column-desc">
+                Inscribe your parchment scroll and an owl messenger will be dispatched instantly.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="owl-interactive-form">
+              <div className="owl-form-group">
+                <label className="owl-field-label">YOUR NAME</label>
+                <div className="owl-input-wrap">
+                  <span className="owl-input-icon">👤</span>
+                  <input
+                    type="text"
+                    value={form.name}
+                    onChange={e => setForm({ ...form, name: e.target.value })}
+                    required
+                    placeholder="e.g. Harry Potter"
+                    className="owl-text-input"
+                  />
                 </div>
               </div>
-            </div>
+
+              <div className="owl-form-group">
+                <label className="owl-field-label">OWL ADDRESS (EMAIL)</label>
+                <div className="owl-input-wrap">
+                  <span className="owl-input-icon">✉️</span>
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={e => setForm({ ...form, email: e.target.value })}
+                    required
+                    placeholder="wizard@hogwarts.edu"
+                    className="owl-text-input"
+                  />
+                </div>
+              </div>
+
+              <div className="owl-form-group">
+                <label className="owl-field-label">YOUR MESSAGE</label>
+                <textarea
+                  value={form.message}
+                  onChange={e => setForm({ ...form, message: e.target.value })}
+                  required
+                  rows={2}
+                  placeholder="Inscribe your parchment scroll..."
+                  className="owl-text-input owl-textarea"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className={`owl-dispatch-btn ${status}`}
+              >
+                <span>
+                  {status === 'sending'
+                    ? 'DISPATCHING OWL...'
+                    : status === 'success'
+                    ? 'OWL DISPATCHED! ✦'
+                    : status === 'error'
+                    ? 'FAILED TO DISPATCH'
+                    : 'DISPATCH OWL MESSAGE ✉️'}
+                </span>
+              </button>
+            </form>
           </div>
 
-          {/* Right Side: The Form */}
-          <div className="contact-form-panel">
-            <div className="wand-decor" style={{ position: 'absolute', top: '45px', left: '20px', width: '4px', height: '70px', background: 'linear-gradient(to bottom, #eeb939, #ae0001)' }} />
-            <div style={{ paddingLeft: '15px' }}>
-              <h2 style={{ fontFamily: 'HarryP, Cinzel, serif', fontSize: '2.8rem', color: '#fff', marginBottom: '5px' }}>Send an Owl</h2>
-              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.88rem', color: 'var(--color-text-muted)', marginBottom: '30px', textTransform: 'uppercase', letterSpacing: '1.5px' }}>Write your parchment scroll</p>
-
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
-                <div>
-                  <label className="character-role" style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: '#eeb939', letterSpacing: '1.5px', fontWeight: 'bold' }}>Your Name</label>
-                  <input type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required placeholder="e.g. Harry Potter" style={inputStyle} onFocus={handleFocus} onBlur={handleBlur} />
-                </div>
-                <div>
-                  <label className="character-role" style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: '#eeb939', letterSpacing: '1.5px', fontWeight: 'bold' }}>Your Email</label>
-                  <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required placeholder="wizard@hogwarts.edu" style={inputStyle} onFocus={handleFocus} onBlur={handleBlur} />
-                </div>
-                <div>
-                  <label className="character-role" style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: '#eeb939', letterSpacing: '1.5px', fontWeight: 'bold' }}>Your Message</label>
-                  <textarea value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required rows={3} placeholder="Inscribe your parchment scroll..." style={{ ...inputStyle, resize: 'none' }} onFocus={handleFocus} onBlur={handleBlur} />
-                </div>
-                <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  style={{ padding: '14px 30px', borderRadius: '30px', background: getButtonBackground(), border: `1px solid ${getButtonBorderColor()}`, color: '#fff', fontFamily: 'Cinzel, serif', fontSize: '1rem', fontWeight: 'bold', letterSpacing: '2px', cursor: status === 'sending' ? 'not-allowed' : 'pointer', transition: 'all 0.3s ease-out', alignSelf: 'flex-start', marginTop: '10px', boxShadow: status === 'success' ? '0 4px 15px rgba(46, 125, 50, 0.4)' : status === 'error' ? '0 4px 15px rgba(198, 40, 40, 0.4)' : '0 4px 15px rgba(174, 0, 1, 0.3)', opacity: status === 'sending' ? 0.7 : 1 }}
-                  onMouseEnter={e => {
-                    if (status === 'sending') return;
-                    const el = e.currentTarget;
-                    el.style.transform = 'translateY(-2px)';
-                    el.style.boxShadow = status === 'success' ? '0 6px 20px rgba(92, 214, 138, 0.4)' : status === 'error' ? '0 6px 20px rgba(255, 138, 128, 0.4)' : '0 6px 20px rgba(238, 185, 57, 0.4), 0 0 15px rgba(174, 0, 1, 0.5)';
-                    el.style.borderColor = '#fff';
-                  }}
-                  onMouseLeave={e => {
-                    if (status === 'sending') return;
-                    const el = e.currentTarget;
-                    el.style.transform = 'translateY(0)';
-                    el.style.boxShadow = status === 'success' ? '0 4px 15px rgba(46, 125, 50, 0.4)' : status === 'error' ? '0 4px 15px rgba(198, 40, 40, 0.4)' : '0 4px 15px rgba(174, 0, 1, 0.3)';
-                    el.style.borderColor = getButtonBorderColor();
-                  }}
-                >
-                  {status === 'sending' ? 'Sending Owl...' : status === 'success' ? 'Owl Dispatched!' : status === 'error' ? 'Failed to Send' : 'Dispatch Owl'}
-                </button>
-              </form>
-            </div>
-          </div>
+          {/* Ornate Corner Filigrees */}
+          <div className="alliance-corner tl" />
+          <div className="alliance-corner tr" />
+          <div className="alliance-corner bl" />
+          <div className="alliance-corner br" />
         </div>
       </div>
     </main>
