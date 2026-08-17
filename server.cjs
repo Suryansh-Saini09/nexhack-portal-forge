@@ -9,34 +9,44 @@ const app = express();
 const PORT = process.env.PORT || 5005;
 const TARGET_EMAIL = process.env.TARGET_EMAIL || 'nexhack@geetauniversity.edu.in';
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(express.json());
 
-const REGISTRATIONS_FILE = path.join(__dirname, 'registrations.json');
-const MESSAGES_FILE = path.join(__dirname, 'messages.json');
-const SPONSORS_FILE = path.join(__dirname, 'sponsors.json');
+// Serverless friendly directory for temporary writes
+const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const DATA_DIR = isServerless ? '/tmp' : __dirname;
+
+const REGISTRATIONS_FILE = path.join(DATA_DIR, 'registrations.json');
+const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
+const SPONSORS_FILE = path.join(DATA_DIR, 'sponsors.json');
+const MENTORS_FILE = path.join(DATA_DIR, 'mentors.json');
 
 // Configure Nodemailer Transporter
 let transporter = null;
 if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+  const cleanPass = process.env.SMTP_PASS.replace(/\s+/g, '');
   transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: parseInt(process.env.SMTP_PORT || '587'),
     secure: process.env.SMTP_SECURE === 'true',
     auth: {
       user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      pass: cleanPass,
     },
-    connectionTimeout: 5000,
-    greetingTimeout: 5000,
-    socketTimeout: 5000,
+    connectionTimeout: 8000,
+    greetingTimeout: 8000,
+    socketTimeout: 8000,
   });
   console.log(`[Email] Mailer active for target: ${TARGET_EMAIL} via ${process.env.SMTP_HOST || 'smtp.gmail.com'}`);
 } else {
-  console.log(`[Email] Target email configured to: ${TARGET_EMAIL}. (SMTP_USER/SMTP_PASS missing in .env -- submissions are stored to JSON files and logged).`);
+  console.log(`[Email] Target email configured to: ${TARGET_EMAIL}. (SMTP_USER/SMTP_PASS missing in .env -- submissions are stored and logged).`);
 }
 
-// Helper to send email notification
+// Helper to send email notification (must be awaited for serverless execution)
 async function sendMailNotification(subject, htmlContent, replyTo) {
   if (!transporter) {
     console.log(`[Mail Simulation -> ${TARGET_EMAIL}]`);
@@ -45,7 +55,6 @@ async function sendMailNotification(subject, htmlContent, replyTo) {
     return;
   }
 
-  // 5-second max timeout guard for mail dispatch
   const mailPromise = transporter.sendMail({
     from: `"${process.env.SENDER_NAME || 'NexHack 2.0 Portal'}" <${process.env.SMTP_USER}>`,
     to: TARGET_EMAIL,
@@ -55,14 +64,16 @@ async function sendMailNotification(subject, htmlContent, replyTo) {
   });
 
   const timeoutPromise = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error('SMTP dispatch timed out')), 20000)
+    setTimeout(() => reject(new Error('SMTP dispatch timed out')), 8000)
   );
 
   try {
     const info = await Promise.race([mailPromise, timeoutPromise]);
     console.log(`[Email Delivered] Sent to ${TARGET_EMAIL}: ID ${info.messageId}`);
+    return true;
   } catch (err) {
     console.error(`[Email Delivery Notice] ${err.message}`);
+    return false;
   }
 }
 
@@ -89,34 +100,26 @@ function writeJsonFile(filePath, data) {
   }
 }
 
-// Root Status Endpoint
-app.get('/', (req, res) => {
+// Root / Health Status Endpoints (supports multiple path variants)
+app.get(['/', '/api', '/api/health', '/health'], (req, res) => {
   res.json({ 
     status: 'ok', 
     service: 'NexHack 2.0 API Server',
     targetEmail: TARGET_EMAIL,
     smtpConfigured: !!transporter,
+    timestamp: new Date().toISOString(),
     endpoints: [
       'GET  /api/health',
       'POST /api/register',
       'POST /api/contact',
-      'POST /api/sponsor'
+      'POST /api/sponsor',
+      'POST /api/mentor'
     ]
   });
 });
 
-// Health Check Endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
-    targetEmail: TARGET_EMAIL,
-    smtpConfigured: !!transporter,
-    timestamp: new Date().toISOString() 
-  });
-});
-
 // Registration Endpoint
-app.post('/api/register', (req, res) => {
+app.post(['/api/register', '/register'], async (req, res) => {
   const { name, email, phone, academy, year, teamSize, github } = req.body;
   
   if (!name || !email || !phone || !academy) {
@@ -141,8 +144,8 @@ app.post('/api/register', (req, res) => {
 
   console.log(`[Registry] New registration added: ${name} (${email})`);
 
-  // Send Email Notification
-  sendMailNotification(
+  // Await email dispatch for serverless reliability
+  await sendMailNotification(
     `🧙‍♂️ New Registration: ${name} (${academy})`,
     `
       <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #0f172a; color: #f8fafc; border-radius: 8px;">
@@ -165,7 +168,7 @@ app.post('/api/register', (req, res) => {
 });
 
 // Contact Endpoint (Owl Post)
-app.post('/api/contact', (req, res) => {
+app.post(['/api/contact', '/contact'], async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
@@ -186,8 +189,8 @@ app.post('/api/contact', (req, res) => {
 
   console.log(`[Owl Post] New message received from: ${name} (${email})`);
 
-  // Send Email Notification
-  sendMailNotification(
+  // Await email dispatch for serverless reliability
+  await sendMailNotification(
     `🦉 Owl Post Inquiry from ${name}`,
     `
       <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #0e1222; color: #f5f5fa; border-radius: 8px;">
@@ -209,7 +212,7 @@ app.post('/api/contact', (req, res) => {
 });
 
 // Sponsorship Endpoint
-app.post('/api/sponsor', (req, res) => {
+app.post(['/api/sponsor', '/sponsor'], async (req, res) => {
   const { company, contactName, email, tier, message } = req.body;
 
   if (!company || (!contactName && !company) || !email) {
@@ -232,8 +235,8 @@ app.post('/api/sponsor', (req, res) => {
 
   console.log(`[Sponsorship] New inquiry from: ${company} (${contactName || email})`);
 
-  // Send Email Notification
-  sendMailNotification(
+  // Await email dispatch for serverless reliability
+  await sendMailNotification(
     `💎 Sponsorship Proposal: ${company} (${tier || 'General'})`,
     `
       <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #0b1120; color: #f8fafc; border-radius: 8px;">
@@ -254,6 +257,52 @@ app.post('/api/sponsor', (req, res) => {
   );
 
   res.status(200).json({ success: true, message: 'Inquiry submitted successfully' });
+});
+
+// Mentor Endpoint
+app.post(['/api/mentor', '/mentor'], async (req, res) => {
+  const { name, email, github, linkedin, experience } = req.body;
+
+  if (!name || !email) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  const mentors = readJsonFile(MENTORS_FILE);
+  const newMentor = {
+    id: Date.now().toString(),
+    name,
+    email,
+    github,
+    linkedin,
+    experience,
+    timestamp: new Date().toISOString()
+  };
+
+  mentors.push(newMentor);
+  writeJsonFile(MENTORS_FILE, mentors);
+
+  console.log(`[Mentor] New application from: ${name} (${email})`);
+
+  // Await email dispatch for serverless reliability
+  await sendMailNotification(
+    `🧙 Mentor Application: ${name}`,
+    `
+      <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #0f172a; color: #f8fafc; border-radius: 8px;">
+        <h2 style="color: #eeb939;">NexHack 2.0 - Mentor Application</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>GitHub:</strong> ${github || 'N/A'}</p>
+        <p><strong>LinkedIn:</strong> ${linkedin || 'N/A'}</p>
+        <p><strong>Experience / Background:</strong></p>
+        <blockquote style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-left: 4px solid #a855f7;">
+          ${experience || 'No additional details provided.'}
+        </blockquote>
+      </div>
+    `,
+    email
+  );
+
+  res.status(200).json({ success: true, message: 'Mentor application submitted successfully' });
 });
 
 if (require.main === module) {
