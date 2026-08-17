@@ -11,7 +11,7 @@ interface NavItem {
 }
 
 const UNSTOP_REGISTER_URL =
-  'https://unstop.com/o/8VHBSm6?lb=useLPsiy&utm_medium=Share&utm_source=nexhac99316&utm_campaign=Online_coding_challenge';
+  'https://unstop.com/hackathons/nexhack-20-geeta-university-naultha-panipat-1733198';
 
 export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,22 +51,23 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
       {/* Inner content row */}
       <div className="site-header-inner">
 
-        {/* LEFT: Logos */}
+        {/* LEFT: NexHack Logo & Brand Title */}
         <div className="navbar-logo-left" onClick={() => handleLinkClick('home')}>
           <img
-            src="/images/home/gu_logo.png"
-            alt="Geeta University Logo"
-            className="nav-logo-img"
-          />
-          <div className="nav-logo-divider" />
-          <img
-            src="/images/home/gth.png"
-            alt="GTH Logo"
-            className="nav-logo-img"
+            src="/images/home/logo_nexhack__final.png"
+            alt="NexHack 2.0 Logo"
+            className="nav-logo-img nexhack-nav-logo"
             onError={(e) => {
-              (e.currentTarget as HTMLImageElement).src = '/images/sponsors/GTH.png';
+              const target = e.currentTarget as HTMLImageElement;
+              if (target.src.endsWith('/images/home/logo_nexhack__final.png')) {
+                target.src = './images/home/logo_nexhack__final.png';
+              }
             }}
           />
+          <div className="navbar-brand-text">
+            <span className="brand-main">NEXHACK</span>
+            <sup className="brand-sub">2.0</sup>
+          </div>
         </div>
 
         {/* CENTER: Desktop Navigation Links */}
@@ -82,17 +83,22 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           ))}
         </nav>
 
-        {/* RIGHT: REGISTER CTA Link to Unstop */}
-        <div className="nav-register-wrapper">
-          <a
-            href={UNSTOP_REGISTER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-register-btn"
-            style={{ textDecoration: 'none' }}
-          >
-            REGISTER
-          </a>
+        {/* RIGHT: Logos */}
+        <div className="navbar-logo-right" onClick={() => handleLinkClick('home')}>
+          <img
+            src="/images/home/gu_logo.png"
+            alt="Geeta University Logo"
+            className="nav-logo-img"
+          />
+          <div className="nav-logo-divider" />
+          <img
+            src="/images/home/gth.png"
+            alt="GTH Logo"
+            className="nav-logo-img"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = '/images/sponsors/GTH.png';
+            }}
+          />
         </div>
 
         {/* Mobile Hamburger Toggle Button */}
@@ -120,16 +126,6 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
               {item.label}
             </button>
           ))}
-          <a
-            href={UNSTOP_REGISTER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-register-btn mobile-register"
-            style={{ textDecoration: 'none' }}
-            onClick={() => setIsOpen(false)}
-          >
-            REGISTER
-          </a>
         </div>
       )}
     </header>

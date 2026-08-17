@@ -211,6 +211,14 @@ export default function App() {
       <WandCursor />
       <div className="global-bg-container">
         <div className={`bg-layer home-bg ${activeSection !== 'schedule' ? 'active' : ''}`} />
+        <div className={`bg-layer video-bg ${activeSection === 'schedule' ? 'active' : ''}`}>
+          <video autoPlay loop muted playsInline>
+            <source src="/nexhack.mp4" type="video/mp4" />
+            <source src="/images/home/nexhack.mp4" type="video/mp4" />
+            <source src="./nexhack.mp4" type="video/mp4" />
+            <source src="./images/home/nexhack.mp4" type="video/mp4" />
+          </video>
+        </div>
       </div>
 
       <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
