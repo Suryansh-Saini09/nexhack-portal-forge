@@ -1,68 +1,90 @@
-const FALLBACK_BACKEND = 'https://websitebackend-w5m9.onrender.com';
-
-async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs: number) {
+async function fetchWithTimeout(
+  url: string,
+  options: RequestInit,
+  timeoutMs: number
+) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  const timer = setTimeout(() => {
+    controller.abort();
+  }, timeoutMs);
+
   try {
-    const res = await fetch(url, { ...options, signal: controller.signal });
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+
+    return response;
+  } finally {
     clearTimeout(timer);
-    return res;
-  } catch (err) {
-    clearTimeout(timer);
-    throw err;
   }
 }
 
-export async function postApi(endpoint: string, body: Record<string, any>) {
-  const baseUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace(/\/$/, '') : '';
-  const primaryUrl = baseUrl ? `${baseUrl}${endpoint}` : endpoint;
-  const fallbackUrl = `${FALLBACK_BACKEND}${endpoint}`;
+export async function postApi(
+  endpoint: string,
+  body: Record<string, any>
+) {
+  const baseUrl = import.meta.env.VITE_API_URL
+    ? import.meta.env.VITE_API_URL.replace(/\/$/, '')
+    : '';
 
-  const reqOptions: RequestInit = {
+  // If VITE_API_URL is not set, use the current domain.
+  // This allows /api/contact and /api/sponsor to work
+  // on the Vercel deployment and custom domain.
+  const apiUrl = baseUrl
+    ? `${baseUrl}${endpoint}`
+    : endpoint;
+
+  const requestOptions: RequestInit = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(body),
   };
 
-  // 1. Try Primary URL (/api/...) - 3.5s timeout guard
   try {
-    const res = await fetchWithTimeout(primaryUrl, reqOptions, 3500);
-    if (res.ok) {
-      const contentType = res.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        const data = await res.json();
-        if (data && data.success !== false) {
-          return data;
-        }
-      }
-    }
-  } catch (err) {
-    // Primary endpoint unavailable, static HTML returned, or timed out
-  }
+    const response = await fetchWithTimeout(
+      apiUrl,
+      requestOptions,
+      10000
+    );
 
-  // 2. Try Fallback URL (Render remote server) - 5s timeout guard
-  try {
-    const res = await fetchWithTimeout(fallbackUrl, reqOptions, 5000);
-    const contentType = res.headers.get('content-type');
-    if (contentType && contentType.includes('application/json')) {
-      const data = await res.json();
-      if (res.ok && data.success !== false) {
-        return data;
-      }
-      if (data.message && data.message.toLowerCase().includes('email')) {
-        return { success: true, message: 'Submission received! We will reach out to you shortly.' };
-      }
-      if (data.error || data.message) {
-        throw new Error(data.error || data.message);
-      }
-    }
-    if (res.ok) {
-      return { success: true, message: 'Submission received successfully!' };
-    }
-  } catch (err: any) {
-    // Fallback server sleeping, offline, or timed out
-  }
+    let data: any = null;
 
-  // Guaranteed resilient user response (prevents UI hanging on "Sending...")
-  return { success: true, message: 'Your message has been received! Our team will contact you shortly.' };
+    const contentType = response.headers.get('content-type');
+
+    if (contentType?.includes('application/json')) {
+      data = await response.json();
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        data?.error ||
+          data?.message ||
+          `Request failed with status ${response.status}`
+      );
+    }
+
+    if (!data || data.success !== true) {
+      throw new Error(
+        data?.error ||
+          data?.message ||
+          'The server did not confirm the submission.'
+      );
+    }
+
+    return data;
+  } catch (error: any) {
+    console.error('[API Request Error]', {
+      endpoint,
+      error: error?.message || error,
+    });
+
+    throw new Error(
+      error?.message ||
+        'Unable to connect to the server. Please try again later.'
+    );
+  }
 }
