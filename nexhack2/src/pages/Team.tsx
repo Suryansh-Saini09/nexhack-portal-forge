@@ -17,7 +17,7 @@ const teamData: TeamMember[] = [
   { id: 'nera',             name: 'Nera',             role: 'Design and Creative Head',                     image: './images/team/nera.webp',    socials: { github: 'https://github.com/nera8563',              linkedin: 'https://www.linkedin.com/in/nera123' } },
   { id: 'krishna-gupta',     name: 'Krishna Gupta',     role: 'Registration & Participant Relations Head',    image: './images/team/krishna.webp', socials: { github: 'https://github.com/Krishna-Gupta-Git',     linkedin: 'https://www.linkedin.com/in/krishna-gupta-890147374' } },
   { id: 'lakshay',          name: 'Lakshay',          role: 'Volunteer Management Head',                    image: './images/team/lakshay.webp', socials: { github: 'https://github.com/Lakshayy-y',            linkedin: 'https://www.linkedin.com/in/lakshaymittal012' } },
-  { id: 'janvi',            name: 'Janvi',            role: 'Content & Documentation Head',                 image: './images/team/janvi.webp',   socials: { github: 'https://github.com/JANVI2223',             linkedin: 'https://www.linkedin.com/in/janvidevi49' } },
+  { id: 'janvi-devi',       name: 'Janvi',       role: 'Content & Documentation Head',                 image: './images/team/janvi.webp',   socials: { github: 'https://github.com/JANVI2223',             linkedin: 'https://www.linkedin.com/in/janvidevi49' } },
   { id: 'drishti',          name: 'Drishti',          role: 'Marketing Head',                               image: './images/team/drishti.webp', socials: { github: 'https://github.com/jaspaldrishti-droid',   linkedin: 'https://www.linkedin.com/in/drishti-jaspal12' } },
 ];
 
