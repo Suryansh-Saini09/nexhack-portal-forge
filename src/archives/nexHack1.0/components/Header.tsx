@@ -17,18 +17,16 @@ export const Header = () => {
 
   const navItems = [
     'ABOUT',
-    'METRICS', 
+    'METRICS',
     'SCHEDULE',
     'SPONSORS',
-    'GLIMPSE',
-    'WORLD',
-    'MAIN'
+    'GLIMPSE'
   ];
 
-  <img 
-  src="/gth.png" 
-  alt="GTH Logo" 
-  className="h-10 w-10 rounded-full"
+  <img
+    src="/gth.png"
+    alt="GTH Logo"
+    className="h-10 w-10 rounded-full"
   />
 
   const scrollToSection = (sectionId: string) => {
@@ -45,9 +43,9 @@ export const Header = () => {
         <div className="flex items-center justify-between h-16 px-4">
           {/* Logo */}
           <div className="flex items-end justify-end">
-            <a href='#'><img src={logo} className='h-16'/></a>
+            <a href='#'><img src={logo} className='h-16' /></a>
           </div>
-          
+
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
@@ -71,10 +69,10 @@ export const Header = () => {
             >
               REGISTER NOW →
             </Button> */}
-            <img 
-          src="/GTH.png" 
-          alt="GTH Logo" 
-          className="h-10 w-30 "
+            <img
+              src="/GTH.png"
+              alt="GTH Logo"
+              className="h-10 w-30 "
             />
           </div>
 
@@ -109,7 +107,7 @@ export const Header = () => {
                   {item}
                 </button>
               ))}
-               {/* <Button 
+              {/* <Button 
                 onClick={() => setIsRegistrationOpen(true)}
                 className="minecraft-btn bg-primary text-primary-foreground hover:bg-primary/90 mt-4"
               >
@@ -118,14 +116,14 @@ export const Header = () => {
             </nav>
           </div>
         )}
-        
+
       </div>
-      
+
       {/* <RegistrationForm 
         open={isRegistrationOpen} 
         onOpenChange={setIsRegistrationOpen} 
       /> */}
-      
+
     </header>
   );
 };

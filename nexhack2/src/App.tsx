@@ -167,8 +167,8 @@ export default function App() {
   };
 
   if (isLocked) {
-    const days    = Math.floor(timeLeft / 86400000);
-    const hours   = Math.floor((timeLeft / 3600000) % 24);
+    const days = Math.floor(timeLeft / 86400000);
+    const hours = Math.floor((timeLeft / 3600000) % 24);
     const minutes = Math.floor((timeLeft / 60000) % 60);
     const seconds = Math.floor((timeLeft / 1000) % 60);
 
@@ -212,10 +212,10 @@ export default function App() {
       <div className="global-bg-container">
         <div className={`bg-layer home-bg ${activeSection !== 'schedule' ? 'active' : ''}`} />
         <div className={`bg-layer video-bg ${activeSection === 'schedule' ? 'active' : ''}`}>
-          <video autoPlay loop muted playsInline>
-            <source src="/nexhack.mp4" type="video/mp4" />
+          <video autoPlay loop muted playsInline preload="auto">
+            <source src="/images/home/nexhack.webm" type="video/webm" />
+            <source src="./images/home/nexhack.webm" type="video/webm" />
             <source src="/images/home/nexhack.mp4" type="video/mp4" />
-            <source src="./nexhack.mp4" type="video/mp4" />
             <source src="./images/home/nexhack.mp4" type="video/mp4" />
           </video>
         </div>
@@ -225,15 +225,15 @@ export default function App() {
 
       {SECTIONS.map(id => {
         const PageMap: Record<SectionId, React.ReactNode> = {
-          home:     <Home />,
-          about:    <About />,
-          themes:   <Themes />,
-          prizes:   <Prizes onUnlockStatusChange={setAllPrizesUnlocked} showBarrierAlert={showBarrierAlert} />,
+          home: <Home />,
+          about: <About />,
+          themes: <Themes />,
+          prizes: <Prizes onUnlockStatusChange={setAllPrizesUnlocked} showBarrierAlert={showBarrierAlert} />,
           schedule: <Schedule />,
           sponsors: <Sponsors />,
-          team:     <Team />,
-          faq:      <FAQ />,
-          contact:  <Contact />,
+          team: <Team />,
+          faq: <FAQ />,
+          contact: <Contact />,
         };
         return (
           <React.Fragment key={id}>

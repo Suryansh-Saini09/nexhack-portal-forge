@@ -8,12 +8,11 @@ export default function Home() {
         loop
         muted
         playsInline
+        preload="auto"
+        poster="/images/home/hero_poster.webp"
         className="homepage-bg-img homepage-hero-video"
       >
-        <source src="/hero.mp4" type="video/mp4" />
         <source src="/images/home/hero.mp4" type="video/mp4" />
-        <source src="./hero.mp4" type="video/mp4" />
-        <source src="./images/home/hero.mp4" type="video/mp4" />
       </video>
       <div className="hero-scrim-overlay" aria-hidden="true" />
 
@@ -22,7 +21,7 @@ export default function Home() {
         <div className="hero-content-copy">
           <h1 className="hero-brand-heading">
             <span className="brand-word">NEXHACK</span>
-            <sup className="brand-tag">2.0</sup>
+            <span className="brand-tag">2.0</span>
           </h1>
 
           <div className="hero-gold-divider" aria-hidden="true">

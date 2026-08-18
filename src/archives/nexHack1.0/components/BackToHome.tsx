@@ -17,7 +17,7 @@ export function BackToHome() {
       setProgress((p) => {
         if (p >= 1) {
           clearInterval(interval);
-          navigate("/");
+          window.location.href = "/nexhack2/";
           return 1;
         }
         return Math.min(1, p + 0.05);

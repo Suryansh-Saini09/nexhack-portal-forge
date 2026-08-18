@@ -15,8 +15,6 @@ export const Footer = () => {
     { name: 'Schedule', href: '#schedule' },
     { name: 'Sponsors', href: '#sponsors' },
     { name: 'Glimpse', href: '#glimpse' },
-    { name: 'World', href: '#world' },
-    { name: 'Main', href: '#main' },
   ];
 
   const archiveLinks = [
@@ -121,8 +119,8 @@ export const Footer = () => {
           <div className="border-t border-border pt-8 mt-8">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <p className="font-mono text-xs text-muted-foreground">
-  © {new Date().getFullYear()} Geeta University. A Nexus for the Next Generation of Builders.
-</p>
+                © {new Date().getFullYear()} Geeta University. A Nexus for the Next Generation of Builders.
+              </p>
               <div className="flex space-x-6">
                 <a
                   href="/RuleBook.pdf"

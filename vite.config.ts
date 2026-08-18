@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => ({
       configureServer(server) {
         server.middlewares.use((req, _res, next) => {
           const url = req.url?.split('?')[0];
-          if (url === '/nexhack1' || url === '/nexhack1/') {
+          if (url === '/nexhack1' || url === '/nexhack1/' || url?.startsWith('/archives') || url === '/nexhack1-archive') {
             req.url = '/nexhack1/index.html';
           } else if (url === '/nexhack' || url === '/nexhack/') {
             req.url = '/nexhack/index.html';

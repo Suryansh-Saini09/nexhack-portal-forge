@@ -93,7 +93,7 @@ export default function Footer({ onNavClick }: FooterProps) {
               </div>
               <div className="footer-link-group">
                 <h4>Archives</h4>
-                <a href="/nexhack1" className="footer-text-link">NexHack 1.0</a>
+                <a href="/nexhack1" className="footer-text-link">NexHack 1.0 Archive</a>
               </div>
             </div>
 

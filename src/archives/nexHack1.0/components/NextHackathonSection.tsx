@@ -32,7 +32,7 @@ export function NextHackathonSection() {
 
     setLoading(true);
     setTimeout(() => {
-      navigate("/");
+      window.location.href = "/nexhack2/";
     }, 1200);
   };
 
@@ -62,10 +62,9 @@ export function NextHackathonSection() {
                 onClick={() => setEdition(v)}
                 className={`
                   px-5 py-2 font-pixel text-xs uppercase border-2 transition
-                  ${
-                    edition === v
-                      ? "border-primary text-primary bg-primary/10"
-                      : "border-neutral-700 text-muted-foreground hover:border-neutral-500"
+                  ${edition === v
+                    ? "border-primary text-primary bg-primary/10"
+                    : "border-neutral-700 text-muted-foreground hover:border-neutral-500"
                   }
                 `}
               >
@@ -94,10 +93,9 @@ export function NextHackathonSection() {
           <div
             className={`
               minecraft-card relative p-10 border-2
-              ${
-                isLocked
-                  ? "border-red-600 bg-black/70"
-                  : "border-primary bg-black/60 cursor-pointer"
+              ${isLocked
+                ? "border-red-600 bg-black/70"
+                : "border-primary bg-black/60 cursor-pointer"
               }
             `}
             onClick={travel}
@@ -107,10 +105,9 @@ export function NextHackathonSection() {
               <span
                 className={`
                   px-6 py-2 font-pixel text-[10px] tracking-widest uppercase border-2
-                  ${
-                    isLocked
-                      ? "border-red-600 text-red-400 bg-red-900/20"
-                      : "border-primary text-primary bg-primary/10"
+                  ${isLocked
+                    ? "border-red-600 text-red-400 bg-red-900/20"
+                    : "border-primary text-primary bg-primary/10"
                   }
                 `}
               >
