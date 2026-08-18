@@ -165,7 +165,7 @@ export default function ShadowGlideEncounter({ onTitleGlow, onDimChange }: Shado
       {showShadow && (
         <div
           className="glide-shadow-sprite"
-          style={{ left: `${shadowPos.x}px`, top: `${shadowPos.y}px`, backgroundImage: "url('./images/about/smoke.png')" }}
+          style={{ left: `${shadowPos.x}px`, top: `${shadowPos.y}px` }}
         />
       )}
     </div>

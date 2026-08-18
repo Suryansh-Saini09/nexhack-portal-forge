@@ -10,16 +10,16 @@ interface Character {
 }
 
 const characterList: Character[] = [
-  { id: '1', src: './images/cartoon_team/1.png', alt: 'Harry Potter Character 1', title: 'Arcane Scholar', hasWand: true, depthFactor: 3.2 },
-  { id: '2', src: './images/cartoon_team/2.png', alt: 'Harry Potter Character 2', title: 'Shadow Walker', hasWand: false, depthFactor: 2.4 },
-  { id: '3', src: './images/cartoon_team/3.png', alt: 'Harry Potter Character 3', title: 'Potion Master', hasWand: true, depthFactor: 4.1 },
-  { id: '4', src: './images/cartoon_team/4.png', alt: 'Harry Potter Character 4', title: 'Spell Weaver', hasWand: true, depthFactor: 3.0 },
-  { id: '5', src: './images/cartoon_team/5.png', alt: 'Harry Potter Character 5', title: 'Mystic Seer', hasWand: true, depthFactor: 4.5 },
-  { id: '6', src: './images/cartoon_team/6.png', alt: 'Harry Potter Character 6', title: 'Rune Smith', hasWand: false, depthFactor: 2.8 },
-  { id: '7', src: './images/cartoon_team/7.png', alt: 'Harry Potter Character 7', title: 'Dragon Tamer', hasWand: true, depthFactor: 3.6 },
-  { id: '8', src: './images/cartoon_team/8.png', alt: 'Harry Potter Character 8', title: 'Astral Warden', hasWand: false, depthFactor: 4.8 },
-  { id: '9', src: './images/cartoon_team/9.png', alt: 'Harry Potter Character 9', title: 'Phoenix Sage', hasWand: true, depthFactor: 3.4 },
-  { id: '10', src: './images/cartoon_team/10.png', alt: 'Harry Potter Character 10', title: 'Cipher Mage', hasWand: true, depthFactor: 4.0 }
+  { id: '1', src: './images/cartoon_team/1.webp', alt: 'Harry Potter Character 1', title: 'Arcane Scholar', hasWand: true, depthFactor: 3.2 },
+  { id: '2', src: './images/cartoon_team/2.webp', alt: 'Harry Potter Character 2', title: 'Shadow Walker', hasWand: false, depthFactor: 2.4 },
+  { id: '3', src: './images/cartoon_team/3.webp', alt: 'Harry Potter Character 3', title: 'Potion Master', hasWand: true, depthFactor: 4.1 },
+  { id: '4', src: './images/cartoon_team/4.webp', alt: 'Harry Potter Character 4', title: 'Spell Weaver', hasWand: true, depthFactor: 3.0 },
+  { id: '5', src: './images/cartoon_team/5.webp', alt: 'Harry Potter Character 5', title: 'Mystic Seer', hasWand: true, depthFactor: 4.5 },
+  { id: '6', src: './images/cartoon_team/6.webp', alt: 'Harry Potter Character 6', title: 'Rune Smith', hasWand: false, depthFactor: 2.8 },
+  { id: '7', src: './images/cartoon_team/7.webp', alt: 'Harry Potter Character 7', title: 'Dragon Tamer', hasWand: true, depthFactor: 3.6 },
+  { id: '8', src: './images/cartoon_team/8.webp', alt: 'Harry Potter Character 8', title: 'Astral Warden', hasWand: false, depthFactor: 4.8 },
+  { id: '9', src: './images/cartoon_team/9.webp', alt: 'Harry Potter Character 9', title: 'Phoenix Sage', hasWand: true, depthFactor: 3.4 },
+  { id: '10', src: './images/cartoon_team/10.webp', alt: 'Harry Potter Character 10', title: 'Cipher Mage', hasWand: true, depthFactor: 4.0 }
 ];
 
 export default function CharacterShowcase() {

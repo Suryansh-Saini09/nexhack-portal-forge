@@ -86,7 +86,7 @@ body {
   position: fixed;
   width: 80px;
   height: 80px;
-  background-image: url('/images/home/cursor_wand.png');
+  background-image: url('/images/home/cursor_wand.webp');
   background-size: contain;
   background-repeat: no-repeat;
   pointer-events: none;
@@ -989,7 +989,11 @@ body {
 .themes-header {
   text-align: center;
   max-width: 700px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .themes-eyebrow {
@@ -6618,7 +6622,7 @@ body {
   background-color: #020204;
   background-image:
     linear-gradient(to bottom, rgba(3, 3, 5, 0.25) 0%, rgba(3, 3, 5, 0.75) 60%, rgba(3, 3, 5, 0.95) 100%),
-    url('/images/home/harry_potter_lock_bg.png');
+    url('/images/home/hero_poster.webp');
   background-size: cover;
   background-position: center 22%;
   background-repeat: no-repeat;

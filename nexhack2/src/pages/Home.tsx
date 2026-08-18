@@ -12,7 +12,10 @@ export default function Home() {
         poster="/images/home/hero_poster.webp"
         className="homepage-bg-img homepage-hero-video"
       >
+        <source src="/images/home/hero.webm" type="video/webm" />
+        <source src="./images/home/hero.webm" type="video/webm" />
         <source src="/images/home/hero.mp4" type="video/mp4" />
+        <source src="./images/home/hero.mp4" type="video/mp4" />
       </video>
       <div className="hero-scrim-overlay" aria-hidden="true" />
 

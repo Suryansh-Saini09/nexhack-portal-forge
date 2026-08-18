@@ -54,13 +54,13 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
         {/* LEFT: NexHack Logo & Brand Title */}
         <div className="navbar-logo-left" onClick={() => handleLinkClick('home')}>
           <img
-            src="/images/home/logo_nexhack__final.png"
+            src="/images/home/logo_nexhack__final.webp"
             alt="NexHack 2.0 Logo"
             className="nav-logo-img nexhack-nav-logo"
             onError={(e) => {
               const target = e.currentTarget as HTMLImageElement;
-              if (target.src.endsWith('/images/home/logo_nexhack__final.png')) {
-                target.src = './images/home/logo_nexhack__final.png';
+              if (target.src.endsWith('/images/home/logo_nexhack__final.webp')) {
+                target.src = './images/home/logo_nexhack__final.webp';
               }
             }}
           />
@@ -86,17 +86,17 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
         {/* RIGHT: Logos */}
         <div className="navbar-logo-right" onClick={() => handleLinkClick('home')}>
           <img
-            src="/images/home/gu_logo.png"
+            src="/images/home/gu_logo.webp"
             alt="Geeta University Logo"
             className="nav-logo-img"
           />
           <div className="nav-logo-divider" />
           <img
-            src="/images/home/gth.png"
+            src="/images/home/gth.webp"
             alt="GTH Logo"
             className="nav-logo-img"
             onError={(e) => {
-              (e.currentTarget as HTMLImageElement).src = '/images/sponsors/GTH.png';
+              (e.currentTarget as HTMLImageElement).src = './images/home/gth.webp';
             }}
           />
         </div>

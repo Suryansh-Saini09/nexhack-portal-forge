@@ -165,9 +165,9 @@ export default function Sponsors() {
           <button
             onClick={() => setShowSponsorModal(true)}
             className="alliance-primary-btn"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
           >
-            <span className="btn-icon">✉</span>
+            <span className="btn-icon">🦉</span>
             <span>DISPATCH OWL INQUIRY</span>
           </button>
 
@@ -175,6 +175,7 @@ export default function Sponsors() {
             href="./images/sponsors/NexHack_2.0_Sponsorship_Prospectus.pdf"
             download
             className="alliance-secondary-btn"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
           >
             <span className="btn-icon">📜</span>
             <span>DOWNLOAD PROSPECTUS</span>
@@ -394,10 +395,13 @@ export default function Sponsors() {
                     color: '#0a0d14',
                     justifyContent: 'center',
                     cursor: 'pointer',
-                    marginTop: '2px'
+                    marginTop: '2px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px'
                   }}
                 >
-                  <span>SEND OWL MESSAGE ✉️</span>
+                  <span>SEND OWL MESSAGE 🦉</span>
                 </button>
               </form>
             )}

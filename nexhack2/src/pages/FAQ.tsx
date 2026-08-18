@@ -67,9 +67,9 @@ export default function FAQ() {
       <div className="faq-atmosphere-glow" />
 
       {/* Header */}
-      <div className="themes-header" style={{ marginBottom: '28px' }}>
+      <div className="themes-header" style={{ margin: '0 auto 28px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
         <h1 className="section-title">Frequently Asked Questions</h1>
-        <div className="themes-header-divider" />
+        <div className="themes-header-divider" style={{ margin: '14px auto 0' }} />
       </div>
 
       {/* FAQ Grimoire Grid */}

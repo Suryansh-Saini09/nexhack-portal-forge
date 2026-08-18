@@ -7,18 +7,18 @@ interface GlimpseItem {
 }
 
 const glimpsesData: GlimpseItem[] = [
-  { id: 1, file: 'glimpse1.jpg', alt: 'Enthusiastic wizarding hackathon participants coding together in a decorated hall' },
-  { id: 2, file: 'glimpse2.JPG', alt: 'A close-up of a developer focus-typing complex algorithms on a glowing mechanical keyboard' },
-  { id: 3, file: 'glimpse3.JPG', alt: 'An expert mentor explaining complex architecture ideas on a whiteboard' },
-  { id: 4, file: 'glimpse4.JPG', alt: 'Hackathon team showcasing an interactive IoT hardware project with sensor modules' },
-  { id: 5, file: 'glimpse5.JPG', alt: 'Team of developers smiling and celebrating their project completion' },
-  { id: 6, file: 'glimpse6.JPG', alt: 'Late night coding session with developers focused on debugging screens' },
-  { id: 7, file: 'glimpse7.JPG', alt: 'The main stage featuring dynamic neon lights and project code visualizations' },
-  { id: 8, file: 'glimpse8.JPG', alt: 'A brainstorming session with colorful sticky notes and UI wireframes' },
-  { id: 9, file: 'glimpse9.JPG', alt: 'Hackathon judges reviewing innovative code submissions at a developer desk' },
-  { id: 10, file: 'glimpse10.JPG', alt: 'A large energetic crowd cheering at the opening ceremony of the hackathon' },
-  { id: 11, file: 'glimpse11.JPG', alt: 'A high-performance workspace setup with neural network diagrams on screens' },
-  { id: 12, file: 'glimpse12.JPG', alt: 'Winning team holding a grand trophy and prizes on the main stage' },
+  { id: 1, file: 'glimpse1.webp', alt: 'Enthusiastic wizarding hackathon participants coding together in a decorated hall' },
+  { id: 2, file: 'glimpse2.webp', alt: 'A close-up of a developer focus-typing complex algorithms on a glowing mechanical keyboard' },
+  { id: 3, file: 'glimpse3.webp', alt: 'An expert mentor explaining complex architecture ideas on a whiteboard' },
+  { id: 4, file: 'glimpse4.webp', alt: 'Hackathon team showcasing an interactive IoT hardware project with sensor modules' },
+  { id: 5, file: 'glimpse5.webp', alt: 'Team of developers smiling and celebrating their project completion' },
+  { id: 6, file: 'glimpse6.webp', alt: 'Late night coding session with developers focused on debugging screens' },
+  { id: 7, file: 'glimpse7.webp', alt: 'The main stage featuring dynamic neon lights and project code visualizations' },
+  { id: 8, file: 'glimpse8.webp', alt: 'A brainstorming session with colorful sticky notes and UI wireframes' },
+  { id: 9, file: 'glimpse9.webp', alt: 'Hackathon judges reviewing innovative code submissions at a developer desk' },
+  { id: 10, file: 'glimpse10.webp', alt: 'A large energetic crowd cheering at the opening ceremony of the hackathon' },
+  { id: 11, file: 'glimpse11.webp', alt: 'A high-performance workspace setup with neural network diagrams on screens' },
+  { id: 12, file: 'glimpse12.webp', alt: 'Winning team holding a grand trophy and prizes on the main stage' },
 ];
 
 interface StatBlock {

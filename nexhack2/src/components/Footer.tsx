@@ -60,9 +60,9 @@ export default function Footer({ onNavClick }: FooterProps) {
           <div className="footer-patronage-container">
             <span className="footer-patronage-label">Organised By</span>
             <div className="footer-patronage-logos">
-              <img src="./images/home/gu_logo.png" alt="Geeta University" className="patronage-logo-img" />
+              <img src="./images/home/gu_logo.webp" alt="Geeta University" className="patronage-logo-img" />
               <div className="footer-patronage-logo-divider" />
-              <img src="./images/home/gth.png" alt="Geeta Technical Hub" className="patronage-logo-img" />
+              <img src="./images/home/gth.webp" alt="Geeta Technical Hub" className="patronage-logo-img" />
             </div>
           </div>
         </div>
