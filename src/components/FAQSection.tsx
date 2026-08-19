@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export const FAQSection = () => {
-  const [openFAQ, setOpenFAQ] = useState<number | null>(0);
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   const faqs = [
     {

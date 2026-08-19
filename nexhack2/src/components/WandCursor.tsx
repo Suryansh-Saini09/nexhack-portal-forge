@@ -1,9 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function WandCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
 
   useEffect(() => {
+    // Check if the current screen is mobile (< 768px)
+    const checkMobile = () => {
+      const isMobile = window.innerWidth < 768;
+      setIsMobileScreen(isMobile);
+      return isMobile;
+    };
+
+    checkMobile();
+
     const cursor = cursorRef.current;
     if (!cursor) return;
 
@@ -15,6 +25,7 @@ export default function WandCursor() {
     };
 
     const onMouseMove = (e: MouseEvent) => {
+      if (window.innerWidth < 768) return;
       if (!isVisible) {
         isVisible = true;
         cursor.style.opacity = '1';
@@ -23,14 +34,17 @@ export default function WandCursor() {
     };
 
     const onMouseDown = () => {
+      if (window.innerWidth < 768) return;
       cursor.classList.add('casting');
     };
 
     const onMouseUp = () => {
+      if (window.innerWidth < 768) return;
       cursor.classList.remove('casting');
     };
 
     const onMouseOver = (e: MouseEvent) => {
+      if (window.innerWidth < 768) return;
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
@@ -52,8 +66,13 @@ export default function WandCursor() {
     };
 
     const onMouseEnterWindow = () => {
+      if (window.innerWidth < 768) return;
       isVisible = true;
       cursor.style.opacity = '1';
+    };
+
+    const onResize = () => {
+      checkMobile();
     };
 
     window.addEventListener('mousemove', onMouseMove, { passive: true });
@@ -62,6 +81,7 @@ export default function WandCursor() {
     document.addEventListener('mouseover', onMouseOver, { passive: true });
     document.addEventListener('mouseleave', onMouseLeaveWindow);
     document.addEventListener('mouseenter', onMouseEnterWindow);
+    window.addEventListener('resize', onResize);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
@@ -70,8 +90,13 @@ export default function WandCursor() {
       document.removeEventListener('mouseover', onMouseOver);
       document.removeEventListener('mouseleave', onMouseLeaveWindow);
       document.removeEventListener('mouseenter', onMouseEnterWindow);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
+
+  if (isMobileScreen) {
+    return null;
+  }
 
   return (
     <div ref={cursorRef} id="wand-cursor">

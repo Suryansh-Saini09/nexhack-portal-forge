@@ -41,8 +41,10 @@
   color: #888;
 }
 
-.App {
-  cursor: url('/cursor-mine.cur') 16 16, auto !important;
+@media (hover: hover) and (pointer: fine) {
+  .App {
+    cursor: url('/cursor-mine.cur') 16 16, auto !important;
+  }
 }
 
 @import "tailwindcss";

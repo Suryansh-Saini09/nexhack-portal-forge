@@ -8,12 +8,15 @@ export const Background = () => {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
       <video
-        className="absolute top-1/2 left-1/2 w-full h-full object-cover transform -translate-x-1/2 -translate-y-1/2"
+        className="absolute top-1/2 left-1/2 w-full h-full object-cover transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
         src={isNether ? netherBg : overworldBg}
         autoPlay
         loop
         muted
         playsInline
+        controls={false}
+        disablePictureInPicture
+        disableRemotePlayback
       />
     </div>
   );

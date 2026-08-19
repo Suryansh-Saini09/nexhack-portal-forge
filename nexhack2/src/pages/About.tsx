@@ -37,7 +37,7 @@ const statsData: StatBlock[] = [
   },
   {
     icon: '✦',
-    number: '1,000+',
+    number: '500+',
     label: 'HACKERS EXPECTED',
     desc: 'Top student developers, sorcerers, and creators uniting from across the nation.'
   },

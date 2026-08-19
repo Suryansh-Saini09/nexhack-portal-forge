@@ -77,7 +77,11 @@ export default function Team() {
       <section className="team-chamber-section">
         <div className="team-chamber-header">
           <div className="team-crest-badge core-badge">
-            <span className="badge-spark">⚡</span>
+            <span className="badge-spark">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" />
+              </svg>
+            </span>
             <span>ORDER OF THE PHOENIX</span>
           </div>
           <h2 className="team-chamber-title">The High Council</h2>
@@ -88,8 +92,27 @@ export default function Team() {
             <span className="ornament-line" />
           </div>
         </div>
-        <div className="cards-grid team-grid">
-          {coreTeam.map(member => <TeamCard key={member.id} member={member} />)}
+
+        <div className="high-council-rows-container">
+          {/* Row 1: 3 Core Leads */}
+          <div className="team-row team-row-3">
+            {coreTeam.slice(0, 3).map(member => <TeamCard key={member.id} member={member} />)}
+          </div>
+
+          {/* Row 2: 2 Core Executives */}
+          <div className="team-row team-row-2">
+            {coreTeam.slice(3, 5).map(member => <TeamCard key={member.id} member={member} />)}
+          </div>
+
+          {/* Row 3: 4 Department Heads */}
+          <div className="team-row team-row-4">
+            {coreTeam.slice(5, 9).map(member => <TeamCard key={member.id} member={member} />)}
+          </div>
+
+          {/* Row 4: 4 Department Heads */}
+          <div className="team-row team-row-4">
+            {coreTeam.slice(9, 13).map(member => <TeamCard key={member.id} member={member} />)}
+          </div>
         </div>
       </section>
 
@@ -115,7 +138,7 @@ export default function Team() {
             <span className="ornament-line" />
           </div>
         </div>
-        <div className="cards-grid team-grid">
+        <div className="team-row team-row-3">
           {subCoreTeam.map(member => <TeamCard key={member.id} member={member} />)}
         </div>
       </section>

@@ -240,8 +240,31 @@
   animation: blink 1.5s steps(1) infinite;
 }
 
-html,body,.App ,p,a,button{
-  cursor: url('/cursor-mine.cur'),auto !important;
+@media (hover: hover) and (pointer: fine) {
+  html, body, .App, p, a, button {
+    cursor: url('/cursor-mine.cur'), auto !important;
+  }
+} 
+
+/* Suppress all native browser overlay play buttons and media controls on background videos */
+video::-webkit-media-controls,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+video {
+  pointer-events: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
 } 
 
 

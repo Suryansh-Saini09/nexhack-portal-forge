@@ -8,12 +8,15 @@ export const ArchiveHeroSection = () => {
 
       {/* Background (video OR image) */}
       <video
-        className="absolute inset-0 w-full h-full object-cover -z-10"
+        className="absolute inset-0 w-full h-full object-cover -z-10 pointer-events-none"
         src={bg}
         autoPlay
         muted
         loop
         playsInline
+        controls={false}
+        disablePictureInPicture
+        disableRemotePlayback
       />
 
       {/* Dark overlay */}
@@ -34,10 +37,10 @@ export const ArchiveHeroSection = () => {
         </div>
 
         {/* TITLE */}
-        <h1 className="font-pixel text-4xl md:text-6xl lg:text-7xl text-primary text-shadow-glow leading-tight">
-          NEXHACK
+        <h1 className="font-pixel text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-primary text-shadow-glow leading-tight break-words">
+          NEXHACK 1.0
           <br />
-          <Cover>1.0 ARCHIVE</Cover>
+          <Cover>ARCHIVE</Cover>
         </h1>
 
         {/* SUBTITLE */}

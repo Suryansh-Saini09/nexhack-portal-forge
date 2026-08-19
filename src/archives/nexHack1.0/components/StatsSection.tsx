@@ -134,7 +134,7 @@ export function StatsSection() {
         </div>
 
         {/* STAT TOTEMS */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-14">
           {stats.map((stat, index) => {
             const isUnlocked = unlocked[index];
 

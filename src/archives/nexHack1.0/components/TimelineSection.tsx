@@ -64,12 +64,12 @@ export function TimelineSection() {
       <div className="relative max-w-7xl mx-auto">
 
         {/* HEADER */}
-        <div className="mb-16 flex justify-between items-end">
+        <div className="mb-16 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
           <div>
             <p className="font-mono text-xs tracking-[0.35em] uppercase text-muted-foreground">
               World Progression
             </p>
-            <h2 className="mt-4 font-pixel text-4xl text-primary">
+            <h2 className="mt-4 font-pixel text-3xl sm:text-4xl text-primary">
               QUEST LOG
             </h2>
             <p className="mt-4 font-mono text-sm text-muted-foreground max-w-md">
@@ -78,7 +78,7 @@ export function TimelineSection() {
           </div>
 
           {/* DAY SWITCH */}
-          <div className="minecraft-card p-2 flex gap-2 border-2 border-primary bg-black/60">
+          <div className="minecraft-card p-2 flex gap-2 border-2 border-primary bg-black/60 shrink-0">
             {(["day1", "day2"] as const).map(d => (
               <button
                 key={d}
@@ -97,8 +97,8 @@ export function TimelineSection() {
         </div>
 
         {/* MINI MAP */}
-        <div className="mb-16 flex justify-center">
-          <div className="flex gap-3 p-3 border-2 border-neutral-700 bg-black/60">
+        <div className="mb-16 flex justify-center overflow-x-auto py-2">
+          <div className="flex gap-3 p-3 border-2 border-neutral-700 bg-black/60 shrink-0">
             {nodes.map((_, i) => (
               <div
                 key={i}
@@ -120,7 +120,7 @@ export function TimelineSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-16"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 lg:gap-16"
           >
             {nodes.map((node, i) => (
               <motion.div

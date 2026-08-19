@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function Home() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay handled safely in low-power/data-saver mode
+        });
+      }
+    }
+  }, []);
+
   return (
     <main className="hero-section homepage-hero-bg">
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
+        controls={false}
+        disablePictureInPicture
+        disableRemotePlayback
         poster="/images/home/hero_poster.webp"
         className="homepage-bg-img homepage-hero-video"
       >

@@ -168,16 +168,16 @@ export function GlimpseSection() {
         </div>
 
         {/* MOSAIC GALLERY */}
-        <div className="mb-36 grid grid-cols-12 gap-4 auto-rows-[160px]">
+        <div className="mb-28 sm:mb-36 grid grid-cols-12 gap-3 sm:gap-4 auto-rows-[140px] sm:auto-rows-[160px]">
           {galleryImages.map((img, index) => {
             const layoutMap: Record<number, string> = {
-              0: "col-span-5 row-span-3",
-              1: "col-span-3 row-span-2",
-              2: "col-span-3 row-span-2",
-              3: "col-span-6 row-span-3",
-              4: "col-span-5 row-span-2",
-              5: "col-span-6 row-span-3",
-              6: "col-span-5 row-span-3",
+              0: "col-span-12 sm:col-span-6 lg:col-span-5 row-span-2 lg:row-span-3 min-h-[200px]",
+              1: "col-span-6 sm:col-span-6 lg:col-span-3 row-span-2 min-h-[160px]",
+              2: "col-span-6 sm:col-span-6 lg:col-span-3 row-span-2 min-h-[160px]",
+              3: "col-span-12 sm:col-span-6 lg:col-span-6 row-span-2 lg:row-span-3 min-h-[200px]",
+              4: "col-span-12 sm:col-span-6 lg:col-span-5 row-span-2 min-h-[180px]",
+              5: "col-span-12 sm:col-span-6 lg:col-span-6 row-span-2 lg:row-span-3 min-h-[200px]",
+              6: "col-span-12 sm:col-span-6 lg:col-span-5 row-span-2 lg:row-span-3 min-h-[200px]",
             };
 
             const isHero = index === 0;
@@ -256,7 +256,7 @@ export function GlimpseSection() {
         </div>
 
         {/* WINNER CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {winners.map((winner, index) => {
             const tierStyles = {
               netherite:

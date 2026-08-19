@@ -11,25 +11,46 @@ interface SponsorFormData {
 
 const sponsorPillars = [
   {
-    icon: '⚡',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" />
+      </svg>
+    ),
     tag: 'TALENT & REACH',
-    title: '1,000+ Elite Builders',
+    title: '500+ Elite Builders',
     desc: 'Connect directly with high-caliber developers, designers, and AI creators from 50+ premier institutions.'
   },
   {
-    icon: '🔮',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+        <path d="M2 12h20" />
+      </svg>
+    ),
     tag: 'PRODUCT SPOTLIGHT',
     title: 'Custom Tracks & Bounties',
     desc: 'Empower hackers to build real-world solutions powered by your APIs, SDKs, dev tools, and cloud platforms.'
   },
   {
-    icon: '📜',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
+      </svg>
+    ),
     tag: 'HIRING PIPELINE',
     title: 'Direct Talent Access',
     desc: 'Fast-track recruitment with curated participant resumes, live project demonstrations, and interview access.'
   },
   {
-    icon: '🏛️',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 2 2 7h20L12 2z" />
+      </svg>
+    ),
     tag: 'BRAND IMMERSION',
     title: 'Keynote & Booth Presence',
     desc: 'Claim the main stage for keynote addresses, interactive workshops, branded booth stalls, and mentor desks.'
@@ -48,6 +69,7 @@ export default function Sponsors() {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleCloseModal = () => {
     if (isKeyTurning || isModalClosing) return;
@@ -66,6 +88,8 @@ export default function Sponsors() {
 
   const handleSponsorSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     try {
       const data = await postApi('/api/sponsor', formData);
       if (data && data.success) {
@@ -77,6 +101,8 @@ export default function Sponsors() {
     } catch (err) {
       console.error('Error submitting inquiry:', err);
       alert((err as Error).message || 'A network error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -142,7 +168,35 @@ export default function Sponsors() {
 
           <div className="decree-seal-header">
             <div className="decree-wax-seal">
-              <span className="wax-crest-icon">🛡️</span>
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="wax-crest-svg"
+              >
+                <path
+                  d="M12 2L4 5V11.5C4 16.5 7.5 20.8 12 22C16.5 20.8 20 16.5 20 11.5V5L12 2Z"
+                  fill="url(#waxGoldGrad)"
+                  stroke="#d4af37"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M12 5.5L6.5 7.5V11.5C6.5 15.2 9 18.5 12 19.5C15 18.5 17.5 15.2 17.5 11.5V7.5L12 5.5Z"
+                  stroke="#fff5cc"
+                  strokeWidth="1"
+                  strokeOpacity="0.8"
+                />
+                <path d="M12 8V16M8 12H16" stroke="#58111a" strokeWidth="1.6" strokeLinecap="round" />
+                <defs>
+                  <linearGradient id="waxGoldGrad" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#ffd700" />
+                    <stop offset="0.5" stopColor="#d4af37" />
+                    <stop offset="1" stopColor="#996515" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
             <div className="decree-header-text">
               <h3 className="decree-heading">Patronage Alliances Available</h3>
@@ -160,27 +214,70 @@ export default function Sponsors() {
             <span className="tier-tag custom">✦ Custom / In-Kind</span>
           </div>
 
-        {/* Action Controls */}
+          {/* Action Controls */}
           <div className="decree-action-controls">
-          <button
-            onClick={() => setShowSponsorModal(true)}
-            className="alliance-primary-btn"
-            style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-          >
-            <span className="btn-icon">🦉</span>
-            <span>DISPATCH OWL INQUIRY</span>
-          </button>
+            <button
+              onClick={() => setShowSponsorModal(true)}
+              className="alliance-primary-btn"
+            >
+              <svg
+                className="btn-wizard-svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 3C8.13 3 5 6.13 5 10C5 14.5 8 19 12 21.5C16 19 19 14.5 19 10C19 6.13 15.87 3 12 3Z"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinejoin="round"
+                />
+                <circle cx="9" cy="9.5" r="2.2" stroke="currentColor" strokeWidth="1.2" />
+                <circle cx="9" cy="9.5" r="1" fill="currentColor" />
+                <circle cx="15" cy="9.5" r="2.2" stroke="currentColor" strokeWidth="1.2" />
+                <circle cx="15" cy="9.5" r="1" fill="currentColor" />
+                <path d="M12 10.5L11 13H13L12 10.5Z" fill="currentColor" />
+                <path d="M2 8C4.5 9.5 5.5 12 5.5 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M22 8C19.5 9.5 18.5 12 18.5 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M9.5 16.5C11 17.5 13 17.5 14.5 16.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+              </svg>
+              <span>DISPATCH OWL INQUIRY</span>
+            </button>
 
-          <a
-            href="./images/sponsors/NexHack_2.0_Sponsorship_Prospectus.pdf"
-            download
-            className="alliance-secondary-btn"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-          >
-            <span className="btn-icon">📜</span>
-            <span>DOWNLOAD PROSPECTUS</span>
-          </a>
-        </div>
+            <a
+              href="./images/sponsors/NexHack_2.0_Sponsorship_Prospectus.pdf"
+              download
+              className="alliance-secondary-btn"
+            >
+              <svg
+                className="btn-wizard-svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19 17V5C19 3.89543 18.1046 3 17 3H7C5.89543 3 5 3.89543 5 5V17C5 18.1046 5.89543 19 7 19H17C18.1046 19 19 18.1046 19 17Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M19 17C19 18.6569 17.6569 20 16 20H5C3.34315 20 2 18.6569 2 17C2 15.3431 3.34315 14 5 14H19V17Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="currentColor"
+                  fillOpacity="0.15"
+                />
+                <path d="M8 7H15" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                <path d="M8 10H14" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                <path d="M8 13H12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+              <span>DOWNLOAD PROSPECTUS</span>
+            </a>
+          </div>
 
           {/* Ornate Corner Brackets */}
           <div className="alliance-corner-bracket tl" />
@@ -382,26 +479,42 @@ export default function Sponsors() {
 
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="alliance-primary-btn"
                   style={{
                     width: '100%',
-                    padding: '11px 24px',
-                    fontSize: '0.84rem',
+                    padding: '13px 24px',
+                    fontSize: '0.86rem',
                     fontWeight: 800,
-                    letterSpacing: '1.3px',
-                    borderRadius: '50px',
-                    background: 'linear-gradient(135deg, #f0c030 0%, #d4a017 100%)',
-                    boxShadow: '0 0 20px rgba(240, 192, 48, 0.4)',
-                    color: '#0a0d14',
+                    letterSpacing: '1.8px',
                     justifyContent: 'center',
-                    cursor: 'pointer',
-                    marginTop: '2px',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px'
+                    marginTop: '6px'
                   }}
                 >
-                  <span>SEND OWL MESSAGE 🦉</span>
+                  <svg
+                    className="btn-wizard-svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 3C8.13 3 5 6.13 5 10C5 14.5 8 19 12 21.5C16 19 19 14.5 19 10C19 6.13 15.87 3 12 3Z"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinejoin="round"
+                    />
+                    <circle cx="9" cy="9.5" r="2.2" stroke="currentColor" strokeWidth="1.2" />
+                    <circle cx="9" cy="9.5" r="1" fill="currentColor" />
+                    <circle cx="15" cy="9.5" r="2.2" stroke="currentColor" strokeWidth="1.2" />
+                    <circle cx="15" cy="9.5" r="1" fill="currentColor" />
+                    <path d="M12 10.5L11 13H13L12 10.5Z" fill="currentColor" />
+                    <path d="M2 8C4.5 9.5 5.5 12 5.5 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M22 8C19.5 9.5 18.5 12 18.5 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M9.5 16.5C11 17.5 13 17.5 14.5 16.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                  </svg>
+                  <span>{isSubmitting ? 'DISPATCHING OWL...' : 'SEND OWL INQUIRY'}</span>
                 </button>
               </form>
             )}

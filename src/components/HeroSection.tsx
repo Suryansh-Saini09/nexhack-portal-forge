@@ -23,12 +23,15 @@ export const HeroSection = () => {
     <section className="relative h-[92vh] flex items-center justify-center overflow-hidden">
       {/* Video Background */}
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover -z-10"
+        className="absolute top-0 left-0 w-full h-full object-cover -z-10 pointer-events-none"
         src={netherBg}
         autoPlay
         loop
         muted
         playsInline
+        controls={false}
+        disablePictureInPicture
+        disableRemotePlayback
       />
 
       {/* Black Overlay */}

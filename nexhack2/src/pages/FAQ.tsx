@@ -53,12 +53,10 @@ const faqData: FAQItem[] = [
 ];
 
 export default function FAQ() {
-  const [openIds, setOpenIds] = useState<number[]>([1]); // First card open by default
+  const [openId, setOpenId] = useState<number | null>(null);
 
   const toggleAccordion = (id: number) => {
-    setOpenIds(prev =>
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
-    );
+    setOpenId(prev => (prev === id ? null : id));
   };
 
   return (
@@ -75,7 +73,7 @@ export default function FAQ() {
       {/* FAQ Grimoire Grid */}
       <div className="faq-grimoire-grid">
         {faqData.map(item => {
-          const isOpen = openIds.includes(item.id);
+          const isOpen = openId === item.id;
 
           return (
             <div
