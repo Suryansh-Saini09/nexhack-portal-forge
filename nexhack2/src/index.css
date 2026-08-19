@@ -68,6 +68,20 @@ svg,
 img,
 div,
 span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+form,
+section,
+article,
+header,
+footer,
+nav,
 [role="button"],
 [onClick] {
   cursor: none !important;
@@ -84,65 +98,38 @@ body {
 /* Custom Wand Cursor — The Single Universal Cursor */
 #wand-cursor {
   position: fixed;
-  width: 80px;
-  height: 80px;
-  background-image: url('/images/home/cursor_wand.webp');
-  background-size: contain;
-  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+  width: 115px;
+  height: 115px;
   pointer-events: none;
   z-index: 10000000 !important;
-  mix-blend-mode: screen;
-  transform: translate(-8px, -8px);
-  transform-origin: 8px 8px;
   opacity: 0;
-  transition: transform 0.05s linear, opacity 0.15s ease;
+  will-change: transform;
+  transform-origin: 0 0;
+  transition: opacity 0.15s ease;
+  background: transparent !important;
+  background-color: transparent !important;
+  mix-blend-mode: screen;
 }
 
-#wand-cursor.hovering {
-  transform: translate(-8px, -8px) scale(1.12) rotate(-12deg);
-}
-
-/* Particle effect */
-.cursor-particle {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+.wand-cursor-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
   pointer-events: none;
-  z-index: 9999999 !important;
-  animation: fadeOutParticle 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  background: transparent !important;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-@keyframes fadeOutParticle {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: blur(0px);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(2.5) translate(var(--x-dir), var(--y-dir));
-    filter: blur(2px);
-  }
+#wand-cursor.hovering .wand-cursor-img {
+  filter: brightness(1.25);
 }
 
-/* Hide wand cursor on mobile & tablet devices */
-@media (max-width: 1024px) {
-
-  #wand-cursor,
-  .cursor-particle {
-    display: none !important;
-  }
-}
-
-/* Also hide on any touch-only device regardless of width */
-@media (hover: none) {
-
-  #wand-cursor,
-  .cursor-particle {
-    display: none !important;
-  }
+#wand-cursor.casting .wand-cursor-img {
+  filter: brightness(1.5);
 }
 
 /* ==========================================================================
@@ -3356,6 +3343,132 @@ body {
   width: 24px;
   height: 24px;
   stroke: currentColor;
+}
+
+/* Team Page Enhancements — Harry Potter Chambers */
+.team-main-subtitle {
+  font-family: 'Spectral', serif;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-style: italic;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 45px;
+  letter-spacing: 0.5px;
+  max-width: 700px;
+}
+
+.team-chamber-section {
+  width: 100%;
+  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.team-chamber-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.team-crest-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 30px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border: 1px solid rgba(240, 199, 94, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.team-crest-badge.core-badge {
+  background: linear-gradient(135deg, rgba(116, 0, 1, 0.35) 0%, rgba(174, 0, 1, 0.2) 100%);
+  color: #f0c75e;
+  border-color: rgba(240, 199, 94, 0.45);
+  box-shadow: 0 0 25px rgba(174, 0, 1, 0.35), inset 0 0 12px rgba(240, 199, 94, 0.15);
+}
+
+.team-crest-badge.subcore-badge {
+  background: linear-gradient(135deg, rgba(14, 26, 64, 0.45) 0%, rgba(34, 47, 91, 0.25) 100%);
+  color: #60a5fa;
+  border-color: rgba(96, 165, 250, 0.45);
+  box-shadow: 0 0 25px rgba(14, 26, 64, 0.4), inset 0 0 12px rgba(96, 165, 250, 0.15);
+}
+
+.badge-spark {
+  font-size: 1rem;
+}
+
+.team-chamber-title {
+  font-family: 'HarryP', 'Cinzel Decorative', 'Cinzel', serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  color: #ffffff;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(240, 199, 94, 0.4);
+}
+
+.team-chamber-subtitle {
+  font-family: 'Spectral', serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-style: italic;
+  color: #a0a0b0;
+  margin-bottom: 15px;
+}
+
+.team-chamber-ornament {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 280px;
+  margin-top: 5px;
+}
+
+.ornament-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240, 199, 94, 0.5), transparent);
+}
+
+.ornament-glyph {
+  color: #f0c75e;
+  font-size: 0.9rem;
+  text-shadow: 0 0 8px rgba(240, 199, 94, 0.8);
+}
+
+.team-chamber-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin: 50px 0 60px 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240, 199, 94, 0.35), transparent);
+}
+
+.divider-sigil {
+  color: #f0c75e;
+  font-size: 1.4rem;
+  text-shadow: 0 0 12px rgba(240, 199, 94, 0.9);
+  animation: snitchPulse 3s ease-in-out infinite alternate;
 }
 
 /* Team Card Grid layout */

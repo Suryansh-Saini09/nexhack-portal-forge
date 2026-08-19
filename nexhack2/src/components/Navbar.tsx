@@ -36,14 +36,14 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
   };
 
   const navItems: NavItem[] = [
-    { id: 'about',    label: 'ABOUT' },
-    { id: 'themes',   label: 'THEMES' },
-    { id: 'prizes',   label: 'PRIZES' },
+    { id: 'about', label: 'ABOUT' },
+    { id: 'themes', label: 'THEMES' },
+    { id: 'prizes', label: 'PRIZES' },
     { id: 'schedule', label: 'SCHEDULE' },
     { id: 'sponsors', label: 'SPONSOR' },
-    { id: 'team',     label: 'TEAM' },
-    { id: 'faq',      label: 'FAQ' },
-    { id: 'contact',  label: 'CONTACT' },
+    { id: 'team', label: 'TEAM' },
+    { id: 'faq', label: 'FAQ' },
+    { id: 'contact', label: 'CONTACT' },
   ];
 
   return (

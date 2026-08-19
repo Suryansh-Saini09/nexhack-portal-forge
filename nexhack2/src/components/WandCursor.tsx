@@ -7,73 +7,80 @@ export default function WandCursor() {
     const cursor = cursorRef.current;
     if (!cursor) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
+    let isVisible = false;
+
+    // Direct, instant 0-lag position updates
+    const updatePosition = (x: number, y: number) => {
+      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    };
 
     const onMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      if (!isVisible) {
+        isVisible = true;
+        cursor.style.opacity = '1';
+      }
+      updatePosition(e.clientX, e.clientY);
+    };
+
+    const onMouseDown = () => {
+      cursor.classList.add('casting');
+    };
+
+    const onMouseUp = () => {
+      cursor.classList.remove('casting');
+    };
+
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      // Check if target is interactive / clickable
+      const isInteractive = target.closest(
+        'a, button, select, input, textarea, [role="button"], [onclick], .card, .card-wrapper, .floating-img, .logo, .character-name, .team-social-icon, .faq-item, .faq-search-input, .footer-logo, .footer-nav-grid button, .footer-social-icon, .sponsor-card, .prize-card, .interactive'
+      );
+
+      if (isInteractive) {
+        cursor.classList.add('hovering');
+      } else {
+        cursor.classList.remove('hovering');
+      }
+    };
+
+    const onMouseLeaveWindow = () => {
+      isVisible = false;
+      cursor.style.opacity = '0';
+    };
+
+    const onMouseEnterWindow = () => {
+      isVisible = true;
       cursor.style.opacity = '1';
     };
 
-    const onMouseLeaveWindow = () => { cursor.style.opacity = '0'; };
-    const onMouseEnterWindow = () => { cursor.style.opacity = '1'; };
-
-    document.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('mousedown', onMouseDown, { passive: true });
+    window.addEventListener('mouseup', onMouseUp, { passive: true });
+    document.addEventListener('mouseover', onMouseOver, { passive: true });
     document.addEventListener('mouseleave', onMouseLeaveWindow);
     document.addEventListener('mouseenter', onMouseEnterWindow);
 
-    let animationFrameId: number;
-    const updateCursor = () => {
-      const dx = mouseX - cursorX;
-      const dy = mouseY - cursorY;
-      cursorX += dx * 0.35;
-      cursorY += dy * 0.35;
-
-      cursor.style.left = `${cursorX}px`;
-      cursor.style.top = `${cursorY}px`;
-
-      animationFrameId = requestAnimationFrame(updateCursor);
-    };
-
-    updateCursor();
-
-    const onMouseEnter = () => cursor.classList.add('hovering');
-    const onMouseLeave = () => cursor.classList.remove('hovering');
-
-    const addHoverListeners = () => {
-      const hoverables = document.querySelectorAll<Element>(
-        'a, button, select, input, .card, .floating-img, .logo, .character-name, .team-social-icon, .faq-item, .faq-search-input, .footer-logo, .footer-nav-grid button, .footer-social-icon'
-      );
-      hoverables.forEach(elem => {
-        elem.removeEventListener('mouseenter', onMouseEnter);
-        elem.removeEventListener('mouseleave', onMouseLeave);
-        elem.addEventListener('mouseenter', onMouseEnter);
-        elem.addEventListener('mouseleave', onMouseLeave);
-      });
-    };
-
-    addHoverListeners();
-    const observer = new MutationObserver(addHoverListeners);
-    observer.observe(document.body, { childList: true, subtree: true });
-
     return () => {
-      document.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mouseover', onMouseOver);
       document.removeEventListener('mouseleave', onMouseLeaveWindow);
       document.removeEventListener('mouseenter', onMouseEnterWindow);
-      cancelAnimationFrame(animationFrameId);
-      observer.disconnect();
-      const hoverables = document.querySelectorAll<Element>(
-        'a, button, select, input, .card, .floating-img, .logo, .character-name, .team-social-icon, .faq-item, .faq-search-input, .footer-logo, .footer-nav-grid button, .footer-social-icon'
-      );
-      hoverables.forEach(elem => {
-        elem.removeEventListener('mouseenter', onMouseEnter);
-        elem.removeEventListener('mouseleave', onMouseLeave);
-      });
     };
   }, []);
 
-  return <div ref={cursorRef} id="wand-cursor" />;
+  return (
+    <div ref={cursorRef} id="wand-cursor">
+      <img
+        src="/images/home/cursor_wand.png?v=3"
+        alt=""
+        className="wand-cursor-img"
+        draggable={false}
+      />
+    </div>
+  );
 }

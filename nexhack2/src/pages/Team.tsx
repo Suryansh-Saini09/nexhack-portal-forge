@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 
 interface TeamMember {
   id: string;
@@ -8,17 +8,28 @@ interface TeamMember {
   socials: { github: string; linkedin: string };
 }
 
-const teamData: TeamMember[] = [
+// ⚡ CORE COMMITTEE — The High Council (Order of the Phoenix)
+const coreTeam: TeamMember[] = [
   { id: 'shravya-atrey',    name: 'Shravya Atrey',    role: 'Core Lead',                                    image: './images/team/shravya.webp', socials: { github: 'https://github.com/shravya315',            linkedin: 'https://www.linkedin.com/in/shravyatrey315/' } },
+  { id: 'gagan-thakur',     name: 'Gagan Thakur',     role: 'Core Lead',                                    image: './images/team/gagan.webp',   socials: { github: 'https://github.com/Gaganthakur0101',            linkedin: 'https://www.linkedin.com/in/gagan-singh0101/' } },
   { id: 'sahil-bhardwaj',   name: 'Sahil Bhardwaj',   role: 'Core Lead',                                    image: './images/team/sahil.webp',   socials: { github: 'https://github.com/sahil-codesfor-fun',    linkedin: 'https://www.linkedin.com/in/sahil-bhardwajs10/' } },
-  { id: 'muskan-kaushik',   name: 'Muskan Kaushik',   role: 'Technical Lead',                               image: './images/team/muskan.webp',  socials: { github: 'https://github.com/kaushikmuskan29',       linkedin: 'https://www.linkedin.com/in/kaushikmuskan29' } },
-  { id: 'kunal-khandelwal', name: 'Kunal Khandelwal', role: 'Outreach Head',                                image: './images/team/kunal.webp',  socials: { github: 'https://github.com/KunalKhandelwal-dev',   linkedin: 'https://in.linkedin.com/in/kunal-khandelwal-62a5b1311' } },
+  { id: 'muskan-kaushik',   name: 'Muskan Kaushik',   role: 'Core Executive',                               image: './images/team/muskan.webp',  socials: { github: 'https://github.com/kaushikmuskan29',       linkedin: 'https://www.linkedin.com/in/kaushikmuskan29' } },
+  { id: 'riya-rana',        name: 'Riya Rana',        role: 'Core Executive',                               image: './images/team/riya.webp',    socials: { github: 'https://github.com/riyarana9813',       linkedin: 'https://www.linkedin.com/in/riya-rana-b752a6327/' } },
+  { id: 'pratyaksh-goel',   name: 'Pratyaksh Goel',   role: 'Outreach Head',                               image: './images/team/pratyaksh.webp', socials: { github: 'https://github.com/Pratyaksh12134',       linkedin: 'https://www.linkedin.com/in/partyksh-goel-15781b323?utm_source=share_via&utm_content=profile&utm_medium=member_ios' } },
+  { id: 'nera-shyoran',     name: 'Nera Shyoran',     role: 'Design and Creative Head',                     image: './images/team/nera.webp',    socials: { github: 'https://github.com/nera8563',              linkedin: 'https://www.linkedin.com/in/nera123' } },
+  { id: 'kunal-khandelwal', name: 'Kunal Khandelwal', role: 'Logistics Head',                                image: './images/team/kunal.webp',  socials: { github: 'https://github.com/KunalKhandelwal-dev',   linkedin: 'https://in.linkedin.com/in/kunal-khandelwal-62a5b1311' } },
   { id: 'vinit-vashishta',  name: 'Vinit Vashishta',  role: 'Social Media & Public Relations Head',         image: './images/team/vinit.webp',   socials: { github: 'https://github.com',                       linkedin: 'https://www.linkedin.com/in/vinit-vashishta-4280b8323/' } },
-  { id: 'nera',             name: 'Nera',             role: 'Design and Creative Head',                     image: './images/team/nera.webp',    socials: { github: 'https://github.com/nera8563',              linkedin: 'https://www.linkedin.com/in/nera123' } },
-  { id: 'krishna-gupta',     name: 'Krishna Gupta',     role: 'Registration & Participant Relations Head',    image: './images/team/krishna.webp', socials: { github: 'https://github.com/Krishna-Gupta-Git',     linkedin: 'https://www.linkedin.com/in/krishna-gupta-890147374' } },
-  { id: 'lakshay',          name: 'Lakshay',          role: 'Volunteer Management Head',                    image: './images/team/lakshay.webp', socials: { github: 'https://github.com/Lakshayy-y',            linkedin: 'https://www.linkedin.com/in/lakshaymittal012' } },
-  { id: 'janvi-devi',       name: 'Janvi',       role: 'Content & Documentation Head',                 image: './images/team/janvi.webp',   socials: { github: 'https://github.com/JANVI2223',             linkedin: 'https://www.linkedin.com/in/janvidevi49' } },
-  { id: 'drishti',          name: 'Drishti',          role: 'Marketing Head',                               image: './images/team/drishti.webp', socials: { github: 'https://github.com/jaspaldrishti-droid',   linkedin: 'https://www.linkedin.com/in/drishti-jaspal12' } },
+  { id: 'krishna-gupta',    name: 'Krishna Gupta',    role: 'Registration & Participant Relations Head',    image: './images/team/krishna.webp', socials: { github: 'https://github.com/Krishna-Gupta-Git',     linkedin: 'https://www.linkedin.com/in/krishna-gupta-890147374' } },
+  { id: 'lakshay Mittal',          name: 'Lakshay Mittal',          role: 'Volunteer Management Head',                    image: './images/team/lakshay.webp', socials: { github: 'https://github.com/Lakshayy-y',            linkedin: 'https://www.linkedin.com/in/lakshaymittal012' } },
+  { id: 'janvi-devi',       name: 'Janvi Devi',            role: 'Content & Documentation Head',                 image: './images/team/janvi.webp',   socials: { github: 'https://github.com/JANVI2223',             linkedin: 'https://www.linkedin.com/in/janvidevi49' } },
+  { id: 'drishti-jaspal',          name: 'Drishti Jaspal',          role: 'Marketing Head',                               image: './images/team/drishti.webp', socials: { github: 'https://github.com/jaspaldrishti-droid',   linkedin: 'https://www.linkedin.com/in/drishti-jaspal12' } },
+];
+
+// ✦ SUB-CORE COMMITTEE — The Guild of Prefects / Sub-Core Team (Add your 3 new members here)
+const subCoreTeam: TeamMember[] = [
+  { id: 'aryan-jangir', name: 'Aryan Jangir', role: 'Sub-Core', image: './images/team/aryan.webp', socials: { github: 'https://github.com/aryanjangir27-crypto', linkedin: 'https://www.linkedin.com/in/aryan-jangir-060609366?utm_source=share_via&utm_content=profile&utm_medium=member_ios' } },
+  { id: 'krish-garg', name: 'Krish Garg', role: 'Sub-Core', image: './images/team/krish.webp', socials: { github: 'https://www.linkedin.com/in/garg-krish0001/', linkedin: 'https://github.com/072Krish' } },
+  { id: 'keshav-jindal', name: 'Keshav Jindal', role: 'Sub-Core', image: './images/team/keshav.webp', socials: { github: 'https://github.com/keshavjindal012', linkedin: 'https://www.linkedin.com/in/keshavjindal012?utm_source=share_via&utm_content=profile&utm_medium=member_android' } },
 ];
 
 function TeamCard({ member }: { member: TeamMember }) {
@@ -60,9 +71,54 @@ export default function Team() {
   return (
     <main className="characters-section">
       <h1 className="section-title">Organizing Committee</h1>
-      <div className="cards-grid team-grid">
-        {teamData.map(member => <TeamCard key={member.id} member={member} />)}
+      <p className="team-main-subtitle">The Sorcerers, Enchanters & Guild Masters Guiding the Realm</p>
+
+      {/* ⚡ SECTION 1: CORE COMMITTEE */}
+      <section className="team-chamber-section">
+        <div className="team-chamber-header">
+          <div className="team-crest-badge core-badge">
+            <span className="badge-spark">⚡</span>
+            <span>ORDER OF THE PHOENIX</span>
+          </div>
+          <h2 className="team-chamber-title">The High Council</h2>
+          <p className="team-chamber-subtitle">Core Committee & Leads</p>
+          <div className="team-chamber-ornament">
+            <span className="ornament-line" />
+            <span className="ornament-glyph">❖</span>
+            <span className="ornament-line" />
+          </div>
+        </div>
+        <div className="cards-grid team-grid">
+          {coreTeam.map(member => <TeamCard key={member.id} member={member} />)}
+        </div>
+      </section>
+
+      {/* Decorative Divider Between Chambers */}
+      <div className="team-chamber-divider">
+        <div className="divider-line" />
+        <div className="divider-sigil">✦</div>
+        <div className="divider-line" />
       </div>
+
+      {/* ✦ SECTION 2: SUB-CORE COMMITTEE */}
+      <section className="team-chamber-section">
+        <div className="team-chamber-header">
+          <div className="team-crest-badge subcore-badge">
+            <span className="badge-spark">✦</span>
+            <span>THE GUILD OF PREFECTS</span>
+          </div>
+          <h2 className="team-chamber-title">The Sub-Core Alliance</h2>
+          <p className="team-chamber-subtitle">Support Enchanters & Operations Support</p>
+          <div className="team-chamber-ornament">
+            <span className="ornament-line" />
+            <span className="ornament-glyph">❖</span>
+            <span className="ornament-line" />
+          </div>
+        </div>
+        <div className="cards-grid team-grid">
+          {subCoreTeam.map(member => <TeamCard key={member.id} member={member} />)}
+        </div>
+      </section>
     </main>
   );
 }
