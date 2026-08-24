@@ -1,15 +1,28 @@
-const FALLBACK_BACKEND = 'https://websitebackend-w5m9.onrender.com';
+const FALLBACK_BACKEND = "http://localhost:4000";
 
-async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs: number): Promise<Response> {
+async function fetchWithTimeout(
+  url: string,
+  options: RequestInit,
+  timeoutMs: number
+): Promise<Response> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  const timer = setTimeout(() => {
+    controller.abort();
+  }, timeoutMs);
+
   try {
-    const res = await fetch(url, { ...options, signal: controller.signal });
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+
     clearTimeout(timer);
-    return res;
-  } catch (err) {
+
+    return response;
+  } catch (error) {
     clearTimeout(timer);
-    throw err;
+    throw error;
   }
 }
 
@@ -20,56 +33,71 @@ export interface ApiResponse {
   [key: string]: any;
 }
 
-export async function postApi(endpoint: string, body: Record<string, any>): Promise<ApiResponse> {
-  const baseUrl = (import.meta as any).env?.VITE_API_URL ? (import.meta as any).env.VITE_API_URL.replace(/\/$/, '') : '';
-  const primaryUrl = baseUrl ? `${baseUrl}${endpoint}` : endpoint;
-  const fallbackUrl = `${FALLBACK_BACKEND}${endpoint}`;
+export async function postApi(
+  endpoint: string,
+  body: Record<string, any>
+): Promise<ApiResponse> {
+  const configuredUrl = (
+    import.meta as any
+  ).env?.VITE_API_URL;
 
-  const reqOptions: RequestInit = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  const baseUrl = configuredUrl
+    ? configuredUrl.replace(/\/$/, "")
+    : FALLBACK_BACKEND;
+
+  const url = `${baseUrl}${endpoint}`;
+
+  const requestOptions: RequestInit = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(body),
   };
 
-  // 1. Try Primary URL (/api/...) - 15s timeout guard for serverless & email dispatch
   try {
-    const res = await fetchWithTimeout(primaryUrl, reqOptions, 15000);
-    if (res.ok) {
-      const contentType = res.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        const data = await res.json();
-        if (data && data.success !== false) {
-          return data;
-        }
-      }
-    }
-  } catch (err) {
-    // Primary endpoint unavailable, static HTML returned, or timed out
-  }
+    const response = await fetchWithTimeout(
+      url,
+      requestOptions,
+      15000
+    );
 
-  // 2. Try Fallback URL (Render remote server) - 5s timeout guard
-  try {
-    const res = await fetchWithTimeout(fallbackUrl, reqOptions, 5000);
-    const contentType = res.headers.get('content-type');
-    if (contentType && contentType.includes('application/json')) {
-      const data = await res.json();
-      if (res.ok && data.success !== false) {
-        return data;
-      }
-      if (data.message && data.message.toLowerCase().includes('email')) {
-        return { success: true, message: 'Submission received! We will reach out to you shortly.' };
-      }
-      if (data.error || data.message) {
-        throw new Error(data.error || data.message);
-      }
-    }
-    if (res.ok) {
-      return { success: true, message: 'Submission received successfully!' };
-    }
-  } catch (err) {
-    // Fallback server sleeping, offline, or timed out
-  }
+    const contentType =
+      response.headers.get("content-type") || "";
 
-  // Guaranteed resilient user response (prevents UI hanging on "Sending...")
-  return { success: true, message: 'Your message has been received! Our team will contact you shortly.' };
+    let data: ApiResponse | null = null;
+
+    if (contentType.includes("application/json")) {
+      data = await response.json();
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        data?.message ||
+          data?.error ||
+          `Request failed with status ${response.status}`
+      );
+    }
+
+    if (!data) {
+      throw new Error("Invalid response from backend.");
+    }
+
+    if (data.success === false) {
+      throw new Error(
+        data.message ||
+          data.error ||
+          "Request failed."
+      );
+    }
+
+    return data;
+  } catch (error) {
+    console.error(
+      `NexHack API request failed: ${endpoint}`,
+      error
+    );
+
+    throw error;
+  }
 }
