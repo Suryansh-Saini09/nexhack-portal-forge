@@ -18,6 +18,7 @@ import mon from "/mon.jpg";
 import bx from "/bx.png";
 import tri from "/tri.png";
 import arena from "/arenapulse.png";
+import nexora from "/nexora.jpeg";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 export const SponsorsSection = () => {
@@ -34,6 +35,7 @@ export const SponsorsSection = () => {
     emerald: [{ name: "", logo: devfolio }],
     gold: [{ name: "", logo: cblogo }],
     general: [
+      { name: "Technology\u00A0Partner", logo: nexora },
       { name: "Domain Partner", logo: xyz },
       { name: "Certificate\u00A0Partner", logo: Give },
       { name: "Blockchain\u00A0Partner", logo: ethindia },

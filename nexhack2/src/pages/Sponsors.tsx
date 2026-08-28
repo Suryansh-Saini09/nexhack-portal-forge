@@ -1,5 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { postApi } from '../utils/api';
+
+export interface Sponsor {
+  id: string;
+  name: string;
+  category?: string;
+  categoryType?: 'prize' | 'knowledge' | 'domain' | 'tech' | 'media';
+  logo?: string;
+  url?: string;
+  tier?: 'powered-by' | 'ally';
+}
+
+/**
+ * ⚡ HERO / POWERED BY SPONSORS
+ * Primary patrons of NexHack 2.0
+ */
+export const POWERED_BY_SPONSORS: Sponsor[] = [
+  {
+    id: 'unstop',
+    name: 'Unstop',
+    category: 'Powered By Partner',
+    logo: '/images/sponsors/unstop.png',
+    url: 'https://unstop.com',
+    tier: 'powered-by'
+  },
+  {
+    id: 'geeksforgeeks',
+    name: 'GeeksforGeeks',
+    category: 'Powered By Partner',
+    logo: '/images/sponsors/GeeksforGeeks.webp',
+    url: 'https://geeksforgeeks.org',
+    tier: 'powered-by'
+  }
+];
+
+/**
+ * 🏆 STRATEGIC & KNOWLEDGE ALLIES
+ * Scalable sponsor wall — seamlessly accommodates 5, 10, 20+ partners
+ */
+export const ALLY_SPONSORS: Sponsor[] = [
+  {
+    id: 'codecrafters',
+    name: 'CodeCrafters',
+    category: '🏆 Prize Partner',
+    categoryType: 'prize',
+    logo: '/images/sponsors/codecrafters.svg',
+    url: 'https://codecrafters.io',
+    tier: 'ally'
+  },
+  {
+    id: 'mastra',
+    name: 'Mastra',
+    category: '📚 Knowledge Partner',
+    categoryType: 'knowledge',
+    logo: '/images/sponsors/mastra.png',
+    url: 'https://mastra.ai',
+    tier: 'ally'
+  },
+  {
+    id: 'xyz',
+    name: '.xyz',
+    category: '🌐 Domain Partner',
+    categoryType: 'domain',
+    logo: '/images/sponsors/xyz.svg',
+    url: 'https://gen.xyz',
+    tier: 'ally'
+  },
+  /* {
+    id: 'eventopia',
+    name: 'Eventopia.in',
+    category: '📢 Official Media Partner',
+    categoryType: 'media',
+    logo: '',
+    url: 'https://eventopia.in',
+    tier: 'ally'
+  }, */
+  {
+    id: 'n8n',
+    name: 'n8n',
+    category: '💻 Technology Partner',
+    categoryType: 'tech',
+    logo: '/images/sponsors/n8n.svg',
+    url: 'https://n8n.io',
+    tier: 'ally'
+  },
+  {
+    id: 'nexora',
+    name: 'Nexora',
+    category: '💻 Technology Partner',
+    categoryType: 'tech',
+    logo: '/images/sponsors/nexora.jpeg',
+    url: '#',
+    tier: 'ally'
+  }
+];
 
 interface SponsorFormData {
   company: string;
@@ -71,10 +165,54 @@ export default function Sponsors() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Progressive Scroll Summon Reveal Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-summoned');
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    const revealElements = sectionRef.current?.querySelectorAll('.summon-reveal');
+    revealElements?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '11px 16px',
+    borderRadius: '10px',
+    background: 'rgba(10, 16, 28, 0.85)',
+    border: '1px solid rgba(212, 175, 55, 0.35)',
+    color: '#ffffff',
+    fontFamily: 'Spectral, serif',
+    fontSize: '0.96rem',
+    outline: 'none',
+    boxShadow: 'inset 0 2px 5px rgba(0, 0, 0, 0.6)',
+    transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
+    cursor: 'text'
+  };
+
+  const labelStyle: React.CSSProperties = {
+    fontSize: '0.74rem',
+    color: '#f0c030',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    letterSpacing: '1.2px',
+    fontFamily: 'Cinzel, serif'
+  };
+
   const handleCloseModal = () => {
     if (isKeyTurning || isModalClosing) return;
     setIsKeyTurning(true);
-    // Key mechanically turns 180deg with a gold glint, then modal smoothly vanishes
     setTimeout(() => {
       setIsModalClosing(true);
       setTimeout(() => {
@@ -106,185 +244,219 @@ export default function Sponsors() {
     }
   };
 
-  const inputStyle: React.CSSProperties = {
-    width: '100%',
-    padding: '11px 16px',
-    borderRadius: '10px',
-    background: 'rgba(10, 16, 28, 0.85)',
-    border: '1px solid rgba(212, 175, 55, 0.35)',
-    color: '#ffffff',
-    fontFamily: 'Spectral, serif',
-    fontSize: '0.96rem',
-    outline: 'none',
-    boxShadow: 'inset 0 2px 5px rgba(0, 0, 0, 0.6)',
-    transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
-    cursor: 'text'
-  };
-
-  const labelStyle: React.CSSProperties = {
-    fontSize: '0.74rem',
-    color: '#f0c030',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    letterSpacing: '1.2px',
-    fontFamily: 'Cinzel, serif'
-  };
-
   return (
-    <main className="objects-section sponsors-page" id="sponsors">
+    <main ref={sectionRef} className="objects-section sponsors-page" id="sponsors">
+      {/* Background Arcane Halo */}
+      <div className="sponsors-ambient-aura" />
+
       {/* Grand Section Header */}
-      <div className="sponsors-grand-header">
+      <div className="sponsors-grand-header summon-reveal">
         <div className="sponsors-eyebrow-badge">
           <span className="eyebrow-sparkle">✦</span>
-          <span className="eyebrow-text">THE MINISTRY OF ALLIANCES & PATRONAGE</span>
+          <span className="eyebrow-text">PATRONAGE & ALLIANCES</span>
           <span className="eyebrow-sparkle">✦</span>
         </div>
-        <h1 className="section-title">Become a Sponsor</h1>
+        <h1 className="section-title">OUR SPONSORS & ALLIES</h1>
+        <p className="sponsors-section-subtitle">
+          Those who stand with <strong>NexHack 2.0</strong> — championing the next generation of builders, innovators, and creators.
+        </p>
         <div className="themes-header-divider" style={{ margin: '14px auto 0' }} />
       </div>
 
       {/* Main Patronage Showcase Container */}
       <div className="sponsors-showcase-container">
 
-        {/* 4 Patronage Impact Pillars */}
-        <div className="sponsor-pillars-grid">
-          {sponsorPillars.map((pillar, idx) => (
-            <div key={idx} className="sponsor-pillar-card">
-              <div className="pillar-header-row">
-                <div className="pillar-icon-badge">{pillar.icon}</div>
-                <span className="pillar-tag-pill">{pillar.tag}</span>
-              </div>
-              <h3 className="pillar-title">{pillar.title}</h3>
-              <p className="pillar-desc">{pillar.desc}</p>
-              <div className="pillar-corner-filigree" />
-            </div>
-          ))}
+        {/* ===================================================================
+            1. POWERED BY (HERO TIER)
+            =================================================================== */}
+        <section className="sponsor-tier-section tier-hero summon-reveal" aria-label="Powered By Sponsors">
+          <div className="tier-header-badge">
+            <span className="tier-badge-icon">⚡</span>
+            <span className="tier-badge-label">POWERED BY</span>
+            <span className="tier-badge-icon">⚡</span>
+          </div>
+
+          <div className="powered-by-hero-grid">
+            {POWERED_BY_SPONSORS.map((sponsor, idx) => (
+              <a
+                key={sponsor.id || idx}
+                href={sponsor.url || '#'}
+                target={sponsor.url && sponsor.url !== '#' ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="sponsor-seal-card hero-seal"
+                title={`${sponsor.name} — Powered By Partner`}
+                style={{ transitionDelay: `${idx * 80}ms` }}
+              >
+                <div className="seal-shimmer-sweep" />
+                <div className="seal-gold-perimeter" />
+
+                <div className="seal-logo-chamber hero-chamber">
+                  {sponsor.logo ? (
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                      className="seal-logo-img hero-img"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="seal-placeholder-chamber">
+                      <span className="placeholder-crest-icon">✦ ⚡ ✦</span>
+                      <span className="placeholder-brand-title">{sponsor.name}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="seal-corner tl" />
+                <div className="seal-corner tr" />
+                <div className="seal-corner bl" />
+                <div className="seal-corner br" />
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* Section Tier Connector */}
+        <div className="sponsor-tier-divider summon-reveal">
+          <div className="divider-line" />
+          <span className="divider-sparkle">✦</span>
+          <div className="divider-line" />
         </div>
 
-        {/* Central Grand Alliance Decree Card */}
-        <div className="sponsor-decree-card">
-          <div className="decree-ambient-aura" />
-          <div className="decree-top-hairline" />
-
-          <div className="decree-seal-header">
-            <div className="decree-wax-seal">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="wax-crest-svg"
-              >
-                <path
-                  d="M12 2L4 5V11.5C4 16.5 7.5 20.8 12 22C16.5 20.8 20 16.5 20 11.5V5L12 2Z"
-                  fill="url(#waxGoldGrad)"
-                  stroke="#d4af37"
-                  strokeWidth="1.5"
-                />
-                <path
-                  d="M12 5.5L6.5 7.5V11.5C6.5 15.2 9 18.5 12 19.5C15 18.5 17.5 15.2 17.5 11.5V7.5L12 5.5Z"
-                  stroke="#fff5cc"
-                  strokeWidth="1"
-                  strokeOpacity="0.8"
-                />
-                <path d="M12 8V16M8 12H16" stroke="#58111a" strokeWidth="1.6" strokeLinecap="round" />
-                <defs>
-                  <linearGradient id="waxGoldGrad" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#ffd700" />
-                    <stop offset="0.5" stopColor="#d4af37" />
-                    <stop offset="1" stopColor="#996515" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <div className="decree-header-text">
-              <h3 className="decree-heading">Patronage Alliances Available</h3>
-              <p className="decree-sub">Custom tiers crafted to amplify your brand presence and hiring goals.</p>
-            </div>
+        {/* ===================================================================
+            2. OUR ALLIES (RESPONSIVE 3-COL / 2-COL / 1-COL SPONSOR WALL)
+            =================================================================== */}
+        <section className="sponsor-tier-section tier-allies summon-reveal" aria-label="Strategic and Knowledge Allies">
+          <div className="tier-header-badge">
+            <span className="tier-badge-icon">🏆</span>
+            <span className="tier-badge-label">STRATEGIC & KNOWLEDGE ALLIES</span>
+            <span className="tier-badge-icon">🏆</span>
           </div>
 
-          <div className="decree-tiers-strip">
-            <span className="tier-tag gold">✦ Gold Ally</span>
-            <span className="tier-bullet">•</span>
-            <span className="tier-tag platform">✦ Platform Ally</span>
-            <span className="tier-bullet">•</span>
-            <span className="tier-tag special">✦ Special Category</span>
-            <span className="tier-bullet">•</span>
-            <span className="tier-tag custom">✦ Custom / In-Kind</span>
-          </div>
-
-          {/* Action Controls */}
-          <div className="decree-action-controls">
-            <button
-              onClick={() => setShowSponsorModal(true)}
-              className="alliance-primary-btn"
-            >
-              <svg
-                className="btn-wizard-svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+          <div className="allies-sponsor-wall">
+            {ALLY_SPONSORS.map((sponsor, idx) => (
+              <a
+                key={sponsor.id || idx}
+                href={sponsor.url || '#'}
+                target={sponsor.url && sponsor.url !== '#' ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="sponsor-seal-card ally-seal"
+                title={`${sponsor.name}${sponsor.category ? ` — ${sponsor.category}` : ''}`}
+                style={{ transitionDelay: `${idx * 60}ms` }}
               >
-                <path
-                  d="M12 3C8.13 3 5 6.13 5 10C5 14.5 8 19 12 21.5C16 19 19 14.5 19 10C19 6.13 15.87 3 12 3Z"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinejoin="round"
-                />
-                <circle cx="9" cy="9.5" r="2.2" stroke="currentColor" strokeWidth="1.2" />
-                <circle cx="9" cy="9.5" r="1" fill="currentColor" />
-                <circle cx="15" cy="9.5" r="2.2" stroke="currentColor" strokeWidth="1.2" />
-                <circle cx="15" cy="9.5" r="1" fill="currentColor" />
-                <path d="M12 10.5L11 13H13L12 10.5Z" fill="currentColor" />
-                <path d="M2 8C4.5 9.5 5.5 12 5.5 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M22 8C19.5 9.5 18.5 12 18.5 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M9.5 16.5C11 17.5 13 17.5 14.5 16.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-              </svg>
-              <span>DISPATCH OWL INQUIRY</span>
-            </button>
+                <div className="seal-shimmer-sweep" />
+                <div className="seal-gold-perimeter" />
 
-            <a
-              href="./images/sponsors/NexHack_2.0_Sponsorship_Prospectus.pdf"
-              download
-              className="alliance-secondary-btn"
-            >
-              <svg
-                className="btn-wizard-svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M19 17V5C19 3.89543 18.1046 3 17 3H7C5.89543 3 5 3.89543 5 5V17C5 18.1046 5.89543 19 7 19H17C18.1046 19 19 18.1046 19 17Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                />
-                <path
-                  d="M19 17C19 18.6569 17.6569 20 16 20H5C3.34315 20 2 18.6569 2 17C2 15.3431 3.34315 14 5 14H19V17Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="currentColor"
-                  fillOpacity="0.15"
-                />
-                <path d="M8 7H15" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                <path d="M8 10H14" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                <path d="M8 13H12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-              </svg>
-              <span>DOWNLOAD PROSPECTUS</span>
-            </a>
+                <div className="seal-logo-chamber ally-chamber">
+                  {sponsor.logo ? (
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                      className="seal-logo-img ally-img"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="seal-placeholder-chamber">
+                      <span className="placeholder-crest-icon">✦ 🪄 ✦</span>
+                      <span className="placeholder-brand-title">{sponsor.name}</span>
+                    </div>
+                  )}
+                </div>
+
+                {sponsor.category && (
+                  <div className="seal-category-footer">
+                    <span className={`seal-category-label ${sponsor.categoryType ? `type-${sponsor.categoryType}` : ''}`}>
+                      {sponsor.category}
+                    </span>
+                  </div>
+                )}
+
+                <div className="seal-corner tl" />
+                <div className="seal-corner tr" />
+                <div className="seal-corner bl" />
+                <div className="seal-corner br" />
+              </a>
+            ))}
           </div>
+        </section>
 
-          {/* Ornate Corner Brackets */}
-          <div className="alliance-corner-bracket tl" />
-          <div className="alliance-corner-bracket tr" />
-          <div className="alliance-corner-bracket bl" />
-          <div className="alliance-corner-bracket br" />
+        {/* Section Tier Connector */}
+        <div className="sponsor-tier-divider summon-reveal">
+          <div className="divider-line" />
+          <span className="divider-sparkle">✦</span>
+          <div className="divider-line" />
         </div>
+
+        {/* ===================================================================
+            3. BECOME A PARTNER SECTION
+            =================================================================== */}
+        <section className="sponsor-tier-section tier-partner-cta summon-reveal" aria-label="Become a Partner">
+          <div className="tier-header-badge">
+            <span className="tier-badge-icon">✦</span>
+            <span className="tier-badge-label">PATRONAGE INVITATION</span>
+            <span className="tier-badge-icon">✦</span>
+          </div>
+
+          <h2 className="section-title" style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2.1rem)', margin: '0' }}>
+            BECOME A PARTNER
+          </h2>
+          <div className="themes-header-divider" style={{ margin: '8px auto 16px' }} />
+
+          <div className="sponsor-decree-card">
+            <div className="decree-ambient-aura" />
+            <div className="decree-top-hairline" />
+
+            <p className="decree-compact-tagline">
+              ✦ Even the greatest spells require legendary tools — equip 500+ tech wizards and watch pure innovation come alive. ✦
+            </p>
+
+            {/* Action Controls */}
+            <div className="decree-action-controls">
+              <button
+                onClick={() => setShowSponsorModal(true)}
+                className="alliance-primary-btn"
+              >
+                <svg
+                  className="btn-wizard-svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 3C8.13 3 5 6.13 5 10C5 14.5 8 19 12 21.5C16 19 19 14.5 19 10C19 6.13 15.87 3 12 3Z"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                  />
+                  <circle cx="9" cy="9.5" r="2.2" stroke="currentColor" strokeWidth="1.2" />
+                  <circle cx="9" cy="9.5" r="1" fill="currentColor" />
+                  <circle cx="15" cy="9.5" r="2.2" stroke="currentColor" strokeWidth="1.2" />
+                  <circle cx="15" cy="9.5" r="1" fill="currentColor" />
+                  <path d="M12 10.5L11 13H13L12 10.5Z" fill="currentColor" />
+                  <path d="M2 8C4.5 9.5 5.5 12 5.5 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M22 8C19.5 9.5 18.5 12 18.5 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M9.5 16.5C11 17.5 13 17.5 14.5 16.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                </svg>
+                <span>FORGE AN ALLIANCE ✦</span>
+              </button>
+              <a
+                href="/images/sponsors/NexHack_2.0_Sponsorship_Prospectus.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="alliance-secondary-btn"
+              >
+                <span>DOWNLOAD DECREE (PDF)</span>
+              </a>
+            </div>
+
+            {/* Corner Filigree Brackets */}
+            <div className="decree-corner tl" />
+            <div className="decree-corner tr" />
+            <div className="decree-corner bl" />
+            <div className="decree-corner br" />
+          </div>
+        </section>
       </div>
 
       {/* Widened & Sleek Dispatch Owl Inquiry Vault Modal Card */}

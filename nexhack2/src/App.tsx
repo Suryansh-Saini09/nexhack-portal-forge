@@ -210,24 +210,7 @@ export default function App() {
     <>
       <WandCursor />
       <div className="global-bg-container">
-        <div className={`bg-layer home-bg ${activeSection !== 'schedule' ? 'active' : ''}`} />
-        <div className={`bg-layer video-bg ${activeSection === 'schedule' ? 'active' : ''}`}>
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            controls={false}
-            disablePictureInPicture
-            disableRemotePlayback
-          >
-            <source src="/images/home/nexhack.webm" type="video/webm" />
-            <source src="./images/home/nexhack.webm" type="video/webm" />
-            <source src="/images/home/nexhack.mp4" type="video/mp4" />
-            <source src="./images/home/nexhack.mp4" type="video/mp4" />
-          </video>
-        </div>
+        <div className="bg-layer home-bg active" />
       </div>
 
       <Navbar activeSection={activeSection} onNavClick={handleNavClick} />

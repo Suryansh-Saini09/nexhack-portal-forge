@@ -101,7 +101,7 @@ export default function WandCursor() {
   return (
     <div ref={cursorRef} id="wand-cursor">
       <img
-        src="/images/home/cursor_wand.png?v=3"
+        src="/images/home/cursor_wand.webp"
         alt=""
         className="wand-cursor-img"
         draggable={false}
