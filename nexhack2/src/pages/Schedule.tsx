@@ -436,11 +436,6 @@ export default function Schedule() {
 
       {/* Section Header */}
       <div className="schedule-section-header">
-        <div className="schedule-express-badge">
-          <span className="express-badge-spark">✦</span>
-          <span className="express-badge-text">PLATFORM 9¾ • THE JOURNEY</span>
-          <span className="express-badge-spark">✦</span>
-        </div>
         <h1 className="schedule-main-title">Hogwarts Express Schedule</h1>
         <div className="schedule-track-divider">
           <div className="track-rail-line" />

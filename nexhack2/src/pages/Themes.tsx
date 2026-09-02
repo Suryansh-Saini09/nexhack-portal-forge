@@ -119,13 +119,7 @@ export default function Themes() {
     <section className="objects-section themes-section" id="themes">
       {/* Grand Arcane Section Header */}
       <div className="themes-grand-header">
-        <div className="themes-eyebrow-badge">
-          <span className="eyebrow-sparkle">✦</span>
-          <span className="eyebrow-text">THE TEN CHAMBERS OF INNOVATION</span>
-          <span className="eyebrow-sparkle">✦</span>
-        </div>
         <h1 className="section-title themes-title">Hacking Themes</h1>
-        <div className="themes-header-divider" style={{ margin: '14px auto 0' }} />
       </div>
 
       {/* Main 10-Chambers Showcase Grid */}
@@ -145,7 +139,9 @@ export default function Themes() {
 
             {/* Icon + Title */}
             <div className="chamber-title-wrap">
-              <span className="chamber-icon-glyph">{track.icon}</span>
+              <div className="chamber-icon-orb">
+                <span className="chamber-icon-glyph">{track.icon}</span>
+              </div>
               <h3 className="chamber-card-title">{track.title}</h3>
             </div>
 
@@ -160,12 +156,6 @@ export default function Themes() {
                 </span>
               ))}
             </div>
-
-            {/* Ornate Corner Filigrees */}
-            <div className="alliance-corner tl" />
-            <div className="alliance-corner tr" />
-            <div className="alliance-corner bl" />
-            <div className="alliance-corner br" />
           </div>
         ))}
       </div>

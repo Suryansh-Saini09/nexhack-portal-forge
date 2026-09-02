@@ -18,17 +18,26 @@ export default function WandCursor() {
     if (!cursor) return;
 
     let isVisible = false;
+    let lastX = window.innerWidth / 2;
+    let lastY = window.innerHeight / 2;
 
     // Direct, instant 0-lag position updates
     const updatePosition = (x: number, y: number) => {
+      lastX = x;
+      lastY = y;
       cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
     };
 
-    const onMouseMove = (e: MouseEvent) => {
+    const showCursor = () => {
+      if (window.innerWidth < 768) return;
+      isVisible = true;
+      cursor.style.opacity = '1';
+    };
+
+    const onPointerMove = (e: MouseEvent | PointerEvent) => {
       if (window.innerWidth < 768) return;
       if (!isVisible) {
-        isVisible = true;
-        cursor.style.opacity = '1';
+        showCursor();
       }
       updatePosition(e.clientX, e.clientY);
     };
@@ -60,36 +69,52 @@ export default function WandCursor() {
       }
     };
 
-    const onMouseLeaveWindow = () => {
-      isVisible = false;
-      cursor.style.opacity = '0';
+    const onMouseLeaveWindow = (e: MouseEvent) => {
+      // Only hide if cursor genuinely leaves the browser viewport
+      if (!e.relatedTarget && !(e as unknown as { toElement?: Element }).toElement) {
+        isVisible = false;
+        cursor.style.opacity = '0';
+      }
     };
 
     const onMouseEnterWindow = () => {
-      if (window.innerWidth < 768) return;
-      isVisible = true;
-      cursor.style.opacity = '1';
+      showCursor();
+    };
+
+    const onVisibilityOrFocusChange = () => {
+      if (!document.hidden && window.innerWidth >= 768) {
+        showCursor();
+        updatePosition(lastX, lastY);
+      }
     };
 
     const onResize = () => {
       checkMobile();
     };
 
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('mousemove', onPointerMove, { passive: true });
     window.addEventListener('mousedown', onMouseDown, { passive: true });
     window.addEventListener('mouseup', onMouseUp, { passive: true });
     document.addEventListener('mouseover', onMouseOver, { passive: true });
     document.addEventListener('mouseleave', onMouseLeaveWindow);
     document.addEventListener('mouseenter', onMouseEnterWindow);
+    document.addEventListener('visibilitychange', onVisibilityOrFocusChange);
+    window.addEventListener('focus', onVisibilityOrFocusChange);
+    window.addEventListener('pageshow', onVisibilityOrFocusChange);
     window.addEventListener('resize', onResize);
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('mousemove', onPointerMove);
       window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mouseup', onMouseUp);
       document.removeEventListener('mouseover', onMouseOver);
       document.removeEventListener('mouseleave', onMouseLeaveWindow);
       document.removeEventListener('mouseenter', onMouseEnterWindow);
+      document.removeEventListener('visibilitychange', onVisibilityOrFocusChange);
+      window.removeEventListener('focus', onVisibilityOrFocusChange);
+      window.removeEventListener('pageshow', onVisibilityOrFocusChange);
       window.removeEventListener('resize', onResize);
     };
   }, []);

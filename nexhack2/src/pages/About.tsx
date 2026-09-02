@@ -125,14 +125,14 @@ export default function About() {
             <div className="glimpses-set">
               {glimpsesData.map((img) => (
                 <div key={`row1-set1-${img.id}`} className="glimpses-card">
-                  <img src={`./images/glimpses/${img.file}`} alt={img.alt} className="glimpses-img" />
+                  <img src={`/images/glimpses/${img.file}`} alt={img.alt} className="glimpses-img" />
                 </div>
               ))}
             </div>
             <div className="glimpses-set">
               {glimpsesData.map((img) => (
                 <div key={`row1-set2-${img.id}`} className="glimpses-card">
-                  <img src={`./images/glimpses/${img.file}`} alt={img.alt} className="glimpses-img" />
+                  <img src={`/images/glimpses/${img.file}`} alt={img.alt} className="glimpses-img" />
                 </div>
               ))}
             </div>
@@ -143,14 +143,14 @@ export default function About() {
             <div className="glimpses-set">
               {[...glimpsesData].reverse().map((img) => (
                 <div key={`row2-set1-${img.id}`} className="glimpses-card">
-                  <img src={`./images/glimpses/${img.file}`} alt={img.alt} className="glimpses-img" />
+                  <img src={`/images/glimpses/${img.file}`} alt={img.alt} className="glimpses-img" />
                 </div>
               ))}
             </div>
             <div className="glimpses-set">
               {[...glimpsesData].reverse().map((img) => (
                 <div key={`row2-set2-${img.id}`} className="glimpses-card">
-                  <img src={`./images/glimpses/${img.file}`} alt={img.alt} className="glimpses-img" />
+                  <img src={`/images/glimpses/${img.file}`} alt={img.alt} className="glimpses-img" />
                 </div>
               ))}
             </div>

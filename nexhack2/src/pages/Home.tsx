@@ -19,28 +19,39 @@ export default function Home() {
 
   return (
     <main className="hero-section homepage-hero-bg">
+      {/* Desktop Video Background */}
       <video
         ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
+        webkit-playsinline="true"
         preload="auto"
         controls={false}
         disablePictureInPicture
         disableRemotePlayback
         poster="/images/home/hero_poster.webp"
-        className="homepage-bg-img homepage-hero-video"
+        className="homepage-bg-img homepage-hero-video desktop-only-hero-video"
       >
         <source src="/images/home/hero.webm" type="video/webm" />
         <source src="./images/home/hero.webm" type="video/webm" />
         <source src="/images/home/hero.mp4" type="video/mp4" />
         <source src="./images/home/hero.mp4" type="video/mp4" />
       </video>
+
+      {/* Mobile-Only Static Poster Background (prevents iPhone video play button overlay) */}
+      <img
+        src="/images/home/hero_poster.webp"
+        alt="NexHack 2.0 Castle"
+        className="homepage-bg-img homepage-hero-poster-img mobile-only-hero-img"
+        loading="eager"
+      />
+
       <div className="hero-scrim-overlay" aria-hidden="true" />
 
-      {/* Hero Content Positioned in the Clouds/Fog below the Castle */}
-      <div className="hero-content-container hero-fog-bottom">
+      {/* Hero Content Positioned Centered over Background */}
+      <div className="hero-content-container hero-center-content">
         <div className="hero-content-copy">
           <h1 className="hero-brand-heading">
             <span className="brand-word">NEXHACK</span>

@@ -410,12 +410,6 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
           </div>
         )}
       </div>
-
-      {/* Antique Filigree Corner Accents */}
-      <div className="vault-corner tl" />
-      <div className="vault-corner tr" />
-      <div className="vault-corner bl" />
-      <div className="vault-corner br" />
     </div>
   );
 }
@@ -473,10 +467,8 @@ export default function Prizes({ onUnlockStatusChange, showBarrierAlert }: Prize
       <div className="enchanted-rewards-container">
         {/* Section Header */}
         <div className="rewards-section-header">
-          <span className="rewards-pre-eyebrow">ENCHANTED VAULTS</span>
-          <h1 className="rewards-main-title">NEXHACK REWARDS</h1>
-          <div className="rewards-header-divider" />
-
+          <h1 className="rewards-main-title">Nexhack Rewards</h1>
+ 
           {/* Progression Counter */}
           <div className="vaults-progress-tracker">
             <span className="progress-counter-text">

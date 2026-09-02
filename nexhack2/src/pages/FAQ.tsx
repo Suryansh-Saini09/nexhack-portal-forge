@@ -67,7 +67,6 @@ export default function FAQ() {
       {/* Header */}
       <div className="themes-header" style={{ margin: '0 auto 28px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
         <h1 className="section-title">Frequently Asked Questions</h1>
-        <div className="themes-header-divider" style={{ margin: '14px auto 0' }} />
       </div>
 
       {/* FAQ Grimoire Grid */}
@@ -81,12 +80,6 @@ export default function FAQ() {
               className={`faq-grimoire-card ${isOpen ? 'is-open' : ''}`}
               onClick={() => toggleAccordion(item.id)}
             >
-              {/* Arcane Corner Ornaments */}
-              <div className="card-corner corner-tl" />
-              <div className="card-corner corner-tr" />
-              <div className="card-corner corner-bl" />
-              <div className="card-corner corner-br" />
-
               {/* Card Header / Question */}
               <div className="faq-card-header">
                 <div className="faq-numeral-badge">
@@ -112,11 +105,11 @@ export default function FAQ() {
         })}
       </div>
 
-      {/* Bottom Floating Post Inquiry Callout */}
+      {/* Bottom Floating Post Inquiry Callout in Harry Potter Style */}
       <div className="faq-owl-callout">
         <span className="owl-feather-icon">🪶</span>
-        <span>Have an unanswered inquiry? Dispatch a message to the </span>
-        <a href="#contact" className="owl-callout-link">Owl Post Vault</a>
+        <span>Still puzzled by ancient riddles? Dispatch your owl to </span>
+        <a href="#contact" className="owl-callout-link">Get in Touch</a>
         <span> below.</span>
       </div>
     </section>
