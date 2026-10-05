@@ -32,34 +32,27 @@ const statsData: StatBlock[] = [
   {
     icon: '⚡',
     number: '24 HRS',
-    label: 'NON-STOP HACKING',
-    desc: 'Around-the-clock building, live mentorship, and collaborative innovation.'
+    label: 'NON-STOP SPRINT',
+    desc: 'Nonstop coding, prototyping, and problem-solving on campus.'
   },
   {
     icon: '✦',
-    number: '500+',
-    label: 'HACKERS EXPECTED',
-    desc: 'Top student developers, sorcerers, and creators uniting from across the nation.'
+    number: '160+ TEAMS',
+    label: '23+ STATES',
+    desc: 'Pan-India builders from universities and colleges uniting to innovate.'
   },
   {
     icon: '⬡',
     number: '10 TRACKS',
     label: 'DOMAIN CHALLENGES',
-    desc: 'Specialized problem statements spanning AI, Web3, Cyber, and Open Innovation.'
+    desc: 'Specialized problem statements spanning EdTech, Web3, AI, and Open Innovation.'
   },
   {
     icon: '🏆',
     number: '₹1 LAKH+',
     label: 'PRIZE POOL & SWAGS',
-    desc: 'Grand cash bounties, sponsor grants, dev tooling, and exclusive accolades.'
+    desc: 'Track awards, grand cash bounties, certificates, and curated dev swags.'
   }
-];
-
-const thematicTags = [
-  'AI & INNOVATION',
-  'OPEN INNOVATION',
-  'BUILDERS WELCOME',
-  'BEGINNER FRIENDLY'
 ];
 
 export default function About() {
@@ -69,29 +62,27 @@ export default function About() {
       <div className="about-ambient-glow left" />
       <div className="about-ambient-glow right" />
 
+      {/* Centered Heading */}
+      <div className="about-heading-center-wrap">
+        <h1 className="about-editorial-heading">
+          <span>HACK THE</span>
+          <span className="heading-line-glow">NEXT</span>
+          <span>DIMENSION</span>
+        </h1>
+      </div>
+
       {/* Two-Column Editorial Hero Container */}
       <div className="about-editorial-container">
-        {/* Left Column: Heading, Narrative, Tags */}
+        {/* Left Column: Narrative */}
         <div className="about-editorial-left">
-          <h1 className="about-editorial-heading">
-            <span>HACK THE</span>
-            <span className="heading-line-glow">NEXT</span>
-            <span>DIMENSION</span>
-          </h1>
 
           <p className="about-editorial-desc">
-            A 24-hour hackathon uniting courageous developers, designers, and innovators to build cutting-edge solutions, collaborate with expert mentors, and compete for legendary prizes.
+            <strong>NexHack</strong> is the national-level 24-hour hackathon of <strong>Geeta University, Panipat (Delhi NCR)</strong>, organised by <strong>Geeta Technical Hub</strong> and <strong>School of Computer Science and Engineering</strong> powered by <strong>CodeForge Society</strong>. Built around the theme <em>“Hack the Next Dimension,”</em> it brings student teams of two to four from colleges and universities across India to the Geeta University campus for nonstop coding, prototyping, and problem-solving. Tracks span <strong>EdTech, Web3, AI in agriculture, and open innovation</strong>, so participants can build real solutions, work with mentors, and present working products to industry and academic judges.
           </p>
 
-          {/* Enchanted Thematic Labels */}
-          <div className="about-tags-collection">
-            {thematicTags.map((tag, i) => (
-              <div key={i} className="about-editorial-tag">
-                <span className="tag-sparkle">✦</span>
-                <span className="tag-text">{tag}</span>
-              </div>
-            ))}
-          </div>
+          <p className="about-editorial-desc">
+            For students searching for a student hackathon in India, a coding competition in Delhi NCR, or a technology event at Geeta University Panipat, <strong>NexHack</strong> is the flagship platform where ideas move from concept to demo in a single day. The 2025 edition drew <strong>160 plus teams from more than 23 states</strong>, with certificates, swags, and track awards for winning builds. Whether you are a first-time builder or an experienced developer, NexHack at Geeta University is where campus innovation, industry exposure, and a 24-hour build sprint come together.
+          </p>
         </div>
 
         {/* Right Column: 2x2 Stat Blocks */}

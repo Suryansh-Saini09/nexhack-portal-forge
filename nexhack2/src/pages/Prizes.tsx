@@ -459,7 +459,7 @@ export default function Prizes({ onUnlockStatusChange, showBarrierAlert }: Prize
   }, [allOpened, onUnlockStatusChange]);
 
   return (
-    <main className="objects-section enchanted-rewards-section" id="prizes">
+    <main className="objects-section enchanted-rewards-section">
       {/* Background Atmosphere */}
       <div className="rewards-ambient-aura top" />
       <div className="rewards-ambient-aura bottom" />
