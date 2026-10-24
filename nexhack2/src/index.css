@@ -11716,10 +11716,11 @@ video {
 }
 
 .faculty-quote {
-  font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 0.96rem;
-  line-height: 1.68;
-  color: rgba(240, 240, 248, 0.92);
+  font-family: 'Spectral', Georgia, serif;
+  font-size: 1.04rem;
+  font-style: italic;
+  line-height: 1.72;
+  color: rgba(245, 235, 215, 0.92);
   margin: 0;
 }
 
