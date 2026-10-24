@@ -2535,16 +2535,24 @@ video {
 .character-marquee-track {
   display: flex;
   align-items: flex-end;
-  gap: 18px;
   width: max-content;
-  animation: scrollRightToLeft 26s linear infinite;
-  will-change: transform;
   z-index: 2;
   padding: 0 0 25px 0;
   margin: 0;
+  user-select: none;
 }
 
-.character-marquee-track:hover {
+.character-marquee-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+  padding-right: 18px;
+  flex-shrink: 0;
+  animation: scrollRightToLeft 28s linear infinite;
+  will-change: transform;
+}
+
+.character-marquee-track:hover .character-marquee-group {
   animation-play-state: paused;
 }
 
@@ -2867,7 +2875,7 @@ video {
   }
 
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
@@ -2878,9 +2886,13 @@ video {
   }
 
   .character-marquee-track {
-    gap: 10px;
-    animation-duration: 20s;
     padding-bottom: 18px;
+  }
+
+  .character-marquee-group {
+    gap: 12px;
+    padding-right: 12px;
+    animation-duration: 22s;
   }
 
   .character-marquee-img,
@@ -2893,6 +2905,7 @@ video {
 @media (prefers-reduced-motion: reduce) {
 
   .character-marquee-track,
+  .character-marquee-group,
   .character-marquee-item,
   .wand-spark-core,
   .wand-spark-flare,

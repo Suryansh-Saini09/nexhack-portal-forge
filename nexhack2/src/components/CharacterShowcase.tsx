@@ -27,8 +27,8 @@ export default function CharacterShowcase() {
   const [isInView, setIsInView] = useState(false);
   const rafRef = useRef<number | null>(null);
 
-  // Triple sequence for gapless infinite marquee
-  const marqueeItems = [...characterList, ...characterList, ...characterList];
+  // Multiple identical groups ensure seamless, gapless infinite marquee on any screen resolution
+  const characterGroups = [0, 1, 2, 3];
 
   // Viewport Staggered Reveal
   useEffect(() => {
@@ -91,52 +91,60 @@ export default function CharacterShowcase() {
         ))}
       </div>
 
-      {/* Infinite Moving Character Procession */}
+      {/* Truly Infinite Seamless Moving Character Procession */}
       <div className="character-marquee-track">
-        {marqueeItems.map((char, index) => {
-          const itemKey = `${char.id}-${index}`;
-          const staggerIndex = index % 10;
+        {characterGroups.map((groupIndex) => (
+          <div
+            key={groupIndex}
+            className="character-marquee-group"
+            aria-hidden={groupIndex > 0 ? true : undefined}
+          >
+            {characterList.map((char, index) => {
+              const itemKey = `g${groupIndex}-${char.id}-${index}`;
+              const staggerIndex = index % 10;
 
-          return (
-            <div
-              key={itemKey}
-              className={`character-marquee-item item-char-${char.id} float-node-${char.id}`}
-              style={{
-                '--char-depth': `${char.depthFactor}px`,
-                '--stagger-delay': `${staggerIndex * 130}ms`
-              } as React.CSSProperties}
-            >
-              {/* Character Image & Parallax Wrapper */}
-              <div className="character-portrait-wrapper">
-                <img
-                  src={char.src}
-                  alt={char.alt}
-                  className="character-marquee-img"
-                  draggable={false}
-                  loading="lazy"
-                />
+              return (
+                <div
+                  key={itemKey}
+                  className={`character-marquee-item item-char-${char.id} float-node-${char.id}`}
+                  style={{
+                    '--char-depth': `${char.depthFactor}px`,
+                    '--stagger-delay': `${staggerIndex * 130}ms`
+                  } as React.CSSProperties}
+                >
+                  {/* Character Image & Parallax Wrapper */}
+                  <div className="character-portrait-wrapper">
+                    <img
+                      src={char.src}
+                      alt={char.alt}
+                      className="character-marquee-img"
+                      draggable={false}
+                      loading="eager"
+                    />
 
-                {/* Rare Subtle Wand Tip Spark */}
-                {char.hasWand && (
-                  <div className="wand-spark-emitter" aria-hidden="true">
-                    <span className="wand-spark-core" />
-                    <span className="wand-spark-flare" />
+                    {/* Rare Subtle Wand Tip Spark */}
+                    {char.hasWand && (
+                      <div className="wand-spark-emitter" aria-hidden="true">
+                        <span className="wand-spark-core" />
+                        <span className="wand-spark-flare" />
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
 
-              {/* Water / Black Lake Reflection */}
-              <div className="character-reflection-wrapper" aria-hidden="true">
-                <img
-                  src={char.src}
-                  alt=""
-                  className="character-reflection-img"
-                  draggable={false}
-                />
-              </div>
-            </div>
-          );
-        })}
+                  {/* Water / Black Lake Reflection */}
+                  <div className="character-reflection-wrapper" aria-hidden="true">
+                    <img
+                      src={char.src}
+                      alt=""
+                      className="character-reflection-img"
+                      draggable={false}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ))}
       </div>
 
       {/* Bottom Mist Vignette */}
