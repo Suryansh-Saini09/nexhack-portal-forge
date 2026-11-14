@@ -39,16 +39,6 @@ const coreOperationsTeam: TeamMember[] = [
     }
   },
   {
-    id: 'khushi-saini',
-    name: 'Khushi Saini',
-    role: 'Core Operations',
-    image: './images/team/khushi.webp',
-    socials: {
-      github: '',
-      linkedin: 'https://www.linkedin.com/in/khushi-saini-84b87b263'
-    }
-  },
-  {
     id: 'garima-malik',
     name: 'Garima Malik',
     role: 'Core Operations',
@@ -56,6 +46,16 @@ const coreOperationsTeam: TeamMember[] = [
     socials: {
       github: 'https://github.com/garima-m14',
       linkedin: 'https://www.linkedin.com/in/garima-malik-5b2842291'
+    }
+  },
+  {
+    id: 'khushi-saini',
+    name: 'Khushi Saini',
+    role: 'Core Operations',
+    image: './images/team/khushi.webp',
+    socials: {
+      github: '',
+      linkedin: 'https://www.linkedin.com/in/khushi-saini-84b87b263'
     }
   }
 ];
@@ -65,12 +65,16 @@ const coreTeam: TeamMember[] = [
   { id: 'shravya-atrey', name: 'Shravya Atrey', role: 'Core Lead', image: './images/team/shravya.webp', socials: { github: 'https://github.com/shravya315', linkedin: 'https://www.linkedin.com/in/shravyatrey315/' } },
   { id: 'gagan-thakur', name: 'Gagan Thakur', role: 'Core Lead', image: './images/team/gagan.webp', socials: { github: 'https://github.com/Gaganthakur0101', linkedin: 'https://www.linkedin.com/in/gagan-singh0101/' } },
   { id: 'sahil-bhardwaj', name: 'Sahil Bhardwaj', role: 'Core Lead', image: './images/team/sahil.webp', socials: { github: 'https://github.com/sahil-codesfor-fun', linkedin: 'https://www.linkedin.com/in/sahil-bhardwajs10/' } },
+  { id: 'rishabh', name: 'Rishabh', role: 'Core Executive', image: './images/team/rishabh.webp', socials: { github: 'https://github.com/RishabhVoid', linkedin: 'https://www.linkedin.com/in/developer-rishabh/' } },
   { id: 'muskan-kaushik', name: 'Muskan Kaushik', role: 'Core Executive', image: './images/team/muskan.webp', socials: { github: 'https://github.com/kaushikmuskan29', linkedin: 'https://www.linkedin.com/in/kaushikmuskan29' } },
   { id: 'riya-rana', name: 'Riya Rana', role: 'Core Executive', image: './images/team/riya.webp', socials: { github: 'https://github.com/riyarana9813', linkedin: 'https://www.linkedin.com/in/riya-rana-b752a6327/' } },
-  { id: 'pratyaksh-goel', name: 'Pratyaksh Goel', role: 'Outreach Head', image: './images/team/pratyaksh.webp', socials: { github: 'https://github.com/Pratyaksh12134', linkedin: 'https://www.linkedin.com/in/partyksh-goel-15781b323?utm_source=share_via&utm_content=profile&utm_medium=member_ios' } },
+  { id: 'vinit-vashishta', name: 'Vinit Vashishta', role: 'Social Media & Public Relations Head', image: './images/team/vinit.webp', socials: { github: 'https://github.com', linkedin: 'https://www.linkedin.com/in/vinit-vashishta-4280b8323/' } },
   { id: 'nera-shyoran', name: 'Nera Shyoran', role: 'Design and Creative Head', image: './images/team/nera.webp', socials: { github: 'https://github.com/nera8563', linkedin: 'https://www.linkedin.com/in/nera123' } },
   { id: 'kunal-khandelwal', name: 'Kunal Khandelwal', role: 'Logistics Head', image: './images/team/kunal.webp', socials: { github: 'https://github.com/KunalKhandelwal-dev', linkedin: 'https://in.linkedin.com/in/kunal-khandelwal-62a5b1311' } },
-  { id: 'vinit-vashishta', name: 'Vinit Vashishta', role: 'Social Media & Public Relations Head', image: './images/team/vinit.webp', socials: { github: 'https://github.com', linkedin: 'https://www.linkedin.com/in/vinit-vashishta-4280b8323/' } },
+  { id: 'himangshu-kumar-das', name: 'Himangshu Kumar Das', role: 'Communications Lead', image: './images/team/himangshu.webp', socials: { github: 'https://github.com/himangs02', linkedin: 'https://www.linkedin.com/in/himangshu-kumar-das-1349b6320/' } },
+  { id: 'pratyaksh-goel', name: 'Pratyaksh Goel', role: 'Outreach Head', image: './images/team/pratyaksh.webp', socials: { github: 'https://github.com/Pratyaksh12134', linkedin: 'https://www.linkedin.com/in/partyksh-goel-15781b323?utm_source=share_via&utm_content=profile&utm_medium=member_ios' } },
+  { id: 'tripti', name: 'Tripti', role: 'Design and Creative Head', image: './images/team/tripti.webp', socials: { github: 'https://github.com/Tripti129', linkedin: 'https://www.linkedin.com/in/-tripti-mittal/' } },
+  { id: 'vivek', name: 'Vivek', role: 'Public Relations', image: './images/team/vivek.webp', socials: { github: 'https://github.com/VivekCoderz', linkedin: 'https://www.linkedin.com/in/-vivek-garg/' } },
   { id: 'krishna-gupta', name: 'Krishna Gupta', role: 'Registration & Participant Relations Head', image: './images/team/krishna.webp', socials: { github: 'https://github.com/Krishna-Gupta-Git', linkedin: 'https://www.linkedin.com/in/krishna-gupta-890147374' } },
   { id: 'lakshay-mittal', name: 'Lakshay Mittal', role: 'Volunteer Management Head', image: './images/team/lakshay.webp', socials: { github: 'https://github.com/Lakshayy-y', linkedin: 'https://www.linkedin.com/in/lakshaymittal012' } },
   { id: 'janvi-devi', name: 'Janvi Devi', role: 'Content & Documentation Head', image: './images/team/janvi.webp', socials: { github: 'https://github.com/JANVI2223', linkedin: 'https://www.linkedin.com/in/janvidevi49' } },
@@ -79,6 +83,7 @@ const coreTeam: TeamMember[] = [
   { id: 'urmika-sharma', name: 'Urmika Sharma', role: 'Outreach', image: './images/team/urmika.webp', socials: { github: '', linkedin: '' } },
   { id: 'krish-garg', name: 'Krish Garg', role: 'Outreach', image: './images/team/krish.webp', socials: { github: 'https://github.com/072Krish', linkedin: 'https://www.linkedin.com/in/garg-krish0001/' } },
   { id: 'keshav-jindal', name: 'Keshav Jindal', role: 'Social Media', image: './images/team/keshav.webp', socials: { github: 'https://github.com/keshavjindal012', linkedin: 'https://www.linkedin.com/in/keshavjindal012' } },
+  { id: 'aman', name: 'Aman', role: 'Social Media', image: './images/team/aman.webp', socials: { github: 'https://github.com/amunagra0267-oss', linkedin: 'https://www.linkedin.com/in/ammu-nagra0267' } },
 ];
 
 function FacultyCard({ member }: { member: TeamMember }) {
@@ -282,24 +287,34 @@ export default function Team() {
             {coreTeam.slice(0, 3).map(member => <TeamCard key={member.id} member={member} />)}
           </div>
 
-          {/* Row 2: 2 Core Executives */}
-          <div className="team-row team-row-2">
-            {coreTeam.slice(3, 5).map(member => <TeamCard key={member.id} member={member} />)}
+          {/* Row 2: 3 Core Executives */}
+          <div className="team-row team-row-3">
+            {coreTeam.slice(3, 6).map(member => <TeamCard key={member.id} member={member} />)}
           </div>
 
-          {/* Row 3: 4 Department Heads */}
-          <div className="team-row team-row-4">
-            {coreTeam.slice(5, 9).map(member => <TeamCard key={member.id} member={member} />)}
+          {/* Row 3: 3 Department Heads */}
+          <div className="team-row team-row-3">
+            {coreTeam.slice(6, 9).map(member => <TeamCard key={member.id} member={member} />)}
           </div>
 
-          {/* Row 4: 4 Department Heads */}
+          {/* Row 4: 4 Members (Himangshu, Pratyaksh, Tripti, Vivek) */}
           <div className="team-row team-row-4">
             {coreTeam.slice(9, 13).map(member => <TeamCard key={member.id} member={member} />)}
           </div>
 
-          {/* Row 5: 4 Members (Outreach & Social Media) */}
-          <div className="team-row team-row-4">
-            {coreTeam.slice(13).map(member => <TeamCard key={member.id} member={member} />)}
+          {/* Row 5: 3 Department Heads */}
+          <div className="team-row team-row-3">
+            {coreTeam.slice(13, 16).map(member => <TeamCard key={member.id} member={member} />)}
+          </div>
+
+          {/* Row 6: 3 Outreach / Marketing */}
+          <div className="team-row team-row-3">
+            {coreTeam.slice(16, 19).map(member => <TeamCard key={member.id} member={member} />)}
+          </div>
+
+          {/* Row 7: 3 Outreach & Social Media */}
+          <div className="team-row team-row-3">
+            {coreTeam.slice(19).map(member => <TeamCard key={member.id} member={member} />)}
           </div>
         </div>
       </section>

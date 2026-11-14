@@ -822,7 +822,7 @@ video {
 .high-council-rows-container {
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 48px;
   width: 100%;
   align-items: center;
 }
@@ -831,7 +831,7 @@ video {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 22px;
+  gap: 36px;
   width: 100%;
 }
 
@@ -840,7 +840,7 @@ video {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 24px;
+  gap: 36px;
   width: 100%;
   flex-wrap: nowrap;
 }
@@ -850,17 +850,17 @@ video {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 24px;
+  gap: 36px;
   width: 100%;
   flex-wrap: nowrap;
 }
 
-/* Row 3 & Row 4: 4 Department Heads */
+/* Row 4: 4 Department Heads / Members */
 .team-row.team-row-4 {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px;
+  gap: 24px;
   width: 100%;
   flex-wrap: nowrap;
 }
@@ -903,11 +903,11 @@ video {
   }
 
   .team-row.team-row-3 {
-    gap: 18px;
+    gap: 24px;
   }
 
   .team-row.team-row-2 {
-    gap: 18px;
+    gap: 24px;
   }
 
   .card-wrapper {
@@ -924,7 +924,7 @@ video {
 
 @media (max-width: 767px) {
   .high-council-rows-container {
-    gap: 24px;
+    gap: 32px;
   }
 
   .team-row,
@@ -933,7 +933,7 @@ video {
   .team-row.team-row-4 {
     flex-direction: column;
     align-items: center;
-    gap: 22px;
+    gap: 26px;
   }
 
   .card-wrapper {
@@ -1000,9 +1000,14 @@ video {
 
 /* Card details below the card */
 .card-details-below {
-  margin-top: 12px;
+  margin-top: 14px;
   text-align: center;
   pointer-events: auto;
+  width: 100%;
+  padding: 0 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .character-name {
@@ -1010,7 +1015,7 @@ video {
   font-size: 1.65rem;
   font-weight: 700;
   color: var(--color-text-light);
-  margin-bottom: 3px;
+  margin-bottom: 6px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
   letter-spacing: 1px;
   transition: all 0.3s ease;
@@ -1037,12 +1042,12 @@ video {
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 1.2px;
-  margin-bottom: 2px;
-  min-height: 32px;
+  margin-bottom: 4px;
+  min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1.3;
+  line-height: 1.35;
   padding: 0 4px;
 }
 
@@ -1051,8 +1056,8 @@ video {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  margin-top: 12px;
+  gap: 14px;
+  margin-top: 10px;
   pointer-events: auto !important;
 }
 
