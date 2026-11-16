@@ -49,9 +49,9 @@ const statsData: StatBlock[] = [
   },
   {
     icon: '🏆',
-    number: '₹1 LAKH+',
+    number: '2.5 LAKHS +',
     label: 'PRIZE POOL & SWAGS',
-    desc: 'Track awards, grand cash bounties, certificates, and curated dev swags.'
+    desc: 'Track awards, grand bounties worth 2.5 Lakhs +, certificates, and curated dev swags.'
   }
 ];
 

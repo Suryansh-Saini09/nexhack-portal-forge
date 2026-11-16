@@ -14,7 +14,7 @@ export const AboutSection = () => {
     {
       iconLink: "https://cdn.lordicon.com/kezeezyg.json",
       title: "Legendary Loot & Prizes",
-      description: "Compete for epic prizes including cash rewards and exclusive tech gear.",
+      description: "Compete for epic rewards worth 2.5 Lakhs + including exclusive tech gear and swags.",
       color:{
         primary:"#1AFF1A",
         secondary:"#1AFF1A"

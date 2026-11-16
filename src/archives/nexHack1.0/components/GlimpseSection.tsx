@@ -44,7 +44,7 @@ const winners: Winner[] = [
     team: "Elite Squad",
     project: "EcoTrace",
     track: "Sustainability",
-    amount: "₹25,000",
+    amount: "Worth ₹25,000",
     tier: "netherite",
     description:
       "A blockchain-backed platform to trace carbon emissions across supply chains in real time.",
@@ -54,7 +54,7 @@ const winners: Winner[] = [
     team: "Chips",
     project: "NeuroAssist",
     track: "AI & Healthcare",
-    amount: "₹15,000",
+    amount: "Worth ₹15,000",
     tier: "diamond",
     description:
       "An AI-powered assistant that helps doctors prioritize cases using predictive analytics.",
@@ -64,7 +64,7 @@ const winners: Winner[] = [
     team: "Cipher Squad",
     project: "CivicLens",
     track: "GovTech",
-    amount: "₹10,000",
+    amount: "Worth ₹10,000",
     tier: "emerald",
     description:
       "A citizen reporting platform enabling faster resolution of urban infrastructure issues.",

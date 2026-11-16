@@ -208,7 +208,7 @@ const scheduleEventsData: EventItem[] = [
     day: 'Day 02',
     time: '02:30 PM',
     title: 'CLOSURE CEREMONY',
-    desc: 'Trophy handover, cash prizes, certificates and official event group photo.',
+    desc: 'Trophy handover, bounties worth 2.5 Lakhs +, certificates and official event group photo.',
     side: 'center',
     stationName: 'TERMINUS HOGWARTS'
   }

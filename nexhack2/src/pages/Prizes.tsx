@@ -22,7 +22,7 @@ const prizeVaultsData: VaultPrize[] = [
     rank: '1ST',
     title: 'THE GOLDEN SNITCH',
     category: 'GRAND CHAMPIONS · 1ST',
-    amount: 'Prizes worth ₹25,000 ',
+    amount: 'Worth ₹25,000',
     image: './images/prizes/new_snitch.webp',
     alt: 'The Flying Golden Snitch Trophy',
     themeColor: '#f0c030',
@@ -36,7 +36,7 @@ const prizeVaultsData: VaultPrize[] = [
     rank: '2ND',
     title: 'THE GRINGOTTS VAULT',
     category: 'RESERVE CHAMPIONS · 2ND',
-    amount: 'Prizes worth ₹15,000',
+    amount: 'Worth ₹15,000',
     image: './images/prizes/new_galleons.webp',
     alt: 'The Gringotts Vault Galleon Relics',
     themeColor: '#cbd5e1',
@@ -50,7 +50,7 @@ const prizeVaultsData: VaultPrize[] = [
     rank: '3RD',
     title: 'THE ELDER WAND',
     category: 'TECHNICAL VANGUARD · 3RD',
-    amount: 'Prizes worth ₹10,000',
+    amount: 'Worth ₹10,000',
     image: './images/prizes/new_elder_wand.webp',
     alt: 'The Elder Wand Artifact',
     themeColor: '#45c7e8',
@@ -63,10 +63,11 @@ const prizeVaultsData: VaultPrize[] = [
 interface ScratchCardProps {
   vault: VaultPrize;
   isRevealed: boolean;
+  isUnsealing?: boolean;
   onReveal: (id: string) => void;
 }
 
-function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
+function VaultScratchCard({ vault, isRevealed, isUnsealing, onReveal }: ScratchCardProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDrawing = useRef(false);
   const lastPoint = useRef<{ x: number; y: number } | null>(null);
@@ -184,6 +185,19 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
     }
   }, [isRevealed, initCanvas]);
 
+  // Automatic unsealing trigger from cinematic sequence
+  useEffect(() => {
+    if (isUnsealing && !isRevealed && !hasTriggeredReveal.current) {
+      hasTriggeredReveal.current = true;
+      setIsBreaking(true);
+      const timer = setTimeout(() => {
+        onReveal(vault.id);
+        setIsBreaking(false);
+      }, 350);
+      return () => clearTimeout(timer);
+    }
+  }, [isUnsealing, isRevealed, onReveal, vault.id]);
+
   // Check cleared percentage
   const checkClearedPercentage = useCallback(() => {
     const canvas = canvasRef.current;
@@ -220,7 +234,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
       setTimeout(() => {
         onReveal(vault.id);
         setIsBreaking(false);
-      }, 400);
+      }, 350);
     }
   }, [onReveal, vault.id]);
 
@@ -315,7 +329,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
     setTimeout(() => {
       onReveal(vault.id);
       setIsBreaking(false);
-    }, 400);
+    }, 350);
   };
 
   const handleCardMouseEnter = () => {
@@ -336,7 +350,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
 
   return (
     <div
-      className={`enchanted-vault-box ${isRevealed ? 'vault-unsealed' : 'vault-sealed'}`}
+      className={`enchanted-vault-box ${isRevealed ? 'vault-unsealed' : 'vault-sealed'} ${isUnsealing ? 'vault-is-unsealing' : ''}`}
       onMouseEnter={handleCardMouseEnter}
       onMouseLeave={handleCardMouseLeave}
       style={{
@@ -376,6 +390,16 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
           </div>
         </div>
 
+        {/* Magical Rune Sparkle Burst on Reveal */}
+        {isRevealed && (
+          <div className="vault-magic-sparks">
+            <span className="magic-spark s1">✦</span>
+            <span className="magic-spark s2">❖</span>
+            <span className="magic-spark s3">✧</span>
+            <span className="magic-spark s4">✦</span>
+          </div>
+        )}
+
         {/* Interactive Scratch Canvas Mask (Active when sealed) */}
         {!isRevealed && (
           <canvas
@@ -401,7 +425,7 @@ function VaultScratchCard({ vault, isRevealed, onReveal }: ScratchCardProps) {
             className="vault-unlock-action-btn"
             title="Click to automatically break the magical seal"
           >
-            <span>✦ UNSEAL ✦</span>
+            <span>{isUnsealing ? '✦ UNSEALING... ✦' : '✦ UNSEAL ✦'}</span>
           </button>
         ) : (
           <div className="vault-unlocked-status-badge">
@@ -419,14 +443,37 @@ interface PrizesProps {
   showBarrierAlert?: boolean;
 }
 
-export default function Prizes({ onUnlockStatusChange, showBarrierAlert }: PrizesProps) {
-  const [revealedVaults, setRevealedVaults] = useState<{ [id: string]: boolean }>({
-    'vault-1': false,
-    'vault-2': false,
-    'vault-3': false
+const HAS_REVEALED_KEY = 'nexhack_prizes_revealed_v2';
+
+export default function Prizes({ onUnlockStatusChange }: PrizesProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Initialize revealed state from session storage so animation triggers once per visit
+  const [hasRevealedOnce, setHasRevealedOnce] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem(HAS_REVEALED_KEY) === 'true';
+    } catch {
+      return false;
+    }
   });
 
-  const handleReveal = (vaultId: string) => {
+  const [revealedVaults, setRevealedVaults] = useState<{ [id: string]: boolean }>(() => {
+    try {
+      if (sessionStorage.getItem(HAS_REVEALED_KEY) === 'true') {
+        return { 'vault-1': true, 'vault-2': true, 'vault-3': true };
+      }
+    } catch {}
+    return { 'vault-1': false, 'vault-2': false, 'vault-3': false };
+  });
+
+  const [unsealingVaultId, setUnsealingVaultId] = useState<string | null>(null);
+  const [isCinematicActive, setIsCinematicActive] = useState<boolean>(false);
+
+  const hasTriggeredRef = useRef<boolean>(hasRevealedOnce);
+  const isLockingScrollRef = useRef<boolean>(false);
+  const timeoutsRef = useRef<number[]>([]);
+
+  const handleReveal = useCallback((vaultId: string) => {
     setRevealedVaults((prev) => {
       const next = { ...prev, [vaultId]: true };
       const allDone = Object.values(next).filter(Boolean).length === 3;
@@ -435,19 +482,203 @@ export default function Prizes({ onUnlockStatusChange, showBarrierAlert }: Prize
       }
       return next;
     });
-  };
+  }, [onUnlockStatusChange]);
 
-  const unsealAllVaults = () => {
+  const unsealAllVaults = useCallback(() => {
     const all = {
       'vault-1': true,
       'vault-2': true,
       'vault-3': true
     };
     setRevealedVaults(all);
+    setUnsealingVaultId(null);
+    setIsCinematicActive(false);
+    isLockingScrollRef.current = false;
+    setHasRevealedOnce(true);
+    try {
+      sessionStorage.setItem(HAS_REVEALED_KEY, 'true');
+    } catch {}
     if (onUnlockStatusChange) {
       onUnlockStatusChange(true);
     }
-  };
+  }, [onUnlockStatusChange]);
+
+  // Clean helper for scheduled timeouts
+  const scheduleTimer = useCallback((fn: () => void, ms: number) => {
+    const id = window.setTimeout(fn, ms);
+    timeoutsRef.current.push(id);
+    return id;
+  }, []);
+
+  // Main cinematic sequential reveal sequence
+  const triggerCinematicSequence = useCallback(() => {
+    if (hasTriggeredRef.current) return;
+    hasTriggeredRef.current = true;
+    setIsCinematicActive(true);
+    isLockingScrollRef.current = true;
+
+    // Smoothly center the Prizes section in viewport
+    if (sectionRef.current) {
+      const rect = sectionRef.current.getBoundingClientRect();
+      const idealOffset = Math.max(20, (window.innerHeight - rect.height) / 2);
+      const targetScroll = window.scrollY + rect.top - idealOffset;
+      window.scrollTo({
+        top: Math.max(0, targetScroll),
+        behavior: 'smooth'
+      });
+    }
+
+    // Sequence 1: Vault 1 (The Golden Snitch)
+    scheduleTimer(() => {
+      setUnsealingVaultId('vault-1');
+      scheduleTimer(() => {
+        setRevealedVaults(prev => ({ ...prev, 'vault-1': true }));
+      }, 350);
+    }, 350);
+
+    // Sequence 2: Vault 2 (The Gringotts Vault)
+    scheduleTimer(() => {
+      setUnsealingVaultId('vault-2');
+      scheduleTimer(() => {
+        setRevealedVaults(prev => ({ ...prev, 'vault-2': true }));
+      }, 350);
+    }, 1200);
+
+    // Sequence 3: Vault 3 (The Elder Wand)
+    scheduleTimer(() => {
+      setUnsealingVaultId('vault-3');
+      scheduleTimer(() => {
+        setRevealedVaults(prev => ({ ...prev, 'vault-3': true }));
+      }, 350);
+    }, 2050);
+
+    // Sequence 4: Celebration & Release Scroll Pin
+    scheduleTimer(() => {
+      setUnsealingVaultId(null);
+      setIsCinematicActive(false);
+      isLockingScrollRef.current = false;
+      setHasRevealedOnce(true);
+      try {
+        sessionStorage.setItem(HAS_REVEALED_KEY, 'true');
+      } catch {}
+      if (onUnlockStatusChange) {
+        onUnlockStatusChange(true);
+      }
+    }, 2850);
+
+    // Failsafe timer: ensures scroll lock is unconditionally released
+    scheduleTimer(() => {
+      isLockingScrollRef.current = false;
+      setIsCinematicActive(false);
+      if (onUnlockStatusChange) {
+        onUnlockStatusChange(true);
+      }
+    }, 3600);
+  }, [scheduleTimer, onUnlockStatusChange]);
+
+  // Viewport entry observation
+  useEffect(() => {
+    if (hasTriggeredRef.current) {
+      if (onUnlockStatusChange) onUnlockStatusChange(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasTriggeredRef.current) {
+          triggerCinematicSequence();
+        }
+      },
+      {
+        threshold: 0.25,
+        rootMargin: '0px 0px -5% 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    // Passive scroll check for fast scroll
+    const onScrollCheck = () => {
+      if (hasTriggeredRef.current || !sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      if (rect.top <= window.innerHeight * 0.72 && rect.bottom >= window.innerHeight * 0.28) {
+        triggerCinematicSequence();
+      }
+    };
+
+    window.addEventListener('scroll', onScrollCheck, { passive: true });
+    onScrollCheck();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScrollCheck);
+      timeoutsRef.current.forEach(clearTimeout);
+    };
+  }, [triggerCinematicSequence, onUnlockStatusChange]);
+
+  // Scroll Controller during cinematic reveal:
+  // Prevents scrolling past Prizes while animating, but gracefully permits reverse (upward) scrolling
+  useEffect(() => {
+    let touchStartY = 0;
+
+    const onWheel = (e: WheelEvent) => {
+      if (!isLockingScrollRef.current) return;
+      // If scrolling downward past prizes, temporarily hold position
+      if (e.deltaY > 0) {
+        e.preventDefault();
+      }
+      // If e.deltaY < 0 (reverse scrolling upward), ALLOW it!
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY;
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isLockingScrollRef.current) return;
+      if (e.touches.length > 0) {
+        const deltaY = touchStartY - e.touches[0].clientY;
+        // If swiping down to scroll forward, hold
+        if (deltaY > 0 && e.cancelable) {
+          e.preventDefault();
+        }
+      }
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (!isLockingScrollRef.current) return;
+      if (['ArrowDown', 'PageDown', ' ', 'End'].includes(e.key)) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('keydown', onKeyDown);
+
+    // Optional manual reset in console for testing: window.resetPrizeVaults()
+    if (typeof window !== 'undefined') {
+      (window as unknown as { resetPrizeVaults?: () => void }).resetPrizeVaults = () => {
+        try {
+          sessionStorage.removeItem(HAS_REVEALED_KEY);
+        } catch {}
+        window.location.reload();
+      };
+    }
+
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, []);
 
   const openedCount = Object.values(revealedVaults).filter(Boolean).length;
   const allOpened = openedCount === 3;
@@ -459,7 +690,7 @@ export default function Prizes({ onUnlockStatusChange, showBarrierAlert }: Prize
   }, [allOpened, onUnlockStatusChange]);
 
   return (
-    <main className="objects-section enchanted-rewards-section">
+    <main ref={sectionRef} className="objects-section enchanted-rewards-section">
       {/* Background Atmosphere */}
       <div className="rewards-ambient-aura top" />
       <div className="rewards-ambient-aura bottom" />
@@ -467,8 +698,10 @@ export default function Prizes({ onUnlockStatusChange, showBarrierAlert }: Prize
       <div className="enchanted-rewards-container">
         {/* Section Header */}
         <div className="rewards-section-header">
+          <span className="rewards-pre-eyebrow">PRIZE POOL WORTH 2.5 LAKHS +</span>
           <h1 className="rewards-main-title">Nexhack Rewards</h1>
- 
+          <p className="rewards-sub-headline">GRAND BOUNTIES & AWARDS WORTH 2.5 LAKHS +</p>
+
           {/* Progression Counter */}
           <div className="vaults-progress-tracker">
             <span className="progress-counter-text">
@@ -489,33 +722,37 @@ export default function Prizes({ onUnlockStatusChange, showBarrierAlert }: Prize
               key={vault.id}
               vault={vault}
               isRevealed={revealedVaults[vault.id]}
+              isUnsealing={unsealingVaultId === vault.id}
               onReveal={handleReveal}
             />
           ))}
         </div>
 
-        {/* Magical Scroll Barrier & Progression Gate */}
-        {!allOpened ? (
-          <div className={`prizes-barrier-notice ${showBarrierAlert ? 'barrier-shake-alert' : ''}`}>
-            <div className="barrier-shield-icon">🔒</div>
-            <div className="barrier-text-wrap">
-              <h4 className="barrier-title">ANCIENT SEAL ACTIVE</h4>
-              <p className="barrier-desc">
-                Unseal all 3 prize vaults ({openedCount}/3 unlocked) to proceed down the tracks to the Schedule & beyond.
-              </p>
-            </div>
-            <button onClick={unsealAllVaults} className="barrier-quick-unlock-btn" title="Click to instantly unseal all 3 vaults">
-              <span>✦ UNSEAL ALL ✦</span>
-            </button>
+        {/* Cinematic Active Sequence Status Banner */}
+        {isCinematicActive && !allOpened && (
+          <div className="prizes-unsealing-active-banner">
+            <span className="unsealing-sparkle-spin">❖</span>
+            <span className="unsealing-text">UNSEALING ANCIENT RUNIC VAULTS • REVEALING BOUNTIES WORTH 2.5 LAKHS +</span>
+            <span className="unsealing-sparkle-spin">❖</span>
           </div>
-        ) : (
+        )}
+
+        {/* All Vaults Unlocked Celebration Banner */}
+        {allOpened ? (
           <div className="all-vaults-unlocked-banner visible">
             <div className="unlocked-banner-glow" />
             <span className="unlocked-banner-sparkle">✦</span>
             <h2 className="unlocked-banner-title">ALL VAULTS UNSEALED • PATHWAY UNLOCKED</h2>
             <span className="unlocked-banner-sparkle">✦</span>
           </div>
-        )}
+        ) : !isCinematicActive ? (
+          /* Subtle non-blocking manual unlock fallback */
+          <div className="all-vaults-unlocked-banner visible" style={{ borderStyle: 'dashed', cursor: 'pointer' }} onClick={unsealAllVaults}>
+            <span className="unlocked-banner-sparkle">✦</span>
+            <h2 className="unlocked-banner-title" style={{ fontSize: '0.74rem' }}>CLICK TO QUICKLY UNSEAL ALL VAULTS</h2>
+            <span className="unlocked-banner-sparkle">✦</span>
+          </div>
+        ) : null}
       </div>
     </main>
   );

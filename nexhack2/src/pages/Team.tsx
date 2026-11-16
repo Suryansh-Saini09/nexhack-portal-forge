@@ -72,7 +72,6 @@ const coreTeam: TeamMember[] = [
   { id: 'nera-shyoran', name: 'Nera Shyoran', role: 'Design and Creative Head', image: './images/team/nera.webp', socials: { github: 'https://github.com/nera8563', linkedin: 'https://www.linkedin.com/in/nera123' } },
   { id: 'kunal-khandelwal', name: 'Kunal Khandelwal', role: 'Logistics Head', image: './images/team/kunal.webp', socials: { github: 'https://github.com/KunalKhandelwal-dev', linkedin: 'https://in.linkedin.com/in/kunal-khandelwal-62a5b1311' } },
   { id: 'himangshu-kumar-das', name: 'Himangshu Kumar Das', role: 'Communications Lead', image: './images/team/himangshu.webp', socials: { github: 'https://github.com/himangs02', linkedin: 'https://www.linkedin.com/in/himangshu-kumar-das-1349b6320/' } },
-  { id: 'pratyaksh-goel', name: 'Pratyaksh Goel', role: 'Outreach Head', image: './images/team/pratyaksh.webp', socials: { github: 'https://github.com/Pratyaksh12134', linkedin: 'https://www.linkedin.com/in/partyksh-goel-15781b323?utm_source=share_via&utm_content=profile&utm_medium=member_ios' } },
   { id: 'tripti', name: 'Tripti', role: 'Design and Creative Head', image: './images/team/tripti.webp', socials: { github: 'https://github.com/Tripti129', linkedin: 'https://www.linkedin.com/in/-tripti-mittal/' } },
   { id: 'vivek', name: 'Vivek', role: 'Public Relations', image: './images/team/vivek.webp', socials: { github: 'https://github.com/VivekCoderz', linkedin: 'https://www.linkedin.com/in/-vivek-garg/' } },
   { id: 'krishna-gupta', name: 'Krishna Gupta', role: 'Registration & Participant Relations Head', image: './images/team/krishna.webp', socials: { github: 'https://github.com/Krishna-Gupta-Git', linkedin: 'https://www.linkedin.com/in/krishna-gupta-890147374' } },
@@ -297,24 +296,24 @@ export default function Team() {
             {coreTeam.slice(6, 9).map(member => <TeamCard key={member.id} member={member} />)}
           </div>
 
-          {/* Row 4: 4 Members (Himangshu, Pratyaksh, Tripti, Vivek) */}
-          <div className="team-row team-row-4">
-            {coreTeam.slice(9, 13).map(member => <TeamCard key={member.id} member={member} />)}
+          {/* Row 4: 3 Members (Himangshu, Tripti, Vivek) */}
+          <div className="team-row team-row-3">
+            {coreTeam.slice(9, 12).map(member => <TeamCard key={member.id} member={member} />)}
           </div>
 
           {/* Row 5: 3 Department Heads */}
           <div className="team-row team-row-3">
-            {coreTeam.slice(13, 16).map(member => <TeamCard key={member.id} member={member} />)}
+            {coreTeam.slice(12, 15).map(member => <TeamCard key={member.id} member={member} />)}
           </div>
 
           {/* Row 6: 3 Outreach / Marketing */}
           <div className="team-row team-row-3">
-            {coreTeam.slice(16, 19).map(member => <TeamCard key={member.id} member={member} />)}
+            {coreTeam.slice(15, 18).map(member => <TeamCard key={member.id} member={member} />)}
           </div>
 
           {/* Row 7: 3 Outreach & Social Media */}
           <div className="team-row team-row-3">
-            {coreTeam.slice(19).map(member => <TeamCard key={member.id} member={member} />)}
+            {coreTeam.slice(18).map(member => <TeamCard key={member.id} member={member} />)}
           </div>
         </div>
       </section>
