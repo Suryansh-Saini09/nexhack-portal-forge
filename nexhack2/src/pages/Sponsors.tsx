@@ -28,7 +28,7 @@ export const FEATURED_SPONSORS: Sponsor[] = [
     name: 'GeeksforGeeks',
     category: 'Featured Partners',
     descriptor: 'LEARNING PARTNER',
-    logo: '/images/sponsors/GeeksforGeeks.webp',
+    logo: '/images/sponsors/geeksforgeeks.png',
     url: 'https://geeksforgeeks.org',
     tier: 'featured'
   }
@@ -42,8 +42,7 @@ export const ALLY_SPONSORS: Sponsor[] = [
   {
     id: 'codecrafters',
     name: 'CodeCrafters',
-    category: 'Prize Partners',
-    descriptor: 'PRIZE PARTNER',
+    category: 'Associate Sponsors',
     logo: '/images/sponsors/codecrafters.svg',
     url: 'https://codecrafters.io',
     tier: 'partner'
@@ -51,8 +50,7 @@ export const ALLY_SPONSORS: Sponsor[] = [
   {
     id: 'mastra',
     name: 'Mastra',
-    category: 'Knowledge Partners',
-    descriptor: 'KNOWLEDGE PARTNER',
+    category: 'Associate Sponsors',
     logo: '/images/sponsors/mastra.png',
     url: 'https://mastra.ai',
     tier: 'partner'
@@ -60,8 +58,7 @@ export const ALLY_SPONSORS: Sponsor[] = [
   {
     id: 'xyz',
     name: '.xyz',
-    category: 'Domain Partners',
-    descriptor: 'DOMAIN PARTNER',
+    category: 'Associate Sponsors',
     logo: '/images/sponsors/xyz.svg',
     url: 'https://gen.xyz',
     tier: 'partner'
@@ -69,19 +66,65 @@ export const ALLY_SPONSORS: Sponsor[] = [
   {
     id: 'n8n',
     name: 'n8n',
-    category: 'Automation Partners',
-    descriptor: 'AUTOMATION PARTNER',
+    category: 'Associate Sponsors',
     logo: '/images/sponsors/n8n.svg',
     url: 'https://n8n.io',
     tier: 'partner'
   },
   {
-    id: 'nexora',
-    name: 'Nexora Academy',
-    category: 'Education Partners',
-    descriptor: 'COMMUNITY PARTNER',
-    logo: '/images/sponsors/nexora.jpeg',
-    url: 'https://nexora.academy',
+    id: 'mystartupwave',
+    name: 'My Startup Wave',
+    category: 'Associate Sponsors',
+    logo: '/images/sponsors/mystartupwave.png',
+    url: 'https://www.mystartupwave.com',
+    tier: 'partner'
+  },
+  {
+    id: 'render',
+    name: 'Render',
+    category: 'Associate Sponsors',
+    logo: '/images/sponsors/render.png',
+    url: 'https://render.com',
+    tier: 'partner'
+  },
+  {
+    id: 'fueler',
+    name: 'Fueler',
+    category: 'Associate Sponsors',
+    logo: '/images/sponsors/fueler.png',
+    url: 'https://fueler.io',
+    tier: 'partner'
+  },
+  {
+    id: 'interviewbuddy',
+    name: 'InterviewBuddy',
+    category: 'Associate Sponsors',
+    logo: '/images/sponsors/interviewbuddy.png',
+    url: 'https://interviewbuddy.in',
+    tier: 'partner'
+  },
+  {
+    id: 'prune',
+    name: 'Prune',
+    category: 'Associate Sponsors',
+    logo: '/images/sponsors/prune.png',
+    url: 'https://prune.co.in',
+    tier: 'partner'
+  },
+  {
+    id: 'namoid',
+    name: 'Namo ID',
+    category: 'Associate Sponsors',
+    logo: '/images/sponsors/namo_id.webp',
+    url: 'https://namoid.in',
+    tier: 'partner'
+  },
+  {
+    id: 'cft',
+    name: 'CIFIT - Crypto Forensic Technology',
+    category: 'Associate Sponsors',
+    logo: '/images/sponsors/cft.png',
+    url: 'https://cryptoforensic.in',
     tier: 'partner'
   }
 ];
@@ -94,7 +137,6 @@ export const MEDIA_SPONSORS: Sponsor[] = [
     id: 'eventopia',
     name: 'Eventopia',
     category: 'Media Partners',
-    descriptor: 'MEDIA PARTNER',
     logo: '/images/sponsors/eventopia.png',
     url: 'https://eventopia.in',
     tier: 'partner'
@@ -174,7 +216,11 @@ export default function Sponsors() {
       {/* ── POWERED BY ── */}
       {FEATURED_SPONSORS.length > 0 && (
         <section className="featured-sponsors-section editorial-reveal" aria-label="Powered By">
-          <h3 className="featured-sponsors-heading">POWERED BY</h3>
+          <h3 className="featured-sponsors-heading">
+            <span className="heading-flair">❖</span>
+            <span>POWERED BY</span>
+            <span className="heading-flair">❖</span>
+          </h3>
           <div className="featured-sponsors-grid">
             {FEATURED_SPONSORS.map((sponsor, index) => (
               <div
@@ -189,6 +235,10 @@ export default function Sponsors() {
                   className="featured-sponsor-card"
                   title={sponsor.name}
                 >
+                  <div className="seal-corner tl" />
+                  <div className="seal-corner tr" />
+                  <div className="seal-corner bl" />
+                  <div className="seal-corner br" />
                   <img
                     src={sponsor.logo}
                     alt={`${sponsor.name} logo`}
@@ -196,6 +246,9 @@ export default function Sponsors() {
                     loading="lazy"
                   />
                 </a>
+                {sponsor.descriptor && (
+                  <span className="featured-card-descriptor">{sponsor.descriptor}</span>
+                )}
               </div>
             ))}
           </div>
@@ -205,7 +258,11 @@ export default function Sponsors() {
       {/* ── MEDIA PARTNER ── */}
       {MEDIA_SPONSORS.length > 0 && (
         <section className="media-sponsors-section editorial-reveal" aria-label="Media Partner">
-          <h3 className="media-sponsors-heading">MEDIA PARTNER</h3>
+          <h3 className="media-sponsors-heading">
+            <span className="heading-flair">❖</span>
+            <span>MEDIA PARTNER</span>
+            <span className="heading-flair">❖</span>
+          </h3>
           <div className="media-sponsors-grid">
             {MEDIA_SPONSORS.map((sponsor, index) => (
               <div
@@ -220,6 +277,10 @@ export default function Sponsors() {
                   className="media-sponsor-card"
                   title={sponsor.name}
                 >
+                  <div className="seal-corner tl" />
+                  <div className="seal-corner tr" />
+                  <div className="seal-corner bl" />
+                  <div className="seal-corner br" />
                   <img
                     src={sponsor.logo}
                     alt={`${sponsor.name} logo`}
@@ -233,10 +294,14 @@ export default function Sponsors() {
         </section>
       )}
 
-      {/* ── GENERAL SPONSORS ── */}
+      {/* ── ASSOCIATE SPONSORS ── */}
       {ALLY_SPONSORS.length > 0 && (
-        <section className="general-sponsors-section editorial-reveal" aria-label="General Sponsors">
-          <h3 className="general-sponsors-heading">GENERAL SPONSORS</h3>
+        <section className="general-sponsors-section editorial-reveal" aria-label="Associate Sponsors">
+          <h3 className="general-sponsors-heading">
+            <span className="heading-flair">❖</span>
+            <span>ASSOCIATE SPONSORS</span>
+            <span className="heading-flair">❖</span>
+          </h3>
           <div className="general-sponsors-grid">
             {ALLY_SPONSORS.map((sponsor, index) => (
               <div
@@ -251,6 +316,10 @@ export default function Sponsors() {
                   className="general-sponsor-card"
                   title={sponsor.name}
                 >
+                  <div className="seal-corner tl" />
+                  <div className="seal-corner tr" />
+                  <div className="seal-corner bl" />
+                  <div className="seal-corner br" />
                   <img
                     src={sponsor.logo}
                     alt={`${sponsor.name} logo`}
@@ -269,8 +338,23 @@ export default function Sponsors() {
           =================================================================== */}
       <section className="sponsor-tier-section tier-partner-cta editorial-reveal" aria-label="Become a Partner">
         <div className="sponsor-decree-card">
+          <div className="decree-ambient-aura" />
+          <div className="decree-top-hairline" />
+
+          {/* Corner Filigree Brackets */}
+          <div className="seal-corner tl" />
+          <div className="seal-corner tr" />
+          <div className="seal-corner bl" />
+          <div className="seal-corner br" />
+
+          <div className="tier-header-badge">
+            <span className="tier-badge-icon">✦</span>
+            <span>PARTNERSHIP DECREE</span>
+            <span className="tier-badge-icon">✦</span>
+          </div>
+
           <h2 className="decree-heading">FORGE AN ALLIANCE</h2>
-          <div className="sponsors-arcane-divider" style={{ margin: '8px auto 14px' }}>
+          <div className="sponsors-arcane-divider" style={{ margin: '10px auto 16px' }}>
             <span className="divider-line" />
             <span className="divider-star">✦</span>
             <span className="divider-line" />
@@ -337,6 +421,13 @@ export default function Sponsors() {
               transition: 'all 0.28s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
+            <div className="decree-ambient-aura" />
+            <div className="decree-top-hairline" />
+            <div className="seal-corner tl" />
+            <div className="seal-corner tr" />
+            <div className="seal-corner bl" />
+            <div className="seal-corner br" />
+
             {/* Golden Animated Key Close Button */}
             <button
               onClick={handleKeyClose}
